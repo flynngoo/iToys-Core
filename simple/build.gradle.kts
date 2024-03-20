@@ -29,24 +29,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.mmkv)
 
-    // splash 模块
-    implementation(projects.housingFeature.splash)
-    // 合同模块
-    implementation(projects.housingFeature.contract.implement)
-    // 企业模块
-    implementation(projects.housingFeature.enterprise.implement)
-    // 房源
-    implementation(projects.housingFeature.housing.implement)
-    // 登录模块
-    implementation(projects.housingFeature.login.export)
-    implementation(projects.housingFeature.login.implement)
-    // Main模块
-    implementation(projects.housingFeature.main.implement)
-    // 消息模块
-    implementation(projects.housingFeature.message.implement)
-    // 支付模块
-    implementation(projects.housingFeature.pay.implement)
-
     implementation(projects.iToysCore.common)
     implementation(projects.iToysCore.location)
     implementation(projects.iToysCore.logcat)

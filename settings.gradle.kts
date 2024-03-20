@@ -46,7 +46,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "iToysAndroidHousing"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-includeModules(":housing", ":housing-feature", ":iToys-core")
+includeModules(":simple", ":iToys-core")
 
 // -------------------------------------------------------------------------------------------------
 // Tools (Modules)
