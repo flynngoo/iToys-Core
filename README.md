@@ -1,17 +1,9 @@
-### Housing(荟安家)
+### iToys-Core
 
 ```
 .
-├── housing             App module.
+├── simple             App module.
 │     └── keystore      签名文件 folder.
-├── housing-feature     App feature.
-│     ├── contract      合同 module.
-│     ├── enterprise    企业 module.
-│     ├── housing       房源 module.
-│     ├── login         登录 module.
-│     ├── main          Main module.
-│     ├── message       消息 module.
-│     └── splash        闪屏页 module.
 ├── iToys-core          iToys Core.
 │     ├── common        公共 module.
 │     ├── download      下载 module.
