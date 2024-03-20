@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerificationInputView">
+        <!--输入框的数量-->
+        <attr name="boxNumber" format="integer" />
+        <!--输入类型-->
+        <attr name="boxInputType">
+            <enum name="number" value="0" />
+            <enum name="numberPassword" value="1" />
+            <enum name="text" value="2" />
+            <enum name="textPassword" value="3" />
+        </attr>
+        <!--输入框的宽度-->
+        <attr name="boxWidth" format="dimension" />
+        <!--输入框的高度-->
+        <attr name="boxHeight" format="dimension" />
+        <!--输入框文字颜色-->
+        <attr name="boxTextColor" format="color|reference" />
+        <!--输入框文字大小-->
+        <attr name="boxTextSize" format="dimension" />
+        <!--输入框间距，不输入则代表平分-->
+        <attr name="boxSpacing" format="dimension" />
+        <!--输入框背景色-->
+        <attr name="boxBackground" format="color|reference" />
+        <!--输入框焦点背景色-->
+        <attr name="boxFocusBackground" format="color|reference" />
+        <!--输入框焦点宽度-->
+        <attr name="boxCursorWidth" format="dimension" />
+        <!--输入框焦点高度-->
+        <attr name="boxCursorHeight" format="dimension" />
+        <!--输入框焦点颜色-->
+        <attr name="boxCursorColor" format="color|reference" />
+        <!--输入框下划线高度-->
+        <attr name="boxUnderlineHeight" format="dimension" />
+        <!--输入框无焦点的下划线颜色-->
+        <attr name="boxUnderlineDefaultColor" format="color|reference" />
+        <!--输入框有焦点的下划线颜色-->
+        <attr name="boxUnderlineFocusColor" format="color|reference" />
+        <!--输入框下划线是否展示-->
+        <attr name="boxUnderlineShow" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="IToysFormView">
+        <!-- 表单最大高度, 默认54dp -->
+        <attr name="formMaxHeight" format="dimension" />
+
+        <!-- 表单-必填 默认false -->
+        <attr name="requiredMark" format="boolean" />
+        <!-- 表单-必填icon -->
+        <attr name="requiredMarkIcon" format="reference" />
+        <!-- 表单-必填icon宽 -->
+        <attr name="requiredMarkIconWidth" format="dimension" />
+        <!-- 表单-必填icon高 -->
+        <attr name="requiredMarkIconHeight" format="dimension" />
+        <!-- 表单-必填start margin -->
+        <attr name="requiredMarkStartMargin" format="dimension" />
+        <!-- 表单-必填end margin -->
+        <attr name="requiredMarkEndMargin" format="dimension" />
+
+        <!-- 表单-label -->
+        <attr name="formLabel" format="string" />
+        <!-- 表单-label宽 -->
+        <attr name="formLabelWidth" format="dimension" />
+        <!-- 表单-label字体大小 -->
+        <attr name="formLabelSize" format="dimension" />
+        <!-- 表单-label字体颜色 -->
+        <attr name="formLabelColor" format="color|reference" />
+        <!-- 表单-是否在表单标签字段右侧显示冒号 -->
+        <attr name="formLabelColon" format="boolean" />
+        <!-- 表单-label对齐方式 -->
+        <attr name="formLabelAlign" format="enum">
+            <enum name="start" value="0" />
+            <enum name="center" value="1" />
+            <enum name="end" value="2" />
+        </attr>
+        <!-- 表单-label start margin -->
+        <attr name="formLabelStartMargin" format="dimension" />
+        <!-- 表单-label end margin -->
+        <attr name="formLabelEndMargin" format="dimension" />
+
+        <!-- 表单类型 -->
+        <attr name="formModel" format="enum">
+            <enum name="Text" value="0" />
+            <enum name="Number" value="1" />
+            <enum name="Mobile" value="2" />
+            <enum name="IdCard" value="3" />
+            <enum name="Email" value="4" />
+            <enum name="Address" value="5" />
+            <enum name="Date" value="6" />
+            <enum name="Datetime" value="7" />
+            <enum name="Select" value="8" />
+            <enum name="Radio" value="9" />
+        </attr>
+        <!-- 表单是否可点击 -->
+        <attr name="formEnable" format="boolean" />
+        <!-- 表单-占位符 -->
+        <attr name="placeholder" format="string" />
+        <!-- 表单-占位符字体颜色 -->
+        <attr name="placeholderColor" format="color|reference" />
+        <!-- 表单-内容字体大小 -->
+        <attr name="contentSize" format="dimension" />
+        <!-- 表单-内容字体颜色 -->
+        <attr name="contentColor" format="color|reference" />
+        <!-- 表单-内容字符最大限制 -->
+        <attr name="contentMaxLength" format="integer" />
+        <!-- 表单-内容 start margin -->
+        <attr name="contentStartMargin" format="dimension" />
+        <!-- 表单-内容 end margin -->
+        <attr name="contentEndMargin" format="dimension" />
+
+        <!-- 表单-后缀 icon -->
+        <attr name="formSuffixIcon" format="reference" />
+        <!-- 表单-后缀 icon size 默认16dp -->
+        <attr name="formSuffixIconSize" format="reference" />
+        <!-- 表单-后缀 text -->
+        <attr name="formSuffixText" format="string" />
+        <!-- 表单-后缀 text size -->
+        <attr name="formSuffixTextSize" format="dimension" />
+        <!-- 表单-后缀 text color -->
+        <attr name="formSuffixTextColor" format="reference" />
+        <!-- 表单-后缀 icon end margin 默认16dp -->
+        <attr name="formSuffixEndMargin" format="reference" />
+
+        <!-- 表单-对齐方式 -->
+        <attr name="contentAlign" format="enum">
+            <enum name="start" value="0" />
+            <enum name="end" value="2" />
+        </attr>
+
+        <!-- 表单-底部分割线 默认不显示 -->
+        <attr name="bottomSeparator" format="boolean" />
+        <!-- 表单-底部分割线颜色 -->
+        <attr name="bottomSeparatorColor" format="color|reference" />
+        <!-- 表单-底部分割线高度 -->
+        <attr name="bottomSeparatorHeight" format="dimension" />
+        <!-- 表单-底部分割线缩紧 -->
+        <attr name="bottomSeparatorIndent" format="dimension" />
+        <!-- 表单-底部分割线缩紧 -->
+        <attr name="bottomSeparatorEndIndent" format="dimension" />
+
+        <!-- 表单-自动检查 -->
+        <attr name="autoCheck" format="boolean" />
+        <!-- 错误提示 -->
+        <attr name="errorMessage" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="PicturesFormView">
+        <!-- title -->
+        <attr name="pictureTitle" format="string" />
+        <!-- title size -->
+        <attr name="pictureTitleSize" format="dimension" />
+        <!-- title typeface -->
+        <attr name="pictureTitleTypeface" format="string" />
+        <!-- title 背景 -->
+        <attr name="pictureTitleBackground" format="reference|color" />
+        <!-- 是否展示添加item -->
+        <attr name="picturePlus" format="boolean" />
+        <!-- 是否显示delete按钮 -->
+        <attr name="pictureDelete" format="boolean" />
+        <!-- 最大值 -->
+        <attr name="pictureMaximum" format="integer" />
+        <!-- 每行 count -->
+        <attr name="pictureSpanCount" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="RemarksFormView">
+        <!-- title -->
+        <attr name="remarksTitle" format="string" />
+        <!-- title size -->
+        <attr name="remarksTitleSize" format="dimension" />
+        <!-- title typeface -->
+        <attr name="remarksTitleTypeface" format="string" />
+        <!-- title 背景 -->
+        <attr name="remarksTitleBackground" format="reference|color" />
+        <!-- 输入框指示器 -->
+        <attr name="remarksIndicator" format="boolean" />
+        <!-- 输入框最大长度 -->
+        <attr name="remarksMaxLength" format="boolean" />
+        <!-- 禁用 -->
+        <attr name="remarksDisable" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="NavigationMenu">
+        <!-- 导航菜单 - icon -->
+        <attr name="menuIcon" format="reference" />
+        <attr name="menuIconSize" format="dimension" />
+
+        <!-- 导航菜单 - icon 和 text 间距 -->
+        <attr name="spacing" format="dimension" />
+
+        <!-- 导航菜单 - label -->
+        <attr name="menuLabel" format="string" />
+        <!-- 导航菜单 - label 大小 -->
+        <attr name="menuLabelSize" format="dimension" />
+        <!-- 导航菜单 - label 选中大小 -->
+        <attr name="menuLabelActiveSize" format="dimension" />
+        <!-- 导航菜单 - label 颜色 -->
+        <attr name="menuLabelColor" format="color|reference" />
+        <!-- 导航菜单 - label 选中颜色 -->
+        <attr name="menuLabelActiveColor" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RadioButtonSelector">
+        <attr name="selectorTextColorUnChecked" format="reference|color" />
+        <attr name="selectorTextColorChecked" format="reference|color" />
+        <attr name="selectorIconUnChecked" format="reference" />
+        <attr name="selectorIconChecked" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="IdentityCardPickerView">
+        <attr name="identityCardTitle" format="string" />
+    </declare-styleable>
+</resources>

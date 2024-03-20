@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/uikit_rectangle_12_white"
+    android:padding="24dp">
+
+    <!-- Title -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        style="@style/IToysAndroid.Title1"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="@color/uikit_colorful_percent90_black"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/uikit_name" />
+
+    <!-- Content -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/content"
+        style="@style/IToysAndroid.Body1"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:maxHeight="324dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/uikit_colorful_percent60_black"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="@string/uikit_id_card" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_start"
+            style="@style/IToysAndroid.Button.Background"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/uikit_button_variant_base_radius_6"
+            android:text="@string/uikit_confirm"
+            android:visibility="gone" />
+
+        <Space
+            android:id="@+id/space_start"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_center"
+            style="@style/IToysAndroid.Button.Background"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/uikit_button_variant_base_radius_6"
+            android:text="@string/uikit_confirm"
+            android:visibility="gone" />
+
+        <Space
+            android:id="@+id/space_end"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_end"
+            style="@style/IToysAndroid.Button.Background"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/uikit_button_variant_base_radius_6"
+            android:text="@string/uikit_confirm"
+            android:visibility="gone" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

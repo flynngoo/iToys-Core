@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="location_tips">提示</string>
+    <string name="location_permission_denied">定位权限被拒绝, 请在设置中打开</string>
+    <string name="location_service_not_enable">定位服务未开启, 请在设置中打开</string>
+    <string name="location_cancel">取消</string>
+    <string name="location_open_settings">去设置</string>
+</resources>

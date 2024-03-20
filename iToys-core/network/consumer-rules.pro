@@ -1,0 +1,4 @@
+-keep class com.itoys.android.network.BaseEntity { *; }
+-keep class com.itoys.android.network.PageEntity { *; }
+-keep class com.itoys.android.network.FilePath { *; }
+-keep class com.itoys.android.network.DictModel { *; }

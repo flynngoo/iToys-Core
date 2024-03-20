@@ -1,0 +1,175 @@
+[versions]
+activity-ktx = "1.8.2"
+androidx-lifecycle = "2.7.0"
+avatar-view = "1.0.7"
+agp = "8.2.2"
+appcompat = "1.6.1"
+androidx-test-ext-junit = "1.1.5"
+brv = "1.5.7"
+bottomnavigationex = "2.0.0"
+card-view = "1.0.0"
+calendar-haibin = "3.7.1"
+calendar-angcyo = "3.7.1.37"
+calendar-kiz = "2.4.1"
+chart-mp = "v3.1.0"
+core-ktx = "1.12.0"
+constraint-layout = "2.1.4"
+cryptography = "0.2.0"
+captcha-verification = "1.6"
+captcha-separated = "1.3.4"
+datastore = "1.0.0"
+espresso-core = "3.5.1"
+eventbus-live = "1.8.0"
+flexbox = "3.0.0"
+fragment-ktx = "1.6.2"
+gson = "2.10.1"
+glide = "4.15.1"
+glide-transformers = "1.0.6"
+hilt = "2.48.1"
+immersionbar = "3.2.2"
+jackson = "2.13.5"
+junit = "4.13.2"
+keyboard-event = "1.0.9"
+kotlin = "1.9.10"
+kotlinx-coroutines = "1.7.3"
+kotlinx-datetime = "0.4.1"
+kotlinx-serialization = "1.6.0"
+luban = "1.0.0"
+lottie = "6.1.0"
+location-amap = "6.4.2"
+material = "1.11.0"
+magic-indicator = "1.7.0"
+mmkv = "1.2.15"
+multidex = "2.0.1"
+navigation = "2.7.7"
+okhttp = "4.12.0"
+okio = "3.6.0"
+paging = "3.2.1"
+permissions = "18.6"
+picker = "4.1.13"
+picture-selector = "v3.11.2"
+protobuf = "3.24.4"
+protobuf-plugin = "0.9.4"
+popup = "3.2.1"
+qiniu = "8.7.0"
+recycler-view = "1.3.2"
+retrofit = "2.9.0"
+refresh-header-classics = "2.1.0"
+room = "2.6.0"
+round = "1.1.2"
+seekbar-range = "v3.0.0"
+secrets = "2.0.1"
+spin-kit = "1.4.0"
+swipe-menu = "V1.3.0"
+theroute = "1.2.0-rc1"
+timber = "5.0.1"
+title-bar = "10.5"
+viewpager2 = "1.0.0"
+zxing = "3.0.1"
+
+[libraries]
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+avatar-view = { group = "io.getstream", name = "avatarview-coil", version.ref = "avatar-view" }
+brv = { group = "com.github.liangjingkanji", name = "BRV", version.ref = "brv" }
+bottomnavigationex = { group = "io.github.clistery", name = "bottomnavigationex-ex", version.ref = "bottomnavigationex" }
+bottomnavigationex-v17x = { group = "io.github.clistery", name = "bottomnavigationex-17x", version.ref = "bottomnavigationex" }
+card-view = { group = "androidx.cardview", name = "cardview", version.ref = "card-view" }
+calendar-angcyo = { group = "com.github.angcyo", name = "CalendarView", version.ref = "calendar-angcyo" }
+calendar-haibin = { group = "com.haibin", name = "calendarview", version.ref = "calendar-haibin" }
+calendar-kiz = { group = "com.kizitonwose.calendar", name = "view", version.ref = "calendar-kiz" }
+chart-mp = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "chart-mp" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraint-layout" }
+captcha-verification = { group = "com.github.liuguangli", name = "VerificationCodeInput", version.ref = "captcha-verification" }
+captcha-separated = { group = "com.github.WGwangguan", name = "SeparatedEditText", version.ref = "captcha-separated" }
+cryptography = { group = "dev.whyoleg.cryptography", name = "cryptography-core", version.ref = "cryptography" }
+cryptography-provider = { group = "dev.whyoleg.cryptography", name = "cryptography-provider-jdk", version.ref = "cryptography" }
+datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
+eventbus-live = { group = "io.github.jeremyliao", name = "live-event-bus-x", version.ref = "eventbus-live" }
+flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
+fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+glide-transformers = { group = "jp.wasabeef.transformers", name = "glide", version.ref = "glide-transformers" }
+glide-transformers-gpu = { group = "jp.wasabeef.transformers", name = "glide-gpu", version.ref = "glide-transformers" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+immersionbar = { group = "com.geyifeng.immersionbar", name = "immersionbar", version.ref = "immersionbar" }
+jackson = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
+keyboard-event = { group = "com.github.liangjingkanji", name = "soft-input-event", version.ref = "keyboard-event" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
+location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+magic-indicator = { group = "com.github.hackware1993", name = "MagicIndicator", version.ref = "magic-indicator" }
+mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
+multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation" }
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigation" }
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logger = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+okio = { group = "com.squareup.okio", name = "okio", version.ref = "okhttp" }
+paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging" }
+permissions = { group = "com.github.getActivity", name = "XXPermissions", version.ref = "permissions" }
+picker-wheel = { group = "com.github.gzu-liyujiang.AndroidPicker", name = "WheelPicker", version.ref = "picker" }
+picture-selector = { group = "io.github.lucksiege", name = "pictureselector", version.ref = "picture-selector" }
+picture-compress = { group = "io.github.lucksiege", name = "compress", version.ref = "picture-selector" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+protobuf-java-lite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
+protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
+popup = { group = "io.github.razerdp", name = "BasePopup", version.ref = "popup" }
+qiniu = { group = "com.qiniu", name = "qiniu-android-sdk", version.ref = "qiniu" }
+recycler-view = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recycler-view" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+retrofit-converter-jackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
+retrofit-converter-scalars = { group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }
+refresh-header-classics = { group = "io.github.scwang90", name = "refresh-header-classics", version.ref = "refresh-header-classics" }
+round = { group = "io.github.xiaofeidev", name = "round", version.ref = "round" }
+seekbar-range = { group = "com.github.Jay-Goo", name = "RangeSeekBar", version.ref = "seekbar-range" }
+spin-kit = { group = "com.github.ybq", name = "Android-SpinKit", version.ref = "spin-kit" }
+swipe-menu = { group = "com.github.mcxtzhang", name = "SwipeDelMenuLayout", version.ref = "swipe-menu" }
+therouter = { group = "cn.therouter", name = "router", version.ref = "theroute" }
+therouter-apt = { group = "cn.therouter", name = "apt", version.ref = "theroute" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+title-bar = { group = "com.github.getActivity", name = "TitleBar", version.ref = "title-bar" }
+viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
+wheel = { group = "com.github.gzu-liyujiang.AndroidPicker", name = "WheelView", version.ref = "picker" }
+zxing = { group = "com.github.jenly1314", name = "zxing-lite", version.ref = "zxing" }
+
+# Dependencies of the test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+
+# Dependencies of the included iToys-plugin
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
+
+[plugins]
+com-android-application = { id = "com.android.application", version.ref = "agp" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
+therouter = { id = "cn.therouter.agp8", version.ref = "theroute" }
+
+# Plugins defined by this project
+itoys-android-application = { id = "itoys.android.application", version = "unspecified" }
+itoys-android-library = { id = "itoys.android.library", version = "unspecified" }
+itoys-android-hilt = { id = "itoys.android.hilt", version = "unspecified" }
+itoys-android-therouter = { id = "itoys.android.therouter", version = "unspecified" }

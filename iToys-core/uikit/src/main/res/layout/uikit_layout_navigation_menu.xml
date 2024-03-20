@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        tools:src="@drawable/uikit_icon_empty" />
+
+    <Space
+        android:id="@+id/spacing"
+        android:layout_width="0dp"
+        android:layout_height="4dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label"
+        style="@style/IToysAndroid.Body2"
+        android:textColor="@color/uikit_colorful_white"
+        tools:text="@string/uikit_module_name" />
+</androidx.appcompat.widget.LinearLayoutCompat>

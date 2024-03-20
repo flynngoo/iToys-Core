@@ -1,0 +1,25 @@
+package com.itoys.android.plugin.env
+
+import org.gradle.kotlin.dsl.provideDelegate
+
+/**
+ * @Author Gu Fanfan
+ * @Email fanfan.work@outlook.com
+ * @Date 2023/10/23
+ */
+class UatEnv : IEnv() {
+
+    companion object {
+        val INSTANCE: IEnv by lazy { UatEnv() }
+    }
+
+    override fun apiUrl() = stringValue(value = "http://panda.tianhuo.vip:8100/")
+
+    override fun loginSalt() = stringValue(value = "Basic YXBwOmFwcF9zZWNyZXQ=")
+
+    override fun umengKey() = ""
+
+    override fun wxPayKey() = ""
+
+    override fun aMapKey() = "98b1bdf02165a84acbc5102abbd40e38"
+}
