@@ -15,7 +15,7 @@ afterEvaluate {
                 from(components["debug"])
                 groupId = "com.itoys.android"
                 artifactId = project.name
-                version = "0.0.1-SNAPSHOT"
+                version = "0.0.2-SNAPSHOT"
             }
         }
 
