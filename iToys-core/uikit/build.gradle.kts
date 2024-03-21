@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.itoys.android.library)
 }
 
+apply(from = "${rootDir}/publish-maven.gradle.kts")
+
 android {
     namespace = "com.itoys.android.uikit"
 }
@@ -21,7 +23,7 @@ dependencies {
     implementation(libs.viewpager2)
     implementation(libs.wheel)
 
-    implementation(projects.iToysCore.image)
-    implementation(projects.iToysCore.logcat)
-    implementation(projects.iToysCore.utils)
+    implementation(libs.itoys.image)
+    implementation(libs.itoys.logcat)
+    implementation(libs.itoys.utils)
 }

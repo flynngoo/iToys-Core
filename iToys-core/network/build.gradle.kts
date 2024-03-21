@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.itoys.android.library)
 }
 
+apply(from = "${rootDir}/publish-maven.gradle.kts")
+
 android {
     namespace = "com.itoys.android.network"
 
@@ -25,8 +27,8 @@ dependencies {
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.retrofit.converter.scalars)
 
-    implementation(projects.iToysCore.logcat)
-    implementation(projects.iToysCore.utils)
+    implementation(libs.itoys.logcat)
+    implementation(libs.itoys.utils)
 
     // Test
     testImplementation(libs.junit)

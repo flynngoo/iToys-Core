@@ -2,11 +2,14 @@ package com.itoys.android.scan.qrcode
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.zxing.Result
+import com.gyf.immersionbar.ImmersionBar
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
+import com.itoys.android.logcat.asLog
+import com.itoys.android.logcat.logcat
 import com.itoys.android.scan.R
-import com.itoys.android.uikit.initBar
 import com.king.camera.scan.AnalyzeResult
 import com.king.camera.scan.CameraScan
 import com.king.camera.scan.analyze.Analyzer
@@ -25,12 +28,12 @@ class QRCodeScanActivity : BarcodeCameraScanActivity() {
     /**
      * 标题栏
      */
-    protected open var titleBar: TitleBar? = null
+    private var titleBar: TitleBar? = null
 
     /**
      * 标题栏点击时间
      */
-    protected open var titleBarListener: OnTitleBarListener = object : OnTitleBarListener {
+    private val titleBarListener: OnTitleBarListener = object : OnTitleBarListener {
         override fun onLeftClick(titleBar: TitleBar?) {
             finish()
         }
@@ -38,14 +41,29 @@ class QRCodeScanActivity : BarcodeCameraScanActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initBar(
-            statusBarColor = R.color.uikit_colorful_transparent,
-            fitsSystemWindows = false,
-            statusBarDarkFont = false,
-        )
+        initImmersionBar()
 
         titleBar = findViewById(R.id.title_bar)
         titleBar?.setOnTitleBarListener(titleBarListener)
+    }
+
+    /**
+     * 初始化状态栏
+     */
+    private fun initImmersionBar() {
+        try {
+            ImmersionBar.with(this)
+                .fullScreen(false)
+                .statusBarColor(R.color.scanning_colorful_transparent)
+                .statusBarDarkFont(false)
+                .fitsSystemWindows(false)
+                .keyboardEnable(false)
+                .navigationBarColor(R.color.scanning_colorful_white)
+                .transparentNavigationBar()
+                .init()
+        } catch (e: Exception) {
+            logcat(priority = Log.ERROR) { e.asLog() }
+        }
     }
 
     override fun getLayoutId(): Int = R.layout.scanning_activity_qrcode

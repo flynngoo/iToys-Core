@@ -30,8 +30,11 @@ dependencies {
     implementation(libs.mmkv)
 
     implementation(projects.iToysCore.common)
+    implementation(projects.iToysCore.image)
     implementation(projects.iToysCore.location)
     implementation(projects.iToysCore.logcat)
     implementation(projects.iToysCore.network)
+    implementation(projects.iToysCore.scanning)
+    implementation(projects.iToysCore.uikit)
     implementation(projects.iToysCore.utils)
 }

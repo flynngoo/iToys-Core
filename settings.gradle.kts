@@ -44,7 +44,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "iToysAndroidHousing"
+rootProject.name = "iToysCore"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 includeModules(":simple", ":iToys-core")
 

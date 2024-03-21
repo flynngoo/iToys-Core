@@ -27,6 +27,7 @@ glide = "4.15.1"
 glide-transformers = "1.0.6"
 hilt = "2.48.1"
 immersionbar = "3.2.2"
+itoys-core = "0.0.1-SNAPSHOT"
 jackson = "2.13.5"
 junit = "4.13.2"
 keyboard-event = "1.0.9"
@@ -110,6 +111,14 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+itoys-common = { group = "com.itoys.android", name = "common", version.ref = "itoys-core" }
+itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-core" }
+itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys-core" }
+itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys-core" }
+itoys-network = { group = "com.itoys.android", name = "network", version.ref = "itoys-core" }
+itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-core" }
+itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-core" }
+itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-core" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 magic-indicator = { group = "com.github.hackware1993", name = "MagicIndicator", version.ref = "magic-indicator" }
 mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }

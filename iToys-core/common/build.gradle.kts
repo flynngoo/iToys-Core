@@ -22,8 +22,8 @@ dependencies {
     implementation(libs.recycler.view)
     implementation(libs.refresh.header.classics)
 
-    implementation(projects.iToysCore.logcat)
-    implementation(projects.iToysCore.network)
-    implementation(projects.iToysCore.uikit)
-    implementation(projects.iToysCore.utils)
+    implementation(libs.itoys.logcat)
+    implementation(libs.itoys.network)
+    implementation(libs.itoys.uikit)
+    implementation(libs.itoys.utils)
 }

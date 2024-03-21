@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.itoys.android.library)
 }
 
+apply(from = "${rootDir}/publish-maven.gradle.kts")
+
 android {
     namespace = "com.itoys.android.image"
 }
@@ -17,12 +19,10 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     implementation(libs.glide.transformers)
+    implementation(libs.picture.compress)
+    implementation(libs.picture.selector)
     implementation(libs.glide.transformers.gpu)
     implementation(libs.okhttp)
 
-    implementation(libs.picture.compress)
-    implementation(libs.picture.selector)
-
-    implementation(projects.iToysCore.network)
-    implementation(projects.iToysCore.utils)
+    implementation(libs.itoys.utils)
 }
