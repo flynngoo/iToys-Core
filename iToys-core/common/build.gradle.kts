@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.itoys.android.therouter)
 }
 
+apply(from = "${rootDir}/publish-maven.gradle.kts")
+
 android {
     namespace = "com.itoys.android.common"
 }
