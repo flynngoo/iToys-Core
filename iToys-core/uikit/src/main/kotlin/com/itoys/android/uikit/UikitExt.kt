@@ -8,6 +8,7 @@ import androidx.annotation.ColorRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -22,16 +23,15 @@ import com.itoys.android.uikit.model.StepsModel
 import com.itoys.android.uikit.model.StepsStatus
 import com.itoys.android.utils.expansion.color
 import com.itoys.android.utils.expansion.dp2px
-import com.itoys.android.utils.expansion.tagName
 import com.itoys.android.utils.expansion.then
 import net.lucode.hackware.magicindicator.FragmentContainerHelper
 import net.lucode.hackware.magicindicator.MagicIndicator
+import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 
 /**
  * @Author Gu Fanfan
@@ -187,6 +187,58 @@ fun ViewPager2?.bindMagicIndicator(magicIndicator: MagicIndicator) {
             magicIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels)
         }
     })
+}
+
+fun MagicIndicator.magicIndicator(
+    indicatorList: List<String>,
+    viewPager: ViewPager?,
+    config: IndicatorConfig = IndicatorConfig.DEFAULT,
+    callback: ((Int) -> Unit)? = null,
+) {
+    val helper = FragmentContainerHelper(this)
+    val navigator = CommonNavigator(context)
+    navigator.isAdjustMode = config.adjustMode
+
+    navigator.adapter = object : CommonNavigatorAdapter() {
+        override fun getCount(): Int = indicatorList.size
+
+        override fun getTitleView(context: Context, index: Int): IPagerTitleView {
+            val titleView = IToysPagerTitleView(context)
+            titleView.text = indicatorList[index]
+            titleView.normalTextTypeface = config.textTypeface
+            titleView.selectedTextTypeface = config.selectedTextTypeface
+            titleView.textSize = config.textSize
+            titleView.normalColor = context.color(config.normalColor)
+            titleView.selectedColor = context.color(config.selectedColor)
+            titleView.setOnClickListener {
+                if (viewPager == null) helper.handlePageSelected(index)
+                viewPager?.currentItem = index
+                callback?.invoke(index)
+            }
+            return titleView
+        }
+
+        override fun getIndicator(context: Context): IPagerIndicator? {
+            return if (config.withIndicator) {
+                val indicator = LinePagerIndicator(context)
+                indicator.lineWidth = 24.dp2px().toFloat()
+                indicator.mode = LinePagerIndicator.MODE_EXACTLY
+                indicator.setColors(context.color(config.indicatorColor))
+                indicator.roundRadius = 2.dp2px().toFloat()
+                indicator.lineHeight = 2.dp2px().toFloat()
+                indicator
+            } else {
+                return null
+            }
+        }
+    }
+
+    this.navigator = navigator
+    viewPager?.let { pager ->
+        ViewPagerHelper.bind(this, pager)
+        pager.offscreenPageLimit = indicatorList.size
+    }
+    ViewPagerHelper.bind(this, viewPager)
 }
 
 fun FragmentManager.addFragment(containerViewId: Int, fragment: Fragment?, tag: String) {

@@ -1,17 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- 主色 -->
-    <attr name="primaryColor" format="color" />
-
     <!-- Base application theme. -->
     <style name="Theme.IToysAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="appPrimaryColor">@color/uikit_colorful_42B2F9</item>
+        <item name="appPrimaryVariantColor">@color/uikit_colorful_98CBF9</item>
+        <item name="colorPrimary">?attr/appPrimaryColor</item>
+        <item name="colorPrimaryVariant">?attr/appPrimaryVariantColor</item>
         <item name="colorOnPrimary">@color/uikit_colorful_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="appSecondaryColor">@color/uikit_colorful_42B2F9</item>
+        <item name="appSecondaryVariantColor">@color/uikit_colorful_98CBF9</item>
+        <item name="colorSecondary">?attr/appSecondaryColor</item>
+        <item name="colorSecondaryVariant">?attr/appSecondaryVariantColor</item>
         <item name="colorOnSecondary">@color/uikit_colorful_black</item>
         <!-- Customize your theme here. -->
         <item name="textAppearanceSubtitle1">@style/IToysAndroid.Subtitle1</item>
@@ -20,8 +21,11 @@
         <item name="textAppearanceBody2">@style/IToysAndroid.Body2</item>
         <item name="textAppearanceCaption">@style/IToysAndroid.Caption</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="primaryColor">@color/uikit_colorful_42B2F9</item>"
-        <item name="android:windowBackground">@color/uikit_colorful_F7F8FA</item>
+        <item name="appWindowBackground">@color/uikit_colorful_F7F8FA</item>
+        <item name="android:windowBackground">?attr/appWindowBackground</item>
+        <item name="appPrimaryTextColor">@color/uikit_colorful_1D2129</item>
+        <item name="appSecondaryTextColor">@color/uikit_colorful_1D2129</item>
+        <item name="appHintTextColor">@color/uikit_colorful_D4D8DB</item>
         <!-- 移除recyclerview & scrollview 顶部和底部波纹 -->
         <item name="android:overScrollHeader">@color/uikit_colorful_transparent</item>
         <item name="android:overScrollFooter">@color/uikit_colorful_transparent</item>
@@ -58,35 +62,16 @@
         <item name="lineVisible">false</item>
     </style>
 
-    <style name="IToysAndroid.TitleBar.White" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="barStyle">ripple</item>
-        <!-- 标题栏背景 -->
-        <item name="android:background">@color/uikit_colorful_transparent</item>
+    <style name="IToysAndroid.TitleBar.White" parent="IToysAndroid.TitleBar">
         <item name="titleColor">@color/uikit_colorful_white</item>
-        <item name="titleSize">18sp</item>
         <item name="leftIcon">@drawable/uikit_icon_back_white</item>
-        <item name="lineVisible">false</item>
-    </style>
-
-    <style name="IToysAndroid.TitleBar.Black" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="barStyle">ripple</item>
-        <!-- 标题栏背景 -->
-        <item name="android:background">@color/uikit_colorful_white</item>
-        <item name="titleColor">@color/uikit_colorful_333333</item>
-        <item name="titleSize">18sp</item>
-        <item name="leftIcon">@drawable/uikit_icon_back_black</item>
-        <item name="lineVisible">false</item>
     </style>
 
     <!-- Title1 -->
     <style name="IToysAndroid.Title1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/uikit_colorful_1D2129</item>
+        <item name="android:textColor">?attr/appPrimaryTextColor</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">18sp</item>
     </style>
@@ -98,14 +83,14 @@
 
     <!-- Subtitle1 14sp -->
     <style name="IToysAndroid.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:textColor">@color/uikit_colorful_1D2129</item>
+        <item name="android:textColor">?attr/appPrimaryTextColor</item>
     </style>
 
     <!-- Body1 16sp -->
     <style name="IToysAndroid.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/uikit_colorful_1D2129</item>
+        <item name="android:textColor">?attr/appPrimaryTextColor</item>
     </style>
 
     <style name="IToysAndroid.Body1.Medium" parent="IToysAndroid.Body1">
@@ -121,7 +106,7 @@
     <style name="IToysAndroid.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/uikit_colorful_1D2129</item>
+        <item name="android:textColor">?attr/appPrimaryTextColor</item>
     </style>
 
     <style name="IToysAndroid.Body2.Medium" parent="IToysAndroid.Body2">
@@ -165,7 +150,7 @@
     </style>
 
     <style name="IToysAndroid.Button.BackgroundTint" parent="IToysAndroid.Button">
-        <item name="backgroundTint">?attr/primaryColor</item>
+        <item name="backgroundTint">?attr/appPrimaryColor</item>
         <item name="cornerRadius">100dp</item>
     </style>
 
@@ -173,8 +158,8 @@
     <style name="IToysAndroid.Input" parent="IToysAndroid.Body2">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textColor">@color/uikit_colorful_1D2129</item>
-        <item name="android:textColorHint">@color/uikit_colorful_D4D8DB</item>
+        <item name="android:textColor">?attr/appPrimaryTextColor</item>
+        <item name="android:textColorHint">?attr/appHintTextColor</item>
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:background">@null</item>
     </style>
@@ -188,13 +173,13 @@
         <!-- 半透明 -->
         <item name="android:windowIsTranslucent">true</item>
         <!-- 背景透明 -->
-        <item name="android:windowBackground">#00000000</item>
+        <item name="android:windowBackground">@color/uikit_colorful_transparent</item>
         <!-- 去除黑色边框的关键设置项 遮盖层 -->
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 无标题 -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowTranslucentNavigation">false</item>
-        <item name="android:background">#00000000</item>
+        <item name="android:background">@color/uikit_colorful_transparent</item>
         <!-- Base.Theme.AppCompat.Light.Dialog.Alert 特有的属性，用于指定默认宽度，这里需要禁用 -->
         <item name="android:windowMinWidthMajor">0dp</item>
         <item name="android:windowMinWidthMinor">0dp</item>
@@ -221,12 +206,12 @@
     <!-- 渐变 淡入淡出 -->
     <style name="IToysAndroid.Dialog.Animation.Fade" parent="android:Animation.Dialog" />
 
-    <!-- 渐变 淡入淡出 -->
+    <!-- Radio -->
     <style name="IToysAndroid.Radio" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/uikit_itoys_radio_buttons</item>
         <item name="buttonTint">@color/uikit_colorful_42B2F9</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/uikit_colorful_1D2129</item>
+        <item name="android:textColor">?attr/appPrimaryTextColor</item>
         <item name="android:textSize">16sp</item>
         <item name="android:drawablePadding">8dp</item>
         <item name="android:paddingStart">8dp</item>

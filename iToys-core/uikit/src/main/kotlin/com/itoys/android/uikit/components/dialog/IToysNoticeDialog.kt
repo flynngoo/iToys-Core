@@ -35,8 +35,7 @@ class IToysNoticeDialog : IToysDialog<UikitDialogLayoutNoticeBinding, IToysNotic
      */
     private lateinit var builder: Builder
 
-    override fun createViewBinding(inflater: LayoutInflater) =
-        UikitDialogLayoutNoticeBinding.inflate(inflater)
+    override fun createViewBinding(inflater: LayoutInflater) = UikitDialogLayoutNoticeBinding.inflate(inflater)
 
     override fun builder() = builder
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- APP - 主要品牌颜色 -->
+    <attr name="appPrimaryColor" format="color" />
+
+    <!-- APP - 主要品牌颜色的较浅/较暗变体 -->
+    <attr name="appPrimaryVariantColor" format="color" />
+
+    <!-- APP - 次要品牌颜色的较浅/较暗变体 -->
+    <attr name="appSecondaryColor" format="color" />
+
+    <!-- APP - 次要品牌颜色的较浅/较暗变体 -->
+    <attr name="appSecondaryVariantColor" format="color" />
+
+    <!-- APP - 统一背景颜色 -->
+    <attr name="appWindowBackground" format="color" />
+
+    <!-- APP - 主要Text颜色，主要用于Text等组件 -->
+    <attr name="appPrimaryTextColor" format="color" />
+
+    <!-- APP - 次要Text颜色，主要用于Text等组件 -->
+    <attr name="appSecondaryTextColor" format="color" />
+
+    <!-- APP - Hint Text颜色，主要用于Edit等组件 -->
+    <attr name="appHintTextColor" format="color" />
+</resources>
