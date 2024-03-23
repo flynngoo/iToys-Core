@@ -1,8 +1,7 @@
 package com.itoys.android.core.network.upload.qiniu
 
 import com.itoys.android.core.network.BaseEntity
-import com.itoys.android.network.BaseEntity
-import com.itoys.android.network.FilePath
+import com.itoys.android.core.network.FilePath
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.Field

@@ -1,7 +1,7 @@
 package com.itoys.android.core.mvi
 
+import com.itoys.android.core.network.PageEntity
 import com.itoys.android.logcat.logcat
-import com.itoys.android.network.PageEntity
 import com.itoys.android.utils.expansion.isBlank
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
