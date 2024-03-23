@@ -8,14 +8,19 @@ configure<PublishingExtension> {
     }
 }
 
+val publishLibraryName: String by project
+val publishLibraryVersion: String by project
+
 afterEvaluate {
+    if (publishLibraryName != null && publishLibraryName != project.name) return@afterEvaluate
+
     extensions.configure<PublishingExtension>("publishing") {
         publications {
             create<MavenPublication>("plugin") {
                 from(components["debug"])
                 groupId = "com.itoys.android"
                 artifactId = project.name
-                version = "0.0.2-SNAPSHOT"
+                version = publishLibraryVersion
             }
         }
 

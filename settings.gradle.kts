@@ -46,7 +46,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "iToysCore"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-includeModules(":simple", ":iToys-core")
+includeModules(":simple", ":iToys-kit")
 
 // -------------------------------------------------------------------------------------------------
 // Tools (Modules)

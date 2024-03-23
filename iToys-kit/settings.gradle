@@ -1,0 +1,7 @@
+include ':core',
+        ':image',
+        ':location',
+        ':logcat',
+        ':scanning',
+        ':uikit',
+        ':utils'

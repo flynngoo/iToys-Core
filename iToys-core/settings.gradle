@@ -1,8 +1,0 @@
-include ':common',
-        ':image',
-        ':location',
-        ':logcat',
-        ':network',
-        ':scanning',
-        ':uikit',
-        ':utils'

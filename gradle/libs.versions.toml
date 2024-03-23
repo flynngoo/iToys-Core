@@ -1,6 +1,5 @@
 [versions]
 activity-ktx = "1.8.2"
-androidx-lifecycle = "2.7.0"
 avatar-view = "1.0.7"
 agp = "8.2.2"
 appcompat = "1.6.1"
@@ -27,14 +26,17 @@ glide = "4.15.1"
 glide-transformers = "1.0.6"
 hilt = "2.48.1"
 immersionbar = "3.2.2"
-itoys-core = "0.0.1-SNAPSHOT"
+itoys-core = "0.0.2-SNAPSHOT"
+itoys-uikit = "0.0.3-SNAPSHOT"
+itoys-utils = "0.0.4-SNAPSHOT"
 jackson = "2.13.5"
 junit = "4.13.2"
 keyboard-event = "1.0.9"
-kotlin = "1.9.10"
+kotlin = "1.9.20"
 kotlinx-coroutines = "1.7.3"
 kotlinx-datetime = "0.4.1"
 kotlinx-serialization = "1.6.0"
+lifecycle = "2.7.0"
 luban = "1.0.0"
 lottie = "6.1.0"
 location-amap = "6.4.2"
@@ -71,8 +73,6 @@ zxing = "3.0.1"
 [libraries]
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
-androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 avatar-view = { group = "io.getstream", name = "avatarview-coil", version.ref = "avatar-view" }
 brv = { group = "com.github.liangjingkanji", name = "BRV", version.ref = "brv" }
 bottomnavigationex = { group = "io.github.clistery", name = "bottomnavigationex-ex", version.ref = "bottomnavigationex" }
@@ -108,6 +108,9 @@ kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-co
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "lifecycle" }
+lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
@@ -117,8 +120,8 @@ itoys-location = { group = "com.itoys.android", name = "location", version.ref =
 itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys-core" }
 itoys-network = { group = "com.itoys.android", name = "network", version.ref = "itoys-core" }
 itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-core" }
-itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-core" }
-itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-core" }
+itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-uikit" }
+itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-utils" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 magic-indicator = { group = "com.github.hackware1993", name = "MagicIndicator", version.ref = "magic-indicator" }
 mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
@@ -143,8 +146,8 @@ qiniu = { group = "com.qiniu", name = "qiniu-android-sdk", version.ref = "qiniu"
 recycler-view = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recycler-view" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
-retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 retrofit-converter-jackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
+retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 retrofit-converter-scalars = { group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }
 refresh-header-classics = { group = "io.github.scwang90", name = "refresh-header-classics", version.ref = "refresh-header-classics" }
 round = { group = "io.github.xiaofeidev", name = "round", version.ref = "round" }
