@@ -12,6 +12,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.core.ktx)
     implementation(libs.material)
+    implementation(libs.autosize)
     implementation(libs.brv)
     implementation(libs.constraint.layout)
     implementation(libs.calendar.angcyo)
