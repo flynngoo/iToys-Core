@@ -8,6 +8,7 @@ import com.itoys.android.core.network.NetworkInitialization
 import com.itoys.android.logcat.LoggerInitialization
 import com.itoys.android.uikit.UikitInitialization
 import com.itoys.android.utils.SysUtils
+import com.itoys.android.utils.UtilsInitialization
 import com.itoys.android.utils.expansion.launchOnIO
 import com.therouter.TheRouter
 
@@ -31,12 +32,6 @@ abstract class AbsApp : Application() {
         super.onCreate()
 
         if (SysUtils.isMainProcess(this)) {
-            syncInit(application = this@AbsApp)
-
-            launchOnIO {
-                asyncInit(application = this@AbsApp)
-            }
-
             // 注册activity 生命周期回调
             ActivityLifecycleImpl.install(application = this@AbsApp)
             // network 初始化
@@ -45,6 +40,14 @@ abstract class AbsApp : Application() {
             LoggerInitialization.initialization(application = this@AbsApp, debug = globalConfig.debug)
             // uikit 初始化
             UikitInitialization.initialization(application = this@AbsApp)
+            // utils 初始化
+            UtilsInitialization.initialization(application = this@AbsApp)
+
+            syncInit(application = this@AbsApp)
+
+            launchOnIO {
+                asyncInit(application = this@AbsApp)
+            }
         }
 
         globalInit(application = this@AbsApp)

@@ -19,9 +19,9 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     implementation(libs.glide.transformers)
+    implementation(libs.glide.transformers.gpu)
     implementation(libs.picture.compress)
     implementation(libs.picture.selector)
-    implementation(libs.glide.transformers.gpu)
     implementation(libs.okhttp)
 
     implementation(libs.itoys.utils)

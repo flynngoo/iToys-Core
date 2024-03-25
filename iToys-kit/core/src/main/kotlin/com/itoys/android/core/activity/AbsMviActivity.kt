@@ -1,7 +1,6 @@
 package com.itoys.android.core.activity
 
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.itoys.android.core.mvi.AbsViewModel
 import com.itoys.android.core.mvi.IUIIntent
@@ -11,7 +10,6 @@ import com.itoys.android.uikit.components.snack.TopSnackBar
 import com.itoys.android.uikit.components.snack.makeSnack
 import com.itoys.android.uikit.components.toast.toast
 import com.itoys.android.utils.expansion.collect
-import kotlinx.coroutines.launch
 
 /**
  * @Author Gu Fanfan
@@ -39,8 +37,6 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
         // 添加观察者, 注册监听
         viewModel?.let { viewModel ->
             lifecycle.addObserver(viewModel)
-
-            lifecycleScope.launch { uiCollect() }
         }
 
         viewModel?.apply { collect(toastState, ::toast) }
@@ -84,9 +80,4 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
             }
         }
     }
-
-    /**
-     * UI 状态更新
-     */
-    abstract suspend fun uiCollect()
 }
