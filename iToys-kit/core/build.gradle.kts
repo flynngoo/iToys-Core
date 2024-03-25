@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.multidex)
 
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.autosize)
     implementation(libs.brv)
     implementation(libs.eventbus.live)
     implementation(libs.jackson)

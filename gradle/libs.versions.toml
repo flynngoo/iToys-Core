@@ -1,9 +1,10 @@
 [versions]
 activity-ktx = "1.8.2"
-avatar-view = "1.0.7"
 agp = "8.2.2"
-appcompat = "1.6.1"
 androidx-test-ext-junit = "1.1.5"
+appcompat = "1.6.1"
+avatar-view = "1.0.7"
+autosize = "v1.2.1"
 brv = "1.5.7"
 bottomnavigationex = "2.0.0"
 card-view = "1.0.0"
@@ -74,6 +75,7 @@ zxing = "3.0.1"
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
 avatar-view = { group = "io.getstream", name = "avatarview-coil", version.ref = "avatar-view" }
+autosize = { group = "com.github.JessYanCoding", name = "AndroidAutoSize", version.ref = "autosize" }
 brv = { group = "com.github.liangjingkanji", name = "BRV", version.ref = "brv" }
 bottomnavigationex = { group = "io.github.clistery", name = "bottomnavigationex-ex", version.ref = "bottomnavigationex" }
 bottomnavigationex-v17x = { group = "io.github.clistery", name = "bottomnavigationex-17x", version.ref = "bottomnavigationex" }
