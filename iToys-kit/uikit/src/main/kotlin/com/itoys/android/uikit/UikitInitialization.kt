@@ -3,6 +3,9 @@ package com.itoys.android.uikit
 import android.app.Application
 import com.drake.statelayout.StateConfig
 import com.itoys.android.logcat.logcat
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 /**
  * @Author Gu Fanfan
@@ -27,6 +30,10 @@ object UikitInitialization {
                 logcat { "StateConfig -> onEmpty" }
             }
         }
+
+        // 全局刷新配置
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(context) }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(context) }
     }
 
     fun requireApp(): Application {

@@ -20,8 +20,6 @@ interface IUIState
  */
 sealed class LoadingUIState {
 
-    data object Idle : LoadingUIState()
-
     data class Loading(var showLoading: Boolean) : LoadingUIState()
 
     data class State(val isSuccess: Boolean, val message: String) : LoadingUIState()

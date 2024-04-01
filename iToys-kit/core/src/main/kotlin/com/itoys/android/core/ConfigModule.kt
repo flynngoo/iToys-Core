@@ -1,5 +1,6 @@
 package com.itoys.android.core
 
+import com.itoys.android.core.network.ApiResultCode
 import com.itoys.android.core.network.GlobalHttpHandler
 import com.itoys.android.core.network.INetworkDependency
 
@@ -11,6 +12,7 @@ import com.itoys.android.core.network.INetworkDependency
 class GlobalConfig(
     val debug: Boolean,
     val apiHostUrl: String?,
+    val apiSuccessfulCode: Int,
     val resourcesHostUrl: String?,
     val networkDependency: INetworkDependency?,
     val globalHttpHandler: GlobalHttpHandler,
@@ -29,6 +31,9 @@ class GlobalConfig(
 
         /** api host url */
         private var apiHostUrl: String? = null
+
+        /** api成功code */
+        private var apiSuccessfulCode = ApiResultCode.SUCCESSFUL
 
         /** 资源 host url */
         private var resourcesHostUrl: String? = null
@@ -49,6 +54,11 @@ class GlobalConfig(
          */
         fun apiHostUrl(url: String): Builder {
             apiHostUrl = url
+            return this
+        }
+
+        fun apiSuccessfulCode(code: Int): Builder {
+            apiSuccessfulCode = code
             return this
         }
 
@@ -80,6 +90,7 @@ class GlobalConfig(
             return GlobalConfig(
                 this.debug,
                 this.apiHostUrl,
+                this.apiSuccessfulCode,
                 this.resourcesHostUrl,
                 this.networkDependency,
                 this.globalHttpHandler

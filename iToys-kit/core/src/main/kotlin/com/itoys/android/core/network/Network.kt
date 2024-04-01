@@ -61,7 +61,7 @@ fun <T> Class<T>.toApiService(): T {
     return retrofit!!.create(this)
 }
 
-fun <T> BaseEntity<T>?.isSuccessful(successful: Int = ApiResultCode.SUCCESSFUL) = this?.errorCode == successful
+fun <T> BaseEntity<T>?.isSuccessful(successful: Int = NetworkInitialization.requireApiSuccessfulCode()) = this?.errorCode == successful
 
 fun <T> BaseEntity<T>?.result() : T? {
     if (this.isSuccessful()) {
@@ -71,18 +71,25 @@ fun <T> BaseEntity<T>?.result() : T? {
     throw ResultException(this?.errorCode ?: 0, this?.msg ?: "请求接口出现异常, 请稍后重试")
 }
 
+/**
+ * 统一异常处理
+ */
+fun String.asThrowable(code: Int = ApiResultCode.PARAMS_ERROR) {
+    throw ResultException(code, this)
+}
+
 fun <T> ViewModel.networkRequest(block: RequestAction<T>.() -> Unit) {
     val action = RequestAction<T>().apply(block)
 
     viewModelScope.launch {
-        action.start?.invoke()
+        action.start?.invoke(true)
 
         flow {
             emit(action.request?.invoke())
         }.flowOn(Dispatchers.IO)
             .catch { exception ->
                 logcat(priority = Log.ERROR) { exception.asLog() }
-                action.error?.invoke(exception.handlerException())
+                action.failure?.invoke(exception.handlerException())
             }
             .onCompletion {
                 action.finish?.invoke()

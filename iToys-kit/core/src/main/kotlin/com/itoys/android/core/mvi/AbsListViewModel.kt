@@ -1,8 +1,12 @@
 package com.itoys.android.core.mvi
 
 import com.itoys.android.core.network.PageEntity
+import com.itoys.android.core.network.RequestAction
+import com.itoys.android.core.network.ResultException
 import com.itoys.android.logcat.logcat
+import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
+import com.itoys.android.utils.expansion.then
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -161,5 +165,30 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
         if (pager.list.isNullOrEmpty()) {
             sendListState(ListUIState.ShowEmpty)
         }
+    }
+
+    /**
+     * 是否是第一页
+     */
+    fun isFirstPage() = page == 1
+
+    /**
+     * 封装请求action
+     */
+    fun <T> RequestAction<T>.handlerPagerAction(
+        success: (T?) -> Unit,
+        failure: (ResultException) -> Unit = ::handlePagerFailure
+    ) {
+        start { sendLoading(LoadingUIState.Loading(it)) }
+        success(success)
+        failure(failure)
+        finish { sendLoading(LoadingUIState.Loading(showLoading = false)) }
+    }
+
+    open fun handlePagerFailure(failure: ResultException) {
+        val intent = isFirstPage().then(ListUIIntent.Refresh, ListUIIntent.LoadMore)
+        parsePager(null, intent, isSuccessful = false)
+        val msg = failure.msg.invalid("请求出现异常")
+        sendToast(ToastUIState.Toast(msg))
     }
 }

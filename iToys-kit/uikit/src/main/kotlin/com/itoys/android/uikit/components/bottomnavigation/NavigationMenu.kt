@@ -95,7 +95,7 @@ class NavigationMenu(
             R.styleable.NavigationMenu_menuLabelColor, menuLabelColor
         )
         menuLabelActiveColor = ta.getColor(
-            R.styleable.NavigationMenu_menuLabelActiveColor, menuLabelColor
+            R.styleable.NavigationMenu_menuLabelActiveColor, menuLabelActiveColor
         )
         initMenuLabel(binding.label)
 
@@ -168,5 +168,7 @@ class NavigationMenu(
         this.label?.typeface = Typeface.create(
             selected.then("sans-serif-medium", "sans-serif"), Typeface.NORMAL
         )
+        val textColor = selected.then(menuLabelActiveColor, menuLabelColor)
+        if (textColor != -1) this.label?.setTextColor(textColor)
     }
 }

@@ -23,4 +23,7 @@
 
     <!-- APP - Hint Text颜色，主要用于Edit等组件 -->
     <attr name="appHintTextColor" format="color" />
+
+    <!-- APP - 主要按钮背景 -->
+    <attr name="appPrimaryButtonBackground" format="reference" />
 </resources>

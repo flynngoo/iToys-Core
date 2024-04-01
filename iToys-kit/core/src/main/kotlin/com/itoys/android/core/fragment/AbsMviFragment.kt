@@ -7,7 +7,9 @@ import androidx.viewbinding.ViewBinding
 import com.itoys.android.core.mvi.AbsViewModel
 import com.itoys.android.core.mvi.IUIIntent
 import com.itoys.android.core.mvi.IUIState
+import com.itoys.android.core.mvi.LoadingUIState
 import com.itoys.android.core.mvi.ToastUIState
+import com.itoys.android.uikit.components.loading.LottieLoadingDialog
 import com.itoys.android.uikit.components.snack.TopSnackBar
 import com.itoys.android.uikit.components.snack.makeSnack
 import com.itoys.android.uikit.components.toast.toast
@@ -23,6 +25,11 @@ abstract class AbsMviFragment<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
 
     /** view model */
     abstract val viewModel: VM?
+
+    /**
+     * loading dialog
+     */
+    private var loadingDialog: LottieLoadingDialog? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,11 +47,40 @@ abstract class AbsMviFragment<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
         // 添加观察者, 注册监听
         viewModel?.let { viewModel ->
             lifecycle.addObserver(viewModel)
-
-            lifecycleScope.launch { uiCollect() }
         }
 
-        viewModel?.apply { collect(toastState, ::toast) }
+        viewModel?.apply {
+            collect(loadingState, ::loading)
+            collect(toastState, ::toast)
+        }
+    }
+
+    /**
+     * loading
+     */
+    private fun loading(loading: LoadingUIState?) {
+        when (loading) {
+            is LoadingUIState.Loading -> showLoading(loading.showLoading)
+
+            else -> {}
+        }
+    }
+
+    /**
+     * loading
+     */
+    open fun showLoading(show: Boolean) {
+        if (loadingDialog == null) {
+            loadingDialog = LottieLoadingDialog.show {
+                fm = childFragmentManager
+            }
+        }
+
+        if (show) {
+            loadingDialog?.showDialog()
+        } else {
+            loadingDialog?.dismiss()
+        }
     }
 
     /**
@@ -85,9 +121,4 @@ abstract class AbsMviFragment<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
             }
         }
     }
-
-    /**
-     * UI 状态更新
-     */
-    abstract suspend fun uiCollect()
 }

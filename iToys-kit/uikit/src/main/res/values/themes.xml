@@ -26,6 +26,7 @@
         <item name="appPrimaryTextColor">@color/uikit_colorful_1D2129</item>
         <item name="appSecondaryTextColor">@color/uikit_colorful_1D2129</item>
         <item name="appHintTextColor">@color/uikit_colorful_D4D8DB</item>
+        <item name="appPrimaryButtonBackground">@drawable/uikit_button_variant_gradient</item>
         <!-- 移除recyclerview & scrollview 顶部和底部波纹 -->
         <item name="android:overScrollHeader">@color/uikit_colorful_transparent</item>
         <item name="android:overScrollFooter">@color/uikit_colorful_transparent</item>
@@ -141,11 +142,10 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:padding">0dp</item>
     </style>
 
     <style name="IToysAndroid.Button.Background" parent="IToysAndroid.Button">
-        <item name="android:background">@drawable/uikit_button_variant_gradient</item>
+        <item name="android:background">?attr/appPrimaryButtonBackground</item>
         <item name="backgroundTint">@null</item>
     </style>
 

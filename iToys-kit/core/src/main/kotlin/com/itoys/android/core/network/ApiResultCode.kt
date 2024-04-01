@@ -24,7 +24,7 @@ object ApiResultCode {
     const val NETWORK_NOT_CONNECTION = 1002
     const val UNKNOWN_HOST = 1003
     const val GW_ERROR = 1004
-    const val ARGS_ERROR = 1005
+    const val PARAMS_ERROR = 1005
     const val TOKEN_ERROR = 1006
     const val SIGN_ERROR = 1007
     const val SSL_ERROR = 1008

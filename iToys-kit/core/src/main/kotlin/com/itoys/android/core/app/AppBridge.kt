@@ -33,4 +33,25 @@ object AppBridge {
     fun getTopActivity(): Activity? {
         return ActivityLifecycleImpl.INSTANCE.getTopActivity()
     }
+
+    /**
+     * Kill the activity.
+     */
+    fun killActivity(activityClass: Class<*>) {
+        ActivityLifecycleImpl.INSTANCE.killActivity(activityClass)
+    }
+
+    /**
+     * Kill all activities.
+     */
+    fun killAllActivities() {
+        ActivityLifecycleImpl.INSTANCE.killAllActivities()
+    }
+
+    /**
+     * Kill all activities，excluding specified activities.
+     */
+    fun killAllActivities(vararg excludeActivityClasses: Class<*>) {
+        ActivityLifecycleImpl.INSTANCE.killAllActivities(excludeActivityClasses.toList())
+    }
 }

@@ -2,10 +2,8 @@ package com.itoys.android.simple.splash
 
 import android.os.Bundle
 import com.itoys.android.core.activity.AbsMviActivity
-import com.itoys.android.core.mvi.IUIState
-import com.itoys.android.housing.databinding.SplashActivityLayoutBinding
-import com.itoys.android.splash.SplashState
-import com.itoys.android.splash.SplashViewModel
+import com.itoys.android.databinding.SplashActivityLayoutBinding
+import com.itoys.android.uikit.components.loading.LottieLoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -21,5 +19,16 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     override fun createViewBinding() = SplashActivityLayoutBinding.inflate(layoutInflater)
 
     override fun initialize(savedInstanceState: Bundle?) {
+    }
+
+    override fun addClickListen() {
+        super.addClickListen()
+
+        binding?.btnLoading?.setOnClickListener {
+            LottieLoadingDialog.show {
+                fm = supportFragmentManager
+                closeOnOverlayClick = true
+            }.showDialog()
+        }
     }
 }

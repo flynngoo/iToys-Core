@@ -10,7 +10,7 @@ class RequestAction<T> {
     /**
      * 开始请求
      */
-    var start: (() -> Unit)? = null
+    var start: ((Boolean) -> Unit)? = null
         private set
 
     /**
@@ -28,7 +28,7 @@ class RequestAction<T> {
     /**
      * 请求失败
      */
-    var error: ((ResultException) -> Unit)? = null
+    var failure: ((ResultException) -> Unit)? = null
         private set
 
     /**
@@ -41,7 +41,7 @@ class RequestAction<T> {
         request = block
     }
 
-    fun start(block: () -> Unit) {
+    fun start(block: (Boolean) -> Unit) {
         start = block
     }
 
@@ -49,8 +49,8 @@ class RequestAction<T> {
         success = block
     }
 
-    fun error(block: (ResultException) -> Unit) {
-        error = block
+    fun failure(block: (ResultException) -> Unit) {
+        failure = block
     }
 
     fun finish(block: () -> Unit) {

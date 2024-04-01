@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.os.Process
 import android.util.Log
 import com.itoys.android.logcat.logcat
 import com.itoys.android.utils.ActivityUtils
@@ -172,6 +173,76 @@ class ActivityLifecycleImpl : Application.ActivityLifecycleCallbacks {
         }
 
         return null
+    }
+
+    /**
+     * 关闭指定的 [Activity] class 的所有的实例
+     *
+     * @param activityClass
+     */
+    fun killActivity(activityClass: Class<*>) {
+        synchronized(ActivityLifecycleImpl) {
+            val iterator = activityList.iterator()
+            while (iterator.hasNext()) {
+                val next = iterator.next()
+
+                if (next.javaClass == activityClass) {
+                    iterator.remove()
+                    next.finish()
+                }
+            }
+        }
+    }
+
+    /**
+     * 关闭所有 [Activity]
+     */
+    fun killAllActivities() {
+        synchronized(ActivityLifecycleImpl) {
+            val iterator = activityList.iterator()
+            while (iterator.hasNext()) {
+                val next = iterator.next()
+                iterator.remove()
+                next.finish()
+            }
+        }
+    }
+
+    /**
+     * 关闭所有 [Activity],排除指定的 [Activity]
+     *
+     * @param excludeActivityClasses activity class
+     */
+    fun killAllActivities(excludeActivityClasses: List<Class<*>>) {
+        synchronized(ActivityLifecycleImpl) {
+            val iterator = activityList.iterator()
+            while (iterator.hasNext()) {
+                val next = iterator.next()
+                if (excludeActivityClasses.contains(next.javaClass)) {
+                    continue
+                }
+
+                iterator.remove()
+                next.finish()
+            }
+        }
+    }
+
+    /**
+     * 退出应用程序
+     *
+     * 此方法经测试在某些机型上并不能完全杀死 App 进程, 几乎试过市面上大部分杀死进程的方式, 但都发现没卵用, 所以此
+     * 方法如果不能百分之百保证能杀死进程, 就不能贸然调用 [release()] 释放资源, 否则会造成其他问题, 如果您
+     * 有测试通过的并能适用于绝大多数机型的杀死进程的方式, 望告知
+     */
+    fun exitApp() {
+        try {
+            killAllActivities()
+            Process.killProcess(Process.myPid())
+            System.exit(0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun getActivityList(): List<Activity> {

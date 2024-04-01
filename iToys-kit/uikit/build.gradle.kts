@@ -20,6 +20,7 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.magic.indicator)
     implementation(libs.picker.wheel)
+    implementation(libs.refresh.header.classics)
     implementation(libs.title.bar)
     implementation(libs.viewpager2)
     implementation(libs.wheel)

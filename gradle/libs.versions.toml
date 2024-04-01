@@ -27,8 +27,10 @@ glide = "4.15.1"
 glide-transformers = "1.0.6"
 hilt = "2.48.1"
 immersionbar = "3.2.2"
-itoys-core = "0.0.2-SNAPSHOT"
-itoys-uikit = "0.0.3-SNAPSHOT"
+itoys-core = "0.0.14-SNAPSHOT"
+itoys-image = "0.0.3-SNAPSHOT"
+itoys-logcat = "0.0.2-SNAPSHOT"
+itoys-uikit = "0.0.14-SNAPSHOT"
 itoys-utils = "0.0.4-SNAPSHOT"
 jackson = "2.13.5"
 junit = "4.13.2"
@@ -116,11 +118,10 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
-itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-uikit" }
-itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys-core" }
-itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys-core" }
-itoys-network = { group = "com.itoys.android", name = "network", version.ref = "itoys-core" }
-itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-core" }
+itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-image" }
+itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys-logcat" }
+itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys-logcat" }
+itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-logcat" }
 itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-uikit" }
 itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-utils" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }

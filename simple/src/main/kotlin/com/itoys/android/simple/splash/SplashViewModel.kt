@@ -1,15 +1,19 @@
-package com.itoys.android.splash
+package com.itoys.android.simple.splash
 
 import androidx.lifecycle.LifecycleOwner
 import com.itoys.android.core.mvi.AbsViewModel
-import com.itoys.android.login.Login
+import com.itoys.android.simple.splash.interactor.Simple
+import com.itoys.android.splash.SplashIntent
+import com.itoys.android.splash.SplashState
 
 /**
  * @Author Gu Fanfan
  * @Email fanfan.worker@gmail.com
  * @Date 2024/3/24
  */
-class SplashViewModel : AbsViewModel<SplashIntent, SplashState>() {
+class SplashViewModel(
+    private val simple: Simple
+) : AbsViewModel<SplashIntent, SplashState>() {
 
     override fun createUIState() = SplashState.Idle
 
@@ -29,7 +33,16 @@ class SplashViewModel : AbsViewModel<SplashIntent, SplashState>() {
      */
     private fun navNext(): SplashState {
         // 1. 没有登录直接跳转登录
-        if (!Login.logged) return SplashState.Login
-        return SplashState.Main
+        return SplashState.Login
+    }
+
+    private fun testSimple() {
+        simple(Simple.Params(1)) {
+            handlerAction(
+                { result ->
+
+                }
+            )
+        }
     }
 }

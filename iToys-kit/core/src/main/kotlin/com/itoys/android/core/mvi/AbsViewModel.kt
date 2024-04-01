@@ -6,12 +6,12 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itoys.android.core.activity.AbsActivity
+import com.itoys.android.core.network.RequestAction
 import com.itoys.android.core.network.ResultException
 import com.itoys.android.core.network.networkRequest
 import com.itoys.android.logcat.logcat
 import com.itoys.android.utils.expansion.invalid
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.NonCancellable.start
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -112,6 +112,7 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
      * [handleEx] 默认实现, 提示信息由[showToast] 来控制, 如果都不显示, 默认框架提示
      * [request] 请求
      */
+    @Deprecated("See UseCase")
     fun <T : Any> launchRequest(
         showLoading: Boolean = true,
         showToast: Boolean = true,
@@ -130,12 +131,33 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
             }
             request { request() }
             success { result -> success?.invoke(result) }
-            error { exception -> handleEx.invoke(exception) }
+            failure { exception -> handleEx.invoke(exception) }
             finish {
                 logcat(priority = Log.INFO) { "Request(${requestTag}) is finish!" }
                 if (showLoading) sendLoading(LoadingUIState.Loading(showLoading = false))
             }
         }
+    }
+
+    /**
+     * 封装请求action
+     */
+    fun <T> RequestAction<T>.handlerAction(
+        success: (T?) -> Unit,
+        failure: (ResultException) -> Unit = ::handleFailure
+    ) {
+        start { sendLoading(LoadingUIState.Loading(it)) }
+        success(success)
+        failure(failure)
+        finish { sendLoading(LoadingUIState.Loading(showLoading = false)) }
+    }
+
+    /**
+     * 默认处理请求失败
+     */
+    open fun handleFailure(failure: ResultException) {
+        val msg = failure.msg.invalid("请求出现异常")
+        sendToast(ToastUIState.Toast(msg))
     }
 
     override fun onCleared() {

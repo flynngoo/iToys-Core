@@ -140,7 +140,7 @@ fun MagicIndicator.magicIndicator(
             titleView.selectedColor = context.color(config.selectedColor)
             titleView.setOnClickListener {
                 if (viewPager == null) helper.handlePageSelected(index)
-                viewPager?.currentItem = index
+                viewPager?.setCurrentItem(index, false)
                 callback?.invoke(index)
             }
             return titleView
@@ -212,7 +212,7 @@ fun MagicIndicator.magicIndicator(
             titleView.selectedColor = context.color(config.selectedColor)
             titleView.setOnClickListener {
                 if (viewPager == null) helper.handlePageSelected(index)
-                viewPager?.currentItem = index
+                viewPager?.setCurrentItem(index, false)
                 callback?.invoke(index)
             }
             return titleView
@@ -238,7 +238,51 @@ fun MagicIndicator.magicIndicator(
         ViewPagerHelper.bind(this, pager)
         pager.offscreenPageLimit = indicatorList.size
     }
-    ViewPagerHelper.bind(this, viewPager)
+}
+
+fun MagicIndicator.magicIndicator(
+    indicatorList: List<String>,
+    config: IndicatorConfig = IndicatorConfig.DEFAULT,
+    callback: ((Int) -> Unit)? = null,
+) {
+    val helper = FragmentContainerHelper(this)
+    val navigator = CommonNavigator(context)
+    navigator.isAdjustMode = config.adjustMode
+
+    navigator.adapter = object : CommonNavigatorAdapter() {
+        override fun getCount(): Int = indicatorList.size
+
+        override fun getTitleView(context: Context, index: Int): IPagerTitleView {
+            val titleView = IToysPagerTitleView(context)
+            titleView.text = indicatorList[index]
+            titleView.normalTextTypeface = config.textTypeface
+            titleView.selectedTextTypeface = config.selectedTextTypeface
+            titleView.textSize = config.textSize
+            titleView.normalColor = context.color(config.normalColor)
+            titleView.selectedColor = context.color(config.selectedColor)
+            titleView.setOnClickListener {
+                helper.handlePageSelected(index)
+                callback?.invoke(index)
+            }
+            return titleView
+        }
+
+        override fun getIndicator(context: Context): IPagerIndicator? {
+            return if (config.withIndicator) {
+                val indicator = LinePagerIndicator(context)
+                indicator.lineWidth = 24.dp2px().toFloat()
+                indicator.mode = LinePagerIndicator.MODE_EXACTLY
+                indicator.setColors(context.color(config.indicatorColor))
+                indicator.roundRadius = 2.dp2px().toFloat()
+                indicator.lineHeight = 2.dp2px().toFloat()
+                indicator
+            } else {
+                return null
+            }
+        }
+    }
+
+    this.navigator = navigator
 }
 
 fun FragmentManager.addFragment(containerViewId: Int, fragment: Fragment?, tag: String) {

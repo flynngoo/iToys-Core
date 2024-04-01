@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name="com.itoys.android.simple.SimpleApp"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,9 +12,17 @@
         android:theme="@style/Theme.IToysAndroid"
         tools:replace="android:allowBackup,android:label">
 
-        <!-- 高德地图API -->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="${aMap}" />
+        <activity
+            android:name="com.itoys.android.simple.splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.IToysAndroid.Starting">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

@@ -12,6 +12,11 @@ import com.itoys.android.utils.expansion.invalid
 object NetworkInitialization {
 
     /**
+     * api成功code
+     */
+    private var apiSuccessfulCode = ApiResultCode.SUCCESSFUL
+
+    /**
      * 资源host
      */
     private var resourcesHostUrl: String = ""
@@ -26,6 +31,7 @@ object NetworkInitialization {
      */
     fun initialization(application: Application, globalConfig: GlobalConfig) {
         initRetrofit(globalConfig.apiHostUrl.invalid())
+        apiSuccessfulCode = globalConfig.apiSuccessfulCode
         resourcesHostUrl = globalConfig.resourcesHostUrl.invalid()
         _networkDependency = globalConfig.networkDependency
     }
@@ -36,6 +42,11 @@ object NetworkInitialization {
     fun requireNetworkDependency(): INetworkDependency? {
         return _networkDependency
     }
+
+    /**
+     * 获取api成功code
+     */
+    fun requireApiSuccessfulCode() = apiSuccessfulCode
 
     /**
      * 获取资源host

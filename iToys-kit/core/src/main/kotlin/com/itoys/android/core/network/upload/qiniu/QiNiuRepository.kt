@@ -148,7 +148,7 @@ class QiNiuRepository(
                     )
                 } else {
                     logcat(priority = Log.ERROR) { "上传失败 -> $info" }
-                    handleEx?.invoke(ResultException(ApiResultCode.ARGS_ERROR, "File上传失败"))
+                    handleEx?.invoke(ResultException(ApiResultCode.PARAMS_ERROR, "File上传失败"))
                 }
             }, UploadOptions(null, null, false, processHandler, cancellationSignal)
         )

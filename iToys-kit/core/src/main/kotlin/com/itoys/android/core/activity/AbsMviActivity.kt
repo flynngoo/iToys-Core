@@ -5,7 +5,9 @@ import androidx.viewbinding.ViewBinding
 import com.itoys.android.core.mvi.AbsViewModel
 import com.itoys.android.core.mvi.IUIIntent
 import com.itoys.android.core.mvi.IUIState
+import com.itoys.android.core.mvi.LoadingUIState
 import com.itoys.android.core.mvi.ToastUIState
+import com.itoys.android.uikit.components.loading.LottieLoadingDialog
 import com.itoys.android.uikit.components.snack.TopSnackBar
 import com.itoys.android.uikit.components.snack.makeSnack
 import com.itoys.android.uikit.components.toast.toast
@@ -20,6 +22,11 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
 
     /** view model */
     abstract val viewModel: VM?
+
+    /**
+     * loading dialog
+     */
+    private var loadingDialog: LottieLoadingDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +46,38 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
             lifecycle.addObserver(viewModel)
         }
 
-        viewModel?.apply { collect(toastState, ::toast) }
+        viewModel?.apply {
+            collect(loadingState, ::loading)
+            collect(toastState, ::toast)
+        }
+    }
+
+    /**
+     * loading
+     */
+    private fun loading(loading: LoadingUIState?) {
+        when (loading) {
+            is LoadingUIState.Loading -> showLoading(loading.showLoading)
+
+            else -> {}
+        }
+    }
+
+    /**
+     * loading
+     */
+    open fun showLoading(show: Boolean) {
+        if (loadingDialog == null) {
+            loadingDialog = LottieLoadingDialog.show {
+                fm = supportFragmentManager
+            }
+        }
+
+        if (show) {
+            loadingDialog?.showDialog()
+        } else {
+            loadingDialog?.dismiss()
+        }
     }
 
     /**
