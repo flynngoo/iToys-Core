@@ -63,7 +63,27 @@ fun <T> Class<T>.toApiService(): T {
 
 fun <T> BaseEntity<T>?.isSuccessful(successful: Int = NetworkInitialization.requireApiSuccessfulCode()) = this?.errorCode == successful
 
+fun <T> BaseListEntity<T>?.isSuccessful(successful: Int = NetworkInitialization.requireApiSuccessfulCode()) = this?.errorCode == successful
+
+fun <T> BasePageEntity<T>?.isSuccessful(successful: Int = NetworkInitialization.requireApiSuccessfulCode()) = this?.errorCode == successful
+
 fun <T> BaseEntity<T>?.result() : T? {
+    if (this.isSuccessful()) {
+        return this?.data
+    }
+
+    throw ResultException(this?.errorCode ?: 0, this?.msg ?: "请求接口出现异常, 请稍后重试")
+}
+
+fun <T> BaseListEntity<T>?.result() : List<T>? {
+    if (this.isSuccessful()) {
+        return this?.data
+    }
+
+    throw ResultException(this?.errorCode ?: 0, this?.msg ?: "请求接口出现异常, 请稍后重试")
+}
+
+fun <T> BasePageEntity<T>?.result() : PageEntity<T>? {
     if (this.isSuccessful()) {
         return this?.data
     }

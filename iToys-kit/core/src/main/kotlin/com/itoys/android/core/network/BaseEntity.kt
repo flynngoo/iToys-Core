@@ -19,6 +19,17 @@ class BaseEntity<T>(
     var timestamp: Long = 0,
 )
 
+class BaseListEntity<T>(
+    @JsonProperty("code")
+    var errorCode: Int = -1,
+    @JsonProperty("msg")
+    var msg: String? = null,
+    @JsonProperty("data")
+    var data: List<T>? = null,
+    @JsonProperty("timestamp")
+    var timestamp: Long = 0,
+)
+
 class PageEntity<T>(
     @JsonProperty("size")
     val pageNum: Int,
@@ -30,6 +41,17 @@ class PageEntity<T>(
     val total: Int,
     @JsonProperty("records")
     val list: List<T>?,
+)
+
+class BasePageEntity<T>(
+    @JsonProperty("code")
+    var errorCode: Int = -1,
+    @JsonProperty("msg")
+    var msg: String? = null,
+    @JsonProperty("data")
+    var data: PageEntity<T>? = null,
+    @JsonProperty("timestamp")
+    var timestamp: Long = 0,
 )
 
 data class FilePath(

@@ -14,7 +14,6 @@ interface GlobalHttpHandler {
     companion object {
         val DEFAULT = object : GlobalHttpHandler {
             override fun onHttpResultResponse(
-                httpResult: String,
                 chain: Interceptor.Chain,
                 response: Response
             ): Response {
@@ -31,13 +30,11 @@ interface GlobalHttpHandler {
      * 这里可以先客户端一步拿到每一次 Http 请求的结果, 可以先解析成 Json, 再做一些操作, 如检测到 token 过期后
      * 重新请求 token, 并重新执行请求
      *
-     * @param httpResult 服务器返回的结果 (已被框架自动转换为字符串)
      * @param chain      [okhttp3.Interceptor.Chain]
      * @param response   [Response]
      * @return [Response]
      */
     fun onHttpResultResponse(
-        httpResult: String,
         chain: Interceptor.Chain,
         response: Response
     ): Response

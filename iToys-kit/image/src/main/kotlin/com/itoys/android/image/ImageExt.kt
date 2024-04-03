@@ -9,6 +9,7 @@ import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.addModels
@@ -125,7 +126,7 @@ fun ImageView.loadRoundCornerImage(
     @RawRes @DrawableRes error: Int = placeholder,
 ) {
     val options = RequestOptions().transform(
-        CropCenterTransformation(),
+        CenterCrop(),
         RoundedCornersTransformation(radius)
     )
 

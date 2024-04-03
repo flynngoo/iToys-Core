@@ -22,6 +22,7 @@ fun String?.navigation() {
         override fun onLost(navigator: Navigator) {
             super.onLost(navigator)
             logcat(Log.ERROR) { "Not found ${navigator.url} page, please check." }
+
         }
 
         override fun onArrival(navigator: Navigator) {

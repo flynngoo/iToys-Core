@@ -24,7 +24,12 @@ object NetworkInitialization {
     /**
      * 网络依赖
      */
-    private var _networkDependency: INetworkDependency? = null
+    private var networkDependency: INetworkDependency? = null
+
+    /**
+     * 全局http请求处理类
+     */
+    private var globalHttpHandler: GlobalHttpHandler = GlobalHttpHandler.DEFAULT
 
     /**
      * 初始化
@@ -33,14 +38,15 @@ object NetworkInitialization {
         initRetrofit(globalConfig.apiHostUrl.invalid())
         apiSuccessfulCode = globalConfig.apiSuccessfulCode
         resourcesHostUrl = globalConfig.resourcesHostUrl.invalid()
-        _networkDependency = globalConfig.networkDependency
+        networkDependency = globalConfig.networkDependency
+        globalHttpHandler = globalConfig.globalHttpHandler
     }
 
     /**
      * 获取网络配置
      */
     fun requireNetworkDependency(): INetworkDependency? {
-        return _networkDependency
+        return networkDependency
     }
 
     /**
@@ -52,4 +58,9 @@ object NetworkInitialization {
      * 获取资源host
      */
     fun requireResourcesHostUrl() = resourcesHostUrl
+
+    /**
+     * 获取全局http请求处理类
+     */
+    fun requireGlobalHttpHandler() = globalHttpHandler
 }

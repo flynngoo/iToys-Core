@@ -32,7 +32,7 @@ abstract class UseCase<Type, P : UseCase.Params> where Type : Any {
         val action = RequestAction<Type>().apply(block)
 
         scope.launch {
-            action.start?.invoke(params.showToast())
+            action.start?.invoke(params.showLoading())
 
             flow {
                 emit(run(params))
@@ -46,7 +46,6 @@ abstract class UseCase<Type, P : UseCase.Params> where Type : Any {
     }
 
     interface Params {
-        fun showToast() = true
 
         fun showLoading() = true
     }

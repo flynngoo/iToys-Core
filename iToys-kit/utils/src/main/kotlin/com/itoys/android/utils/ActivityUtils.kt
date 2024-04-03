@@ -1,6 +1,7 @@
 package com.itoys.android.utils
 
 import android.app.Activity
+import android.content.Intent
 
 /**
  * @Author Gu Fanfan
@@ -26,5 +27,15 @@ object ActivityUtils {
         val componentName = activity.componentName
 
         return (launchComponentName != null && componentName.equals(launchComponentName))
+    }
+
+    /**
+     * Open the main activity.
+     */
+    fun openLaunchActivity(activity: Activity) {
+        val packageManager = UtilsInitialization.requireApp().packageManager
+        val launchIntent = packageManager.getLaunchIntentForPackage(activity.packageName) ?: return
+        launchIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(launchIntent)
     }
 }

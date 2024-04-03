@@ -70,13 +70,13 @@ abstract class AbsMviFragment<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
      * loading
      */
     open fun showLoading(show: Boolean) {
-        if (loadingDialog == null) {
-            loadingDialog = LottieLoadingDialog.show {
-                fm = childFragmentManager
-            }
-        }
-
         if (show) {
+            if (loadingDialog == null) {
+                loadingDialog = LottieLoadingDialog.show {
+                    fm = childFragmentManager
+                }
+            }
+
             loadingDialog?.showDialog()
         } else {
             loadingDialog?.dismiss()

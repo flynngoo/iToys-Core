@@ -7,16 +7,11 @@ apply(from = "${rootDir}/publish-maven.gradle.kts")
 
 android {
     namespace = "com.itoys.android.core"
-
-    buildFeatures { buildConfig = true }
-
-    defaultConfig {
-        buildConfigField("String", "PUBLIC_RES_DOMAIN", "\"https://openres-housing.tianhuo.vip/\"")
-    }
 }
 
 dependencies {
     implementation(libs.appcompat)
+    implementation(libs.activity.ktx)
     implementation(libs.core.ktx)
     implementation(libs.material)
     implementation(libs.multidex)

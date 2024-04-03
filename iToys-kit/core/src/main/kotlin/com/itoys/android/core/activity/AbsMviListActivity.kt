@@ -3,7 +3,7 @@ package com.itoys.android.core.activity
 import android.os.Bundle
 import android.view.View
 import com.itoys.android.core.R
-import com.itoys.android.core.databinding.CommonLayoutListBinding
+import com.itoys.android.core.databinding.CoreLayoutListBinding
 import com.itoys.android.core.mvi.AbsListViewModel
 import com.itoys.android.core.mvi.IUIIntent
 import com.itoys.android.core.mvi.IUIState
@@ -17,7 +17,7 @@ import com.itoys.android.utils.expansion.then
  * @Email fanfan.work@outlook.com
  * @Date 2023/12/8
  */
-abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUIState>> : AbsMviActivity<CommonLayoutListBinding, VM>() {
+abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUIState>> : AbsMviActivity<CoreLayoutListBinding, VM>() {
 
     /**
      * 是否显示搜索组件
@@ -39,7 +39,7 @@ abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUISt
      */
     open val showBottomButton = false
 
-    override fun createViewBinding() = CommonLayoutListBinding.inflate(layoutInflater)
+    override fun createViewBinding() = CoreLayoutListBinding.inflate(layoutInflater)
 
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.titleBar?.setTitle(listTitle())

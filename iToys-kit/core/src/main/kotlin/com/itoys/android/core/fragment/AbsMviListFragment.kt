@@ -2,7 +2,7 @@ package com.itoys.android.core.fragment
 
 import android.os.Bundle
 import android.view.View
-import com.itoys.android.core.databinding.CommonLayoutListBinding
+import com.itoys.android.core.databinding.CoreLayoutListBinding
 import com.itoys.android.core.mvi.AbsListViewModel
 import com.itoys.android.core.mvi.IUIIntent
 import com.itoys.android.core.mvi.IUIState
@@ -16,7 +16,7 @@ import com.itoys.android.utils.expansion.then
  * @Email fanfan.work@outlook.com
  * @Date 2023/12/11
  */
-abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUIState>> : AbsMviFragment<CommonLayoutListBinding, VM>()  {
+abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUIState>> : AbsMviFragment<CoreLayoutListBinding, VM>()  {
 
     /**
      * 是否显示标题栏
@@ -38,7 +38,7 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
      */
     open val enableLoadMore = true
 
-    override fun createViewBinding() = CommonLayoutListBinding.inflate(layoutInflater)
+    override fun createViewBinding() = CoreLayoutListBinding.inflate(layoutInflater)
 
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.titleBar?.setTitle(listTitle())
@@ -60,11 +60,13 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
     override fun addClickListen() {
         binding?.page?.apply {
             // 刷新
+            setEnableRefresh(enableRefresh)
             if (enableRefresh) {
                 onRefresh { viewModel?.sendListIntent(ListUIIntent.Refresh) }.refresh()
             }
 
             // 加载更多
+            setEnableLoadMore(enableLoadMore)
             if (enableLoadMore) {
                 onLoadMore { viewModel?.sendListIntent(ListUIIntent.LoadMore) }
             }

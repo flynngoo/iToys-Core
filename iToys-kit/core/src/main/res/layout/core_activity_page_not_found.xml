@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><!--CoordinatorLayout+ViewPager`要求缺省页的XML根布局为`NestedScrollView`, 否则显示缺省页后无法正常滑动-->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="127dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_state"
+                android:layout_width="268dp"
+                android:layout_height="268dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/uikit_icon_empty_error" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_state"
+                style="@style/IToysAndroid.Body2"
+                android:layout_marginTop="12dp"
+                android:text="@string/core_page_not_fount"
+                android:textColor="@color/uikit_colorful_B6BFCC" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_retry"
+                style="@style/IToysAndroid.Button.BackgroundTint"
+                android:layout_width="153dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/uikit_retry"
+                android:textColor="@color/uikit_colorful_white" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

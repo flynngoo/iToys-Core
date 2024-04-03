@@ -45,6 +45,13 @@ class IToysInterceptor : Interceptor {
             }
         }
 
-        return chain.proceed(builder.build())
+        val originalResponse = chain.proceed(builder.build())
+
+        NetworkInitialization.requireGlobalHttpHandler().onHttpResultResponse(
+            chain,
+            originalResponse
+        )
+
+        return originalResponse
     }
 }
