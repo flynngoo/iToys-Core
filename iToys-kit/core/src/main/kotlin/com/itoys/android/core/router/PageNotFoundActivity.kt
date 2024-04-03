@@ -20,6 +20,9 @@ class PageNotFoundActivity : AbsMviActivity<CoreActivityPageNotFoundBinding, Pag
     override fun createViewBinding() = CoreActivityPageNotFoundBinding.inflate(layoutInflater)
 
     override fun initialize(savedInstanceState: Bundle?) {
-        binding?.btnRetry?.doOnClick { viewModel?.sendIntent(PageNotFoundIntent.Navigation) }
+        binding?.btnRetry?.doOnClick {
+            viewModel?.sendIntent(PageNotFoundIntent.Navigation)
+            finish()
+        }
     }
 }

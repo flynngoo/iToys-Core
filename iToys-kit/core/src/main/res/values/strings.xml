@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="core_page_not_fount">页面未找到, 请检查页面地址</string>
+    <string name="core_page_not_fount">页面未找到</string>
+    <string name="core_page_not_fount_msg">页面未找到, 请检查页面地址</string>
 </resources>
