@@ -25,6 +25,7 @@ object UikitInitialization {
         // Brv 缺省页配置
         StateConfig.apply {
             emptyLayout = R.layout.uikit_layout_empty
+            loadingLayout = R.layout.uikit_layout_loading
 
             onEmpty {
                 logcat { "StateConfig -> onEmpty" }
@@ -32,8 +33,8 @@ object UikitInitialization {
         }
 
         // 全局刷新配置
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(context) }
-        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(context) }
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> ClassicsHeader(context) }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ -> ClassicsFooter(context) }
     }
 
     fun requireApp(): Application {

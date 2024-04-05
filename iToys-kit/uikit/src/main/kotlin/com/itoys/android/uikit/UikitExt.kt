@@ -15,7 +15,7 @@ import com.drake.brv.utils.setup
 import com.gyf.immersionbar.ImmersionBar
 import com.itoys.android.logcat.asLog
 import com.itoys.android.logcat.logcat
-import com.itoys.android.uikit.components.decoration.StepsDecoration
+import com.itoys.android.uikit.components.recyclerview.StepsDecoration
 import com.itoys.android.uikit.components.indicator.IToysPagerTitleView
 import com.itoys.android.uikit.components.indicator.IndicatorConfig
 import com.itoys.android.uikit.databinding.UikitLayoutItemStepsBinding

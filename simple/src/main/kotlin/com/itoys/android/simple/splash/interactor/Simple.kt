@@ -17,7 +17,5 @@ class Simple(
 
     data class Params(
         val id: Int?
-    ) : UseCase.Params {
-        override fun showToast() = false
-    }
+    ) : UseCase.Params
 }

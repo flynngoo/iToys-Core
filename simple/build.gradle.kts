@@ -25,12 +25,15 @@ android {
 
 dependencies {
     implementation(libs.appcompat)
+    implementation(libs.activity.ktx)
     implementation(libs.core.ktx)
+    implementation(libs.fragment.ktx)
     implementation(libs.material)
     implementation(libs.mmkv)
     implementation(libs.retrofit)
 
     implementation(projects.iToysKit.core)
+    implementation(projects.iToysKit.logcat)
     implementation(projects.iToysKit.uikit)
     implementation(projects.iToysKit.utils)
 }

@@ -1,4 +1,4 @@
-package com.itoys.android.uikit.components.decoration
+package com.itoys.android.uikit.components.recyclerview
 
 import android.content.Context
 import android.graphics.*

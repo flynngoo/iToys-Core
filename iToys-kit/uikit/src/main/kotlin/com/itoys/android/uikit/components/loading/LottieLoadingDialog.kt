@@ -53,6 +53,6 @@ class LottieLoadingDialog : IToysDialog<UikitDialogLayoutLoadingBinding, LottieL
         /**
          * lottie 资源
          */
-        var lottieResource = "loading/loading_paperplane.json"
+        var lottieResource = "loading/loading_paper_airplane.json"
     }
 }

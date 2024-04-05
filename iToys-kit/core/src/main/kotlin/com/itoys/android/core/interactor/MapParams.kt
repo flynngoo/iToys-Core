@@ -7,4 +7,7 @@ package com.itoys.android.core.interactor
  */
 data class MapParams(
     val map: HashMap<String, Any>,
-) : UseCase.Params
+) : UseCase.Params {
+
+    override fun showLoading() = false
+}

@@ -86,6 +86,26 @@ class GlobalConfig(
             return this
         }
 
+        /**
+         * 分页配置
+         *
+         * @param pageKey 页码key
+         * @param pageSizeKey 分页数量key
+         * @param searchKey 搜索关键字key
+         */
+        fun pagingConfig(
+            pageKey: String = "current",
+            pageSizeKey: String = "size",
+            searchKey: String = "keywords",
+            countdownTimerFuture: Long = 1500L
+        ) : Builder {
+            CoreConfig.pageKey = pageKey
+            CoreConfig.pageSizeKey = pageSizeKey
+            CoreConfig.searchKey = searchKey
+            CoreConfig.searchCountdownTimerFuture = countdownTimerFuture
+            return this
+        }
+
         fun build(): GlobalConfig {
             return GlobalConfig(
                 this.debug,

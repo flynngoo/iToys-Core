@@ -2,7 +2,9 @@ package com.itoys.android.core.activity
 
 import android.os.Bundle
 import android.view.View
-import com.itoys.android.core.R
+import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.itoys.android.core.databinding.CoreLayoutListBinding
 import com.itoys.android.core.mvi.AbsListViewModel
 import com.itoys.android.core.mvi.IUIIntent
@@ -10,7 +12,6 @@ import com.itoys.android.core.mvi.IUIState
 import com.itoys.android.core.mvi.ListUIIntent
 import com.itoys.android.core.mvi.ListUIState
 import com.itoys.android.utils.expansion.collect
-import com.itoys.android.utils.expansion.then
 
 /**
  * @Author Gu Fanfan
@@ -18,11 +19,6 @@ import com.itoys.android.utils.expansion.then
  * @Date 2023/12/8
  */
 abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUIState>> : AbsMviActivity<CoreLayoutListBinding, VM>() {
-
-    /**
-     * 是否显示搜索组件
-     */
-    open val withSearchView = false
 
     /**
      * 开启刷新
@@ -34,69 +30,18 @@ abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUISt
      */
     open val enableLoadMore = true
 
-    /**
-     * 是否显示底部按钮
-     */
-    open val showBottomButton = false
-
     override fun createViewBinding() = CoreLayoutListBinding.inflate(layoutInflater)
 
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.titleBar?.setTitle(listTitle())
-        binding?.searchLayout?.visibility = withSearchView.then(View.VISIBLE, View.GONE)
-        initSearchView()
+        // 显示加载中
+        binding?.page?.showLoading(refresh = false)
 
+        setupSearch()
+        setupHeader()
+        setupFooter()
         setupList()
-
-        if (showBottomButton) {
-            binding?.bottom?.visibility = View.VISIBLE
-            binding?.bottomBtn?.text = bottomButtonText()
-        }
     }
-
-    /**
-     * 初始化搜索组件
-     */
-    private fun initSearchView() {
-        val searchView = searchView() ?: return
-        binding?.searchLayout?.addView(searchView)
-    }
-
-    override fun addClickListen() {
-        super.addClickListen()
-
-        binding?.page?.apply {
-            // 刷新
-            if (enableRefresh) {
-                onRefresh { viewModel?.sendListIntent(ListUIIntent.Refresh) }.refresh()
-            }
-
-            // 加载更多
-            if (enableLoadMore) {
-                onLoadMore { viewModel?.sendListIntent(ListUIIntent.LoadMore) }
-            }
-        }
-    }
-
-    /**
-     * list title
-     */
-    abstract fun listTitle(): String
-
-    /**
-     * bottom button text.
-     */
-    open fun bottomButtonText() = getString(R.string.uikit_confirm)
-
-    /**
-     * 搜索组件
-     */
-    open fun searchView(): View? = null
-
-    /**
-     * 设置list
-     */
-    abstract fun setupList()
 
     override fun addObserver() {
         super.addObserver()
@@ -124,6 +69,80 @@ abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUISt
             ListUIState.ShowEmpty -> binding?.page?.showEmpty()
 
             else -> {}
+        }
+    }
+
+    override fun addClickListen() {
+        super.addClickListen()
+
+        binding?.page?.apply {
+            // 刷新
+            if (enableRefresh) {
+                onRefresh { viewModel?.sendListIntent(ListUIIntent.Refresh) }.refresh()
+            }
+
+            // 加载更多
+            if (enableLoadMore) {
+                onLoadMore { viewModel?.sendListIntent(ListUIIntent.LoadMore) }
+            }
+        }
+    }
+
+    /**
+     * list title
+     */
+    abstract fun listTitle(): String
+
+    /**
+     * 设置list
+     */
+    abstract fun setupList()
+
+    /**
+     * 搜索
+     */
+    open fun searchView(parent: ViewGroup): View? = null
+
+    /**
+     * 设置 搜索
+     */
+    private fun setupSearch() {
+        binding?.search?.let { group ->
+            searchView(group)?.apply {
+                group.addView(this)
+            }
+        }
+    }
+
+    /**
+     * header
+     */
+    open fun headerView(parent: ViewGroup): View? = null
+
+    /**
+     * 设置 header
+     */
+    private fun setupHeader() {
+        binding?.header?.let { group ->
+            headerView(group)?.apply {
+                group.addView(this)
+            }
+        }
+    }
+
+    /**
+     * footer
+     */
+    open fun footerView(parent: ViewGroup): View? = null
+
+    /**
+     * 设置 footer
+     */
+    private fun setupFooter() {
+        binding?.footer?.let { group ->
+            footerView(group)?.apply {
+                group.addView(this)
+            }
         }
     }
 }

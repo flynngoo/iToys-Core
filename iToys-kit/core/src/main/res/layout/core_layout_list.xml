@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,20 +12,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_layout"
+        android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/search" />
 
     <com.drake.brv.PageRefreshLayout
         android:id="@+id/page"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom"
+        app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_layout"
+        app:layout_constraintTop_toBottomOf="@+id/header"
         app:stateEnabled="true">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -35,26 +39,9 @@
             android:layout_height="match_parent" />
     </com.drake.brv.PageRefreshLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/bottom"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/uikit_colorful_white"
-        android:gravity="center"
-        android:paddingHorizontal="40dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/bottom_btn"
-            style="@style/IToysAndroid.Button.BackgroundTint"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/uikit_confirm" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

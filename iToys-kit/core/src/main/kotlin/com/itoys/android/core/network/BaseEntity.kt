@@ -1,5 +1,6 @@
 package com.itoys.android.core.network
 
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
@@ -10,8 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 class BaseEntity<T>(
     @JsonProperty("code")
+    @JsonAlias("status")
     var errorCode: Int = -1,
     @JsonProperty("msg")
+    @JsonAlias("message")
     var msg: String? = null,
     @JsonProperty("data")
     var data: T? = null,
@@ -21,8 +24,10 @@ class BaseEntity<T>(
 
 class BaseListEntity<T>(
     @JsonProperty("code")
+    @JsonAlias("status")
     var errorCode: Int = -1,
     @JsonProperty("msg")
+    @JsonAlias("message")
     var msg: String? = null,
     @JsonProperty("data")
     var data: List<T>? = null,
@@ -32,21 +37,26 @@ class BaseListEntity<T>(
 
 class PageEntity<T>(
     @JsonProperty("size")
+    @JsonAlias("pageSize")
     val pageNum: Int,
     @JsonProperty("pages")
     val pages: Int,
     @JsonProperty("current")
+    @JsonAlias("pageNum")
     val current: Int,
     @JsonProperty("total")
     val total: Int,
     @JsonProperty("records")
+    @JsonAlias("list")
     val list: List<T>?,
 )
 
 class BasePageEntity<T>(
     @JsonProperty("code")
+    @JsonAlias("status")
     var errorCode: Int = -1,
     @JsonProperty("msg")
+    @JsonAlias("message")
     var msg: String? = null,
     @JsonProperty("data")
     var data: PageEntity<T>? = null,

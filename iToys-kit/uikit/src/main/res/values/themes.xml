@@ -56,7 +56,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="barStyle">ripple</item>
         <!-- 标题栏背景 -->
-        <item name="android:background">@color/uikit_colorful_transparent</item>
+        <item name="android:background">@color/uikit_colorful_white</item>
         <item name="titleColor">@color/uikit_colorful_333333</item>
         <item name="titleSize">18sp</item>
         <item name="leftIcon">@drawable/uikit_icon_back_black</item>
@@ -64,6 +64,7 @@
     </style>
 
     <style name="IToysAndroid.TitleBar.White" parent="IToysAndroid.TitleBar">
+        <item name="android:background">@color/uikit_colorful_transparent</item>
         <item name="titleColor">@color/uikit_colorful_white</item>
         <item name="leftIcon">@drawable/uikit_icon_back_white</item>
     </style>

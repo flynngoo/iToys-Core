@@ -1,5 +1,6 @@
 package com.itoys.android.core.mvi
 
+import com.itoys.android.core.CoreConfig
 import com.itoys.android.core.network.PageEntity
 import com.itoys.android.core.network.RequestAction
 import com.itoys.android.core.network.ResultException
@@ -18,6 +19,14 @@ import kotlinx.coroutines.flow.receiveAsFlow
  */
 abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S>() {
 
+    private companion object {
+        /**
+         * 验证码倒计间隔
+         * 单位：ms
+         */
+        const val COUNT_DOWN_TIMER_INTERVAL = 1000L
+    }
+
     /** view intent */
     private val _listIntent: Channel<ListUIIntent> = Channel()
     private val listIntentFlow: Flow<ListUIIntent> = _listIntent.receiveAsFlow()
@@ -32,29 +41,19 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
     open var page = 1
 
     /**
-     * 页码 - key
-     */
-    open var pageKey = "current"
-
-    /**
      * 分页数量
      */
     open val pageSize = 20
 
     /**
-     * 分页数量 - key
-     */
-    open val pageSizeKey = "size"
-
-    /**
-     * 搜索关键之 - key
-     */
-    open val searchKey = "keywords"
-
-    /**
      * 分页参数
      */
     val pageParams = hashMapOf<String, Any>()
+
+    /**
+     * 搜索倒计时
+     */
+    private var searchCountDownTimer: SearchCountDownTimer? = null
 
     init {
         launchOnUI {
@@ -94,8 +93,8 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
         logcat { "刷新数据" }
 
         page = 1
-        pageParams[pageKey] = page
-        pageParams[pageSizeKey] = pageSize
+        pageParams[CoreConfig.pageKey] = page
+        pageParams[CoreConfig.pageSizeKey] = pageSize
 
         fetchData(ListUIIntent.Refresh)
     }
@@ -107,8 +106,8 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
         logcat { "加载更多" }
 
         page++
-        pageParams[pageKey] = page
-        pageParams[pageSizeKey] = pageSize
+        pageParams[CoreConfig.pageKey] = page
+        pageParams[CoreConfig.pageSizeKey] = pageSize
 
         fetchData(ListUIIntent.LoadMore)
     }
@@ -117,13 +116,42 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
      * 搜索
      */
     open fun search(keywords: String) {
-        pageParams[searchKey] = keywords
+        pageParams[CoreConfig.searchKey] = keywords
+        startSearchCountDownTimer(keywords)
 
         if (keywords.isBlank()) {
-            pageParams.remove(searchKey)
+            // 关键字是空的则刷新
+            pageParams.remove(CoreConfig.searchKey)
+            refresh()
         }
+    }
 
-        refresh()
+    /**
+     * 启动新的搜索倒计时
+     */
+    private fun startSearchCountDownTimer(keywords: String) {
+        searchCountDownTimer?.cancel()
+        searchCountDownTimer = null
+        if (keywords.isBlank()) return
+
+        searchCountDownTimer = SearchCountDownTimer(
+            viewModel = this@AbsListViewModel,
+            searchKeywords = keywords,
+            CoreConfig.searchCountdownTimerFuture,
+            COUNT_DOWN_TIMER_INTERVAL
+        )
+        searchCountDownTimer?.start()
+    }
+
+    /**
+     * 倒计时结束
+     */
+    fun countdownEnded(keywords: String) {
+        if (pageParams[CoreConfig.searchKey] == keywords) {
+            // 倒计时的关键字和当前关键字一致则刷新
+            logcat { "当前搜索关键字: $keywords" }
+            refresh()
+        }
     }
 
     /**
@@ -157,7 +185,10 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
         )
 
         // 没有更多
-        if (pager.current >= pager.pages) {
+        // 1. 当前页码是最后一页( >= 总页数)
+        // 2. 当前总条数(当前页码 * 每页数量) >= 总条数
+        val isNoMore = pager.current >= pager.pages || pager.current * pager.pageNum >= pager.total
+        if (isNoMore) {
             sendListState(ListUIState.NoMore)
         }
 

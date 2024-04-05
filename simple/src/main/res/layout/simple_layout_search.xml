@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.itoys.android.uikit.components.input.SearchView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@color/uikit_colorful_white"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+    app:searchPaddingHorizontal="15dp"
+    app:searchBackground="@drawable/simple_rectangle_20_e3e3e3"
+    app:searchSuffix="@drawable/uikit_ic_close_your_eyes"
+    app:searchSuffixSize="40dp"
+    app:searchHint="请输入搜索内容..."
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />

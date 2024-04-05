@@ -2,6 +2,7 @@ package com.itoys.android.core.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import com.itoys.android.core.databinding.CoreLayoutListBinding
 import com.itoys.android.core.mvi.AbsListViewModel
 import com.itoys.android.core.mvi.IUIIntent
@@ -24,11 +25,6 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
     open val withTileBar = false
 
     /**
-     * 是否显示搜索组件
-     */
-    open val withSearchView = false
-
-    /**
      * 开启刷新
      */
     open val enableRefresh = true
@@ -43,18 +39,14 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.titleBar?.setTitle(listTitle())
         binding?.titleBar?.visibility = withTileBar.then(View.VISIBLE, View.GONE)
-        binding?.searchLayout?.visibility = withSearchView.then(View.VISIBLE, View.GONE)
-        initSearchView()
 
+        // 显示加载中
+        binding?.page?.showLoading(refresh = false)
+
+        setupSearch()
+        setupHeader()
+        setupFooter()
         setupList()
-    }
-
-    /**
-     * 初始化搜索组件
-     */
-    private fun initSearchView() {
-        val searchView = searchView() ?: return
-        binding?.searchLayout?.addView(searchView)
     }
 
     override fun addClickListen() {
@@ -72,21 +64,6 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
             }
         }
     }
-
-    /**
-     * list title
-     */
-    open fun listTitle(): String = ""
-
-    /**
-     * 搜索组件
-     */
-    open fun searchView(): View? = null
-
-    /**
-     * 设置list
-     */
-    abstract fun setupList()
 
     override fun addObserver() {
         super.addObserver()
@@ -114,6 +91,64 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
             ListUIState.ShowEmpty -> binding?.page?.showEmpty()
 
             else -> {}
+        }
+    }
+
+    /**
+     * list title
+     */
+    open fun listTitle(): String = ""
+
+    /**
+     * 设置list
+     */
+    abstract fun setupList()
+
+    /**
+     * 搜索
+     */
+    open fun searchView(parent: ViewGroup): View? = null
+
+    /**
+     * 设置 搜索
+     */
+    private fun setupSearch() {
+        binding?.search?.let { group ->
+            searchView(group)?.apply {
+                group.addView(this)
+            }
+        }
+    }
+
+    /**
+     * header
+     */
+    open fun headerView(parent: ViewGroup): View? = null
+
+    /**
+     * 设置 header
+     */
+    private fun setupHeader() {
+        binding?.header?.let { group ->
+            headerView(group)?.apply {
+                group.addView(this)
+            }
+        }
+    }
+
+    /**
+     * footer
+     */
+    open fun footerView(parent: ViewGroup): View? = null
+
+    /**
+     * 设置 footer
+     */
+    private fun setupFooter() {
+        binding?.footer?.let { group ->
+            footerView(group)?.apply {
+                group.addView(this)
+            }
         }
     }
 }

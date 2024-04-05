@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.constraint.layout)
     implementation(libs.calendar.angcyo)
     implementation(libs.immersionbar)
+    implementation(libs.keyboard.event)
     implementation(libs.lottie)
     implementation(libs.magic.indicator)
     implementation(libs.picker.wheel)

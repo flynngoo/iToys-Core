@@ -211,4 +211,53 @@
     <declare-styleable name="IdentityCardPickerView">
         <attr name="identityCardTitle" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="DescriptionsView">
+        <!-- label -->
+        <attr name="descLabel" format="string" />
+        <!-- label font family -->
+        <attr name="descLabelFontFamily" format="string" />
+        <!-- label 冒号 -->
+        <attr name="descLabelColon" format="boolean" />
+        <!-- label 字体大小 -->
+        <attr name="descLabelSize" format="dimension" />
+        <!-- label 字体颜色 -->
+        <attr name="descLabelColor" format="color|reference" />
+        <!-- label weight -->
+        <attr name="descLabelWeight" format="float" />
+
+        <!-- content -->
+        <attr name="descContent" format="string" />
+        <!-- content font family -->
+        <attr name="descContentFontFamily" format="string" />
+        <!-- content 字体大小 -->
+        <attr name="descContentSize" format="dimension" />
+        <!-- content 字体颜色 -->
+        <attr name="descContentColor" format="color|reference" />
+        <!-- content weight -->
+        <attr name="descContentWeight" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="SearchView">
+        <!-- 背景 -->
+        <attr name="searchBackground" format="reference" />
+        <!-- horizontal padding -->
+        <attr name="searchPaddingHorizontal" format="dimension" />
+        <!-- vertical padding -->
+        <attr name="searchPaddingVertical" format="dimension" />
+        <!-- 带有前缀图标的 input -->
+        <attr name="searchPrefix" format="reference" />
+        <!-- 前缀图标大小 -->
+        <attr name="searchPrefixSize" format="dimension" />
+        <!-- 带有后缀图标的 input -->
+        <attr name="searchSuffix" format="reference" />
+        <!-- 后缀图标大小 -->
+        <attr name="searchSuffixSize" format="dimension" />
+        <!-- 提示内容 -->
+        <attr name="searchHint" format="string" />
+        <!-- 提示内容颜色 -->
+        <attr name="searchHintColor" format="color|reference" />
+        <!-- 可以点击后缀图标删除内容 -->
+        <attr name="searchAllowClear" format="boolean" />
+    </declare-styleable>
 </resources>
