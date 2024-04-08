@@ -8,6 +8,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONException
 import retrofit2.HttpException
+import java.io.InterruptedIOException
 import java.net.ConnectException
 import java.net.SocketException
 import java.net.SocketTimeoutException
@@ -98,7 +99,10 @@ fun Throwable.handlerException(): ResultException {
                         Any::class.java
                     )
 
-                    ResultException(code(), (bodyMap?.get("msg") as String?).invalid("请求接口失败, 请检查"))
+                    ResultException(
+                        code(),
+                        (bodyMap?.get("msg") as String?).invalid("请求接口失败, 请检查")
+                    )
                 }
 
                 else -> ResultException(code(), "请求接口出现异常, 请稍后重试")
@@ -114,13 +118,11 @@ fun Throwable.handlerException(): ResultException {
         }
 
         is SocketException -> {
-            ResultException(
-                ApiResultCode.NETWORK_NOT_CONNECTION,
-                "网络连接出现异常, 请检查网络和权限配置"
-            )
+            ResultException(ApiResultCode.NETWORK_NOT_CONNECTION, "网络连接出现异常, 请检查网络和权限配置")
         }
 
-        is SocketTimeoutException -> {
+        is SocketTimeoutException,
+        is InterruptedIOException -> {
             ResultException(ApiResultCode.REQUEST_TIMEOUT, "请求接口超时, 请稍后重试")
         }
 

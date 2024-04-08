@@ -34,5 +34,5 @@
         android:textColor="@color/uikit_colorful_86909C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@string/uikit_avatar" />
+        tools:text="@string/uikit_remarks_count_indicator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

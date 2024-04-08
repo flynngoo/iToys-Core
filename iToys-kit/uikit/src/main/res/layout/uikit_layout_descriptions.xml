@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toStartOf="@id/content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/uikit_please_input" />
+        tools:text="@string/uikit_module_name" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/content"
@@ -22,5 +22,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/label"
         app:layout_constraintTop_toTopOf="@id/label"
-        tools:text="@string/uikit_please_input" />
+        tools:text="@string/uikit_module_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

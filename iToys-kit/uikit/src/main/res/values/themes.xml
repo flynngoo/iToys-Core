@@ -26,7 +26,7 @@
         <item name="appPrimaryTextColor">@color/uikit_colorful_1D2129</item>
         <item name="appSecondaryTextColor">@color/uikit_colorful_1D2129</item>
         <item name="appHintTextColor">@color/uikit_colorful_D4D8DB</item>
-        <item name="appPrimaryButtonBackground">@drawable/uikit_button_variant_gradient</item>
+        <item name="appPrimaryButtonBackground">@drawable/uikit_primary_button_background</item>
         <!-- 移除recyclerview & scrollview 顶部和底部波纹 -->
         <item name="android:overScrollHeader">@color/uikit_colorful_transparent</item>
         <item name="android:overScrollFooter">@color/uikit_colorful_transparent</item>
@@ -43,7 +43,6 @@
         <item name="android:windowEnterTransition">@null</item>
         <!--适配Android P刘海屏-->
         <item name="android:windowLayoutInDisplayCutoutMode" tools:ignore="NewApi">shortEdges</item>
-        <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:navigationBarColor">@color/uikit_colorful_transparent</item>
     </style>
 
@@ -155,6 +154,14 @@
         <item name="cornerRadius">100dp</item>
     </style>
 
+    <style name="IToysAndroid.Button.Stroke" parent="IToysAndroid.Button">
+        <item name="backgroundTint">@color/uikit_colorful_transparent</item>
+        <item name="cornerRadius">100dp</item>
+        <item name="strokeColor">?attr/appPrimaryColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">?attr/appPrimaryColor</item>
+    </style>
+
     <!-- Edit -->
     <style name="IToysAndroid.Input" parent="IToysAndroid.Body2">
         <item name="android:layout_width">match_parent</item>
@@ -210,7 +217,7 @@
     <!-- Radio -->
     <style name="IToysAndroid.Radio" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/uikit_itoys_radio_buttons</item>
-        <item name="buttonTint">@color/uikit_colorful_42B2F9</item>
+        <item name="buttonTint">?attr/appPrimaryColor</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?attr/appPrimaryTextColor</item>
         <item name="android:textSize">16sp</item>

@@ -3,8 +3,6 @@ package com.itoys.android.core.activity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import com.itoys.android.core.databinding.CoreLayoutListBinding
 import com.itoys.android.core.mvi.AbsListViewModel
 import com.itoys.android.core.mvi.IUIIntent
@@ -37,7 +35,6 @@ abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUISt
         // 显示加载中
         binding?.page?.showLoading(refresh = false)
 
-        setupSearch()
         setupHeader()
         setupFooter()
         setupList()
@@ -97,22 +94,6 @@ abstract class AbsMviListActivity<VM : AbsListViewModel<out IUIIntent, out IUISt
      * 设置list
      */
     abstract fun setupList()
-
-    /**
-     * 搜索
-     */
-    open fun searchView(parent: ViewGroup): View? = null
-
-    /**
-     * 设置 搜索
-     */
-    private fun setupSearch() {
-        binding?.search?.let { group ->
-            searchView(group)?.apply {
-                group.addView(this)
-            }
-        }
-    }
 
     /**
      * header

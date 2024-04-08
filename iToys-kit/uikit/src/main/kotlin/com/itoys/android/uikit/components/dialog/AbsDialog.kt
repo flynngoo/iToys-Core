@@ -70,7 +70,18 @@ abstract class AbsDialog<out B : AbsDialog.Builder> : DialogFragment() {
             return
         }
 
-        builder().fm?.let { show(it, javaClass.tagName) }
+        val tagName = javaClass.tagName
+
+        builder().fm?.apply {
+            try {
+                val oldFragment = findFragmentByTag(tagName)
+                if (oldFragment == null || (!oldFragment.isAdded && !oldFragment.isVisible)) {
+                    show(this, tagName)
+                }
+            } catch (e: Exception) {
+                logcat(priority = Log.ERROR) { e.asLog() }
+            }
+        }
     }
 
     abstract class Builder {

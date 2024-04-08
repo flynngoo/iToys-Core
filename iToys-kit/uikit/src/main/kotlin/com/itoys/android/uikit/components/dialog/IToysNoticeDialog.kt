@@ -111,7 +111,7 @@ class IToysNoticeDialog : IToysDialog<UikitDialogLayoutNoticeBinding, IToysNotic
         return try {
             builder.buttonsBackground[index]
         } catch (e: Exception) {
-            R.drawable.uikit_button_variant_base_radius_6
+            R.drawable.uikit_primary_button_background_radius_12
         }
     }
 
@@ -172,7 +172,7 @@ class IToysNoticeDialog : IToysDialog<UikitDialogLayoutNoticeBinding, IToysNotic
         /**
          * 按钮背景 顺序(Start -> Center -> End)
          */
-        var buttonsBackground = arrayOf(R.drawable.uikit_button_variant_base_radius_6)
+        var buttonsBackground = arrayOf(R.drawable.uikit_primary_button_background_radius_12)
 
         /**
          * 最大button数量

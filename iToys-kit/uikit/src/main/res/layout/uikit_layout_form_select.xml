@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/suffixIcon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/uikit_avatar" />
+        tools:text="@string/uikit_module_name" />
 
     <!-- suffix -->
     <androidx.appcompat.widget.AppCompatImageView

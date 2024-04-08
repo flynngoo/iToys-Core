@@ -118,8 +118,8 @@ class IdentityCardPickerView(
                 )
 
                 buttonsBackground = arrayOf(
-                    R.drawable.uikit_rectangle_6_e5e6eb,
-                    R.drawable.uikit_button_variant_base_radius_6
+                    R.drawable.uikit_rectangle_12_e5e6eb,
+                    R.drawable.uikit_primary_button_background_radius_12
                 )
 
                 callback = object : IDialogCallback() {
@@ -156,8 +156,8 @@ class IdentityCardPickerView(
                 )
 
                 buttonsBackground = arrayOf(
-                    R.drawable.uikit_rectangle_6_e5e6eb,
-                    R.drawable.uikit_button_variant_base_radius_6
+                    R.drawable.uikit_rectangle_12_e5e6eb,
+                    R.drawable.uikit_primary_button_background_radius_12
                 )
 
                 callback = object : IDialogCallback() {

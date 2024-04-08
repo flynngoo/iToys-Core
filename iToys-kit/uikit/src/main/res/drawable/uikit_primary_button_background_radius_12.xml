@@ -2,29 +2,23 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_enabled="true">
-        <shape android:shape="rectangle">
-
+        <shape>
             <solid android:color="?attr/appPrimaryColor" />
-
-            <corners android:radius="6dp" />
+            <corners android:radius="12dp" />
         </shape>
     </item>
 
     <item android:state_enabled="false">
-        <shape android:shape="rectangle">
-
-            <solid android:color="@color/uikit_colorful_98CBF9" />
-
-            <corners android:radius="6dp" />
+        <shape>
+            <solid android:color="?attr/appPrimaryVariantColor" />
+            <corners android:radius="12dp" />
         </shape>
     </item>
 
     <item>
-        <shape android:shape="rectangle">
-
+        <shape>
             <solid android:color="?attr/appPrimaryColor" />
-
-            <corners android:radius="6dp" />
+            <corners android:radius="12dp" />
         </shape>
     </item>
 </selector>

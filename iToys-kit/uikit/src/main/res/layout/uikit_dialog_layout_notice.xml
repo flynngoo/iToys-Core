@@ -16,7 +16,7 @@
         android:gravity="center"
         android:textColor="@color/uikit_colorful_percent90_black"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/uikit_name" />
+        tools:text="@string/uikit_module_name" />
 
     <!-- Content -->
     <com.google.android.material.textview.MaterialTextView
@@ -29,7 +29,7 @@
         android:scrollbars="vertical"
         android:textColor="@color/uikit_colorful_percent60_black"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="@string/uikit_id_card" />
+        tools:text="@string/uikit_module_name" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/btn_layout"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/uikit_button_variant_base_radius_6"
+            android:background="@drawable/uikit_primary_button_background_radius_12"
             android:text="@string/uikit_confirm"
             android:visibility="gone" />
 
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/uikit_button_variant_base_radius_6"
+            android:background="@drawable/uikit_primary_button_background_radius_12"
             android:text="@string/uikit_confirm"
             android:visibility="gone" />
 
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/uikit_button_variant_base_radius_6"
+            android:background="@drawable/uikit_primary_button_background_radius_12"
             android:text="@string/uikit_confirm"
             android:visibility="gone" />
     </androidx.appcompat.widget.LinearLayoutCompat>

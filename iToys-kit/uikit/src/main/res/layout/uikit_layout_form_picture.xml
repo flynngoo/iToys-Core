@@ -11,7 +11,7 @@
         android:layout_height="44dp"
         android:paddingHorizontal="16dp"
         android:paddingTop="16dp"
-        android:text="@string/uikit_housing_pictures"
+        android:text="@string/uikit_upload_pictures"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/required_mark"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/uikit_name" />
+        tools:text="@string/uikit_module_name" />
 
     <!-- Content -->
     <FrameLayout
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/uikit_avatar" />
+        tools:text="@string/uikit_module_name" />
 
     <!-- Separator -->
     <View
@@ -73,6 +73,6 @@
         android:textColor="@color/uikit_colorful_D50000"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="@string/uikit_name" />
+        tools:text="@string/uikit_module_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,17 +45,17 @@
         <attr name="formMaxHeight" format="dimension" />
 
         <!-- 表单-必填 默认false -->
-        <attr name="requiredMark" format="boolean" />
+        <attr name="formRequiredMark" format="boolean" />
         <!-- 表单-必填icon -->
-        <attr name="requiredMarkIcon" format="reference" />
+        <attr name="formRequiredMarkIcon" format="reference" />
         <!-- 表单-必填icon宽 -->
-        <attr name="requiredMarkIconWidth" format="dimension" />
+        <attr name="formRequiredMarkIconWidth" format="dimension" />
         <!-- 表单-必填icon高 -->
-        <attr name="requiredMarkIconHeight" format="dimension" />
+        <attr name="formRequiredMarkIconHeight" format="dimension" />
         <!-- 表单-必填start margin -->
-        <attr name="requiredMarkStartMargin" format="dimension" />
+        <attr name="formRequiredMarkStartMargin" format="dimension" />
         <!-- 表单-必填end margin -->
-        <attr name="requiredMarkEndMargin" format="dimension" />
+        <attr name="formRequiredMarkEndMargin" format="dimension" />
 
         <!-- 表单-label -->
         <attr name="formLabel" format="string" />
@@ -94,19 +94,19 @@
         <!-- 表单是否可点击 -->
         <attr name="formEnable" format="boolean" />
         <!-- 表单-占位符 -->
-        <attr name="placeholder" format="string" />
+        <attr name="formPlaceholder" format="string" />
         <!-- 表单-占位符字体颜色 -->
-        <attr name="placeholderColor" format="color|reference" />
+        <attr name="formPlaceholderColor" format="color|reference" />
         <!-- 表单-内容字体大小 -->
-        <attr name="contentSize" format="dimension" />
+        <attr name="formContentSize" format="dimension" />
         <!-- 表单-内容字体颜色 -->
-        <attr name="contentColor" format="color|reference" />
+        <attr name="formContentColor" format="color|reference" />
         <!-- 表单-内容字符最大限制 -->
-        <attr name="contentMaxLength" format="integer" />
+        <attr name="formContentMaxLength" format="integer" />
         <!-- 表单-内容 start margin -->
-        <attr name="contentStartMargin" format="dimension" />
+        <attr name="formContentStartMargin" format="dimension" />
         <!-- 表单-内容 end margin -->
-        <attr name="contentEndMargin" format="dimension" />
+        <attr name="formContentEndMargin" format="dimension" />
 
         <!-- 表单-后缀 icon -->
         <attr name="formSuffixIcon" format="reference" />
@@ -122,26 +122,26 @@
         <attr name="formSuffixEndMargin" format="reference" />
 
         <!-- 表单-对齐方式 -->
-        <attr name="contentAlign" format="enum">
+        <attr name="formContentAlign" format="enum">
             <enum name="start" value="0" />
             <enum name="end" value="2" />
         </attr>
 
         <!-- 表单-底部分割线 默认不显示 -->
-        <attr name="bottomSeparator" format="boolean" />
+        <attr name="formBottomSeparator" format="boolean" />
         <!-- 表单-底部分割线颜色 -->
-        <attr name="bottomSeparatorColor" format="color|reference" />
+        <attr name="formBottomSeparatorColor" format="color|reference" />
         <!-- 表单-底部分割线高度 -->
-        <attr name="bottomSeparatorHeight" format="dimension" />
+        <attr name="formBottomSeparatorHeight" format="dimension" />
         <!-- 表单-底部分割线缩紧 -->
-        <attr name="bottomSeparatorIndent" format="dimension" />
+        <attr name="formBottomSeparatorIndent" format="dimension" />
         <!-- 表单-底部分割线缩紧 -->
-        <attr name="bottomSeparatorEndIndent" format="dimension" />
+        <attr name="formBottomSeparatorEndIndent" format="dimension" />
 
         <!-- 表单-自动检查 -->
-        <attr name="autoCheck" format="boolean" />
+        <attr name="formAutoCheck" format="boolean" />
         <!-- 错误提示 -->
-        <attr name="errorMessage" format="string" />
+        <attr name="formErrorMessage" format="string" />
     </declare-styleable>
 
     <declare-styleable name="PicturesFormView">

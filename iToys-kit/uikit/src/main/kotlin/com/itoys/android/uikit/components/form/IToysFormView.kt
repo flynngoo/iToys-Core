@@ -25,7 +25,6 @@ import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.then
-import java.io.File.separator
 
 /**
  * @Author Gu Fanfan
@@ -195,24 +194,24 @@ class IToysFormView(
         val formView = addFormView()
 
         // 核查
-        autoCheck = ta.getBoolean(R.styleable.IToysFormView_autoCheck, autoCheck)
+        autoCheck = ta.getBoolean(R.styleable.IToysFormView_formAutoCheck, autoCheck)
         // 错误消息
-        errorMessage = ta.getString(R.styleable.IToysFormView_errorMessage).invalid()
+        errorMessage = ta.getString(R.styleable.IToysFormView_formErrorMessage).invalid()
 
         // 必填标识
-        requiredMark = ta.getBoolean(R.styleable.IToysFormView_requiredMark, requiredMark)
-        requiredIcon = ta.getDrawable(R.styleable.IToysFormView_requiredMarkIcon)
+        requiredMark = ta.getBoolean(R.styleable.IToysFormView_formRequiredMark, requiredMark)
+        requiredIcon = ta.getDrawable(R.styleable.IToysFormView_formRequiredMarkIcon)
         requiredMarkIconWidth = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_requiredMarkIconWidth, requiredMarkIconWidth
+            R.styleable.IToysFormView_formRequiredMarkIconWidth, requiredMarkIconWidth
         )
         requiredMarkIconHeight = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_requiredMarkIconHeight, requiredMarkIconHeight
+            R.styleable.IToysFormView_formRequiredMarkIconHeight, requiredMarkIconHeight
         )
         requiredMarkStartMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_requiredMarkStartMargin, requiredMarkStartMargin
+            R.styleable.IToysFormView_formRequiredMarkStartMargin, requiredMarkStartMargin
         )
         requiredMarkEndMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_requiredMarkEndMargin, requiredMarkEndMargin
+            R.styleable.IToysFormView_formRequiredMarkEndMargin, requiredMarkEndMargin
         )
         setRequiredMark(formView.requiredMark)
 
@@ -236,22 +235,22 @@ class IToysFormView(
 
         // content
         formModel = ta.getInt(R.styleable.IToysFormView_formModel, formModel)
-        contentMaxLength = ta.getInt(R.styleable.IToysFormView_contentMaxLength, contentMaxLength)
-        placeholder = ta.getString(R.styleable.IToysFormView_placeholder).invalid()
+        contentMaxLength = ta.getInt(R.styleable.IToysFormView_formContentMaxLength, contentMaxLength)
+        placeholder = ta.getString(R.styleable.IToysFormView_formPlaceholder).invalid()
         placeholderColor = ta.getColor(
-            R.styleable.IToysFormView_placeholderColor, context.color(R.color.uikit_colorful_C9CDD4)
+            R.styleable.IToysFormView_formPlaceholderColor, context.color(R.color.uikit_colorful_C9CDD4)
         )
         contentSize =
-            ta.getDimensionPixelOffset(R.styleable.IToysFormView_contentSize, contentSize)
+            ta.getDimensionPixelOffset(R.styleable.IToysFormView_formContentSize, contentSize)
         contentColor = ta.getColor(
-            R.styleable.IToysFormView_contentColor, context.color(R.color.uikit_colorful_1D2129)
+            R.styleable.IToysFormView_formContentColor, context.color(R.color.uikit_colorful_1D2129)
         )
-        contentAlign = ta.getInt(R.styleable.IToysFormView_contentAlign, contentAlign)
+        contentAlign = ta.getInt(R.styleable.IToysFormView_formContentAlign, contentAlign)
         contentStartMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_contentStartMargin, contentStartMargin
+            R.styleable.IToysFormView_formContentStartMargin, contentStartMargin
         )
         contentEndMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_contentEndMargin, contentEndMargin
+            R.styleable.IToysFormView_formContentEndMargin, contentEndMargin
         )
         formEnable = ta.getBoolean(R.styleable.IToysFormView_formEnable, formEnable)
         contentView = formView.content
@@ -273,21 +272,21 @@ class IToysFormView(
         setSuffix(formView.suffixIcon, formView.suffixText)
 
         // separator
-        separator = ta.getBoolean(R.styleable.IToysFormView_bottomSeparator, separator)
+        separator = ta.getBoolean(R.styleable.IToysFormView_formBottomSeparator, separator)
         separatorColor = ta.getColor(
-            R.styleable.IToysFormView_bottomSeparatorColor,
+            R.styleable.IToysFormView_formBottomSeparatorColor,
             context.color(R.color.uikit_colorful_E5E6EB)
         )
         separatorHeight = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_bottomSeparatorHeight,
+            R.styleable.IToysFormView_formBottomSeparatorHeight,
             separatorHeight
         )
         separatorIndent = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_bottomSeparatorIndent,
+            R.styleable.IToysFormView_formBottomSeparatorIndent,
             separatorIndent
         )
         separatorEndIndent = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_bottomSeparatorEndIndent,
+            R.styleable.IToysFormView_formBottomSeparatorEndIndent,
             separatorEndIndent
         )
         separatorView = formView.bottomSeparator
