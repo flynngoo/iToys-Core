@@ -12,9 +12,10 @@
     <string name="uikit_completed">完成</string>
     <string name="uikit_retry">重试</string>
     <string name="uikit_refresh">刷新</string>
-    <string name="uikit_rmb">元</string>
+    <string name="uikit_yuan">元</string>
+    <string name="uikit_yuan_symbol">¥</string>
+    <string name="uikit_ten_thousand_yuan">万元</string>
     <string name="uikit_odd">单</string>
-    <string name="uikit_rmb_symbol">¥</string>
     <string name="uikit_price_with_symbol">¥ %1$.2f</string>
     <string name="uikit_logout">退出登录</string>
     <string name="uikit_payment_now">立即支付</string>

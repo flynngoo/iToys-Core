@@ -1,5 +1,6 @@
 package com.itoys.android.image.uikit.dialog
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -9,20 +10,24 @@ import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.itoys.android.image.R
-import com.itoys.android.image.databinding.ImageDialogSelectPictureBinding
+import com.itoys.android.image.databinding.ImageDialogChooseImageBinding
+import com.itoys.android.image.loadImage
 import com.itoys.android.utils.expansion.dp2px
+import com.itoys.android.utils.expansion.gone
+import com.itoys.android.utils.expansion.invalid
+import com.itoys.android.utils.expansion.isBlank
 
 /**
  * @Author Gu Fanfan
  * @Email fanfan.work@outlook.com
  * @Date 2023/11/20
  */
-class SelectPictureDialog : DialogFragment() {
+class ChooseImageDialog : DialogFragment() {
 
     companion object {
         fun show(builder: Builder.() -> Unit) {
             val build = Builder.build().apply(builder)
-            val dialog = SelectPictureDialog()
+            val dialog = ChooseImageDialog()
             dialog.setBuilder(build)
             build.fm?.apply { dialog.showDialog(this) }
         }
@@ -47,12 +52,32 @@ class SelectPictureDialog : DialogFragment() {
         var fm: FragmentManager? = null
 
         /**
+         * 示例图片标题
+         */
+        var demoImageTitle = ""
+
+        /**
+         * 示例图片
+         */
+        var demoImageDrawable: Drawable? = null
+
+        /**
+         * 示例图片链接
+         */
+        var demoImageUrl = ""
+
+        /**
+         * 示例图片文字
+         */
+        var demoImageText = ""
+
+        /**
          * 回调
          */
         var callback: ISelectCallback? = null
     }
 
-    private var binding: ImageDialogSelectPictureBinding? = null
+    private var binding: ImageDialogChooseImageBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,13 +90,28 @@ class SelectPictureDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         initDialog()
-        return inflater.inflate(R.layout.image_dialog_select_picture, container, false)
+        return inflater.inflate(R.layout.image_dialog_choose_image, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = ImageDialogSelectPictureBinding.bind(view)
-        binding?.takeAPicture?.setOnClickListener {
+        binding = ImageDialogChooseImageBinding.bind(view)
+
+        binding?.demoImageTitle?.text = builder?.demoImageTitle.invalid()
+        // 标题
+        if (builder?.demoImageTitle.isBlank()) binding?.demoImageTitle?.gone()
+        // 图片
+        if (builder?.demoImageDrawable == null) {
+            binding?.demoImage?.loadImage(builder?.demoImageUrl)
+        } else {
+            binding?.demoImage?.setImageDrawable(builder?.demoImageDrawable)
+        }
+        if (builder?.demoImageUrl.isBlank() || builder?.demoImageDrawable == null) binding?.demoImage?.gone()
+        // 文字
+        binding?.demoImageText?.text = builder?.demoImageText.invalid()
+        if (builder?.demoImageText.isBlank()) binding?.demoImageText?.gone()
+
+        binding?.takePicture?.setOnClickListener {
             builder?.callback?.takePicture()
             dismiss()
         }
@@ -79,7 +119,7 @@ class SelectPictureDialog : DialogFragment() {
             builder?.callback?.selectFromAlbum()
             dismiss()
         }
-        binding?.ivClose?.setOnClickListener { dismiss() }
+        binding?.cancel?.setOnClickListener { dismiss() }
     }
 
     /**
@@ -92,7 +132,7 @@ class SelectPictureDialog : DialogFragment() {
             decorView.setPadding(0, 0, 0, 0)
             val params = attributes
             params.width = WindowManager.LayoutParams.MATCH_PARENT
-            params.height = 280.dp2px()
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT
             params.gravity = Gravity.BOTTOM
             attributes = params
             isCancelable = true

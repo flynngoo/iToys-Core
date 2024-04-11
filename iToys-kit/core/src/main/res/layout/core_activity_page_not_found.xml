@@ -38,7 +38,7 @@
                     android:layout_width="268dp"
                     android:layout_height="268dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/uikit_icon_empty_error" />
+                    android:src="@drawable/uikit_ic_empty_error" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_state"

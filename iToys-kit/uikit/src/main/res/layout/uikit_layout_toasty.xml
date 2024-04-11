@@ -6,8 +6,8 @@
     android:fitsSystemWindows="false"
     android:gravity="center"
     android:orientation="horizontal"
-    android:paddingHorizontal="24dp"
-    android:paddingVertical="14dp">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/toasty_icon"

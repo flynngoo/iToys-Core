@@ -8,7 +8,7 @@ import androidx.annotation.IntDef
  * @Date 2023/11/28
  */
 @IntDef(FormTextAlign.START, FormTextAlign.CENTER, FormTextAlign.END)
-@kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.SOURCE)
 annotation class FormTextAlign {
 
     companion object {

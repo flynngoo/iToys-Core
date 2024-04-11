@@ -89,13 +89,13 @@ abstract class AbsMviFragment<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
     private fun toast(toast: ToastUIState?) {
         when (toast) {
             is ToastUIState.Toast -> {
-                toast(toast.message, direction = toast.direction, status = toast.status)
+                toast(toast.message, orientation = toast.orientation, status = toast.status)
             }
 
             is ToastUIState.ToastRes -> {
                 toast(
                     message = getString(toast.messageRes),
-                    direction = toast.direction,
+                    orientation = toast.orientation,
                     status = toast.status
                 )
             }

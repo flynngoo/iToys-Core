@@ -27,22 +27,6 @@ class SimpleListActivity : AbsMviListActivity<SimpleListViewModel>() {
     override fun setupList() {
     }
 
-    override fun searchView(parent: ViewGroup): View? {
-        val searchView = SimpleLayoutSearchBinding.inflate(
-            LayoutInflater.from(this@SimpleListActivity),
-            parent,
-            false
-        )
-
-        searchView.search.setSearchCallback(object : SearchView.ISearchCallback {
-            override fun onChange(input: CharSequence) {
-                viewModel?.sendListIntent(ListUIIntent.Search(input.toString()))
-            }
-        })
-
-        return searchView.root
-    }
-
     override fun headerView(parent: ViewGroup): View {
         val headerView = SimpleLayoutHeaderTotalCountBinding.inflate(
             LayoutInflater.from(this@SimpleListActivity),

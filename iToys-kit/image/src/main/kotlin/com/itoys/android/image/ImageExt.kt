@@ -1,6 +1,7 @@
 package com.itoys.android.image
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
@@ -17,7 +18,7 @@ import com.drake.brv.utils.divider
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
-import com.itoys.android.image.databinding.ImageLayoutItemPictureBinding
+import com.itoys.android.image.databinding.ImageLayoutItemImageBinding
 import com.itoys.android.image.engine.CompressImageEngine
 import com.itoys.android.image.glide.GlideImageEngine
 import com.itoys.android.image.glide.IToysGlide
@@ -139,6 +140,42 @@ fun ImageView.loadRoundCornerImage(
 }
 
 @JvmOverloads
+fun ImageView.loadRoundCornerImage(
+    @RawRes @DrawableRes drawableId: Int,
+    radius: Int = 0,
+) {
+    val options = RequestOptions().transform(
+        CenterCrop(),
+        RoundedCornersTransformation(radius)
+    )
+
+    IToysGlide.with(this)
+        .load(drawableId)
+        .placeholder(drawableId)
+        .error(drawableId)
+        .apply(options)
+        .into(this)
+}
+
+@JvmOverloads
+fun ImageView.loadRoundCornerImage(
+    drawable: Drawable,
+    radius: Int = 0,
+) {
+    val options = RequestOptions().transform(
+        CenterCrop(),
+        RoundedCornersTransformation(radius)
+    )
+
+    IToysGlide.with(this)
+        .load(drawable)
+        .placeholder(drawable)
+        .error(drawable)
+        .apply(options)
+        .into(this)
+}
+
+@JvmOverloads
 fun ImageView.loadBlurImage(
     url: String?,
     radius: Int = 25,
@@ -178,13 +215,13 @@ fun RecyclerView.pictureList(
         orientation = DividerOrientation.GRID
         setDivider(8, true)
     }.setup {
-        addType<String>(R.layout.image_layout_item_picture)
+        addType<String>(R.layout.image_layout_item_image)
         onBind {
-            val itemBinding = getBinding<ImageLayoutItemPictureBinding>()
+            val itemBinding = getBinding<ImageLayoutItemImageBinding>()
             val item: String? = getModel()
             if (withPlus && item.isBlank()) {
                 // 如果item是空的 && 需要暂时添加按钮
-                itemBinding.picture.setImageResource(R.drawable.image_icon_add_picture)
+                itemBinding.picture.setImageResource(R.drawable.image_ic_add)
             } else {
                 // 加载图片
                 itemBinding.picture.loadRoundCornerImage(item, radius = 2.dp2px())

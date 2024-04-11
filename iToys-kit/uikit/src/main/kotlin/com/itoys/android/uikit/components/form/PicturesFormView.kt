@@ -17,7 +17,7 @@ import com.itoys.android.image.ImageMedia
 import com.itoys.android.image.addPictures
 import com.itoys.android.image.pictureList
 import com.itoys.android.image.toStringList
-import com.itoys.android.image.uikit.dialog.SelectPictureDialog
+import com.itoys.android.image.uikit.dialog.ChooseImageDialog
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
@@ -72,7 +72,7 @@ class PicturesFormView(
     private var fragmentManager: FragmentManager? = null
 
     /** 图片选择回调 */
-    private var pictureCallback: SelectPictureDialog.ISelectCallback? = null
+    private var pictureCallback: ChooseImageDialog.ISelectCallback? = null
 
     /** 删除回调 */
     private var deleteCallback: IPictureDeleteCallback? = null
@@ -131,7 +131,7 @@ class PicturesFormView(
             pictures = showPlus.then(listOf(""), listOf()),
             clickCallback = object : IPictureClickCallback {
                 override fun selectPicture() {
-                    SelectPictureDialog.show {
+                    ChooseImageDialog.show {
                         fm = fragmentManager
                         callback = pictureCallback
                     }
@@ -236,7 +236,7 @@ class PicturesFormView(
     /**
      * 设置图片选择回调
      */
-    fun setPictureCallback(callback: SelectPictureDialog.ISelectCallback) {
+    fun setPictureCallback(callback: ChooseImageDialog.ISelectCallback) {
         this.pictureCallback = callback
     }
 

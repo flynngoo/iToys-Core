@@ -111,15 +111,15 @@
         <!-- 表单-后缀 icon -->
         <attr name="formSuffixIcon" format="reference" />
         <!-- 表单-后缀 icon size 默认16dp -->
-        <attr name="formSuffixIconSize" format="reference" />
+        <attr name="formSuffixIconSize" format="dimension" />
         <!-- 表单-后缀 text -->
         <attr name="formSuffixText" format="string" />
         <!-- 表单-后缀 text size -->
         <attr name="formSuffixTextSize" format="dimension" />
         <!-- 表单-后缀 text color -->
-        <attr name="formSuffixTextColor" format="reference" />
+        <attr name="formSuffixTextColor" format="color|reference" />
         <!-- 表单-后缀 icon end margin 默认16dp -->
-        <attr name="formSuffixEndMargin" format="reference" />
+        <attr name="formSuffixEndMargin" format="dimension" />
 
         <!-- 表单-对齐方式 -->
         <attr name="formContentAlign" format="enum">
@@ -174,12 +174,30 @@
         <attr name="remarksTitleBackground" format="reference|color" />
         <!-- 输入框指示器 -->
         <attr name="remarksIndicator" format="boolean" />
+        <!-- 输入框提示内容 -->
+        <attr name="remarksPlaceholder" format="string" />
         <!-- 输入框最大长度 -->
-        <attr name="remarksMaxLength" format="boolean" />
+        <attr name="remarksMaxLength" format="integer" />
         <!-- 禁用 -->
         <attr name="remarksDisable" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="TextareaFormView">
+        <!-- title -->
+        <attr name="textareaLabel" format="string" />
+        <!-- title size -->
+        <attr name="textareaLabelSize" format="dimension" />
+        <!-- title typeface -->
+        <attr name="textareaLabelTypeface" format="string" />
+        <!-- 输入框指示器 -->
+        <attr name="textareaIndicator" format="boolean" />
+        <!-- 输入框提示内容 -->
+        <attr name="textareaPlaceholder" format="string" />
+        <!-- 输入框最大长度 -->
+        <attr name="textareaMaximum" format="integer" />
+        <!-- 禁用 -->
+        <attr name="textareaDisable" format="boolean" />
+    </declare-styleable>
 
     <declare-styleable name="NavigationMenu">
         <!-- 导航菜单 - icon -->
@@ -259,5 +277,52 @@
         <attr name="searchHintColor" format="color|reference" />
         <!-- 可以点击后缀图标删除内容 -->
         <attr name="searchAllowClear" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="UploadImageView">
+        <!-- 图片上传-必填 默认false -->
+        <attr name="uploadImageRequiredMark" format="boolean" />
+        <!-- 图片上传-必填icon -->
+        <attr name="uploadImageRequiredMarkIcon" format="reference" />
+        <!-- 图片上传-必填icon宽 -->
+        <attr name="uploadImageRequiredMarkIconSize" format="dimension" />
+        <!-- 图片上传-必填start margin -->
+        <attr name="uploadImageRequiredMarkMargin" format="dimension" />
+        <!-- 标题 -->
+        <attr name="uploadImageTitle" format="string" />
+        <!-- 标题颜色 -->
+        <attr name="uploadImageTitleColor" format="string" />
+        <!-- 标题大小 -->
+        <attr name="uploadImageTitleSize" format="string" />
+        <!-- 图片上传-必填end margin -->
+        <attr name="uploadImageTitleMargin" format="dimension" />
+        <!-- 图片上传-标题和图片之间间距 -->
+        <attr name="uploadImageSpacing" format="dimension" />
+        <!-- 图片宽 -->
+        <attr name="uploadImageWidth" format="dimension" />
+        <!-- 图片高 -->
+        <attr name="uploadImageHeight" format="dimension" />
+        <!-- 图片背景 -->
+        <attr name="uploadImageBackground" format="reference" />
+        <!-- 图片圆角 -->
+        <attr name="uploadImageRoundCorner" format="dimension" />
+        <!-- 显示图片上传logo -->
+        <attr name="uploadImageShowLogo" format="boolean" />
+        <!-- 图片上传logo -->
+        <attr name="uploadImageLogo" format="reference" />
+        <!-- 图片上传logo大小 -->
+        <attr name="uploadImageLogoSize" format="reference" />
+        <!-- 显示图片上传text -->
+        <attr name="uploadImageShowText" format="boolean" />
+        <!-- 图片上传提示文字 -->
+        <attr name="uploadImageText" format="string" />
+        <!-- 图片上传提示文字颜色 -->
+        <attr name="uploadImageTextColor" format="string" />
+        <!-- 图片上传提示文字大小 -->
+        <attr name="uploadImageTextSize" format="string" />
+        <!-- 显示删除按钮 -->
+        <attr name="uploadImageShowDelete" format="boolean" />
+        <!-- 图片上传 tag -->
+        <attr name="uploadImageMark" format="string" />
     </declare-styleable>
 </resources>

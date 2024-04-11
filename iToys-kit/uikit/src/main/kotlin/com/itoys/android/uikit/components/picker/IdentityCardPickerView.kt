@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.FragmentManager
 import com.itoys.android.image.loadRoundCornerImage
-import com.itoys.android.image.uikit.dialog.SelectPictureDialog
+import com.itoys.android.image.uikit.dialog.ChooseImageDialog
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
@@ -67,7 +67,7 @@ class IdentityCardPickerView(
     private var fragmentManager: FragmentManager? = null
 
     /** 图片选择回调 */
-    private var pictureCallback: SelectPictureDialog.ISelectCallback? = null
+    private var pictureCallback: ChooseImageDialog.ISelectCallback? = null
 
     /** 身份证选择回调 */
     private var identityCardCallback: IIdentityCardCallback? = null
@@ -96,18 +96,18 @@ class IdentityCardPickerView(
         if (title.isNotBlank()) binding.title.text = title
 
         // 人像页
-        portrait = binding.imgPortrait
-        deletePortrait = binding.deletePortrait
+        // portrait = binding.imgPortrait
+        // deletePortrait = binding.deletePortrait
         binding.portrait.doOnClick {
             pictureIndex = PORTRAIT
 
-            SelectPictureDialog.show {
+            ChooseImageDialog.show {
                 fm = fragmentManager
                 callback = pictureCallback
             }
         }
 
-        binding.deletePortrait.doOnClick {
+        /* binding.deletePortrait.doOnClick {
             IToysNoticeDialog.show {
                 this.title = context.getString(R.string.uikit_id_card_delete_portrait)
                 fm = fragmentManager
@@ -131,21 +131,21 @@ class IdentityCardPickerView(
                     }
                 }
             }
-        }
+        } */
 
         // 国徽页
-        nationalEmblem = binding.imgNationalEmblem
-        deleteNationalEmblem = binding.deleteNationalEmblem
+        // nationalEmblem = binding.imgNationalEmblem
+        // deleteNationalEmblem = binding.deleteNationalEmblem
         binding.nationalEmblem.doOnClick {
             pictureIndex = NATIONAL_EMBLEM
 
-            SelectPictureDialog.show {
+            ChooseImageDialog.show {
                 fm = fragmentManager
                 callback = pictureCallback
             }
         }
 
-        binding.deleteNationalEmblem.doOnClick {
+        /* binding.deleteNationalEmblem.doOnClick {
             IToysNoticeDialog.show {
                 this.title = context.getString(R.string.uikit_id_card_delete_national_emblem)
                 fm = fragmentManager
@@ -169,7 +169,7 @@ class IdentityCardPickerView(
                     }
                 }
             }
-        }
+        } */
     }
 
     /**
@@ -182,7 +182,7 @@ class IdentityCardPickerView(
     /**
      * 设置图片选择回调
      */
-    fun setPictureCallback(callback: SelectPictureDialog.ISelectCallback) {
+    fun setPictureCallback(callback: ChooseImageDialog.ISelectCallback) {
         this.pictureCallback = callback
     }
 

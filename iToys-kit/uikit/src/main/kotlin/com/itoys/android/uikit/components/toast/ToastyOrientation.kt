@@ -5,7 +5,7 @@ package com.itoys.android.uikit.components.toast
  * @Email fanfan.work@outlook.com
  * @Date 2023/10/24
  */
-enum class ToastyDirection {
+enum class ToastyOrientation {
 
     /** 横向 */
     Horizontal,

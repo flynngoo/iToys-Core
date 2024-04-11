@@ -44,13 +44,13 @@ object Toasty {
         context: Context,
         @StringRes message: Int,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = context.getString(message),
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = null
         )
     }
@@ -59,13 +59,13 @@ object Toasty {
         context: Context,
         message: CharSequence,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = message,
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = null
         )
     }
@@ -74,13 +74,13 @@ object Toasty {
         context: Context,
         @StringRes message: Int,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = context.getString(message),
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.INFO
         )
     }
@@ -89,13 +89,13 @@ object Toasty {
         context: Context,
         message: CharSequence,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = message,
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.INFO
         )
     }
@@ -104,13 +104,13 @@ object Toasty {
         context: Context,
         @StringRes message: Int,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = context.getString(message),
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.WARING
         )
     }
@@ -119,13 +119,13 @@ object Toasty {
         context: Context,
         message: CharSequence,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = message,
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.WARING
         )
     }
@@ -134,13 +134,13 @@ object Toasty {
         context: Context,
         @StringRes message: Int,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = context.getString(message),
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.SUCCESS
         )
     }
@@ -149,13 +149,13 @@ object Toasty {
         context: Context,
         message: CharSequence,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = message,
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.SUCCESS
         )
     }
@@ -164,13 +164,13 @@ object Toasty {
         context: Context,
         @StringRes message: Int,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = context.getString(message),
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.ERROR
         )
     }
@@ -179,13 +179,13 @@ object Toasty {
         context: Context,
         message: CharSequence,
         duration: Int = LENGTH_SHORT,
-        direction: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     ): Toast {
         return custom(
             context = context,
             message = message,
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = ToastyStatus.ERROR
         )
     }
@@ -194,11 +194,11 @@ object Toasty {
         context: Context,
         message: CharSequence,
         duration: Int = LENGTH_SHORT,
-        toastyDirection: ToastyDirection = ToastyDirection.Horizontal,
+        orientation: ToastyOrientation = ToastyOrientation.Horizontal,
         toastyStatus: ToastyStatus?,
     ): Toast {
-        return when (toastyDirection) {
-            ToastyDirection.Horizontal -> {
+        return when (orientation) {
+            ToastyOrientation.Horizontal -> {
                 customHorizontal(
                     context = context,
                     message = message,
@@ -207,7 +207,7 @@ object Toasty {
                 )
             }
 
-            ToastyDirection.Vertical -> {
+            ToastyOrientation.Vertical -> {
                 customVertical(
                     context = context,
                     message = message,

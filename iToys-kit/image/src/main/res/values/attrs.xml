@@ -27,8 +27,4 @@
         <attr name="cpv_outerSize" format="dimension" />
         <attr name="cpv_reachCapRound" format="boolean" />
     </declare-styleable>
-
-    <declare-styleable name="IdentityCardPictureView">
-        <attr name="identityCardTitle" format="string" />
-    </declare-styleable>
 </resources>

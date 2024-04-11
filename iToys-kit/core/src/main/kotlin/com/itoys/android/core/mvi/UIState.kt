@@ -1,7 +1,7 @@
 package com.itoys.android.core.mvi
 
 import com.itoys.android.uikit.components.snack.Prompt
-import com.itoys.android.uikit.components.toast.ToastyDirection
+import com.itoys.android.uikit.components.toast.ToastyOrientation
 import com.itoys.android.uikit.components.toast.ToastyStatus
 
 /**
@@ -34,13 +34,13 @@ sealed class ToastUIState {
 
     data class Toast(
         val message: String,
-        val direction: ToastyDirection = ToastyDirection.Horizontal,
+        val orientation: ToastyOrientation = ToastyOrientation.Horizontal,
         val status: ToastyStatus? = null
     ) : ToastUIState()
 
     data class ToastRes(
         val messageRes: Int,
-        val direction: ToastyDirection = ToastyDirection.Horizontal,
+        val orientation: ToastyOrientation = ToastyOrientation.Horizontal,
         val status: ToastyStatus? = null
     ) : ToastUIState()
 

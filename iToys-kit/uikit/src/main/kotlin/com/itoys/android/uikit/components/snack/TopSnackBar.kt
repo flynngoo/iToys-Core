@@ -273,7 +273,7 @@ class TopSnackBar {
         left: Boolean = true, right: Boolean = false
     ): TopSnackBar {
         return addLoadingIcon(
-            mContent.drawable(R.drawable.uikit_icon_loading_24), left, right
+            mContent.drawable(R.drawable.uikit_ic_loading_24), left, right
         )
     }
 

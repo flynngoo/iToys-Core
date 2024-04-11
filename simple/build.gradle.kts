@@ -34,6 +34,7 @@ dependencies {
 
     implementation(projects.iToysKit.core)
     implementation(projects.iToysKit.logcat)
+    implementation(projects.iToysKit.image)
     implementation(projects.iToysKit.uikit)
     implementation(projects.iToysKit.utils)
 }

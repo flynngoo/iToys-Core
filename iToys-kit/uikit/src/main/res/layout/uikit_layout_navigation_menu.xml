@@ -10,7 +10,7 @@
         android:id="@+id/icon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        tools:src="@drawable/uikit_icon_empty" />
+        tools:src="@drawable/uikit_ic_empty" />
 
     <Space
         android:id="@+id/spacing"

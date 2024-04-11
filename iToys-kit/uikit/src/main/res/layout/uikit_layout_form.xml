@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/uikit_icon_required_mark" />
+        tools:src="@drawable/uikit_ic_required_mark" />
 
     <!-- Label -->
     <com.google.android.material.textview.MaterialTextView
@@ -32,8 +32,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/suffixIcon"
-        app:layout_constraintStart_toEndOf="@+id/label"
+        app:layout_constraintEnd_toStartOf="@id/suffixIcon"
+        app:layout_constraintStart_toEndOf="@id/label"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- suffix icon -->
@@ -74,5 +74,4 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="@string/uikit_module_name" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

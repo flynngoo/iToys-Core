@@ -48,7 +48,6 @@ class DescriptionsView(
     /** label weight */
     private var labelWeight = 2f
 
-
     /** content view */
     private var contentView: MaterialTextView? = null
 

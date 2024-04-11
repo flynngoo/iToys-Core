@@ -58,14 +58,14 @@
         <item name="android:background">@color/uikit_colorful_white</item>
         <item name="titleColor">@color/uikit_colorful_333333</item>
         <item name="titleSize">18sp</item>
-        <item name="leftIcon">@drawable/uikit_icon_back_black</item>
+        <item name="leftIcon">@drawable/uikit_ic_back_black</item>
         <item name="lineVisible">false</item>
     </style>
 
     <style name="IToysAndroid.TitleBar.White" parent="IToysAndroid.TitleBar">
         <item name="android:background">@color/uikit_colorful_transparent</item>
         <item name="titleColor">@color/uikit_colorful_white</item>
-        <item name="leftIcon">@drawable/uikit_icon_back_white</item>
+        <item name="leftIcon">@drawable/uikit_ic_back_white</item>
     </style>
 
     <!-- Title1 -->
@@ -142,6 +142,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="IToysAndroid.Button.Background" parent="IToysAndroid.Button">

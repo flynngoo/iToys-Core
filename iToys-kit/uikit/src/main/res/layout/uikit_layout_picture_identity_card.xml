@@ -23,101 +23,24 @@
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.itoys.android.uikit.components.upload.UploadImageView
             android:id="@+id/portrait"
             android:layout_width="0dp"
             android:layout_height="101dp"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/image_rectangle_2_f7f8fa"
             app:layout_constraintEnd_toStartOf="@+id/national_emblem"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/image_icon_plus_c9cdd4" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/IToysAndroid.Body2"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/uikit_id_card_portrait" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_portrait"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/delete_portrait"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/image_icon_delete_picture"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.itoys.android.uikit.components.upload.UploadImageView
             android:id="@+id/national_emblem"
             android:layout_width="0dp"
             android:layout_height="101dp"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/image_rectangle_2_f7f8fa"
+            android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/portrait"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/image_icon_plus_c9cdd4" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/IToysAndroid.Body2"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/uikit_id_card_national_emblem" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_national_emblem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/delete_national_emblem"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/image_icon_delete_picture"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

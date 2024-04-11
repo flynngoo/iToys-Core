@@ -1,6 +1,7 @@
 package com.itoys.android.uikit.components.form
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -9,11 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.widget.AppCompatImageView
 import com.google.android.material.textview.MaterialTextView
 import com.itoys.android.logcat.logcat
 import com.itoys.android.uikit.R
-import com.itoys.android.uikit.components.toast.toast
 import com.itoys.android.uikit.databinding.UikitLayoutFormBinding
 import com.itoys.android.uikit.model.RadioModel
 import com.itoys.android.utils.expansion.color
@@ -199,98 +198,15 @@ class IToysFormView(
         errorMessage = ta.getString(R.styleable.IToysFormView_formErrorMessage).invalid()
 
         // 必填标识
-        requiredMark = ta.getBoolean(R.styleable.IToysFormView_formRequiredMark, requiredMark)
-        requiredIcon = ta.getDrawable(R.styleable.IToysFormView_formRequiredMarkIcon)
-        requiredMarkIconWidth = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formRequiredMarkIconWidth, requiredMarkIconWidth
-        )
-        requiredMarkIconHeight = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formRequiredMarkIconHeight, requiredMarkIconHeight
-        )
-        requiredMarkStartMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formRequiredMarkStartMargin, requiredMarkStartMargin
-        )
-        requiredMarkEndMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formRequiredMarkEndMargin, requiredMarkEndMargin
-        )
-        setRequiredMark(formView.requiredMark)
-
+        setRequiredMark(formView, ta)
         // label
-        labelText = ta.getString(R.styleable.IToysFormView_formLabel).invalid()
-        labelWidth = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formLabelWidth, labelWidth)
-        labelSize = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formLabelSize, labelSize)
-        labelColor = ta.getColor(
-            R.styleable.IToysFormView_formLabelColor,
-            context.color(R.color.uikit_colorful_1D2129)
-        )
-        labelColon = ta.getBoolean(R.styleable.IToysFormView_formLabelColon, labelColon)
-        labelAlign = ta.getInt(R.styleable.IToysFormView_formLabelAlign, labelAlign)
-        labelStartMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formLabelStartMargin, labelStartMargin
-        )
-        labelEndMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formLabelEndMargin, labelEndMargin
-        )
-        setLabelView(formView.label)
-
+        setLabel(formView, ta)
         // content
-        formModel = ta.getInt(R.styleable.IToysFormView_formModel, formModel)
-        contentMaxLength = ta.getInt(R.styleable.IToysFormView_formContentMaxLength, contentMaxLength)
-        placeholder = ta.getString(R.styleable.IToysFormView_formPlaceholder).invalid()
-        placeholderColor = ta.getColor(
-            R.styleable.IToysFormView_formPlaceholderColor, context.color(R.color.uikit_colorful_C9CDD4)
-        )
-        contentSize =
-            ta.getDimensionPixelOffset(R.styleable.IToysFormView_formContentSize, contentSize)
-        contentColor = ta.getColor(
-            R.styleable.IToysFormView_formContentColor, context.color(R.color.uikit_colorful_1D2129)
-        )
-        contentAlign = ta.getInt(R.styleable.IToysFormView_formContentAlign, contentAlign)
-        contentStartMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formContentStartMargin, contentStartMargin
-        )
-        contentEndMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formContentEndMargin, contentEndMargin
-        )
-        formEnable = ta.getBoolean(R.styleable.IToysFormView_formEnable, formEnable)
-        contentView = formView.content
-        setContentView(formView.content)
-
+        setContent(formView, ta)
         // suffix
-        suffixIcon = ta.getDrawable(R.styleable.IToysFormView_formSuffixIcon)
-        suffixIconSize = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formSuffixIconSize, px16)
-        suffixText = ta.getString(R.styleable.IToysFormView_formSuffixText).invalid()
-        suffixTextSize = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formSuffixTextSize, suffixTextSize
-        )
-        suffixTextColor = ta.getColor(
-            R.styleable.IToysFormView_formSuffixTextColor, suffixTextColor
-        )
-        suffixEndMargin = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formSuffixEndMargin, px16
-        )
-        setSuffix(formView.suffixIcon, formView.suffixText)
-
+        setSuffix(formView, ta)
         // separator
-        separator = ta.getBoolean(R.styleable.IToysFormView_formBottomSeparator, separator)
-        separatorColor = ta.getColor(
-            R.styleable.IToysFormView_formBottomSeparatorColor,
-            context.color(R.color.uikit_colorful_E5E6EB)
-        )
-        separatorHeight = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formBottomSeparatorHeight,
-            separatorHeight
-        )
-        separatorIndent = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formBottomSeparatorIndent,
-            separatorIndent
-        )
-        separatorEndIndent = ta.getDimensionPixelOffset(
-            R.styleable.IToysFormView_formBottomSeparatorEndIndent,
-            separatorEndIndent
-        )
-        separatorView = formView.bottomSeparator
-        setSeparator(formView.bottomSeparator)
+        setSeparator(formView, ta)
 
         ta.recycle()
     }
@@ -310,13 +226,28 @@ class IToysFormView(
     /**
      * 设置必填标识
      */
-    private fun setRequiredMark(requiredMark: AppCompatImageView) {
-        requiredMark.visibility = this.requiredMark.then(VISIBLE, GONE)
+    private fun setRequiredMark(root: UikitLayoutFormBinding, ta: TypedArray) {
+        requiredMark = ta.getBoolean(R.styleable.IToysFormView_formRequiredMark, requiredMark)
+        requiredIcon = ta.getDrawable(R.styleable.IToysFormView_formRequiredMarkIcon)
+        requiredMarkIconWidth = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formRequiredMarkIconWidth, requiredMarkIconWidth
+        )
+        requiredMarkIconHeight = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formRequiredMarkIconHeight, requiredMarkIconHeight
+        )
+        requiredMarkStartMargin = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formRequiredMarkStartMargin, requiredMarkStartMargin
+        )
+        requiredMarkEndMargin = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formRequiredMarkEndMargin, requiredMarkEndMargin
+        )
+
+        root.requiredMark.visibility = this.requiredMark.then(VISIBLE, GONE)
         if (this.requiredMark) {
-            requiredMark.setImageDrawable(
-                requiredIcon ?: context.drawable(R.drawable.uikit_icon_required_mark)
+            root.requiredMark.setImageDrawable(
+                requiredIcon ?: context.drawable(R.drawable.uikit_ic_required_mark)
             )
-            val requiredMarkLayoutParams = requiredMark.layoutParams as MarginLayoutParams
+            val requiredMarkLayoutParams = root.requiredMark.layoutParams as MarginLayoutParams
             requiredMarkLayoutParams.setMargins(
                 requiredMarkStartMargin, 0, requiredMarkEndMargin, 0
             )
@@ -327,41 +258,80 @@ class IToysFormView(
             if (requiredMarkIconHeight > 0) {
                 requiredMarkLayoutParams.height = requiredMarkIconHeight
             }
-            requiredMark.layoutParams = requiredMarkLayoutParams
+            root.requiredMark.layoutParams = requiredMarkLayoutParams
         }
     }
 
     /**
      * 设置label
      */
-    private fun setLabelView(label: MaterialTextView) {
-        this.labelView = label
-        label.text = labelColon.then("${labelText}: ", labelText)
-        if (labelSize > 0)
-            label.setTextSize(TypedValue.COMPLEX_UNIT_PX, labelSize.toFloat())
-        label.setTextColor(labelColor)
-        label.gravity = when (labelAlign) {
+    private fun setLabel(root: UikitLayoutFormBinding, ta: TypedArray) {
+        labelText = ta.getString(R.styleable.IToysFormView_formLabel).invalid()
+        labelWidth =
+            ta.getDimensionPixelOffset(R.styleable.IToysFormView_formLabelWidth, labelWidth)
+        labelSize = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formLabelSize, labelSize)
+        labelColor = ta.getColor(
+            R.styleable.IToysFormView_formLabelColor,
+            context.color(R.color.uikit_colorful_1D2129)
+        )
+        labelColon = ta.getBoolean(R.styleable.IToysFormView_formLabelColon, labelColon)
+        labelAlign = ta.getInt(R.styleable.IToysFormView_formLabelAlign, labelAlign)
+        labelStartMargin = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formLabelStartMargin, labelStartMargin
+        )
+        labelEndMargin = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formLabelEndMargin, labelEndMargin
+        )
+
+        this.labelView = root.label
+        root.label.text = labelColon.then("${labelText}: ", labelText)
+        if (labelSize > 0) {
+            root.label.setTextSize(TypedValue.COMPLEX_UNIT_PX, labelSize.toFloat())
+        }
+        root.label.setTextColor(labelColor)
+        root.label.gravity = when (labelAlign) {
             FormTextAlign.START -> Gravity.START or Gravity.CENTER_VERTICAL
             FormTextAlign.CENTER -> Gravity.CENTER
             FormTextAlign.END -> Gravity.END or Gravity.CENTER_VERTICAL
             else -> Gravity.START
         }
 
-        val labelLayoutParams = label.layoutParams as MarginLayoutParams
+        val labelLayoutParams = root.label.layoutParams as MarginLayoutParams
         labelLayoutParams.setMargins(
             labelStartMargin, 0, labelEndMargin, 0
         )
-        labelLayoutParams.width =
-            (labelWidth > 0).then(labelWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
-        label.layoutParams = labelLayoutParams
-
-        label.visibility = labelText.isBlank().then(View.GONE, View.VISIBLE)
+        labelLayoutParams.width = (labelWidth > 0).then(labelWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
+        root.label.layoutParams = labelLayoutParams
+        root.label.visibility = labelText.isBlank().then(View.GONE, View.VISIBLE)
     }
 
     /**
      * 设置content
      */
-    private fun setContentView(content: FrameLayout) {
+    private fun setContent(root: UikitLayoutFormBinding, ta: TypedArray) {
+        formModel = ta.getInt(R.styleable.IToysFormView_formModel, formModel)
+        contentMaxLength =
+            ta.getInt(R.styleable.IToysFormView_formContentMaxLength, contentMaxLength)
+        placeholder = ta.getString(R.styleable.IToysFormView_formPlaceholder).invalid()
+        placeholderColor = ta.getColor(
+            R.styleable.IToysFormView_formPlaceholderColor,
+            context.color(R.color.uikit_colorful_C9CDD4)
+        )
+        contentSize =
+            ta.getDimensionPixelOffset(R.styleable.IToysFormView_formContentSize, contentSize)
+        contentColor = ta.getColor(
+            R.styleable.IToysFormView_formContentColor, context.color(R.color.uikit_colorful_1D2129)
+        )
+        contentAlign = ta.getInt(R.styleable.IToysFormView_formContentAlign, contentAlign)
+        contentStartMargin = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formContentStartMargin, contentStartMargin
+        )
+        contentEndMargin = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formContentEndMargin, contentEndMargin
+        )
+        formEnable = ta.getBoolean(R.styleable.IToysFormView_formEnable, formEnable)
+        contentView = root.content
+
         val config = FormContentConfig(
             placeholder,
             placeholderColor,
@@ -372,18 +342,18 @@ class IToysFormView(
             formEnable,
         )
 
-        val contentLayoutParams = content.layoutParams as MarginLayoutParams
+        val contentLayoutParams = root.content.layoutParams as MarginLayoutParams
         contentLayoutParams.setMargins(
             contentStartMargin, 0, contentEndMargin, 0,
         )
         contentLayoutParams.height = maxHeight
-        content.layoutParams = contentLayoutParams
+        root.content.layoutParams = contentLayoutParams
         val contentView = FormModelFactory.create(
             context,
             formModel,
             config,
         )
-        contentView?.let { content.addView(contentView) }
+        contentView?.let { root.content.addView(contentView) }
 
         FormModelFactory.setCallback(contentView, formModel, object : IFormResultCallback() {
             override fun isAccurate(accurate: Boolean) {
@@ -397,49 +367,80 @@ class IToysFormView(
     }
 
     /**
-     * 设置 form suffix
+     * 设置suffix
      */
-    private fun setSuffix(suffixIcon: AppCompatImageView, suffixText: MaterialTextView) {
-        suffixIcon.visibility = (this.suffixIcon == null).then(View.GONE, View.VISIBLE)
-        if (suffixIcon.visibility == View.VISIBLE) {
-            suffixIcon.setImageDrawable(this.suffixIcon)
-            val suffixIconLayoutParams = suffixIcon.layoutParams as MarginLayoutParams
+    private fun setSuffix(root: UikitLayoutFormBinding, ta: TypedArray) {
+        suffixIcon = ta.getDrawable(R.styleable.IToysFormView_formSuffixIcon)
+        suffixIconSize = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formSuffixIconSize, px16)
+        suffixText = ta.getString(R.styleable.IToysFormView_formSuffixText).invalid()
+        suffixTextSize = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formSuffixTextSize, suffixTextSize
+        )
+        suffixTextColor = ta.getColor(
+            R.styleable.IToysFormView_formSuffixTextColor, suffixTextColor
+        )
+        suffixEndMargin = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formSuffixEndMargin, px16
+        )
+
+        root.suffixIcon.visibility = (this.suffixIcon == null).then(View.GONE, View.VISIBLE)
+        if (root.suffixIcon.visibility == View.VISIBLE) {
+            root.suffixIcon.setImageDrawable(this.suffixIcon)
+            val suffixIconLayoutParams = root.suffixIcon.layoutParams as MarginLayoutParams
             suffixIconLayoutParams.width = suffixIconSize
             suffixIconLayoutParams.height = suffixIconSize
             suffixIconLayoutParams.marginEnd = suffixEndMargin
-            suffixIcon.layoutParams = suffixIconLayoutParams
+            root.suffixIcon.layoutParams = suffixIconLayoutParams
         }
 
-        suffixIcon.doOnClick { resultCallback?.suffixIconClick() }
+        root.suffixIcon.doOnClick { resultCallback?.suffixIconClick() }
 
-        suffixText.visibility = (this.suffixText.isBlank()).then(View.GONE, View.VISIBLE)
-        if (suffixText.visibility == View.VISIBLE) {
-            suffixText.text = this.suffixText
+        root.suffixText.visibility = (this.suffixText.isBlank()).then(View.GONE, View.VISIBLE)
+        if (root.suffixText.visibility == View.VISIBLE) {
+            root.suffixText.text = this.suffixText
             if (suffixTextSize > -1) {
-                suffixText.setTextSize(TypedValue.COMPLEX_UNIT_PX, suffixTextSize.toFloat())
+                root.suffixText.setTextSize(TypedValue.COMPLEX_UNIT_PX, suffixTextSize.toFloat())
             }
 
             if (suffixTextColor > -1) {
-                suffixText.setTextColor(suffixTextColor)
+                root.suffixText.setTextColor(suffixTextColor)
             }
-            val suffixTextLayoutParams = suffixText.layoutParams as MarginLayoutParams
+            val suffixTextLayoutParams = root.suffixText.layoutParams as MarginLayoutParams
             suffixTextLayoutParams.marginEnd = suffixEndMargin
-            suffixText.layoutParams = suffixTextLayoutParams
+            root.suffixText.layoutParams = suffixTextLayoutParams
         }
     }
 
     /**
      * 设置分割线
      */
-    private fun setSeparator(separator: View) {
-        separator.visibility = this.separator.then(VISIBLE, GONE)
-        separator.setBackgroundColor(separatorColor)
-        val separatorLayoutParams = separator.layoutParams as MarginLayoutParams
+    private fun setSeparator(root: UikitLayoutFormBinding, ta: TypedArray) {
+        separator = ta.getBoolean(R.styleable.IToysFormView_formBottomSeparator, separator)
+        separatorColor = ta.getColor(
+            R.styleable.IToysFormView_formBottomSeparatorColor,
+            context.color(R.color.uikit_colorful_E5E6EB)
+        )
+        separatorHeight = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formBottomSeparatorHeight,
+            separatorHeight
+        )
+        separatorIndent = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formBottomSeparatorIndent,
+            separatorIndent
+        )
+        separatorEndIndent = ta.getDimensionPixelOffset(
+            R.styleable.IToysFormView_formBottomSeparatorEndIndent,
+            separatorEndIndent
+        )
+        separatorView = root.bottomSeparator
+        root.bottomSeparator.visibility = this.separator.then(VISIBLE, GONE)
+        root.bottomSeparator.setBackgroundColor(separatorColor)
+        val separatorLayoutParams = root.bottomSeparator.layoutParams as MarginLayoutParams
         separatorLayoutParams.setMargins(separatorIndent, 0, separatorEndIndent, 0)
         if (separatorHeight > 0) {
             separatorLayoutParams.height = separatorHeight
         }
-        separator.layoutParams = separatorLayoutParams
+        root.bottomSeparator.layoutParams = separatorLayoutParams
     }
 
     /**
@@ -492,19 +493,13 @@ class IToysFormView(
     /**
      * 获取表单内容
      */
-    fun formContent(): String? {
-        logcat { "$labelText form content is $formContent!" }
-
-        if (autoCheck && !contentAccurate) {
-            toast(errorMessage)
-            return null
-        }
-
-        if (formContent.size() > 0 && !contentAccurate && errorMessage.isNotBlank()) {
-            toast(errorMessage)
-            return null
-        }
-
+    fun formContent(): String {
+        logcat { "$labelText -> $formContent" }
+        val errMsg = errorMessage.isNotBlank().then({ errorMessage }, { "${labelText}内容不合法" })
+        // 校验： 开启校验 && 内容合法 || 禁用校验
+        check((autoCheck && contentAccurate) || !autoCheck) { errMsg }
+        // 校验：表单内容 isNotBlank() && 内容合法 || 表单内容 isBlank()
+        check((formContent.isNotBlank() && contentAccurate) || formContent.isBlank()) { errMsg }
         return formContent
     }
 

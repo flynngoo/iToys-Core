@@ -1,6 +1,7 @@
 package com.itoys.android.uikit.components.form
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.text.InputFilter
 import android.util.AttributeSet
@@ -71,40 +72,57 @@ class RemarksFormView(
      * 初始备注
      */
     private fun initView(attrs: AttributeSet?) {
-        val ta = context.obtainStyledAttributes(attrs, R.styleable.RemarksFormView)
-        title = ta.getString(R.styleable.RemarksFormView_remarksTitle).invalid()
-        titleSize = ta.getDimensionPixelSize(R.styleable.RemarksFormView_remarksTitleSize, titleSize)
-        titleTypeface = ta.getString(R.styleable.RemarksFormView_remarksTitleTypeface).invalid()
-        titleBackground = ta.getColor(R.styleable.RemarksFormView_remarksTitleBackground, titleBackground)
-        maximum = ta.getInt(R.styleable.RemarksFormView_remarksMaxLength, maximum)
-        remarksIndicator = ta.getBoolean(R.styleable.RemarksFormView_remarksIndicator, remarksIndicator)
-        remarksDisable = ta.getBoolean(R.styleable.RemarksFormView_remarksDisable, remarksDisable)
-        ta.recycle()
-
         val binding = UikitLayoutRemarksBinding.inflate(
             LayoutInflater.from(context), this, false
         )
         this.addView(binding.root)
 
-        titleView = binding.title
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.RemarksFormView)
+        setTitle(binding, ta)
+        setRemarks(binding, ta)
+        ta.recycle()
+    }
+
+    /**
+     * 设置标题
+     */
+    private fun setTitle(root: UikitLayoutRemarksBinding, ta: TypedArray) {
+        title = ta.getString(R.styleable.RemarksFormView_remarksTitle).invalid()
+        titleSize = ta.getDimensionPixelSize(R.styleable.RemarksFormView_remarksTitleSize, titleSize)
+        titleTypeface = ta.getString(R.styleable.RemarksFormView_remarksTitleTypeface).invalid()
+        titleBackground = ta.getColor(R.styleable.RemarksFormView_remarksTitleBackground, titleBackground)
+
+        titleView = root.title
         setTitle(title)
-        // 设置标题size
-        if (titleSize != -1) {
-            titleView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize.toFloat())
+        root.title.apply {
+            // 设置标题size
+            if (titleSize != -1) {
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize.toFloat())
+            }
+            // 设置标题颜色
+            if (titleBackground != 0) {
+                setBackgroundColor(titleBackground)
+            }
+            // 设置标题typeface
+            if (titleTypeface.isNotBlank()) {
+                typeface = Typeface.create(titleTypeface, Typeface.NORMAL)
+            }
         }
+    }
 
-        // 设置标题颜色
-        if (titleBackground != 0) {
-            titleView?.setBackgroundColor(titleBackground)
-        }
-        // 设置标题typeface
-        if (titleTypeface.isNotBlank()) {
-            titleView?.typeface = Typeface.create(titleTypeface, Typeface.NORMAL)
-        }
+    /**
+     * 设置备注
+     */
+    private fun setRemarks(root: UikitLayoutRemarksBinding, ta: TypedArray) {
+        maximum = ta.getInt(R.styleable.RemarksFormView_remarksMaxLength, maximum)
+        remarksIndicator = ta.getBoolean(R.styleable.RemarksFormView_remarksIndicator, remarksIndicator)
+        remarksDisable = ta.getBoolean(R.styleable.RemarksFormView_remarksDisable, remarksDisable)
+        val placeholder = ta.getString(R.styleable.RemarksFormView_remarksPlaceholder)
 
-        remarksView = binding.edit
-        remarksView?.isEnabled = !remarksDisable
-        remarksIndicatorView = binding.indicator
+        remarksView = root.edit
+        root.edit.setHint(placeholder)
+        root.edit.isEnabled = !remarksDisable
+        remarksIndicatorView = root.indicator
         remarksIndicatorView?.visibility = remarksIndicator.then(View.VISIBLE, View.GONE)
         resetCountText()
         var filters = arrayOf<InputFilter>()

@@ -19,7 +19,7 @@ import androidx.annotation.IntDef
     FormModel.SELECT,
     FormModel.RADIO
 )
-@kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.SOURCE)
 annotation class FormModel {
 
     companion object {

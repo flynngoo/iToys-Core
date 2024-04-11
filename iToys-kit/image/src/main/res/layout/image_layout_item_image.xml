@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/image_icon_add_picture" />
+        android:src="@drawable/image_ic_add" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/delete"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:src="@drawable/image_icon_delete_picture"
+        android:src="@drawable/image_ic_delete"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

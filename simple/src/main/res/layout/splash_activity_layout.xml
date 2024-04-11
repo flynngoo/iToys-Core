@@ -23,4 +23,66 @@
         android:layout_marginTop="12dp"
         android:text="List"
         app:layout_constraintTop_toBottomOf="@id/btn_loading" />
+
+    <com.itoys.android.uikit.components.upload.UploadImageView
+        android:id="@+id/upload_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/uikit_colorful_white"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_list"
+        app:uploadImageHeight="95dp"
+        app:uploadImageSpacing="10dp"
+        app:uploadImageTitle="身份证人像页"
+        app:uploadImageTitleMargin="4dp"
+        app:uploadImageWidth="150dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/uikit_colorful_999999"
+        app:layout_constraintTop_toBottomOf="@id/upload_image" />
+
+    <com.itoys.android.uikit.components.form.TextareaFormView
+        android:id="@+id/textarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/uikit_colorful_white"
+        app:layout_constraintTop_toBottomOf="@id/upload_image"
+        app:textareaLabel="备注"
+        app:textareaMaximum="300"
+        app:textareaPlaceholder="请输入备注" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/uikit_colorful_999999"
+        app:layout_constraintTop_toBottomOf="@id/textarea" />
+
+    <com.itoys.android.uikit.components.form.IToysFormView
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/uikit_colorful_white"
+        app:formAutoCheck="true"
+        app:formContentAlign="end"
+        app:formContentEndMargin="16dp"
+        app:formLabel="文本"
+        app:formLabelStartMargin="16dp"
+        app:formErrorMessage="请输入提示文本"
+        app:formModel="Text"
+        app:formPlaceholder="提示文本"
+        app:layout_constraintTop_toBottomOf="@id/textarea" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit"
+        style="@style/IToysAndroid.Button.Stroke"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="43dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/uikit_submit"
+        app:layout_constraintTop_toBottomOf="@id/form" />
 </androidx.constraintlayout.widget.ConstraintLayout>

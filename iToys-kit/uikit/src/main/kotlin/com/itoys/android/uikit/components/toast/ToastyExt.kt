@@ -7,7 +7,7 @@ import com.itoys.android.utils.UtilsInitialization
 fun toast(
     @StringRes message: Int,
     duration: Int = Toasty.LENGTH_SHORT,
-    direction: ToastyDirection = ToastyDirection.Horizontal,
+    orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     status: ToastyStatus? = null
 ) {
     if (status == null) {
@@ -15,14 +15,14 @@ fun toast(
             UtilsInitialization.requireApp(),
             UikitInitialization.requireApp().getString(message),
             duration = duration,
-            direction = direction
+            orientation = orientation
         ).show()
     } else {
         Toasty.custom(
             UtilsInitialization.requireApp(),
             UikitInitialization.requireApp().getString(message),
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = status
         ).show()
     }
@@ -31,7 +31,7 @@ fun toast(
 fun toast(
     message: String,
     duration: Int = Toasty.LENGTH_SHORT,
-    direction: ToastyDirection = ToastyDirection.Horizontal,
+    orientation: ToastyOrientation = ToastyOrientation.Horizontal,
     status: ToastyStatus? = null
 ) {
     if (status == null) {
@@ -39,14 +39,14 @@ fun toast(
             UtilsInitialization.requireApp(),
             message,
             duration = duration,
-            direction = direction
+            orientation = orientation
         ).show()
     } else {
         Toasty.custom(
             UtilsInitialization.requireApp(),
             message,
             duration = duration,
-            toastyDirection = direction,
+            orientation = orientation,
             toastyStatus = status
         ).show()
     }
