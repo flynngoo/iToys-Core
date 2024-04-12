@@ -125,10 +125,11 @@ fun ImageView.loadRoundCornerImage(
     radius: Int = 0,
     @RawRes @DrawableRes placeholder: Int = R.drawable.image_rectangle_placeholder,
     @RawRes @DrawableRes error: Int = placeholder,
+    cornerType: RoundCornerType = RoundCornerType.ALL,
 ) {
     val options = RequestOptions().transform(
         CenterCrop(),
-        RoundedCornersTransformation(radius)
+        RoundedCornersTransformation(radius, cornerType = cornerType.getType())
     )
 
     IToysGlide.with(this)
@@ -143,10 +144,11 @@ fun ImageView.loadRoundCornerImage(
 fun ImageView.loadRoundCornerImage(
     @RawRes @DrawableRes drawableId: Int,
     radius: Int = 0,
+    cornerType: RoundCornerType = RoundCornerType.ALL,
 ) {
     val options = RequestOptions().transform(
         CenterCrop(),
-        RoundedCornersTransformation(radius)
+        RoundedCornersTransformation(radius, cornerType = cornerType.getType())
     )
 
     IToysGlide.with(this)
@@ -161,10 +163,11 @@ fun ImageView.loadRoundCornerImage(
 fun ImageView.loadRoundCornerImage(
     drawable: Drawable,
     radius: Int = 0,
+    cornerType: RoundCornerType = RoundCornerType.ALL,
 ) {
     val options = RequestOptions().transform(
         CenterCrop(),
-        RoundedCornersTransformation(radius)
+        RoundedCornersTransformation(radius, cornerType = cornerType.getType())
     )
 
     IToysGlide.with(this)
@@ -267,9 +270,11 @@ fun RecyclerView.addPictures(
         withPlus && size < maximum -> {
             addModels(pictures, index = max((size - 1), 0))
         }
+
         size == maximum -> {
             models = pictures
         }
+
         else -> addModels(pictures)
     }
 

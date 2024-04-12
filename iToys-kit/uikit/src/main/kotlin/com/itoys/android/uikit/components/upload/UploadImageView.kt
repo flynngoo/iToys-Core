@@ -154,25 +154,26 @@ class UploadImageView(
         val imageWidth = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageWidth, LayoutParams.MATCH_PARENT)
         val imageHeight = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageHeight, LayoutParams.WRAP_CONTENT)
         val spacing = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageSpacing, 0)
-        val imageParams = root.image.layoutParams as MarginLayoutParams
+        imageRoundCorner = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageRoundCorner, 0)
+
+        val imageParams = root.uploadImage.layoutParams as MarginLayoutParams
         imageParams.setMargins(0, spacing, 0, 0)
         imageParams.width = imageWidth
         imageParams.height = imageHeight
-        root.image.layoutParams = imageParams
+        root.uploadImage.layoutParams = imageParams
 
         val imageBackground = ta.getDrawable(R.styleable.UploadImageView_uploadImageBackground)
             ?: context.drawable(R.drawable.uikit_background_upload_image)
         imageBackground?.let { root.imageBackground.loadRoundCornerImage(imageBackground, radius = imageRoundCorner) }
 
-        imageView = root.image
-        root.image.doOnClick { uploadImageCallback?.upload(uploadMark) }
+        imageView = root.uploadImage
+        root.uploadImage.doOnClick { uploadImageCallback?.upload(uploadMark) }
 
         showDelete = ta.getBoolean(R.styleable.UploadImageView_uploadImageShowDelete, showDelete)
+        root.deleteImage.loadRoundCornerImage(R.drawable.image_ic_delete, radius = imageRoundCorner)
 
-        deleteImageView = root.delete
-        root.delete.doOnClick { uploadImageCallback?.delete(uploadMark) }
-
-        imageRoundCorner = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageRoundCorner, 0)
+        deleteImageView = root.deleteImage
+        root.deleteImage.doOnClick { uploadImageCallback?.delete(uploadMark) }
     }
 
     /**
@@ -227,7 +228,10 @@ class UploadImageView(
         this.uploadImageCallback = uploadImageCallback
     }
 
-    fun setImageUrl(url: String) {
+    /**
+     * 设置图片
+     */
+    fun setImage(url: String) {
         this.imageUrl = url
         if (url.isBlank()) {
             imageView?.setImageDrawable(null)
@@ -236,6 +240,15 @@ class UploadImageView(
             imageView?.loadRoundCornerImage(url = url, radius = imageRoundCorner)
             if (showDelete) deleteImageView?.visible()
         }
+    }
+
+    /**
+     * 删除图片
+     */
+    fun deleteImage() {
+        this.imageUrl = ""
+        imageView?.setImageDrawable(null)
+        deleteImageView?.gone()
     }
 
     /**

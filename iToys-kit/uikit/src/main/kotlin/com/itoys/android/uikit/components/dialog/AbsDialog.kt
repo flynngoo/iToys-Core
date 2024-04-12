@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
@@ -104,12 +105,12 @@ abstract class AbsDialog<out B : AbsDialog.Builder> : DialogFragment() {
         /**
          * Dialog 宽, 默认为屏幕宽度
          */
-        open var dialogWidth = WindowManager.LayoutParams.MATCH_PARENT
+        open var dialogWidth = ViewGroup.LayoutParams.MATCH_PARENT
 
         /**
          * Dialog 高, 默认为自适应
          */
-        open var dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT
+        open var dialogHeight = ViewGroup.LayoutParams.WRAP_CONTENT
 
         /**
          * Dialog 位置, 默认为居中

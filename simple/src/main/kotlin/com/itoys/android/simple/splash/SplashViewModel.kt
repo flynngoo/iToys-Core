@@ -1,11 +1,17 @@
 package com.itoys.android.simple.splash
 
 import androidx.lifecycle.LifecycleOwner
+import com.itoys.android.R
 import com.itoys.android.core.mvi.AbsViewModel
+import com.itoys.android.image.IMediaCallback
+import com.itoys.android.image.ImageMedia
+import com.itoys.android.image.selectFromAlbum
+import com.itoys.android.image.takePicture
 import com.itoys.android.image.uikit.dialog.ChooseImageDialog
-import com.itoys.android.simple.splash.interactor.Simple
 import com.itoys.android.splash.SplashIntent
 import com.itoys.android.splash.SplashState
+import com.itoys.android.uikit.components.dialog.IDialogCallback
+import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,6 +23,18 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
 ) : AbsViewModel<SplashIntent, SplashState>() {
+
+    /**
+     * 图片选择回调
+     */
+    private val mediaCallback by lazy {
+        object : IMediaCallback() {
+            override fun onResult(result: ImageMedia) {
+                super.onResult(result)
+                sendUIState(SplashState.UploadImage(result.mediaPath))
+            }
+        }
+    }
 
     override fun createUIState() = SplashState.Idle
 
@@ -48,14 +66,14 @@ class SplashViewModel @Inject constructor(
      */
     private fun testUploadImage(intent: SplashIntent.TestUploadImage) {
         ChooseImageDialog.show {
-            fm = intent.fm
+            fm = intent.owner.supportFragmentManager
             callback = object : ChooseImageDialog.ISelectCallback {
                 override fun takePicture() {
-
+                    intent.owner.takePicture(callback = mediaCallback)
                 }
 
                 override fun selectFromAlbum() {
-
+                    intent.owner.selectFromAlbum(callback = mediaCallback)
                 }
             }
         }
@@ -65,6 +83,23 @@ class SplashViewModel @Inject constructor(
      * 测试删除图片
      */
     private fun testDeleteImage(intent: SplashIntent.TestDeleteImage) {
+        IToysNoticeDialog.show {
+            fm = intent.owner.supportFragmentManager
+            content = "确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗?"
 
+            buttons = arrayOf("取消", "确认")
+
+            buttonsBackground = arrayOf(
+                R.drawable.uikit_rectangle_6_e5e6eb,
+                R.drawable.uikit_primary_button_background_radius_6
+            )
+
+            callback = object : IDialogCallback() {
+                override fun clickCenter() {
+                    super.clickCenter()
+                    sendUIState(SplashState.DeleteImage)
+                }
+            }
+        }
     }
 }

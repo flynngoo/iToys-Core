@@ -28,10 +28,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@id/image"
-        app:layout_constraintEnd_toEndOf="@id/image"
-        app:layout_constraintStart_toStartOf="@id/image"
-        app:layout_constraintTop_toTopOf="@id/image"
+        app:layout_constraintBottom_toBottomOf="@id/upload_image"
+        app:layout_constraintEnd_toEndOf="@id/upload_image"
+        app:layout_constraintStart_toStartOf="@id/upload_image"
+        app:layout_constraintTop_toTopOf="@id/upload_image"
         tools:src="@drawable/uikit_background_upload_image" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/uikit_ic_upload_image"
         app:layout_constraintBottom_toTopOf="@id/upload_text"
-        app:layout_constraintEnd_toEndOf="@id/image"
-        app:layout_constraintStart_toStartOf="@id/image"
-        app:layout_constraintTop_toTopOf="@id/image"
+        app:layout_constraintEnd_toEndOf="@id/upload_image"
+        app:layout_constraintStart_toStartOf="@id/upload_image"
+        app:layout_constraintTop_toTopOf="@id/upload_image"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -51,16 +51,16 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/uikit_colorful_777777"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/image"
-        app:layout_constraintEnd_toEndOf="@id/image"
-        app:layout_constraintStart_toStartOf="@id/image"
+        app:layout_constraintBottom_toBottomOf="@id/upload_image"
+        app:layout_constraintEnd_toEndOf="@id/upload_image"
+        app:layout_constraintStart_toStartOf="@id/upload_image"
         app:layout_constraintTop_toBottomOf="@id/upload_logo"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_goneMarginTop="0dp"
         tools:text="@string/uikit_module_name" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image"
+        android:id="@+id/upload_image"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         android:scaleType="fitXY"
@@ -68,11 +68,11 @@
         app:layout_goneMarginTop="0dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/delete"
+        android:id="@+id/delete_image"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:src="@drawable/image_ic_delete"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/image"
-        app:layout_constraintTop_toTopOf="@id/image" />
+        app:layout_constraintEnd_toEndOf="@id/upload_image"
+        app:layout_constraintTop_toTopOf="@id/upload_image"
+        tools:src="@drawable/image_ic_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>

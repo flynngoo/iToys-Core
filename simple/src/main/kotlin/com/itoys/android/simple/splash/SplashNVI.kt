@@ -1,5 +1,7 @@
 package com.itoys.android.splash
 
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.itoys.android.core.mvi.IUIIntent
 import com.itoys.android.core.mvi.IUIState
@@ -20,12 +22,12 @@ sealed class SplashIntent : IUIIntent {
     /**
      * 测试上传图片
      */
-    data class TestUploadImage(val fm: FragmentManager, val mark: String) : SplashIntent()
+    data class TestUploadImage(val owner: AppCompatActivity, val mark: String) : SplashIntent()
 
     /**
      * 测试删除图片
      */
-    data class TestDeleteImage(val fm: FragmentManager, val mark: String) : SplashIntent()
+    data class TestDeleteImage(val owner: AppCompatActivity, val mark: String) : SplashIntent()
 }
 
 sealed class SplashState : IUIState {
@@ -41,7 +43,12 @@ sealed class SplashState : IUIState {
     data object Login : SplashState()
 
     /**
-     * 主页
+     * 上传图片
      */
-    data object Main : SplashState()
+    data class UploadImage(val imageUrl: String) : SplashState()
+
+    /**
+     * 删除图片
+     */
+    data object DeleteImage : SplashState()
 }

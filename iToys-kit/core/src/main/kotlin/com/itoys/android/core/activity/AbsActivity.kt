@@ -2,6 +2,8 @@ package com.itoys.android.core.activity
 
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.ViewGroup
+import android.view.Window
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
@@ -103,6 +105,11 @@ abstract class AbsActivity<VB : ViewBinding> : AppCompatActivity() {
                 navBack()
             }
         })
+
+        // 监听顶级view 达到点击输入框区域外隐藏输入法目的
+        findViewById<ViewGroup>(Window.ID_ANDROID_CONTENT).setOnClickListener {
+            hideSoftInput()
+        }
     }
 
     /**
