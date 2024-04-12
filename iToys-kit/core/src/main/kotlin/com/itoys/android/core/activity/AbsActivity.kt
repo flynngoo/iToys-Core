@@ -68,8 +68,8 @@ abstract class AbsActivity<VB : ViewBinding> : AppCompatActivity() {
         if (ev?.action == MotionEvent.ACTION_DOWN) {
             val currentView = currentFocus
             currentView?.let {
-                it.clearFocus()
                 hideSoftInput()
+                it.clearFocus()
             }
         }
 
@@ -105,11 +105,6 @@ abstract class AbsActivity<VB : ViewBinding> : AppCompatActivity() {
                 navBack()
             }
         })
-
-        // 监听顶级view 达到点击输入框区域外隐藏输入法目的
-        findViewById<ViewGroup>(Window.ID_ANDROID_CONTENT).setOnClickListener {
-            hideSoftInput()
-        }
     }
 
     /**

@@ -90,11 +90,11 @@
             android:visibility="gone" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!-- 对话框 高度设置ViewGroup.LayoutParams.WRAP_CONTENT时间距有问题，暂时采用加高高度方案解决 -->
-    <!-- 后续再改吧 -->
+    <!-- 对话框 高度设置ViewGroup.LayoutParams.WRAP_CONTENT时间距有问题 -->
+    <!-- 如果标题或者内容长度过高 底部间距很小，后续再改吧 -->
     <Space
         android:layout_width="0dp"
-        android:layout_height="38dp"
+        android:layout_height="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_layout" />

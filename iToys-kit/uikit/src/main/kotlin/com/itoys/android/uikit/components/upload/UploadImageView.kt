@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
+import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.databinding.UikitLayoutUploadImageBinding
@@ -170,7 +171,11 @@ class UploadImageView(
         root.uploadImage.doOnClick { uploadImageCallback?.upload(uploadMark) }
 
         showDelete = ta.getBoolean(R.styleable.UploadImageView_uploadImageShowDelete, showDelete)
-        root.deleteImage.loadRoundCornerImage(R.drawable.image_ic_delete, radius = imageRoundCorner)
+        root.deleteImage.loadRoundCornerImage(
+            R.drawable.image_ic_delete,
+            radius = imageRoundCorner,
+            cornerType = RoundCornerType.DIAGONAL_FROM_TOP_RIGHT
+        )
 
         deleteImageView = root.deleteImage
         root.deleteImage.doOnClick { uploadImageCallback?.delete(uploadMark) }
