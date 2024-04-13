@@ -32,8 +32,6 @@ abstract class AbsApp : Application() {
         super.onCreate()
 
         if (SysUtils.isMainProcess(this)) {
-            // 注册activity 生命周期回调
-            ActivityLifecycleImpl.install(application = this@AbsApp)
             // network 初始化
             NetworkInitialization.initialization(application = this@AbsApp, globalConfig = globalConfig)
             // logger 初始化
@@ -42,6 +40,8 @@ abstract class AbsApp : Application() {
             UikitInitialization.initialization(application = this@AbsApp)
             // utils 初始化
             UtilsInitialization.initialization(application = this@AbsApp)
+            // 注册activity 生命周期回调
+            ActivityLifecycleImpl.install(application = this@AbsApp)
 
             syncInit(application = this@AbsApp)
 

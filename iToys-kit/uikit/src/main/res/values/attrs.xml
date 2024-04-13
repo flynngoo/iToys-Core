@@ -42,7 +42,7 @@
 
     <declare-styleable name="IToysFormView">
         <!-- 表单最大高度, 默认54dp -->
-        <attr name="formMaxHeight" format="dimension" />
+        <attr name="formMinHeight" format="dimension" />
 
         <!-- 表单-必填 默认false -->
         <attr name="formRequiredMark" format="boolean" />

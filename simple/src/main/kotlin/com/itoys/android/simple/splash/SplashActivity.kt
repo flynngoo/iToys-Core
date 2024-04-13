@@ -55,6 +55,8 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
             radius = 6.dp2px(),
             cornerType = RoundCornerType.DIAGONAL_FROM_TOP_RIGHT
         )
+
+        binding?.textareaForm?.setContent(getString(R.string.uikit_long_text))
     }
 
     override fun addClickListen() {

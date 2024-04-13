@@ -16,43 +16,64 @@ data class DictModel(
     val dictKey: Int?,
     @JsonProperty("dictValue")
     val dictValue: String?,
-)
+) {
+    // 选中状态
+    var selected = false
+}
 
 fun Iterable<DictModel>.toDictValueList(): List<String?> = map(DictModel::dictValue)
 
-enum class Sex(val sex: Int, val text: String) {
+/**
+ * 性别枚举
+ *
+ * @param code 性别值
+ * @param description 性别描述
+ */
+enum class Gender(val code: Int, val description: String) {
+    /**
+     * 男
+     */
+    MALE(1, "男"),
 
-    /** 男 */
-    Male(1, "男"),
+    /**
+     * 女
+     */
+    FEMALE(2, "女"),
 
-    /** 女 */
-    Female(2, "女");
+    /**
+     * 其他
+     */
+    OTHER(3, "其他");
+
+
 
     companion object {
-        fun sex(sex: Int?): String {
-            return when (sex) {
-                Male.sex -> Male.text
-                Female.sex -> Female.text
-                else -> ""
+
+        /**
+         * 根据性别值获取对应的枚举描述
+         *
+         * @param code 性别值
+         * @return 对应的枚举描述
+         */
+        fun getDescription(code: Int?): String {
+            return when (code) {
+                MALE.code -> MALE.description
+                FEMALE.code -> FEMALE.description
+                else -> OTHER.description
             }
         }
-    }
-}
 
-enum class Whether(val whether: Int, val text: String, val checked: Boolean) {
-
-    /** 是 */
-    Yes(0, "是", true),
-
-    /** 否 */
-    No(1, "否", false);
-
-    companion object {
-        fun whether(whether: Int?): String {
-            return when (whether) {
-                Yes.whether -> Yes.text
-                No.whether -> No.text
-                else -> ""
+        /**
+         * 根据性别值获取对应的枚举值
+         *
+         * @param code 性别值
+         * @return 对应的枚举值
+         */
+        fun fromCode(code: Int?): Gender {
+            return when (code) {
+                MALE.code -> MALE
+                FEMALE.code -> FEMALE
+                else -> OTHER
             }
         }
     }

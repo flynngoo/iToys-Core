@@ -286,7 +286,10 @@ object FormModelFactory {
             edit.setTextColor(config.contentColor)
         }
 
+        // 占位符
         edit.hint = config.placeholder
+        // 单行，多行展示
+        edit.isSingleLine = false
 
         if (config.placeholderColor != 0) {
             edit.setHintTextColor(config.placeholderColor)
@@ -353,6 +356,7 @@ object FormModelFactory {
      */
     fun updateRadioModel(
         contentView: View?,
+        contentSize: Int,
         radioList: List<RadioModel>?,
     ) {
         if (contentView == null) return
@@ -368,9 +372,12 @@ object FormModelFactory {
             )
             radioView.root.id = item.id
             radioView.root.text = item.label
+            if (contentSize > 0) {
+                radioView.root.setTextSize(TypedValue.COMPLEX_UNIT_PX, contentSize.toFloat())
+            }
             radioView.root.isChecked = item.isChecked
-            radioLayoutParams.marginStart = 12.dp2px()
-            radioLayoutParams.leftMargin = 12.dp2px()
+            radioLayoutParams.marginStart = 6.dp2px()
+            radioLayoutParams.leftMargin = 6.dp2px()
             radioGroup.addView(radioView.root, radioLayoutParams)
         }
     }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.textview.MaterialTextView
 import com.itoys.android.logcat.logcat
 import com.itoys.android.uikit.R
@@ -22,7 +23,6 @@ import com.itoys.android.utils.expansion.drawable
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
-import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.then
 
 /**
@@ -34,13 +34,13 @@ class IToysFormView(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     /** 16 dp */
     private val px16: Int by lazy { 16.dp2px() }
 
-    /** 最大高度 */
-    private var maxHeight = 0
+    /** 最小高度 */
+    private var minHeight = 0
 
     /** 必填标识 */
     private var requiredMark = false
@@ -188,7 +188,7 @@ class IToysFormView(
         val ta = context.obtainStyledAttributes(attrs, R.styleable.IToysFormView)
 
         // 最大高度
-        maxHeight = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formMaxHeight, 54.dp2px())
+        minHeight = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formMinHeight, 54.dp2px())
         // 表单
         val formView = addFormView()
 
@@ -218,7 +218,7 @@ class IToysFormView(
         val binding = UikitLayoutFormBinding.inflate(
             LayoutInflater.from(context), this, false
         )
-        val formLayoutParams = LayoutParams(LayoutParams.MATCH_PARENT, maxHeight)
+        val formLayoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         this.addView(binding.root, formLayoutParams)
         return binding
     }
@@ -300,6 +300,7 @@ class IToysFormView(
         labelLayoutParams.setMargins(
             labelStartMargin, 0, labelEndMargin, 0
         )
+        labelLayoutParams.height = minHeight
         labelLayoutParams.width = (labelWidth > 0).then(labelWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
         root.label.layoutParams = labelLayoutParams
         root.label.visibility = labelText.isBlank().then(View.GONE, View.VISIBLE)
@@ -310,15 +311,13 @@ class IToysFormView(
      */
     private fun setContent(root: UikitLayoutFormBinding, ta: TypedArray) {
         formModel = ta.getInt(R.styleable.IToysFormView_formModel, formModel)
-        contentMaxLength =
-            ta.getInt(R.styleable.IToysFormView_formContentMaxLength, contentMaxLength)
+        contentMaxLength = ta.getInt(R.styleable.IToysFormView_formContentMaxLength, contentMaxLength)
         placeholder = ta.getString(R.styleable.IToysFormView_formPlaceholder).invalid()
         placeholderColor = ta.getColor(
             R.styleable.IToysFormView_formPlaceholderColor,
             context.color(R.color.uikit_colorful_C9CDD4)
         )
-        contentSize =
-            ta.getDimensionPixelOffset(R.styleable.IToysFormView_formContentSize, contentSize)
+        contentSize = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formContentSize, contentSize)
         contentColor = ta.getColor(
             R.styleable.IToysFormView_formContentColor, context.color(R.color.uikit_colorful_1D2129)
         )
@@ -346,7 +345,7 @@ class IToysFormView(
         contentLayoutParams.setMargins(
             contentStartMargin, 0, contentEndMargin, 0,
         )
-        contentLayoutParams.height = maxHeight
+        contentLayoutParams.height = LayoutParams.WRAP_CONTENT
         root.content.layoutParams = contentLayoutParams
         val contentView = FormModelFactory.create(
             context,
@@ -487,7 +486,7 @@ class IToysFormView(
      * 设置表单内容
      */
     fun setContent(radioList: List<RadioModel>?) {
-        FormModelFactory.updateRadioModel(contentView, radioList)
+        FormModelFactory.updateRadioModel(contentView, contentSize, radioList)
     }
 
     /**

@@ -8,12 +8,14 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/content"
-        style="@style/IToysAndroid.Body1"
-        android:layout_marginEnd="8dp"
+        style="@style/IToysAndroid.Body2"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/suffixIcon"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/uikit_module_name" />
+        tools:text="@string/uikit_long_text" />
 
     <!-- suffix -->
     <androidx.appcompat.widget.AppCompatImageView
