@@ -2,12 +2,14 @@ package com.itoys.android.utils.expansion
 
 import com.itoys.android.utils.IdCardValidatorUtil
 import com.itoys.android.utils.regex.Const.EMAIL
+import com.itoys.android.utils.regex.Const.EMOJI
 import com.itoys.android.utils.regex.Const.EXACT_MOBILE
 import com.itoys.android.utils.regex.Const.HIDE_PHONE
 import com.itoys.android.utils.regex.Const.ID_CARD_CHAR
 import com.itoys.android.utils.regex.Const.SIMPLE_MOBILE
-import java.io.File
 import java.math.BigDecimal
+import java.math.RoundingMode
+import java.util.regex.Pattern
 import kotlin.reflect.KClass
 
 /**
@@ -169,6 +171,78 @@ fun CharSequence?.idCardChar() = ID_CARD_CHAR.toRegex().matches(this.invalid())
 fun CharSequence?.email() = this.isNotBlank() && EMAIL.toRegex().matches(this.invalid())
 
 /**
+ * 表情
+ */
+fun CharSequence?.isEmoji() = Pattern.compile(EMOJI, Pattern.UNICODE_CASE or Pattern.CASE_INSENSITIVE).matcher(this.invalid()).find()
+
+/**
  * 空字符串
  */
 fun String.Companion.empty() = ""
+
+// 数字与汉字大写的映射
+val numberDigitMap = mapOf(
+    '0' to "零", '1' to "壹", '2' to "贰", '3' to "叁", '4' to "肆",
+    '5' to "伍", '6' to "陆", '7' to "柒", '8' to "捌", '9' to "玖"
+)
+
+// 定义汉字数字和单位
+val numbersCN = arrayOf("零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖")
+// 单位映射
+val currencyUnits = listOf("元", "拾", "佰", "仟", "万", "亿")
+
+fun String.toCNY(): String {
+    val amount = BigDecimal(this)
+
+    // 将金额拆解为整数和小数部分
+    val wholePart = amount.toInt()
+    var wholePartCopy = wholePart
+    val decimalPart = amount.subtract(BigDecimal(wholePart)).setScale(2, RoundingMode.HALF_UP).multiply(BigDecimal("100")).toInt()
+
+    val sb = StringBuilder()
+
+    if (wholePart == 0 && decimalPart == 0) {
+        sb.append(numbersCN[0]).append(currencyUnits[0])
+    }
+
+    // 处理整数部分
+    var index = 0
+    // 标记是否上一位数字为零
+    var nonZero = false
+
+    while (wholePartCopy != 0) {
+        val digit = wholePartCopy % 10
+
+        if (digit != 0) {
+            sb.insert(0, "${numbersCN[digit]}${currencyUnits[index]}")
+        }
+
+        if (digit == 0 && nonZero) {
+            sb.insert(0, numbersCN[digit])
+        }
+        nonZero = digit != 0
+        wholePartCopy /= 10
+        index++
+    }
+
+    if (sb.isNotEmpty() && !sb.endsWith(currencyUnits[0])) {
+        sb.append(currencyUnits[0])
+    }
+
+    // 处理小数部分
+    if (decimalPart > 0) {
+        if (decimalPart / 10 != 0) {
+            sb.append(numbersCN[decimalPart / 10])
+            sb.append("角")
+        }
+
+        if (decimalPart % 10 != 0) {
+            sb.append(numbersCN[decimalPart % 10])
+            sb.append("分")
+        }
+    } else {
+        sb.append("整")
+    }
+
+    return sb.toString()
+}

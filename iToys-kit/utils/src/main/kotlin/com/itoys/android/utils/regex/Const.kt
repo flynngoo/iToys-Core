@@ -31,4 +31,9 @@ object Const {
      * 身份证号 正则
      */
     const val ID_CARD_CHAR = "^[1234567890Xx]+\$"
+
+    /**
+     * emoji 正则
+     */
+    const val EMOJI = "[\\ud83c\\udc00-\\ud83c\\udfff]|[\\ud83d\\udc00-\\ud83d\\udfff]|[\\u2600-\\u27ff]"
 }

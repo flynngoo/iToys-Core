@@ -8,10 +8,8 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup.MarginLayoutParams
 import android.widget.RadioGroup
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import com.itoys.android.logcat.logcat
@@ -21,7 +19,6 @@ import com.itoys.android.uikit.databinding.UikitLayoutFormRadioBinding
 import com.itoys.android.uikit.databinding.UikitLayoutFormSelectBinding
 import com.itoys.android.uikit.databinding.UikitLayoutItemRadioBinding
 import com.itoys.android.uikit.model.RadioModel
-import com.itoys.android.utils.IdCardInputFilter
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.dp2px
 import com.itoys.android.utils.expansion.email
@@ -32,6 +29,9 @@ import com.itoys.android.utils.expansion.simpleMobile
 import com.itoys.android.utils.expansion.layoutInflater
 import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.then
+import com.itoys.android.utils.filter.DecimalDigitsInputFilter
+import com.itoys.android.utils.filter.EmojiFilter
+import com.itoys.android.utils.filter.IdCardInputFilter
 
 /**
  * @Author Gu Fanfan
@@ -50,7 +50,7 @@ object FormModelFactory {
     ): View? {
         return when (formModel) {
             FormModel.TEXT -> generateTextModel(context, config)
-            FormModel.NUMBER -> generateTextModel(context, config, inputType = InputType.TYPE_CLASS_NUMBER)
+            FormModel.NUMBER -> generateTextModel(context, config, inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
 
             FormModel.MOBILE -> generateMobileModel(context, config)
             FormModel.ID_CARD -> generateIdCardModel(context, config)
@@ -201,6 +201,8 @@ object FormModelFactory {
             setEditStyle(editBinding.formEdit, config)
             var filters = arrayOf<InputFilter>()
             if (config.maxLength > 0) filters = filters.plus(LengthFilter(config.maxLength))
+            if (!config.enableEmoji) filters = filters.plus(EmojiFilter())
+            if (config.enableAmount) filters = filters.plus(DecimalDigitsInputFilter(2))
             editBinding.formEdit.filters = filters
             return editBinding.root
         }
@@ -264,6 +266,7 @@ object FormModelFactory {
             setEditStyle(editBinding.formEdit, config)
             var filters = arrayOf<InputFilter>()
             if (config.maxLength > 0) filters = filters.plus(LengthFilter(config.maxLength))
+            if (!config.enableEmoji) filters = filters.plus(EmojiFilter())
             editBinding.formEdit.filters = filters
             return editBinding.root
         }

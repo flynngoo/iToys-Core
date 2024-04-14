@@ -120,6 +120,12 @@ class IToysFormView(
     /** 内容-end margin */
     private var contentEndMargin = 0
 
+    /** 内容-允许输入表情 */
+    private var enableEmoji = true
+
+    /** 内容-金额 */
+    private var enableAmount = false
+
     /** 内容-suffix icon */
     private var suffixIcon: Drawable? = null
 
@@ -329,6 +335,8 @@ class IToysFormView(
             R.styleable.IToysFormView_formContentEndMargin, contentEndMargin
         )
         formEnable = ta.getBoolean(R.styleable.IToysFormView_formEnable, formEnable)
+        enableEmoji = ta.getBoolean(R.styleable.IToysFormView_formContentEnableEmoji, enableEmoji)
+        enableAmount = ta.getBoolean(R.styleable.IToysFormView_formContentEnableAmount, enableAmount)
         contentView = root.content
 
         val config = FormContentConfig(
@@ -339,6 +347,8 @@ class IToysFormView(
             contentAlign,
             contentMaxLength,
             formEnable,
+            enableEmoji,
+            enableAmount,
         )
 
         val contentLayoutParams = root.content.layoutParams as MarginLayoutParams
@@ -477,6 +487,8 @@ class IToysFormView(
             contentAlign,
             contentMaxLength,
             formEnable,
+            enableEmoji,
+            enableAmount,
         )
 
         FormModelFactory.updateContent(contentView, content, formModel, config)

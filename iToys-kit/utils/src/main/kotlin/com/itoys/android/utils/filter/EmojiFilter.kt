@@ -1,17 +1,18 @@
-package com.itoys.android.utils
+package com.itoys.android.utils.filter
 
 import android.text.InputFilter
 import android.text.Spanned
 import com.itoys.android.utils.expansion.idCardChar
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
+import com.itoys.android.utils.expansion.isEmoji
 
 /**
  * @Author Gu Fanfan
- * @Email fanfan.work@outlook.com
- * @Date 2023/11/30
+ * @Email fanfan.worker@gmail.com
+ * @Date 2024/4/14
  */
-class IdCardInputFilter : InputFilter {
+class EmojiFilter : InputFilter {
     override fun filter(
         source: CharSequence?,
         start: Int,
@@ -21,16 +22,11 @@ class IdCardInputFilter : InputFilter {
         dend: Int
     ): CharSequence {
         if (source.isBlank()) return ""
-        val char = source.invalid()
 
-        if (!Character.isLetterOrDigit(char[start])) {
+        if (source.isEmoji()) {
             return ""
         }
 
-        if (!char.idCardChar()) {
-            return ""
-        }
-
-        return char
+        return source.invalid()
     }
 }

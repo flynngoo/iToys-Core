@@ -157,7 +157,7 @@ class IToysNoticeDialog : IToysDialog<UikitDialogLayoutNoticeBinding, IToysNotic
         /**
          * 按钮 顺序(Start -> Center -> End)
          */
-        var buttons = arrayOf("确认")
+        var buttons = arrayOf("取消", "确认")
 
         /**
          * 按钮 顺序(Start -> Center -> End)
@@ -167,12 +167,18 @@ class IToysNoticeDialog : IToysDialog<UikitDialogLayoutNoticeBinding, IToysNotic
         /**
          * 按钮字体颜色 顺序(Start -> Center -> End)
          */
-        var buttonsTextColor = arrayOf(R.color.uikit_colorful_white)
+        var buttonsTextColor = arrayOf(
+            R.color.uikit_colorful_666666,
+            R.color.uikit_colorful_white,
+        )
 
         /**
          * 按钮背景 顺序(Start -> Center -> End)
          */
-        var buttonsBackground = arrayOf(R.drawable.uikit_primary_button_background_radius_6)
+        var buttonsBackground = arrayOf(
+            R.drawable.uikit_rectangle_6_e5e6eb,
+            R.drawable.uikit_primary_button_background_radius_6
+        )
 
         /**
          * 最大button数量

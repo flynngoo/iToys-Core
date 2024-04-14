@@ -19,6 +19,7 @@ import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.then
+import com.itoys.android.utils.filter.EmojiFilter
 
 /**
  * @Author Gu Fanfan
@@ -118,6 +119,7 @@ class RemarksFormView(
         remarksIndicator = ta.getBoolean(R.styleable.RemarksFormView_remarksIndicator, remarksIndicator)
         remarksDisable = ta.getBoolean(R.styleable.RemarksFormView_remarksDisable, remarksDisable)
         val placeholder = ta.getString(R.styleable.RemarksFormView_remarksPlaceholder)
+        val enableEmoji = ta.getBoolean(R.styleable.RemarksFormView_remarksEnableEmoji, true)
 
         remarksView = root.edit
         root.edit.setHint(placeholder)
@@ -125,8 +127,8 @@ class RemarksFormView(
         remarksIndicatorView = root.indicator
         remarksIndicatorView?.visibility = remarksIndicator.then(View.VISIBLE, View.GONE)
         resetCountText()
-        var filters = arrayOf<InputFilter>()
-        filters = filters.plus(InputFilter.LengthFilter(maximum))
+        var filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maximum))
+        if (!enableEmoji) filters = filters.plus(EmojiFilter())
         remarksView?.filters = filters
         remarksView?.addTextChangedListener {
             resetCountText()

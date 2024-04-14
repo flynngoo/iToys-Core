@@ -17,7 +17,7 @@ import androidx.annotation.IntDef
     FormModel.DATE,
     FormModel.DATETIME,
     FormModel.SELECT,
-    FormModel.RADIO
+    FormModel.RADIO,
 )
 @Retention(AnnotationRetention.SOURCE)
 annotation class FormModel {

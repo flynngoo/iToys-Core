@@ -55,6 +55,12 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
 
         var dateMode = DateMode.YEAR_MONTH_DAY
 
+        /** 起始年份 */
+        var startYear = 1900
+
+        /** 默认年份 */
+        var defaultYear = 2000
+
         /** 回调 */
         var callback: IDateCallback? = null
     }
@@ -70,7 +76,8 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
     /** 日 */
     private var selectDay = 0
 
-    override fun createViewBinding(inflater: LayoutInflater) = UikitLayoutPickerDateBinding.inflate(inflater)
+    override fun createViewBinding(inflater: LayoutInflater) =
+        UikitLayoutPickerDateBinding.inflate(inflater)
 
     override fun initialize() {
         if (builder.title.isNotBlank()) {
@@ -78,12 +85,18 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
         }
         binding?.dateWheel?.apply {
             setDateMode(builder.dateMode)
+            setDateLabel("年", "月", "日")
             setOnDateSelectedListener { year, month, day ->
                 selectYear = year
                 selectMonth = month
                 selectDay = day
             }
-            setRange(DateEntity.target(2023, 1, 1), DateEntity.today())
+            setRange(DateEntity.target(builder.startYear, 1, 1), DateEntity.today())
+            setDefaultValue(DateEntity.target(builder.defaultYear, 1, 1))
+
+            selectYear = selectedYear
+            selectMonth = selectedMonth
+            selectDay = selectedDay
         }
 
         binding?.close?.doOnClick { dismiss() }

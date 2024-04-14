@@ -91,10 +91,10 @@
             app:formContentAlign="end"
             app:formContentEndMargin="16dp"
             app:formErrorMessage="请输入必填提示文本"
-            app:formLabel="必填文本"
+            app:formLabel="数字类型"
             app:formLabelStartMargin="2dp"
-            app:formModel="Text"
-            app:formPlaceholder="必填提示文本"
+            app:formModel="Number"
+            app:formPlaceholder="请输入数字类型"
             app:formRequiredMark="true"
             app:formRequiredMarkStartMargin="16dp"
             app:layout_constraintTop_toBottomOf="@id/form" />
@@ -134,5 +134,44 @@
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/submit" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/emoji"
+            style="@style/IToysAndroid.Input"
+            android:layout_height="54dp"
+            android:hint="测试表情"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/simple_image" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/amount"
+            style="@style/IToysAndroid.Input"
+            android:layout_height="54dp"
+            android:hint="测试金额"
+            android:inputType="number|numberDecimal"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emoji" />
+
+        <com.itoys.android.uikit.components.form.IToysFormView
+            android:id="@+id/shipping_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/uikit_colorful_white"
+            app:formBottomSeparator="true"
+            app:formContentAlign="end"
+            app:formContentEnableAmount="true"
+            app:formContentEndMargin="38dp"
+            app:formLabel="运费"
+            app:formLabelStartMargin="2dp"
+            app:formModel="Number"
+            app:formPlaceholder="@string/uikit_zero"
+            app:formRequiredMark="true"
+            app:formRequiredMarkStartMargin="16dp"
+            app:formSuffixText="@string/uikit_yuan"
+            app:layout_constraintTop_toBottomOf="@id/amount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

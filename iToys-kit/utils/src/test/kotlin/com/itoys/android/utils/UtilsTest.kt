@@ -1,7 +1,10 @@
 package com.itoys.android.utils
 
 import com.itoys.android.utils.expansion.email
+import com.itoys.android.utils.expansion.isEmoji
 import com.itoys.android.utils.expansion.roundToNearestTen
+import com.itoys.android.utils.expansion.string
+import com.itoys.android.utils.expansion.toCNY
 import org.junit.Test
 
 /**
@@ -70,5 +73,22 @@ class UtilsTest {
         val number = 16675
 
         println("Rounded up to the nearest multiple of 10 is ${number.roundToNearestTen()}")
+    }
+
+    @Test
+    fun toCNY() {
+        val amount = "666"
+
+        println("$amount CNY is ${amount.toCNY()}")
+    }
+
+    /**
+     * emoji
+     */
+    @Test
+    fun isEmoji() {
+        val emoji = "😀abs"
+
+        println(emoji.isEmoji())
     }
 }

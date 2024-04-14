@@ -13,4 +13,6 @@ data class FormContentConfig(
     @FormTextAlign val contentAlign: Int,
     val maxLength: Int,
     val isEnable: Boolean,
+    val enableEmoji: Boolean,
+    val enableAmount: Boolean,
 )

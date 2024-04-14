@@ -103,3 +103,12 @@ fun Int.countDigits(): Int {
     }
     return (floor(log10(this.toDouble())) + 1).toInt()
 }
+
+/**
+ * 填充0
+ */
+fun Int.padZeroes(targetLength: Int = 2): String {
+    return "%0${targetLength}d".format(this)
+}
+
+fun Double.toCNY() = toString().toCNY()

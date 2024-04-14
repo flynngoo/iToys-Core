@@ -107,6 +107,10 @@
         <attr name="formContentStartMargin" format="dimension" />
         <!-- 表单-内容 end margin -->
         <attr name="formContentEndMargin" format="dimension" />
+        <!-- 表单-内容 允许输入表情 -->
+        <attr name="formContentEnableEmoji" format="boolean" />
+        <!-- 表单-内容 金额 -->
+        <attr name="formContentEnableAmount" format="boolean" />
 
         <!-- 表单-后缀 icon -->
         <attr name="formSuffixIcon" format="reference" />
@@ -180,6 +184,8 @@
         <attr name="remarksMaxLength" format="integer" />
         <!-- 禁用 -->
         <attr name="remarksDisable" format="boolean" />
+        <!-- 内容 允许输入表情 -->
+        <attr name="remarksEnableEmoji" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="TextareaFormView">
