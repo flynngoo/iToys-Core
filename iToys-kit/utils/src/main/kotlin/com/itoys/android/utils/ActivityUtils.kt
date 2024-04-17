@@ -1,6 +1,7 @@
 package com.itoys.android.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 
 /**
@@ -32,10 +33,10 @@ object ActivityUtils {
     /**
      * Open the main activity.
      */
-    fun openLaunchActivity(activity: Activity) {
+    fun openLaunchActivity(context: Context) {
         val packageManager = UtilsInitialization.requireApp().packageManager
-        val launchIntent = packageManager.getLaunchIntentForPackage(activity.packageName) ?: return
+        val launchIntent = packageManager.getLaunchIntentForPackage(context.packageName) ?: return
         launchIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        activity.startActivity(launchIntent)
+        context.startActivity(launchIntent)
     }
 }

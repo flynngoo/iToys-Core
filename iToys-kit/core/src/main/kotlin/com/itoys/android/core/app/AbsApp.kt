@@ -2,8 +2,11 @@ package com.itoys.android.core.app
 
 import android.app.Application
 import android.content.Context
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import com.itoys.android.core.GlobalConfig
+import com.itoys.android.core.crash.CrashHandler
+import com.itoys.android.core.crash.ToastCrashListener
 import com.itoys.android.core.network.NetworkInitialization
 import com.itoys.android.logcat.LoggerInitialization
 import com.itoys.android.uikit.UikitInitialization
@@ -48,9 +51,14 @@ abstract class AbsApp : Application() {
             launchOnIO {
                 asyncInit(application = this@AbsApp)
             }
+
+            ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleMonitor())
         }
 
         globalInit(application = this@AbsApp)
+
+        // 全局异常捕获
+        // CrashHandler.instance().initialization(this@AbsApp).setOnCrashListener(ToastCrashListener())
     }
 
     /**

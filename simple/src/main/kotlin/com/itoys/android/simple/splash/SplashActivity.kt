@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.itoys.android.R
 import com.itoys.android.core.activity.AbsMviActivity
+import com.itoys.android.core.crash.catchCrash
 import com.itoys.android.core.network.handlerException
 import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.image.RoundCornerType
@@ -102,11 +103,7 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
         }
 
         binding?.phoneSubmit?.doOnClick {
-            try {
-                binding?.phone?.formContent()
-            } catch (e: Exception) {
-                toast(e.handlerException().message.invalid("一场"))
-            }
+            catchCrash { binding?.phone?.formContent() }
         }
     }
 
