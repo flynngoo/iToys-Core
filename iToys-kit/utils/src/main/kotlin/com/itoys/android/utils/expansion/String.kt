@@ -6,6 +6,7 @@ import com.itoys.android.utils.regex.Const.EMOJI
 import com.itoys.android.utils.regex.Const.EXACT_MOBILE
 import com.itoys.android.utils.regex.Const.HIDE_PHONE
 import com.itoys.android.utils.regex.Const.ID_CARD_CHAR
+import com.itoys.android.utils.regex.Const.LANDLINE_PHONE
 import com.itoys.android.utils.regex.Const.SIMPLE_MOBILE
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -143,6 +144,11 @@ fun CharSequence?.simpleMobile() = this.isNotBlank() && SIMPLE_MOBILE.toRegex().
  * 手机号-精确校验
  */
 fun CharSequence?.exactMobile() = this.isNotBlank() && EXACT_MOBILE.toRegex().matches(this.invalid())
+
+/**
+ * 座机-校验
+ */
+fun CharSequence?.landlinePhone() = this.isNotBlank() && LANDLINE_PHONE.toRegex().matches(this.invalid())
 
 /**
  * 隐藏手机号中间4位

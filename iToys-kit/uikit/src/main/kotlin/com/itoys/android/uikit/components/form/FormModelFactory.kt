@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.RadioGroup
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.core.widget.addTextChangedListener
 import com.itoys.android.logcat.logcat
 import com.itoys.android.uikit.R
@@ -25,6 +26,7 @@ import com.itoys.android.utils.expansion.email
 import com.itoys.android.utils.expansion.idCard
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
+import com.itoys.android.utils.expansion.landlinePhone
 import com.itoys.android.utils.expansion.simpleMobile
 import com.itoys.android.utils.expansion.layoutInflater
 import com.itoys.android.utils.expansion.size
@@ -52,7 +54,7 @@ object FormModelFactory {
             FormModel.TEXT -> generateTextModel(context, config)
             FormModel.NUMBER -> generateTextModel(context, config, inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
 
-            FormModel.MOBILE -> generateMobileModel(context, config)
+            FormModel.PHONE -> generateMobileModel(context, config)
             FormModel.ID_CARD -> generateIdCardModel(context, config)
             FormModel.EMAIL -> generateEmailModel(context, config)
             FormModel.DATE,
@@ -84,13 +86,13 @@ object FormModelFactory {
                 }
             }
 
-            FormModel.MOBILE -> {
+            FormModel.PHONE -> {
                 val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
 
                 edit.addTextChangedListener {
                     val mobile = it.toString()
                     callback.result(mobile)
-                    callback.isAccurate(mobile.simpleMobile())
+                    callback.isAccurate(mobile.simpleMobile() || mobile.landlinePhone())
                 }
             }
 
@@ -157,7 +159,7 @@ object FormModelFactory {
         when (formModel) {
             FormModel.TEXT,
             FormModel.NUMBER,
-            FormModel.MOBILE,
+            FormModel.PHONE,
             FormModel.ID_CARD,
             FormModel.EMAIL -> {
                 val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
@@ -178,6 +180,45 @@ object FormModelFactory {
                         config.contentColor
                     )
                 )
+            }
+
+            else -> {
+                logcat { "自定义不需要" }
+            }
+        }
+    }
+
+    /**
+     * [formModel] @see [FormModel]
+     */
+    fun updateContentEnable(
+        contentView: View?,
+        contentEnable: Boolean,
+        @FormModel formModel: Int,
+    ) {
+        if (contentView == null) return
+
+        when (formModel) {
+            FormModel.TEXT,
+            FormModel.NUMBER,
+            FormModel.PHONE,
+            FormModel.ID_CARD,
+            FormModel.EMAIL -> {
+                val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
+                edit.isEnabled = contentEnable
+            }
+
+            FormModel.ADDRESS,
+            FormModel.DATE,
+            FormModel.DATETIME,
+            FormModel.SELECT -> {
+                val selectView: ConstraintLayout = contentView.findViewById(R.id.form_select)
+                selectView.isEnabled = contentEnable
+            }
+
+            FormModel.RADIO -> {
+                val formRadio: RadioGroup = contentView.findViewById(R.id.form_radio)
+                formRadio.children.forEach { radio -> radio.isEnabled = contentEnable }
             }
 
             else -> {
@@ -222,9 +263,7 @@ object FormModelFactory {
             editBinding.formEdit.inputType = InputType.TYPE_CLASS_PHONE
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
-            var filters = arrayOf<InputFilter>()
-            if (config.maxLength > 0) filters = filters.plus(LengthFilter(config.maxLength))
-            editBinding.formEdit.filters = filters
+            editBinding.formEdit.filters = arrayOf(LengthFilter(12))
             return editBinding.root
         }
 

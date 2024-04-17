@@ -34,6 +34,9 @@ class TextareaFormView(
     /** 最大长度 */
     private var maximum = 200
 
+    /** 文本框内容 */
+    private var textarea = ""
+
     init {
         initView(attrs)
     }
@@ -92,9 +95,11 @@ class TextareaFormView(
 
         // 监听文本框变化
         root.edit.addTextChangedListener {
+            textarea = it.toString()
+
             root.indicator.text = context.getString(
                 R.string.uikit_remarks_count_indicator,
-                root.edit.text.size(),
+                textarea.size(),
                 maximum
             )
         }
@@ -107,4 +112,9 @@ class TextareaFormView(
         val indicator = ta.getBoolean(R.styleable.TextareaFormView_textareaIndicator, true)
         root.indicator.visibility = indicator.then(View.VISIBLE, View.GONE)
     }
+
+    /**
+     * 获取文本框内容
+     */
+    fun textarea() = textarea
 }

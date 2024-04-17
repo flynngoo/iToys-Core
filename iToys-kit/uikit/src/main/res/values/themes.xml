@@ -218,7 +218,7 @@
     <!-- Radio -->
     <style name="IToysAndroid.Radio" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/uikit_itoys_radio_buttons</item>
-        <item name="buttonTint">?attr/appPrimaryColor</item>
+        <item name="buttonTint">@color/uikit_primary_radio_tint_color</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?attr/appPrimaryTextColor</item>
         <item name="android:textSize">16sp</item>

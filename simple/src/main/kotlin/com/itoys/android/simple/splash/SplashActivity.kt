@@ -4,25 +4,22 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.itoys.android.R
 import com.itoys.android.core.activity.AbsMviActivity
+import com.itoys.android.core.network.handlerException
 import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
 import com.itoys.android.simple.list.SimpleListActivity
-import com.itoys.android.splash.SplashIntent
-import com.itoys.android.splash.SplashState
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import com.itoys.android.uikit.components.form.IFormResultCallback
 import com.itoys.android.uikit.components.loading.LottieLoadingDialog
 import com.itoys.android.uikit.components.toast.toast
-import com.itoys.android.uikit.components.upload.IUploadCallback
+import com.itoys.android.uikit.model.RadioModel
 import com.itoys.android.utils.expansion.actOpen
 import com.itoys.android.utils.expansion.collect
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.dp2px
 import com.itoys.android.utils.expansion.invalid
-import com.itoys.android.utils.expansion.isNotBlank
-import com.itoys.android.utils.expansion.toCNY
 import com.itoys.android.utils.filter.DecimalDigitsInputFilter
 import com.itoys.android.utils.filter.EmojiFilter
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,24 +32,18 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewModel>() {
 
-    private val uploadCallback = object : IUploadCallback {
-        override fun upload(mark: String) {
-            viewModel?.sendIntent(SplashIntent.TestUploadImage(this@SplashActivity, mark))
-        }
-
-        override fun delete(mark: String) {
-            viewModel?.sendIntent(SplashIntent.TestDeleteImage(this@SplashActivity, mark))
-        }
-    }
-
     override val viewModel: SplashViewModel? by viewModels()
 
     override fun createViewBinding() = SplashActivityLayoutBinding.inflate(layoutInflater)
 
+    /**
+     * 测试radio
+     */
+    private var radioEnable = true
+
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.idCard?.apply {
-            setFragmentManager(supportFragmentManager)
-            setUploadImageCallback(uploadCallback)
+            setOwner(this@SplashActivity)
         }
 
         binding?.simpleImage?.loadRoundCornerImage(
@@ -64,6 +55,12 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
         binding?.textareaForm?.setContent(getString(R.string.uikit_long_text))
         binding?.emoji?.filters = arrayOf(EmojiFilter())
         binding?.amount?.filters = arrayOf(DecimalDigitsInputFilter(2))
+        binding?.radio?.setContent(listOf(
+            RadioModel(1, 1, "男"),
+            RadioModel(2, 2, "女"),
+            RadioModel(3, 3, "其他"),
+        ))
+        binding?.identityCard?.setOwner(this@SplashActivity)
     }
 
     override fun addClickListen() {
@@ -96,10 +93,21 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
         binding?.shippingCost?.setResultCallback(object : IFormResultCallback() {
             override fun result(result: String) {
                 super.result(result)
-
-
             }
         })
+
+        binding?.radioEnable?.doOnClick {
+            radioEnable = !radioEnable
+            binding?.radio?.setContentEnable(radioEnable)
+        }
+
+        binding?.phoneSubmit?.doOnClick {
+            try {
+                binding?.phone?.formContent()
+            } catch (e: Exception) {
+                toast(e.handlerException().message.invalid("一场"))
+            }
+        }
     }
 
     override fun addObserver() {

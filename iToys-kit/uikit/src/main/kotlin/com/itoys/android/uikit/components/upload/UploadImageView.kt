@@ -5,14 +5,24 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.itoys.android.image.IMediaCallback
+import com.itoys.android.image.ImageMedia
 import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
+import com.itoys.android.image.selectFromAlbum
+import com.itoys.android.image.takePicture
+import com.itoys.android.image.uikit.dialog.ChooseImageDialog
 import com.itoys.android.uikit.R
+import com.itoys.android.uikit.components.dialog.IDialogCallback
+import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import com.itoys.android.uikit.databinding.UikitLayoutUploadImageBinding
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.drawable
@@ -38,50 +48,54 @@ class UploadImageView(
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    /**
-     * 上传标识
-     */
+    private val binding: UikitLayoutUploadImageBinding
+
+    /** 上传标识 */
     private var uploadMark = ""
 
-    /**
-     * 上传文字
-     */
+    /** 上传文字 */
     private val uploadTextLabel = "点击上传"
 
-    /**
-     * 图片
-     */
+    /** 图片 */
     private var imageView: AppCompatImageView? = null
 
-    /**
-     * 图片圆角
-     */
+    /** 图片圆角 */
     private var imageRoundCorner = 0
 
-    /**
-     * 是否显示删除按钮
-     */
+    /** 是否显示删除按钮 */
     private var showDelete = true
 
-    /**
-     * 删除按钮
-     */
+    /** 删除按钮 */
     private var deleteImageView: AppCompatImageView? = null
 
-    /** fm */
-    private var fragmentManager: FragmentManager? = null
+    /** owner */
+    private var ownerActivity: AppCompatActivity? = null
 
-    /**
-     * 上传回调
-     */
+    /** owner */
+    private var ownerFragment: Fragment? = null
+
+    /** 上传回调 */
     private var uploadImageCallback: IUploadCallback? = null
 
-    /**
-     * 图片地址
-     */
+    /** 图片地址 */
     private var imageUrl = ""
 
+    /** 图片选择回调 */
+    private val mediaCallback by lazy {
+        object : IMediaCallback() {
+            override fun onResult(result: ImageMedia) {
+                super.onResult(result)
+                setImage(result.mediaPath)
+            }
+        }
+    }
+
     init {
+        binding = UikitLayoutUploadImageBinding.inflate(
+            LayoutInflater.from(context), this, false
+        )
+        this.addView(binding.root)
+
         initView(attrs)
     }
 
@@ -89,11 +103,6 @@ class UploadImageView(
      * 初始化
      */
     private fun initView(attrs: AttributeSet?) {
-        val binding = UikitLayoutUploadImageBinding.inflate(
-            LayoutInflater.from(context), this, false
-        )
-        this.addView(binding.root)
-
         val ta = context.obtainStyledAttributes(attrs, R.styleable.UploadImageView)
         uploadMark = ta.getString(R.styleable.UploadImageView_uploadImageMark).invalid()
         // 标题
@@ -106,6 +115,27 @@ class UploadImageView(
         setUploadText(binding, ta)
         // 释放
         ta.recycle()
+    }
+
+    /**
+     * 设置owner
+     */
+    fun setOwner(owner: AppCompatActivity) {
+        ownerActivity = owner
+    }
+
+    /**
+     * 设置owner
+     */
+    fun setOwner(owner: Fragment) {
+        ownerFragment = owner
+    }
+
+    /**
+     * 获取fragmentManager
+     */
+    private fun fragmentManager(): FragmentManager? {
+        return ownerFragment?.childFragmentManager ?: ownerActivity?.supportFragmentManager
     }
 
     /**
@@ -136,6 +166,8 @@ class UploadImageView(
         val titleColor = ta.getColor(R.styleable.UploadImageView_uploadImageTitleColor, -1)
         val titleMargin = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageTitleMargin, 0)
         root.title.apply {
+            visibility = title.isNotBlank().then(View.VISIBLE, View.GONE)
+
             text = title
             if (titleSize != -1) setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize.toFloat())
             if (titleColor != -1) setTextColor(titleColor)
@@ -168,7 +200,25 @@ class UploadImageView(
         imageBackground?.let { root.imageBackground.loadRoundCornerImage(imageBackground, radius = imageRoundCorner) }
 
         imageView = root.uploadImage
-        root.uploadImage.doOnClick { uploadImageCallback?.upload(uploadMark) }
+        root.uploadImage.doOnClick {
+            if (uploadImageCallback != null) {
+                uploadImageCallback?.upload(uploadMark)
+            } else {
+                ChooseImageDialog.show {
+                    fm = fragmentManager()
+
+                    callback = object : ChooseImageDialog.ISelectCallback {
+                        override fun selectFromAlbum() {
+                            ownerActivity?.selectFromAlbum(callback = mediaCallback)
+                        }
+
+                        override fun takePicture() {
+                            ownerActivity?.takePicture(callback = mediaCallback)
+                        }
+                    }
+                }
+            }
+        }
 
         showDelete = ta.getBoolean(R.styleable.UploadImageView_uploadImageShowDelete, showDelete)
         root.deleteImage.loadRoundCornerImage(
@@ -178,7 +228,13 @@ class UploadImageView(
         )
 
         deleteImageView = root.deleteImage
-        root.deleteImage.doOnClick { uploadImageCallback?.delete(uploadMark) }
+        root.deleteImage.doOnClick {
+            if (uploadImageCallback != null) {
+                uploadImageCallback?.delete(uploadMark)
+            } else {
+                showDeleteImageDialog()
+            }
+        }
     }
 
     /**
@@ -209,21 +265,12 @@ class UploadImageView(
         val uploadTextSize = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageTextSize, -1)
         val uploadTextColor = ta.getColor(R.styleable.UploadImageView_uploadImageTextColor, -1)
         root.uploadText.visibility = showText.then(VISIBLE, GONE)
-        if (showText) {
-            root.uploadText.apply {
-                text = (uploadText.size() > 0).then({ uploadText },
-                    { uploadTextLabel + root.title.text })
-                if (uploadTextSize != -1) setTextSize(TypedValue.COMPLEX_UNIT_PX, uploadTextSize.toFloat())
-                if (uploadTextColor != -1) setTextColor(uploadTextColor)
-            }
+        root.uploadText.apply {
+            text = (uploadText.size() > 0).then({ uploadText },
+                { uploadTextLabel + root.title.text })
+            if (uploadTextSize != -1) setTextSize(TypedValue.COMPLEX_UNIT_PX, uploadTextSize.toFloat())
+            if (uploadTextColor != -1) setTextColor(uploadTextColor)
         }
-    }
-
-    /**
-     * 设置 fm
-     */
-    fun setFragmentManager(fm: FragmentManager) {
-        this.fragmentManager = fm
     }
 
     /**
@@ -248,6 +295,24 @@ class UploadImageView(
     }
 
     /**
+     * 显示删除图片对话框
+     */
+    private fun showDeleteImageDialog() {
+        IToysNoticeDialog.show {
+            fm = fragmentManager()
+            title = "确定删除${binding.uploadText.text.invalid()}吗?"
+
+            callback = object : IDialogCallback() {
+
+                override fun clickCenter() {
+                    super.clickCenter()
+                    deleteImage()
+                }
+            }
+        }
+    }
+
+    /**
      * 删除图片
      */
     fun deleteImage() {
@@ -255,6 +320,11 @@ class UploadImageView(
         imageView?.setImageDrawable(null)
         deleteImageView?.gone()
     }
+
+    /**
+     * 获取图片标记
+     */
+    fun imageMark() = uploadMark
 
     /**
      * 获取图片地址

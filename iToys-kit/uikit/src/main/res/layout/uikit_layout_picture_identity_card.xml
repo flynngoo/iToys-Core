@@ -26,21 +26,31 @@
         <com.itoys.android.uikit.components.upload.UploadImageView
             android:id="@+id/portrait"
             android:layout_width="0dp"
-            android:layout_height="101dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@+id/national_emblem"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:uploadImageHeight="101dp"
+            app:uploadImageRequiredMark="false"
+            app:uploadImageRoundCorner="4dp"
+            app:uploadImageShowText="true"
+            app:uploadImageText="@string/uikit_id_card_portrait" />
 
         <com.itoys.android.uikit.components.upload.UploadImageView
             android:id="@+id/national_emblem"
             android:layout_width="0dp"
-            android:layout_height="101dp"
-            android:layout_marginEnd="4dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/portrait"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:uploadImageHeight="101dp"
+            app:uploadImageRequiredMark="false"
+            app:uploadImageRoundCorner="4dp"
+            app:uploadImageShowText="true"
+            app:uploadImageText="@string/uikit_id_card_national_emblem" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

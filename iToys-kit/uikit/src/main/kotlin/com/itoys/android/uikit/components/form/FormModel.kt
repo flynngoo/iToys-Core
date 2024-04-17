@@ -10,7 +10,7 @@ import androidx.annotation.IntDef
 @IntDef(
     FormModel.TEXT,
     FormModel.NUMBER,
-    FormModel.MOBILE,
+    FormModel.PHONE,
     FormModel.ID_CARD,
     FormModel.EMAIL,
     FormModel.ADDRESS,
@@ -25,7 +25,7 @@ annotation class FormModel {
     companion object {
         const val TEXT = 0
         const val NUMBER = 1
-        const val MOBILE = 2
+        const val PHONE = 2
         const val ID_CARD = 3
         const val EMAIL = 4
         const val ADDRESS = 5

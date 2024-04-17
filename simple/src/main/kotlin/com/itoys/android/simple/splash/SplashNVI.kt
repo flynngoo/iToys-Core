@@ -1,8 +1,6 @@
-package com.itoys.android.splash
+package com.itoys.android.simple.splash
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.itoys.android.core.mvi.IUIIntent
 import com.itoys.android.core.mvi.IUIState
 

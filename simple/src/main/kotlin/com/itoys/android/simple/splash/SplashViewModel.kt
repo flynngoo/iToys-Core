@@ -8,8 +8,6 @@ import com.itoys.android.image.ImageMedia
 import com.itoys.android.image.selectFromAlbum
 import com.itoys.android.image.takePicture
 import com.itoys.android.image.uikit.dialog.ChooseImageDialog
-import com.itoys.android.splash.SplashIntent
-import com.itoys.android.splash.SplashState
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -86,13 +84,6 @@ class SplashViewModel @Inject constructor(
         IToysNoticeDialog.show {
             fm = intent.owner.supportFragmentManager
             content = "确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗?"
-
-            buttons = arrayOf("取消", "确认")
-
-            buttonsBackground = arrayOf(
-                R.drawable.uikit_rectangle_6_e5e6eb,
-                R.drawable.uikit_primary_button_background_radius_6
-            )
 
             callback = object : IDialogCallback() {
                 override fun clickCenter() {

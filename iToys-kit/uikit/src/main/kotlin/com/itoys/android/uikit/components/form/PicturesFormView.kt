@@ -142,16 +142,6 @@ class PicturesFormView(
                         fm = fragmentManager
                         title = context.getString(R.string.image_delete_this_picture)
 
-                        buttons = arrayOf(
-                            context.getString(R.string.uikit_cancel),
-                            context.getString(R.string.uikit_confirm),
-                        )
-
-                        buttonsBackground = arrayOf(
-                            R.drawable.uikit_rectangle_12_e5e6eb,
-                            R.drawable.uikit_primary_button_background_radius_12
-                        )
-
                         callback = object : IDialogCallback() {
 
                             override fun clickCenter() {

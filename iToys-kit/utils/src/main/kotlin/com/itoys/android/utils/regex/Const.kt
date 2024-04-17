@@ -20,7 +20,12 @@ object Const {
     /**
      * 手机号(简单) 正则
      */
-    const val SIMPLE_MOBILE = "^[1]\\d{10}\$"
+    const val SIMPLE_MOBILE = "^1[3-9]\\d{9}\$"
+
+    /**
+     * 座机 正则
+     */
+    const val LANDLINE_PHONE = "^(0\\d{2,3}-)?\\d{7,8}\$"
 
     /**
      * 隐藏手机号 正则
@@ -36,4 +41,9 @@ object Const {
      * emoji 正则
      */
     const val EMOJI = "[\\ud83c\\udc00-\\ud83c\\udfff]|[\\ud83d\\udc00-\\ud83d\\udfff]|[\\u2600-\\u27ff]"
+
+    /**
+     * 营业执照 正则
+     */
+    const val BUSINESS_LICENSE = "^([159Y]{1})([1239]{1})([0-9ABCDEFGHJKLMNPQRTUWXY]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{9})([0-90-9ABCDEFGHJKLMNPQRTUWXY])\$"
 }

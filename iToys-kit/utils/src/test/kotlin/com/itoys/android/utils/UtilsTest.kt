@@ -2,7 +2,9 @@ package com.itoys.android.utils
 
 import com.itoys.android.utils.expansion.email
 import com.itoys.android.utils.expansion.isEmoji
+import com.itoys.android.utils.expansion.landlinePhone
 import com.itoys.android.utils.expansion.roundToNearestTen
+import com.itoys.android.utils.expansion.simpleMobile
 import com.itoys.android.utils.expansion.string
 import com.itoys.android.utils.expansion.toCNY
 import org.junit.Test
@@ -20,6 +22,16 @@ class UtilsTest {
     @Test
     fun runEmailRegex() {
         assert("abcd123@qq.com".email())
+    }
+
+    /**
+     * 手机/座机号正则
+     */
+    @Test
+    fun runPhoneRegex() {
+        val phone = "1213232781"
+
+        assert(phone.simpleMobile() || phone.landlinePhone())
     }
 
     /**

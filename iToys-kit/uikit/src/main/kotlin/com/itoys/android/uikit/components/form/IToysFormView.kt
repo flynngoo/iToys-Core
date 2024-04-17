@@ -492,6 +492,15 @@ class IToysFormView(
         )
 
         FormModelFactory.updateContent(contentView, content, formModel, config)
+
+        when (formModel) {
+            FormModel.ADDRESS,
+            FormModel.DATE,
+            FormModel.DATETIME,
+            FormModel.SELECT -> {
+                contentAccurate = content.isNotBlank() && content != placeholder
+            }
+        }
     }
 
     /**
@@ -499,6 +508,14 @@ class IToysFormView(
      */
     fun setContent(radioList: List<RadioModel>?) {
         FormModelFactory.updateRadioModel(contentView, contentSize, radioList)
+    }
+
+    /**
+     * 设置表单内容是禁用
+     */
+    fun setContentEnable(enable: Boolean) {
+        formEnable = enable
+        FormModelFactory.updateContentEnable(contentView, formEnable, formModel)
     }
 
     /**
