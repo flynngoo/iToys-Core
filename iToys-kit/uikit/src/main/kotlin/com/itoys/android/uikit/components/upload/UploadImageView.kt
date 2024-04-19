@@ -7,7 +7,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +28,7 @@ import com.itoys.android.utils.expansion.drawable
 import com.itoys.android.utils.expansion.gone
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
+import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.then
 import com.itoys.android.utils.expansion.visible
@@ -42,7 +42,7 @@ class UploadImageView(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     constructor(context: Context) : this(context, null)
 
@@ -50,11 +50,17 @@ class UploadImageView(
 
     private val binding: UikitLayoutUploadImageBinding
 
+    /** 是否可自定义 */
+    private var isCustomizable = false
+
     /** 上传标识 */
     private var uploadMark = ""
 
-    /** 上传文字 */
+    /** 上传文字 label */
     private val uploadTextLabel = "点击上传"
+
+    /** 上传文字 */
+    private var uploadText = ""
 
     /** 图片 */
     private var imageView: AppCompatImageView? = null
@@ -86,6 +92,8 @@ class UploadImageView(
             override fun onResult(result: ImageMedia) {
                 super.onResult(result)
                 setImage(result.mediaPath)
+
+                uploadImageCallback?.upload(uploadMark, result.mediaPath)
             }
         }
     }
@@ -130,6 +138,14 @@ class UploadImageView(
     fun setOwner(owner: Fragment) {
         ownerFragment = owner
     }
+
+    /**
+     * 自定义选择图片
+     */
+    fun customImageSelection(customizable: Boolean) {
+        isCustomizable = customizable
+    }
+
 
     /**
      * 获取fragmentManager
@@ -201,8 +217,8 @@ class UploadImageView(
 
         imageView = root.uploadImage
         root.uploadImage.doOnClick {
-            if (uploadImageCallback != null) {
-                uploadImageCallback?.upload(uploadMark)
+            if (isCustomizable) {
+                uploadImageCallback?.customImageSelection()
             } else {
                 ChooseImageDialog.show {
                     fm = fragmentManager()
@@ -210,10 +226,12 @@ class UploadImageView(
                     callback = object : ChooseImageDialog.ISelectCallback {
                         override fun selectFromAlbum() {
                             ownerActivity?.selectFromAlbum(callback = mediaCallback)
+                            ownerFragment?.selectFromAlbum(callback = mediaCallback)
                         }
 
                         override fun takePicture() {
                             ownerActivity?.takePicture(callback = mediaCallback)
+                            ownerFragment?.takePicture(callback = mediaCallback)
                         }
                     }
                 }
@@ -229,7 +247,7 @@ class UploadImageView(
 
         deleteImageView = root.deleteImage
         root.deleteImage.doOnClick {
-            if (uploadImageCallback != null) {
+            if (isCustomizable) {
                 uploadImageCallback?.delete(uploadMark)
             } else {
                 showDeleteImageDialog()
@@ -261,13 +279,13 @@ class UploadImageView(
      */
     private fun setUploadText(root: UikitLayoutUploadImageBinding, ta: TypedArray) {
         val showText = ta.getBoolean(R.styleable.UploadImageView_uploadImageShowText, true)
-        val uploadText = ta.getString(R.styleable.UploadImageView_uploadImageText).invalid()
+        uploadText = ta.getString(R.styleable.UploadImageView_uploadImageText).invalid()
         val uploadTextSize = ta.getDimensionPixelOffset(R.styleable.UploadImageView_uploadImageTextSize, -1)
         val uploadTextColor = ta.getColor(R.styleable.UploadImageView_uploadImageTextColor, -1)
         root.uploadText.visibility = showText.then(VISIBLE, GONE)
+        uploadText = (uploadText.size() > 0).then({ uploadText }, { root.title.text.invalid() })
         root.uploadText.apply {
-            text = (uploadText.size() > 0).then({ uploadText },
-                { uploadTextLabel + root.title.text })
+            text = (uploadText.size() > 0).then({ uploadText }, { uploadTextLabel + uploadText })
             if (uploadTextSize != -1) setTextSize(TypedValue.COMPLEX_UNIT_PX, uploadTextSize.toFloat())
             if (uploadTextColor != -1) setTextColor(uploadTextColor)
         }
@@ -283,14 +301,21 @@ class UploadImageView(
     /**
      * 设置图片
      */
-    fun setImage(url: String) {
+    fun setImage(url: String, needReload: Boolean = true) {
         this.imageUrl = url
-        if (url.isBlank()) {
-            imageView?.setImageDrawable(null)
-            deleteImageView?.gone()
-        } else {
-            imageView?.loadRoundCornerImage(url = url, radius = imageRoundCorner)
-            if (showDelete) deleteImageView?.visible()
+        when {
+            url.isBlank() -> {
+                // 图片地址为空
+                imageView?.setImageDrawable(null)
+                deleteImageView?.gone()
+            }
+            else -> {
+                if (needReload) {
+                    // 需要重新加载图片
+                    imageView?.loadRoundCornerImage(url = url, radius = imageRoundCorner)
+                    if (showDelete) deleteImageView?.visible()
+                }
+            }
         }
     }
 
@@ -300,13 +325,14 @@ class UploadImageView(
     private fun showDeleteImageDialog() {
         IToysNoticeDialog.show {
             fm = fragmentManager()
-            title = "确定删除${binding.uploadText.text.invalid()}吗?"
+            content = "确定删除${uploadText}吗?"
 
             callback = object : IDialogCallback() {
 
                 override fun clickCenter() {
                     super.clickCenter()
                     deleteImage()
+                    uploadImageCallback?.delete(uploadMark)
                 }
             }
         }
@@ -329,5 +355,21 @@ class UploadImageView(
     /**
      * 获取图片地址
      */
-    fun imageUrl() = imageUrl
+    fun imageUrl(required: Boolean = false): String {
+        // 图片地址是否有效
+        val isValidUrl = imageUrl.isNotBlank() && imageUrl.startsWith("http")
+        val checkUrl = required.then({ isValidUrl }, { imageUrl.isBlank() || isValidUrl })
+
+        check(checkUrl) {
+            (imageUrl.isBlank()).then(
+                { "请选择「${uploadText}」" },
+                { "「${uploadText}」上传失败, 请重新选择" })
+        }
+        return imageUrl
+    }
+
+    /**
+     * 图片
+     */
+    fun image(required: Boolean = false) = imageMark() to imageUrl(required)
 }

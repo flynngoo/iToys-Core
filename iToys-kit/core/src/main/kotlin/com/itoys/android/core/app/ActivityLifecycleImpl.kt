@@ -11,7 +11,6 @@ import com.itoys.android.utils.ActivityUtils
 import com.itoys.android.utils.expansion.tagName
 import com.itoys.android.utils.expansion.then
 import java.util.LinkedList
-import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * @Author Gu Fanfan
@@ -30,8 +29,6 @@ class ActivityLifecycleImpl : Application.ActivityLifecycleCallbacks {
 
         private val activityList: LinkedList<Activity> by lazy { LinkedList() }
 
-        private val appStatusList: CopyOnWriteArrayList<IAppStatusChangedCallback> by lazy { CopyOnWriteArrayList() }
-
         /**
          * 注册activity 生命周期回调
          */
@@ -44,22 +41,7 @@ class ActivityLifecycleImpl : Application.ActivityLifecycleCallbacks {
          */
         fun uninstall(application: Application) {
             activityList.clear()
-            appStatusList.clear()
             application.unregisterActivityLifecycleCallbacks(INSTANCE)
-        }
-
-        /**
-         * 添加app 状态回调
-         */
-        fun addAppStatusChangedCallback(callback: IAppStatusChangedCallback) {
-            appStatusList.add(callback)
-        }
-
-        /**
-         * 移除app 状态回调
-         */
-        fun removeAppStatusChangedCallback(callback: IAppStatusChangedCallback) {
-            appStatusList.remove(callback)
         }
     }
 
@@ -71,10 +53,6 @@ class ActivityLifecycleImpl : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         logcat(priority = Log.INFO) { "${activity.tagName} created!" }
-
-        if (activityList.isEmpty()) {
-            postStatus(activity)
-        }
 
         setTopActivity(activity)
     }
@@ -99,7 +77,6 @@ class ActivityLifecycleImpl : Application.ActivityLifecycleCallbacks {
         setTopActivity(activity)
         if (isBackground) {
             isBackground = false
-            postStatus(activity)
         }
     }
 
@@ -117,7 +94,6 @@ class ActivityLifecycleImpl : Application.ActivityLifecycleCallbacks {
 
             if (mForegroundCount <= 0) {
                 isBackground = true
-                postStatus(activity, isForeground = false)
             }
         }
     }
@@ -130,19 +106,6 @@ class ActivityLifecycleImpl : Application.ActivityLifecycleCallbacks {
         logcat(priority = Log.INFO) { "${activity.tagName} destroyed!" }
 
         activityList.remove(activity)
-    }
-
-    /**
-     * 当前 app 是否在前台状态回调
-     */
-    private fun postStatus(activity: Activity, isForeground: Boolean = true) {
-        if (appStatusList.isEmpty()) return
-
-        appStatusList.forEach { callback ->
-            isForeground.then(
-                { callback.onForeground(activity) },
-                { callback.onBackground(activity) })
-        }
     }
 
     /**

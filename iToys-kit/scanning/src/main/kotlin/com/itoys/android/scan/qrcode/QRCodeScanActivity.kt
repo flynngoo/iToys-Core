@@ -7,8 +7,6 @@ import com.google.zxing.Result
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
-import com.itoys.android.logcat.asLog
-import com.itoys.android.logcat.logcat
 import com.itoys.android.scan.R
 import com.king.camera.scan.AnalyzeResult
 import com.king.camera.scan.CameraScan
@@ -62,7 +60,7 @@ class QRCodeScanActivity : BarcodeCameraScanActivity() {
                 .transparentNavigationBar()
                 .init()
         } catch (e: Exception) {
-            logcat(priority = Log.ERROR) { e.asLog() }
+            Log.e("QRCodeScanActivity", e.localizedMessage ?: "初始化状态栏失败")
         }
     }
 

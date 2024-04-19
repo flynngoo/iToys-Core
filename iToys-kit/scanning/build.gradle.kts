@@ -17,7 +17,4 @@ dependencies {
 
     implementation(libs.title.bar)
     implementation(libs.zxing)
-
-    implementation(libs.itoys.logcat)
-    implementation(libs.itoys.utils)
 }

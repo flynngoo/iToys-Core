@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/footer_space"
         app:layout_constraintTop_toBottomOf="@+id/content">
 
         <com.google.android.material.button.MaterialButton
@@ -90,9 +91,8 @@
             android:visibility="gone" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!-- 对话框 高度设置ViewGroup.LayoutParams.WRAP_CONTENT时间距有问题 -->
-    <!-- 如果标题或者内容长度过高 底部间距很小，后续再改吧 -->
     <Space
+        android:id="@+id/footer_space"
         android:layout_width="0dp"
         android:layout_height="24dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,4 +1,4 @@
-package com.itoys.android.core.network.upload
+package com.itoys.android.core.upload
 
 import com.itoys.android.core.network.ResultException
 import java.io.File
@@ -30,7 +30,7 @@ interface IUploadRepository {
      */
     suspend fun uploadFile(
         filePath: String,
-        category: Category,
+        category: String,
         tokenType: TokenType,
         folder: String,
         success: ((String) -> Unit)?,
@@ -42,7 +42,7 @@ interface IUploadRepository {
      */
     suspend fun uploadFile(
         file: File,
-        category: Category,
+        category: String,
         tokenType: TokenType,
         folder: String,
         success: ((String) -> Unit)?,
@@ -63,7 +63,7 @@ interface IUploadRepository {
      */
     suspend fun uploadFileList(
         files: List<File>,
-        category: Category,
+        category: String,
         tokenType: TokenType,
         folder: String,
         success: ((List<String>) -> Unit)?,
@@ -73,5 +73,5 @@ interface IUploadRepository {
     /**
      * 生成上传key
      */
-    fun generateUploadKey(file: File, folder: String, category: Category): String
+    fun generateUploadKey(file: File, folder: String, category: String): String
 }

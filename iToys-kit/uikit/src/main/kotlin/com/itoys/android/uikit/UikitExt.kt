@@ -123,7 +123,9 @@ fun MagicIndicator.magicIndicator(
     config: IndicatorConfig = IndicatorConfig.DEFAULT,
     callback: ((Int) -> Unit)? = null,
 ) {
-    val helper = FragmentContainerHelper(this)
+    var helper: FragmentContainerHelper? = null
+    if (viewPager == null) helper = FragmentContainerHelper(this)
+
     val navigator = CommonNavigator(context)
     navigator.isAdjustMode = config.adjustMode
 
@@ -139,7 +141,7 @@ fun MagicIndicator.magicIndicator(
             titleView.normalColor = context.color(config.normalColor)
             titleView.selectedColor = context.color(config.selectedColor)
             titleView.setOnClickListener {
-                if (viewPager == null) helper.handlePageSelected(index)
+                if (viewPager == null) helper?.handlePageSelected(index)
                 viewPager?.setCurrentItem(index, false)
                 callback?.invoke(index)
             }
@@ -195,7 +197,9 @@ fun MagicIndicator.magicIndicator(
     config: IndicatorConfig = IndicatorConfig.DEFAULT,
     callback: ((Int) -> Unit)? = null,
 ) {
-    val helper = FragmentContainerHelper(this)
+    var helper: FragmentContainerHelper? = null
+    if (viewPager == null) helper = FragmentContainerHelper(this)
+
     val navigator = CommonNavigator(context)
     navigator.isAdjustMode = config.adjustMode
 
@@ -211,7 +215,7 @@ fun MagicIndicator.magicIndicator(
             titleView.normalColor = context.color(config.normalColor)
             titleView.selectedColor = context.color(config.selectedColor)
             titleView.setOnClickListener {
-                if (viewPager == null) helper.handlePageSelected(index)
+                if (viewPager == null) helper?.handlePageSelected(index)
                 viewPager?.setCurrentItem(index, false)
                 callback?.invoke(index)
             }

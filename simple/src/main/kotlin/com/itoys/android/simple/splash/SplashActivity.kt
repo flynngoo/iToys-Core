@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import com.itoys.android.R
 import com.itoys.android.core.activity.AbsMviActivity
 import com.itoys.android.core.crash.catchCrash
-import com.itoys.android.core.network.handlerException
 import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
@@ -14,13 +13,12 @@ import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import com.itoys.android.uikit.components.form.IFormResultCallback
 import com.itoys.android.uikit.components.loading.LottieLoadingDialog
-import com.itoys.android.uikit.components.toast.toast
+import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.uikit.model.RadioModel
 import com.itoys.android.utils.expansion.actOpen
 import com.itoys.android.utils.expansion.collect
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.dp2px
-import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.filter.DecimalDigitsInputFilter
 import com.itoys.android.utils.filter.EmojiFilter
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +43,11 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.idCard?.apply {
             setOwner(this@SplashActivity)
+
+            setUploadImageCallback(object : IUploadCallback {
+                override fun upload(mark: String, path: String) {
+                }
+            })
         }
 
         binding?.simpleImage?.loadRoundCornerImage(
@@ -67,10 +70,7 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     override fun addClickListen() {
         super.addClickListen()
         binding?.btnLoading?.doOnClick {
-            LottieLoadingDialog.show {
-                fm = supportFragmentManager
-                closeOnOverlayClick = true
-            }.showDialog()
+            self?.apply { SimpleListActivity::class.actOpen(this) }
         }
 
         binding?.btnList?.doOnClick {

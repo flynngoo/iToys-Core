@@ -1,5 +1,6 @@
 package com.itoys.android.simple.splash
 
+import android.os.Bundle
 import androidx.lifecycle.LifecycleOwner
 import com.itoys.android.R
 import com.itoys.android.core.mvi.AbsViewModel
@@ -8,6 +9,7 @@ import com.itoys.android.image.ImageMedia
 import com.itoys.android.image.selectFromAlbum
 import com.itoys.android.image.takePicture
 import com.itoys.android.image.uikit.dialog.ChooseImageDialog
+import com.itoys.android.scan.createQRCode
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +23,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
 ) : AbsViewModel<SplashIntent, SplashState>() {
+
+    override fun init(arguments: Bundle?) {
+        super.init(arguments)
+        "djqwoidjopqwkpd".createQRCode()
+    }
 
     /**
      * 图片选择回调

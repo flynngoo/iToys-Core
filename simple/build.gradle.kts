@@ -29,12 +29,15 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.fragment.ktx)
     implementation(libs.material)
+    implementation(libs.magic.indicator)
+    implementation(libs.title.bar)
     implementation(libs.mmkv)
     implementation(libs.retrofit)
 
     implementation(projects.iToysKit.core)
     implementation(projects.iToysKit.logcat)
     implementation(projects.iToysKit.image)
+    implementation(projects.iToysKit.scanning)
     implementation(projects.iToysKit.uikit)
     implementation(projects.iToysKit.utils)
 }

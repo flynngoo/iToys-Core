@@ -28,5 +28,9 @@
         <activity
             android:name="com.itoys.android.simple.list.SimpleListActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.itoys.android.simple.indicator.SimpleIndicatorActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

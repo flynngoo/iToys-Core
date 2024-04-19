@@ -8,12 +8,20 @@ package com.itoys.android.uikit.components.upload
 interface IUploadCallback {
 
     /**
-     * 点击上传
+     * 自定义图片选择
      */
-    fun upload(mark: String)
+    fun customImageSelection() {}
 
     /**
      * 删除
      */
-    fun delete(mark: String)
+    fun delete(mark: String) {}
+
+    /**
+     * 点击上传
+     *
+     * @param mark 标记
+     * @param path 路径
+     */
+    fun upload(mark: String, path: String)
 }

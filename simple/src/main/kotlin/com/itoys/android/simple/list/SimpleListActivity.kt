@@ -10,6 +10,7 @@ import com.itoys.android.databinding.SimpleLayoutFotterButtonBinding
 import com.itoys.android.databinding.SimpleLayoutHeaderTotalCountBinding
 import com.itoys.android.databinding.SimpleLayoutSearchBinding
 import com.itoys.android.uikit.components.input.SearchView
+import com.itoys.android.uikit.magicIndicator
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -35,6 +36,8 @@ class SimpleListActivity : AbsMviListActivity<SimpleListViewModel>() {
         )
 
         headerView.totalCount.text = "共100条"
+
+        headerView.indicator.magicIndicator(listOf("TAB1", "TAB2", "TAB3"))
         return headerView.root
     }
 

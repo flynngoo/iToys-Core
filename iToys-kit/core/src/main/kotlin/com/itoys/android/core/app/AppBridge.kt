@@ -15,7 +15,7 @@ object AppBridge {
      * [callback] The status of application changed callback.
      */
     fun addAppStatusChangeCallback(callback: IAppStatusChangedCallback) {
-        ActivityLifecycleImpl.addAppStatusChangedCallback(callback)
+        LifecycleMonitor.addAppStatusChangedCallback(callback)
     }
 
     /**
@@ -24,7 +24,7 @@ object AppBridge {
      * [callback] The status of application changed callback.
      */
     fun removeAppStatusChangeCallback(callback: IAppStatusChangedCallback) {
-        ActivityLifecycleImpl.removeAppStatusChangedCallback(callback)
+        LifecycleMonitor.removeAppStatusChangedCallback(callback)
     }
 
     /**

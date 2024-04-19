@@ -1,7 +1,6 @@
 package com.itoys.android.scan
 
 import android.graphics.Bitmap
-import com.itoys.android.utils.expansion.isBlank
 import com.king.zxing.util.CodeUtils
 
 /**
@@ -15,7 +14,7 @@ import com.king.zxing.util.CodeUtils
 fun String?.createQRCode(
     height: Int = 600
 ): Bitmap? {
-    if (isBlank()) return null
+    if (this.isNullOrEmpty()) return null
 
     return CodeUtils.createQRCode(this, height)
 }

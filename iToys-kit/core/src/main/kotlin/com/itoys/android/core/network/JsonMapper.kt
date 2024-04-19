@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.module.kotlin.jsonMapper
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import com.itoys.android.logcat.logcat
@@ -91,5 +92,24 @@ object JsonMapper {
         } catch (e: JacksonException) {
             null
         }
+    }
+
+    /**
+     * Merge two json strings.
+     */
+    fun mergeJson(json1: String, json2: String): HashMap<String, Any> {
+        val node1 = mapper.readTree(json1) as ObjectNode
+        val node2 = mapper.readTree(json2) as ObjectNode
+        node1.setAll(node2) as ObjectNode
+        val fields = node1.fields()
+
+        val map = hashMapOf<String, Any>()
+
+        while (fields.hasNext()) {
+            val field = fields.next()
+            map[field.key] = field.value.asText()
+        }
+
+        return map
     }
 }

@@ -52,7 +52,7 @@ abstract class AbsApp : Application() {
                 asyncInit(application = this@AbsApp)
             }
 
-            ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleMonitor())
+            ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleMonitor.INSTANCE)
         }
 
         globalInit(application = this@AbsApp)

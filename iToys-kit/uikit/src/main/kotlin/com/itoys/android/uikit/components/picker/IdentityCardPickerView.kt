@@ -106,7 +106,7 @@ class IdentityCardPickerView(
     /**
      * 人像页图片
      */
-    fun portraitPicture() = binding.portrait.imageUrl()
+    fun portraitPicture() = binding.portrait.image(required = true)
 
     /**
      * 设置国徽页图片
@@ -119,5 +119,5 @@ class IdentityCardPickerView(
     /**
      * 国徽页图片
      */
-    fun nationalEmblemPicture() = binding.nationalEmblem.imageUrl()
+    fun nationalEmblemPicture() = binding.nationalEmblem.image(required = true)
 }

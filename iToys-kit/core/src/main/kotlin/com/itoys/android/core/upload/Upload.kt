@@ -1,4 +1,4 @@
-package com.itoys.android.core.network.upload
+package com.itoys.android.core.upload
 
 import com.itoys.android.utils.expansion.toFile
 import com.itoys.android.utils.mmkv.MMKVOwner

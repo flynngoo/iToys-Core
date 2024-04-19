@@ -12,10 +12,10 @@ interface IAppStatusChangedCallback {
     /**
      * 回到前台
      */
-    fun onForeground(activity: Activity)
+    fun onForeground()
 
     /**
      * 回到后台
      */
-    fun onBackground(activity: Activity)
+    fun onBackground()
 }

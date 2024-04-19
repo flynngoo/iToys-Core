@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import com.itoys.android.scan.qrcode.QRCodeScanActivity
-import com.itoys.android.utils.expansion.stringExtra
 import com.king.camera.scan.CameraScan
 
 /**
@@ -20,7 +19,7 @@ class QRCodeResultContract : ActivityResultContract<Int, String?>() {
 
     override fun parseResult(resultCode: Int, intent: Intent?): String? {
         return if (resultCode == RESULT_OK) {
-            intent?.extras?.stringExtra(CameraScan.SCAN_RESULT)
+            intent?.extras?.getString(CameraScan.SCAN_RESULT)
         } else {
             ""
         }
