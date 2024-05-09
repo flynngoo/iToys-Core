@@ -153,6 +153,20 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
     }
 
     /**
+     * 封装请求action
+     */
+    fun <T> RequestAction<T>.handlerAction(
+        start: (Boolean) -> Unit,
+        success: (T?) -> Unit,
+        failure: (ResultException) -> Unit = ::handleFailure
+    ) {
+        start(start)
+        success(success)
+        failure(failure)
+        finish { sendLoading(LoadingUIState.Loading(showLoading = false)) }
+    }
+
+    /**
      * 默认处理请求失败
      */
     open fun handleFailure(failure: ResultException) {

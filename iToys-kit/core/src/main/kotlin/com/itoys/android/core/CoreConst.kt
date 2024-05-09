@@ -21,6 +21,8 @@ data class DictModel(
     var selected = false
 }
 
+fun DictModel?.dictKey() = this?.dictKey ?: 0
+
 fun Iterable<DictModel>.toDictValueList(): List<String?> = map(DictModel::dictValue)
 
 /**

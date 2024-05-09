@@ -17,7 +17,7 @@ afterEvaluate {
     extensions.configure<PublishingExtension>("publishing") {
         publications {
             create<MavenPublication>("plugin") {
-                from(components["debug"])
+                from(components["release"])
                 groupId = "com.itoys.android"
                 artifactId = project.name
                 version = publishLibraryVersion

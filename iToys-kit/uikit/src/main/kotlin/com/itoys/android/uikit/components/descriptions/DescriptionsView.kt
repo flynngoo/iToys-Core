@@ -147,9 +147,9 @@ class DescriptionsView(
     /**
      * 设置label
      */
-    fun setLabel(label: String) {
+    fun setLabel(label: String, withColon: Boolean = true) {
         this.label = label
-        labelView?.text = this.label
+        labelView?.text = withColon.then("$label:", label)
     }
 
     /**

@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import com.itoys.android.uikit.R
@@ -17,6 +18,7 @@ import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.sp2px
 import com.itoys.android.utils.expansion.then
+import com.itoys.android.utils.filter.EmojiFilter
 
 /**
  * @Author Gu Fanfan
@@ -30,6 +32,9 @@ class TextareaFormView(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+
+    /** 文本框 */
+    private var textareaEdit: AppCompatEditText? = null
 
     /** 最大长度 */
     private var maximum = 200
@@ -85,12 +90,16 @@ class TextareaFormView(
 
         val disable = ta.getBoolean(R.styleable.TextareaFormView_textareaDisable, false)
         val placeholder = ta.getString(R.styleable.TextareaFormView_textareaPlaceholder)
+        val enableEmoji = ta.getBoolean(R.styleable.TextareaFormView_textareaEnableEmoji, true)
+
+        textareaEdit = root.edit
         root.edit.isEnabled = !disable
         root.edit.setHint(placeholder)
 
         // 设置最大长度
         var filters = arrayOf<InputFilter>()
         filters = filters.plus(InputFilter.LengthFilter(maximum))
+        if (!enableEmoji) filters = filters.plus(EmojiFilter())
         root.edit.filters = filters
 
         // 监听文本框变化
@@ -117,4 +126,11 @@ class TextareaFormView(
      * 获取文本框内容
      */
     fun textarea() = textarea
+
+    /**
+     * 设置文本框内容
+     */
+    fun setTextarea(text: String) {
+        textareaEdit?.setText(text)
+    }
 }

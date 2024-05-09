@@ -8,13 +8,14 @@ import com.itoys.android.core.crash.catchCrash
 import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
+import com.itoys.android.simple.indicator.SimpleIndicatorActivity
 import com.itoys.android.simple.list.SimpleListActivity
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import com.itoys.android.uikit.components.form.IFormResultCallback
-import com.itoys.android.uikit.components.loading.LottieLoadingDialog
 import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.uikit.model.RadioModel
+import com.itoys.android.uikit.viewImage
 import com.itoys.android.utils.expansion.actOpen
 import com.itoys.android.utils.expansion.collect
 import com.itoys.android.utils.expansion.doOnClick
@@ -34,6 +35,11 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     override val viewModel: SplashViewModel? by viewModels()
 
     override fun createViewBinding() = SplashActivityLayoutBinding.inflate(layoutInflater)
+
+    /**
+     * 上传图片
+     */
+    private var uploadEnable = false
 
     /**
      * 测试radio
@@ -70,11 +76,16 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     override fun addClickListen() {
         super.addClickListen()
         binding?.btnLoading?.doOnClick {
-            self?.apply { SimpleListActivity::class.actOpen(this) }
+            self?.apply { SimpleIndicatorActivity::class.actOpen(this) }
         }
 
         binding?.btnList?.doOnClick {
             self?.apply { SimpleListActivity::class.actOpen(this) }
+        }
+
+        binding?.idCardBtn?.doOnClick {
+            uploadEnable = !uploadEnable
+            binding?.idCard?.setUploadEnable(uploadEnable)
         }
 
         binding?.submit?.doOnClick {
@@ -89,6 +100,12 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
                     }
                 }
             }
+        }
+
+        binding?.simpleImage?.doOnClick {
+            viewImage(
+                "http://dayu-img.uc.cn/columbus/img/oc/1002/b36ded73f33bc25e0dc4ec36bf620b0e.jpg"
+            )
         }
 
         binding?.shippingCost?.setResultCallback(object : IFormResultCallback() {
@@ -108,6 +125,7 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     }
 
     override fun addObserver() {
+        3
         super.addObserver()
         viewModel?.apply { collect(uiState, ::uiCollect) }
     }

@@ -6,6 +6,7 @@ import com.itoys.android.utils.expansion.landlinePhone
 import com.itoys.android.utils.expansion.roundToNearestTen
 import com.itoys.android.utils.expansion.simpleMobile
 import com.itoys.android.utils.expansion.string
+import com.itoys.android.utils.expansion.stripTrailingZeros
 import com.itoys.android.utils.expansion.toCNY
 import org.junit.Test
 
@@ -102,5 +103,25 @@ class UtilsTest {
         val emoji = "😀abs"
 
         println(emoji.isEmoji())
+    }
+
+    /**
+     * number to string
+     */
+    @Test
+    fun numberToString() {
+        val number: Float? = 0f
+
+        println("Result: " + number.string())
+    }
+
+    /**
+     * removeTrailingZeros
+     */
+    @Test
+    fun removeTrailingZeros() {
+        val number = 0
+
+        println("Result: " + number.stripTrailingZeros())
     }
 }

@@ -10,14 +10,21 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import cc.shinichi.library.ImagePreview
+import cc.shinichi.library.view.listener.OnDownloadListener
+import cc.shinichi.library.view.listener.OnImageDeleteListener
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.gyf.immersionbar.ImmersionBar
 import com.itoys.android.logcat.asLog
 import com.itoys.android.logcat.logcat
+import com.itoys.android.uikit.components.image.IViewImageCallback
 import com.itoys.android.uikit.components.recyclerview.StepsDecoration
 import com.itoys.android.uikit.components.indicator.IToysPagerTitleView
 import com.itoys.android.uikit.components.indicator.IndicatorConfig
+import com.itoys.android.uikit.components.toast.ToastyOrientation
+import com.itoys.android.uikit.components.toast.ToastyStatus
+import com.itoys.android.uikit.components.toast.toast
 import com.itoys.android.uikit.databinding.UikitLayoutItemStepsBinding
 import com.itoys.android.uikit.model.StepsModel
 import com.itoys.android.uikit.model.StepsStatus
@@ -38,6 +45,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Li
  * @Email fanfan.work@outlook.com
  * @Date 2023/10/31
  */
+
 /**
  * 沉浸式状态栏
  */
@@ -123,9 +131,7 @@ fun MagicIndicator.magicIndicator(
     config: IndicatorConfig = IndicatorConfig.DEFAULT,
     callback: ((Int) -> Unit)? = null,
 ) {
-    var helper: FragmentContainerHelper? = null
-    if (viewPager == null) helper = FragmentContainerHelper(this)
-
+    val helper = FragmentContainerHelper(this)
     val navigator = CommonNavigator(context)
     navigator.isAdjustMode = config.adjustMode
 
@@ -141,8 +147,9 @@ fun MagicIndicator.magicIndicator(
             titleView.normalColor = context.color(config.normalColor)
             titleView.selectedColor = context.color(config.selectedColor)
             titleView.setOnClickListener {
-                if (viewPager == null) helper?.handlePageSelected(index)
+                if (viewPager == null) helper.handlePageSelected(index)
                 viewPager?.setCurrentItem(index, false)
+                navigator.onPageScrolled(index, 0f, 0)
                 callback?.invoke(index)
             }
             return titleView
@@ -171,12 +178,10 @@ fun MagicIndicator.magicIndicator(
 fun ViewPager2?.bindMagicIndicator(magicIndicator: MagicIndicator) {
     this?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
             magicIndicator.onPageSelected(position)
         }
 
         override fun onPageScrollStateChanged(state: Int) {
-            super.onPageScrollStateChanged(state)
             magicIndicator.onPageScrollStateChanged(state)
         }
 
@@ -185,7 +190,6 @@ fun ViewPager2?.bindMagicIndicator(magicIndicator: MagicIndicator) {
             positionOffset: Float,
             positionOffsetPixels: Int
         ) {
-            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             magicIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels)
         }
     })
@@ -197,9 +201,7 @@ fun MagicIndicator.magicIndicator(
     config: IndicatorConfig = IndicatorConfig.DEFAULT,
     callback: ((Int) -> Unit)? = null,
 ) {
-    var helper: FragmentContainerHelper? = null
-    if (viewPager == null) helper = FragmentContainerHelper(this)
-
+    val helper = FragmentContainerHelper(this)
     val navigator = CommonNavigator(context)
     navigator.isAdjustMode = config.adjustMode
 
@@ -215,8 +217,9 @@ fun MagicIndicator.magicIndicator(
             titleView.normalColor = context.color(config.normalColor)
             titleView.selectedColor = context.color(config.selectedColor)
             titleView.setOnClickListener {
-                if (viewPager == null) helper?.handlePageSelected(index)
+                if (viewPager == null) helper.handlePageSelected(index)
                 viewPager?.setCurrentItem(index, false)
+                navigator.onPageScrolled(index, 0f, 0)
                 callback?.invoke(index)
             }
             return titleView
@@ -304,4 +307,92 @@ fun FragmentManager.removeFragmentByTag(tag: String) {
         trans.remove(fragment)
         trans.commit()
     }
+}
+
+fun Context.viewImage(
+    imageUrl: String,
+    folder: String = UikitInitialization.requireImageFolder(),
+    showDownload: Boolean = true,
+    showDelete: Boolean = true,
+    callback: IViewImageCallback? = null
+) {
+    ImagePreview.instance.setContext(this)
+        .setImage(imageUrl)
+        .setLoadStrategy(ImagePreview.LoadStrategy.NetworkAuto)
+        .setShowDownButton(showDownload)
+        .setShowDeleteButton(showDelete)
+        .setFolderName(folder)
+        .setZoomTransitionDuration(300)
+        .setEnableDragClose(true)
+        .setDownloadListener(object : OnDownloadListener() {
+            override fun onDownloadFailed(activity: Activity?, position: Int) {
+                toast(
+                    "图片下载失败",
+                    orientation = ToastyOrientation.Vertical,
+                    status = ToastyStatus.ERROR,
+                )
+                callback?.onDownloadFailed(activity, position)
+            }
+
+            override fun onDownloadStart(activity: Activity?, position: Int) {
+                toast("正在下载图片...")
+                callback?.onDownloadStart(activity, position)
+            }
+
+            override fun onDownloadSuccess(activity: Activity?, position: Int, targetPath: String) {
+                toast("图片已保存到: $targetPath")
+                callback?.onDownloadSuccess(activity, position, targetPath)
+            }
+        })
+        .setDeleteListener(object : OnImageDeleteListener {
+            override fun onDelete(position: Int) {
+                callback?.onDelete(position)
+            }
+        })
+        .setShowDeleteConfirmDialog(true)
+        .start()
+}
+
+fun Context.viewImage(
+    imageUrl: List<String>,
+    folder: String = UikitInitialization.requireImageFolder(),
+    showDownload: Boolean = true,
+    showDelete: Boolean = true,
+    callback: IViewImageCallback? = null
+) {
+    ImagePreview.instance.setContext(this)
+        .setImageList(imageUrl.toMutableList())
+        .setLoadStrategy(ImagePreview.LoadStrategy.NetworkAuto)
+        .setShowDownButton(showDownload)
+        .setShowDeleteButton(showDelete)
+        .setFolderName(folder)
+        .setZoomTransitionDuration(300)
+        .setEnableDragClose(true)
+        .setDownloadListener(object : OnDownloadListener() {
+            override fun onDownloadFailed(activity: Activity?, position: Int) {
+                callback?.onDownloadFailed(activity, position)
+                toast(
+                    "图片下载失败",
+                    orientation = ToastyOrientation.Vertical,
+                    status = ToastyStatus.ERROR,
+                )
+            }
+
+            override fun onDownloadStart(activity: Activity?, position: Int) {
+                callback?.onDownloadStart(activity, position)
+                toast("正在下载图片...")
+            }
+
+            override fun onDownloadSuccess(activity: Activity?, position: Int, targetPath: String) {
+                callback?.onDownloadSuccess(activity, position, targetPath)
+                toast("图片已保存到: $targetPath")
+            }
+        })
+        .setDeleteListener(object : OnImageDeleteListener {
+            override fun onDelete(position: Int) {
+                callback?.onDelete(position)
+            }
+        })
+        .setShowDeleteConfirmDialog(true)
+        .start()
 }

@@ -75,7 +75,7 @@ fun Double?.toFen(): Int {
     return (100 * this).toInt()
 }
 
-fun Int?.string(invalid: String = "") = (this != null).then(
+fun Number?.string(invalid: String = "0") = (this != null).then(
     "$this", invalid
 )
 
@@ -111,4 +111,14 @@ fun Int.padZeroes(targetLength: Int = 2): String {
     return "%0${targetLength}d".format(this)
 }
 
-fun Double.toCNY() = toString().toCNY()
+fun Number?.toCNY() = string().toCNY()
+
+fun Number?.stripTrailingZeros(): String {
+    val number = string()
+
+    return (number.contains('.')).then(
+        { number.removeSuffix("0").removeSuffix(".") },
+        { number })
+}
+
+fun Number?.withYuan() = "${stripTrailingZeros()} 元"

@@ -203,6 +203,8 @@
         <attr name="textareaMaximum" format="integer" />
         <!-- 禁用 -->
         <attr name="textareaDisable" format="boolean" />
+        <!-- 内容 允许输入表情 -->
+        <attr name="textareaEnableEmoji" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NavigationMenu">
@@ -330,5 +332,7 @@
         <attr name="uploadImageShowDelete" format="boolean" />
         <!-- 图片上传 tag -->
         <attr name="uploadImageMark" format="string" />
+        <!-- 图片上传 enable -->
+        <attr name="uploadImageEnable" format="boolean" />
     </declare-styleable>
 </resources>

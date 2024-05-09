@@ -2,15 +2,33 @@
     <!-- Base application theme. -->
     <style name="Theme.IToysAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/uikit_colorful_black</item>
+        <item name="appPrimaryColor">@color/uikit_colorful_42B2F9</item>
+        <item name="appPrimaryVariantColor">@color/uikit_colorful_98CBF9</item>
+        <item name="colorPrimary">?attr/appPrimaryColor</item>
+        <item name="colorPrimaryVariant">?attr/appPrimaryVariantColor</item>
+        <item name="colorOnPrimary">@color/uikit_colorful_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="appSecondaryColor">@color/uikit_colorful_42B2F9</item>
+        <item name="appSecondaryVariantColor">@color/uikit_colorful_98CBF9</item>
+        <item name="colorSecondary">?attr/appSecondaryColor</item>
+        <item name="colorSecondaryVariant">?attr/appSecondaryVariantColor</item>
         <item name="colorOnSecondary">@color/uikit_colorful_black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="textAppearanceSubtitle1">@style/IToysAndroid.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/IToysAndroid.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/IToysAndroid.Body1</item>
+        <item name="textAppearanceBody2">@style/IToysAndroid.Body2</item>
+        <item name="textAppearanceCaption">@style/IToysAndroid.Caption</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="appWindowBackground">@color/uikit_colorful_F7F8FA</item>
+        <item name="android:windowBackground">?attr/appWindowBackground</item>
+        <item name="appPrimaryTextColor">@color/uikit_colorful_1D2129</item>
+        <item name="appSecondaryTextColor">@color/uikit_colorful_1D2129</item>
+        <item name="appHintTextColor">@color/uikit_colorful_D4D8DB</item>
+        <item name="appPrimaryButtonBackground">@drawable/uikit_primary_button_background</item>
+        <!-- 移除recyclerview & scrollview 顶部和底部波纹 -->
+        <item name="android:overScrollHeader">@color/uikit_colorful_transparent</item>
+        <item name="android:overScrollFooter">@color/uikit_colorful_transparent</item>
+        <item name="android:overScrollMode">never</item>
     </style>
 </resources>

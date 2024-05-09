@@ -16,11 +16,14 @@ object UikitInitialization {
 
     private lateinit var APPLICATION: Application
 
+    private var imageFolder = ""
+
     /**
      * 初始化 uikit.
      */
-    fun initialization(application: Application) {
+    fun initialization(application: Application, imageFolder: String = "iToysAndroid") {
         this.APPLICATION = application
+        this.imageFolder = imageFolder
 
         // Brv 缺省页配置
         StateConfig.apply {
@@ -39,5 +42,9 @@ object UikitInitialization {
 
     fun requireApp(): Application {
         return APPLICATION
+    }
+
+    fun requireImageFolder(): String {
+        return imageFolder
     }
 }

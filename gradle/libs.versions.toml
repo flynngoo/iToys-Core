@@ -1,5 +1,5 @@
 [versions]
-activity-ktx = "1.8.2"
+activity-ktx = "1.9.0"
 agp = "8.2.2"
 androidx-test-ext-junit = "1.1.5"
 appcompat = "1.6.1"
@@ -12,12 +12,12 @@ calendar-haibin = "3.7.1"
 calendar-angcyo = "3.7.1.37"
 calendar-kiz = "2.4.1"
 chart-mp = "v3.1.0"
-core-ktx = "1.12.0"
+core-ktx = "1.13.0"
 constraint-layout = "2.1.4"
 cryptography = "0.2.0"
 captcha-verification = "1.6"
 captcha-separated = "1.3.4"
-datastore = "1.0.0"
+datastore = "1.1.0"
 espresso-core = "3.5.1"
 eventbus-live = "1.8.0"
 flexbox = "3.0.0"
@@ -27,10 +27,12 @@ glide = "4.15.1"
 glide-transformers = "1.0.6"
 hilt = "2.48.1"
 immersionbar = "3.2.2"
-itoys-image = "0.0.11-SNAPSHOT"
-itoys-logcat = "0.0.2-SNAPSHOT"
-itoys-uikit = "0.0.39-SNAPSHOT"
-itoys-utils = "0.0.18-SNAPSHOT"
+imageviewer = "1.0.7"
+itoys-image = "0.0.13-SNAPSHOT"
+itoys-logcat = "0.0.3-SNAPSHOT"
+itoys-scanning = "0.0.4-SNAPSHOT"
+itoys-uikit = "0.0.74-SNAPSHOT"
+itoys-utils = "0.0.22-SNAPSHOT"
 jackson = "2.13.5"
 junit = "4.13.2"
 keyboard-event = "1.0.9"
@@ -117,10 +119,11 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+imageviewer = { group = "com.itoys.android", name = "ImageViewPager", version.ref = "imageviewer" }
 itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-image" }
 itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys-logcat" }
 itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys-logcat" }
-itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-logcat" }
+itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-scanning" }
 itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-uikit" }
 itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-utils" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }

@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager
 import com.itoys.android.image.R
 import com.itoys.android.image.databinding.ImageDialogChooseImageBinding
 import com.itoys.android.image.loadImage
-import com.itoys.android.utils.expansion.dp2px
 import com.itoys.android.utils.expansion.gone
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
@@ -106,7 +105,7 @@ class ChooseImageDialog : DialogFragment() {
         } else {
             binding?.demoImage?.setImageDrawable(builder?.demoImageDrawable)
         }
-        if (builder?.demoImageUrl.isBlank() || builder?.demoImageDrawable == null) binding?.demoImage?.gone()
+        if (builder?.demoImageUrl.isBlank() && builder?.demoImageDrawable == null) binding?.demoImage?.gone()
         // 文字
         binding?.demoImageText?.text = builder?.demoImageText.invalid()
         if (builder?.demoImageText.isBlank()) binding?.demoImageText?.gone()
@@ -119,7 +118,7 @@ class ChooseImageDialog : DialogFragment() {
             builder?.callback?.selectFromAlbum()
             dismiss()
         }
-        binding?.cancel?.setOnClickListener { dismiss() }
+            binding?.cancel?.setOnClickListener { dismiss() }
     }
 
     /**

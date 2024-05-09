@@ -16,6 +16,8 @@ class SimpleIndicatorActivity : AbsActivity<SimpleActivityIndicatorBinding>() {
     override fun createViewBinding() = SimpleActivityIndicatorBinding.inflate(layoutInflater)
 
     override fun initialize(savedInstanceState: Bundle?) {
+        initializeMagicIndicator()
+
         // 禁止滑动
         binding?.navHostFragment?.isUserInputEnabled = false
         val adapter = PagerAdapter(this)

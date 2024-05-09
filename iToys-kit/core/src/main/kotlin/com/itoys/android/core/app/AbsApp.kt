@@ -40,7 +40,7 @@ abstract class AbsApp : Application() {
             // logger 初始化
             LoggerInitialization.initialization(application = this@AbsApp, debug = globalConfig.debug)
             // uikit 初始化
-            UikitInitialization.initialization(application = this@AbsApp)
+            UikitInitialization.initialization(application = this@AbsApp, imageFolder = globalConfig.imageFolder)
             // utils 初始化
             UtilsInitialization.initialization(application = this@AbsApp)
             // 注册activity 生命周期回调

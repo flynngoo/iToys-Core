@@ -187,7 +187,8 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
         // 没有更多
         // 1. 当前页码是最后一页( >= 总页数)
         // 2. 当前总条数(当前页码 * 每页数量) >= 总条数
-        val isNoMore = pager.current >= pager.pages || pager.current * pager.pageNum >= pager.total
+        // val isNoMore = pager.current >= pager.pages || pager.current * pager.pageNum >= pager.total
+        val isNoMore = pager.current * pager.pageNum >= pager.total
         if (isNoMore) {
             sendListState(ListUIState.NoMore)
         }

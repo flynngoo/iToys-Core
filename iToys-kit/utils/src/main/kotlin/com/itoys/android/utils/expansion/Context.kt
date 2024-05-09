@@ -25,6 +25,15 @@ fun Context.color(@ColorRes colorResId: Int): Int {
     return ContextCompat.getColor(this.applicationContext, colorResId)
 }
 
+/**
+ * 透明度颜色
+ */
+fun Context.color(@ColorRes colorResId: Int, alpha: Float): Int {
+    return ContextCompat.getColor(this.applicationContext, colorResId).let {
+        it and 0x00ffffff or ((alpha * 255).toInt() shl 24)
+    }
+}
+
 fun Context.drawable(@DrawableRes drawableResId: Int): Drawable? {
     return AppCompatResources.getDrawable(this, drawableResId)
 }

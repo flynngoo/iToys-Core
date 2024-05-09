@@ -16,6 +16,7 @@ class GlobalConfig(
     val resourcesHostUrl: String?,
     val networkDependency: INetworkDependency?,
     val globalHttpHandler: GlobalHttpHandler,
+    val imageFolder: String,
 ) {
 
     companion object {
@@ -43,6 +44,9 @@ class GlobalConfig(
 
         /** 全局http请求处理类 */
         private var globalHttpHandler: GlobalHttpHandler = GlobalHttpHandler.DEFAULT
+
+        /** 图片目录 */
+        private var imageFolder = "iToysAndroid"
 
         fun debugMode(debug: Boolean): Builder {
             this.debug = debug
@@ -106,6 +110,14 @@ class GlobalConfig(
             return this
         }
 
+        /**
+         * 配置图片文件夹
+         */
+        fun imageFolder(folder: String): Builder {
+            this.imageFolder = folder
+            return this
+        }
+
         fun build(): GlobalConfig {
             return GlobalConfig(
                 this.debug,
@@ -113,7 +125,8 @@ class GlobalConfig(
                 this.apiSuccessfulCode,
                 this.resourcesHostUrl,
                 this.networkDependency,
-                this.globalHttpHandler
+                this.globalHttpHandler,
+                this.imageFolder,
             )
         }
     }
