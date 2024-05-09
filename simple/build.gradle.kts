@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.retrofit)
 
     implementation(projects.iToysKit.core)
+    implementation(projects.iToysKit.hybrid)
     implementation(projects.iToysKit.logcat)
     implementation(projects.iToysKit.image)
     implementation(projects.iToysKit.scanning)

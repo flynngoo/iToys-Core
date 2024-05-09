@@ -33,6 +33,7 @@ itoys-logcat = "0.0.3-SNAPSHOT"
 itoys-scanning = "0.0.4-SNAPSHOT"
 itoys-uikit = "0.0.74-SNAPSHOT"
 itoys-utils = "0.0.22-SNAPSHOT"
+itoys-library-hybrid = "1.0.0"
 jackson = "2.13.5"
 junit = "4.13.2"
 keyboard-event = "1.0.9"
@@ -126,6 +127,7 @@ itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "it
 itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-scanning" }
 itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-uikit" }
 itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-utils" }
+itoys-library-hybrid = { group = "com.itoys.library", name = "lib-hybrid", version.ref = "itoys-library-hybrid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 magic-indicator = { group = "com.github.hackware1993", name = "MagicIndicator", version.ref = "magic-indicator" }
 mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }

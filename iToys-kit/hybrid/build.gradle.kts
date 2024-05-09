@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.itoys.android.library)
+    alias(libs.plugins.itoys.android.therouter)
 }
 
 apply(from = "${rootDir}/publish-maven.gradle.kts")
 
 android {
-    namespace = "com.itoys.android.location"
+    namespace = "com.itoys.android.hybrid"
 }
 
 dependencies {
@@ -15,6 +16,12 @@ dependencies {
     implementation(libs.fragment.ktx)
     implementation(libs.material)
 
-    implementation(libs.location.amap)
+    implementation(libs.eventbus.live)
     implementation(libs.permissions)
+
+    implementation(libs.itoys.image)
+    implementation(libs.itoys.logcat)
+    implementation(libs.itoys.utils)
+
+    implementation(libs.itoys.library.hybrid)
 }

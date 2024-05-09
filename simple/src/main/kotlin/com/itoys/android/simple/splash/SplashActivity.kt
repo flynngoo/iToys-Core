@@ -6,6 +6,7 @@ import com.itoys.android.R
 import com.itoys.android.core.activity.AbsMviActivity
 import com.itoys.android.core.crash.catchCrash
 import com.itoys.android.databinding.SplashActivityLayoutBinding
+import com.itoys.android.hybrid.HybridRouter
 import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
 import com.itoys.android.simple.indicator.SimpleIndicatorActivity
@@ -76,7 +77,7 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     override fun addClickListen() {
         super.addClickListen()
         binding?.btnLoading?.doOnClick {
-            self?.apply { SimpleIndicatorActivity::class.actOpen(this) }
+            self?.apply { HybridRouter.navHybrid("https://www.baidu.com") }
         }
 
         binding?.btnList?.doOnClick {

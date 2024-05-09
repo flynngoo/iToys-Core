@@ -12,3 +12,6 @@
 
 # 打包Core库
 #./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.49-SNAPSHOT
+
+# hybrid
+#./gradlew publish -PpublishLibraryName=hybrid -PpublishLibraryVersion=0.0.1-SNAPSHOT

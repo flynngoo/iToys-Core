@@ -1,4 +1,3 @@
-import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.gradle.LibraryExtension
 import com.itoys.android.plugin.AppConfig
 import com.itoys.android.plugin.PluginIds
@@ -6,8 +5,6 @@ import com.itoys.android.plugin.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
-import java.io.File
 
 /**
  * @Author Gu Fanfan

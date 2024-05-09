@@ -8,8 +8,8 @@ configure<PublishingExtension> {
     }
 }
 
-val publishLibraryName: String by project
-val publishLibraryVersion: String by project
+val publishLibraryName: String? by project
+val publishLibraryVersion: String? by project
 
 afterEvaluate {
     if (publishLibraryName != null && publishLibraryName != project.name) return@afterEvaluate
