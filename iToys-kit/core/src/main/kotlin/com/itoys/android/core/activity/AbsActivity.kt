@@ -2,8 +2,6 @@ package com.itoys.android.core.activity
 
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.ViewGroup
-import android.view.Window
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding

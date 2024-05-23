@@ -1,8 +1,10 @@
 package com.itoys.android.uikit.components.dialog
 
+import android.text.Html
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.text.HtmlCompat
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.databinding.UikitDialogLayoutNoticeBinding
 import com.itoys.android.utils.expansion.color
@@ -42,7 +44,7 @@ class IToysNoticeDialog : IToysDialog<UikitDialogLayoutNoticeBinding, IToysNotic
     override fun initialize() {
         binding?.title?.text = builder.title
         binding?.title?.visibility = (builder.title.isBlank()).then(View.GONE, View.VISIBLE)
-        binding?.content?.text = builder.content
+        binding?.content?.text = HtmlCompat.fromHtml(builder.content, HtmlCompat.FROM_HTML_MODE_LEGACY)
         binding?.content?.movementMethod = ScrollingMovementMethod.getInstance()
         binding?.content?.visibility = (builder.content.isBlank()).then(View.GONE, View.VISIBLE)
 

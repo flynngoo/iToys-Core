@@ -1,5 +1,6 @@
 package com.itoys.android.core.mvi
 
+import com.itoys.android.core.network.ResultException
 import com.itoys.android.uikit.components.snack.Prompt
 import com.itoys.android.uikit.components.toast.ToastyOrientation
 import com.itoys.android.uikit.components.toast.ToastyStatus
@@ -30,8 +31,6 @@ sealed class LoadingUIState {
  */
 sealed class ToastUIState {
 
-    data object Idle : ToastUIState()
-
     data class Toast(
         val message: String,
         val orientation: ToastyOrientation = ToastyOrientation.Horizontal,
@@ -51,6 +50,14 @@ sealed class ToastUIState {
     ) : ToastUIState()
 
     data class BottomSnack(val message: String, val prompt: Prompt? = null) : ToastUIState()
+}
+
+/**
+ * 错误状态回调
+ */
+sealed class FailureUIState {
+
+    data class Failure(val throwable: ResultException) : FailureUIState()
 }
 
 sealed class ListUIState : IUIState {

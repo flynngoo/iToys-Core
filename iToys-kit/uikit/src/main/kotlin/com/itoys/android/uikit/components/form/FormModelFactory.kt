@@ -1,6 +1,7 @@
 package com.itoys.android.uikit.components.form
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
@@ -70,7 +71,7 @@ object FormModelFactory {
     fun setCallback(
         contentView: View?,
         @FormModel formModel: Int,
-        callback: IFormResultCallback,
+        callback: IFormResultCallback?,
     ) {
         if (contentView == null) return
 
@@ -81,8 +82,11 @@ object FormModelFactory {
 
                 edit.addTextChangedListener {
                     val text = it.toString()
-                    callback.result(text)
-                    callback.isAccurate(text.size() > 0)
+
+                    if (edit.isFocused) {
+                        callback?.result(text)
+                    }
+                    callback?.isAccurate(text.size() > 0)
                 }
             }
 
@@ -91,8 +95,11 @@ object FormModelFactory {
 
                 edit.addTextChangedListener {
                     val mobile = it.toString()
-                    callback.result(mobile)
-                    callback.isAccurate(mobile.simpleMobile() || mobile.landlinePhone())
+
+                    if (edit.isFocused) {
+                        callback?.result(mobile)
+                    }
+                    callback?.isAccurate(mobile.simpleMobile() || mobile.landlinePhone())
                 }
             }
 
@@ -101,8 +108,11 @@ object FormModelFactory {
 
                 edit.addTextChangedListener {
                     val idCard = it.toString()
-                    callback.result(idCard)
-                    callback.isAccurate(idCard.idCard())
+
+                    if (edit.isFocused) {
+                        callback?.result(idCard)
+                    }
+                    callback?.isAccurate(idCard.idCard())
                 }
             }
 
@@ -111,8 +121,11 @@ object FormModelFactory {
 
                 edit.addTextChangedListener {
                     val email = it.toString()
-                    callback.result(email)
-                    callback.isAccurate(email.email())
+
+                    if (edit.isFocused) {
+                        callback?.result(email)
+                    }
+                    callback?.isAccurate(email.email())
                 }
             }
 
@@ -129,13 +142,15 @@ object FormModelFactory {
             FormModel.SELECT -> {
                 val selectView: ConstraintLayout = contentView.findViewById(R.id.form_select)
                 val selectBinding = UikitLayoutFormSelectBinding.bind(selectView)
-                selectBinding.formSelect.doOnClick { callback.click() }
+                selectBinding.formSelect.doOnClick { callback?.click() }
+
+                selectBinding.suffixIcon.doOnClick { callback?.suffixIconClick() }
             }
 
             FormModel.RADIO -> {
                 val formRadio: RadioGroup = contentView.findViewById(R.id.form_radio)
                 formRadio.setOnCheckedChangeListener { _, checkedId ->
-                    callback.resultId(checkedId)
+                    callback?.resultId(checkedId)
                 }
             }
 
@@ -421,6 +436,23 @@ object FormModelFactory {
             radioLayoutParams.marginStart = 6.dp2px()
             radioLayoutParams.leftMargin = 6.dp2px()
             radioGroup.addView(radioView.root, radioLayoutParams)
+        }
+    }
+
+    /**
+     * 修改Select Model Suffix
+     */
+    fun changeSelectSuffix(
+        contentView: View?,
+        suffixIcon: Drawable?,
+    ) {
+        if (contentView == null) return
+
+        val selectView: ConstraintLayout = contentView.findViewById(R.id.form_select)
+        val selectBinding = UikitLayoutFormSelectBinding.bind(selectView)
+
+        if (suffixIcon != null) {
+            selectBinding.suffixIcon.setImageDrawable(suffixIcon)
         }
     }
 }

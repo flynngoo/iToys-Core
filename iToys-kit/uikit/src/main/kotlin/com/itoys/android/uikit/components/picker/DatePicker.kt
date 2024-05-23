@@ -8,8 +8,10 @@ import com.itoys.android.uikit.R
 import com.itoys.android.uikit.components.dialog.AbsDialog
 import com.itoys.android.uikit.components.dialog.IToysDialog
 import com.itoys.android.uikit.databinding.UikitLayoutPickerDateBinding
+import com.itoys.android.utils.expansion.color
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.isNotBlank
+import com.itoys.android.utils.expansion.then
 
 /**
  * @Author Gu Fanfan
@@ -55,11 +57,14 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
 
         var dateMode = DateMode.YEAR_MONTH_DAY
 
+        /** 从今天开始 */
+        var fromToday = true
+
         /** 起始年份 */
         var startYear = 1900
 
         /** 默认年份 */
-        var defaultYear = 2000
+        var defaultYear = 0
 
         /** 回调 */
         var callback: IDateCallback? = null
@@ -76,8 +81,7 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
     /** 日 */
     private var selectDay = 0
 
-    override fun createViewBinding(inflater: LayoutInflater) =
-        UikitLayoutPickerDateBinding.inflate(inflater)
+    override fun createViewBinding(inflater: LayoutInflater) = UikitLayoutPickerDateBinding.inflate(inflater)
 
     override fun initialize() {
         if (builder.title.isNotBlank()) {
@@ -86,13 +90,39 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
         binding?.dateWheel?.apply {
             setDateMode(builder.dateMode)
             setDateLabel("年", "月", "日")
+            yearLabelView.setTextColor(context.color(R.color.uikit_colorful_333333))
+            monthLabelView.setTextColor(context.color(R.color.uikit_colorful_333333))
+            dayLabelView.setTextColor(context.color(R.color.uikit_colorful_333333))
             setOnDateSelectedListener { year, month, day ->
                 selectYear = year
                 selectMonth = month
                 selectDay = day
             }
-            setRange(DateEntity.target(builder.startYear, 1, 1), DateEntity.today())
-            setDefaultValue(DateEntity.target(builder.defaultYear, 1, 1))
+
+            val startingDate: DateEntity
+            val endingDate: DateEntity
+
+            when {
+                builder.fromToday -> {
+                    startingDate = DateEntity.today()
+                    endingDate = DateEntity.target(startingDate.year + 20, 12, 31)
+                }
+
+                else -> {
+                    startingDate = DateEntity.target(builder.startYear, 1, 1)
+                    endingDate = DateEntity.today()
+                }
+            }
+            setRange(startingDate, endingDate)
+
+            setDefaultValue(
+                DateEntity.target(
+                    (builder.defaultYear > 0).then(
+                        builder.defaultYear,
+                        startingDate.year
+                    ), startingDate.month, startingDate.day
+                )
+            )
 
             selectYear = selectedYear
             selectMonth = selectedMonth

@@ -1,6 +1,7 @@
 package com.itoys.android.utils
 
 import android.app.ActivityManager
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -11,8 +12,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Process
 import androidx.core.content.FileProvider
+import com.itoys.android.utils.expansion.clipboardManager
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.locationManager
+import com.itoys.android.utils.expansion.textServicesManager
 import com.itoys.android.utils.expansion.then
 import java.io.File
 
@@ -244,5 +247,14 @@ object SysUtils {
         val network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
         return gps || network
+    }
+
+    /**
+     * 复制到剪切板
+     */
+    @JvmStatic
+    fun copyToClipboard(context: Context, text: String, label: String = "IToys-Clipboard") {
+        val clipData = ClipData.newPlainText(label, text)
+        context.clipboardManager?.setPrimaryClip(clipData)
     }
 }

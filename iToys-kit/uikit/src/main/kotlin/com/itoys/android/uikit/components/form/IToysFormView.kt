@@ -24,6 +24,7 @@ import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.then
+import com.itoys.android.utils.expansion.visible
 
 /**
  * @Author Gu Fanfan
@@ -183,6 +184,8 @@ class IToysFormView(
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
+    private var formBinding: UikitLayoutFormBinding? = null
+
     init {
         initView(attrs)
     }
@@ -197,6 +200,7 @@ class IToysFormView(
         minHeight = ta.getDimensionPixelOffset(R.styleable.IToysFormView_formMinHeight, 54.dp2px())
         // 表单
         val formView = addFormView()
+        formBinding = formView
 
         // 核查
         autoCheck = ta.getBoolean(R.styleable.IToysFormView_formAutoCheck, autoCheck)
@@ -421,6 +425,22 @@ class IToysFormView(
     }
 
     /**
+     * 显示suffix
+     */
+    fun showSuffix(
+        suffixIcon: Drawable? = null
+    ) {
+        this.suffixIcon = suffixIcon
+
+        when (formModel) {
+            FormModel.SELECT -> {
+                FormModelFactory.changeSelectSuffix(contentView, suffixIcon)
+            }
+            else -> formBinding?.suffixIcon?.visible()
+        }
+    }
+
+    /**
      * 设置分割线
      */
     private fun setSeparator(root: UikitLayoutFormBinding, ta: TypedArray) {
@@ -534,7 +554,7 @@ class IToysFormView(
     /**
      * 设置result 回调
      */
-    fun setResultCallback(resultCallback: IFormResultCallback) {
+    fun setResultCallback(resultCallback: IFormResultCallback?) {
         this.resultCallback = resultCallback
         FormModelFactory.setCallback(contentView, formModel, resultCallback)
     }

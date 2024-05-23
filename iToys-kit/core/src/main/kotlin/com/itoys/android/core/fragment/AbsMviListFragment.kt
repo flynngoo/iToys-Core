@@ -48,12 +48,17 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
         setupList()
     }
 
+    override fun initData() {
+        super.initData()
+        viewModel?.sendListIntent(ListUIIntent.Refresh)
+    }
+
     override fun addClickListen() {
         binding?.page?.apply {
             // 刷新
             setEnableRefresh(enableRefresh)
             if (enableRefresh) {
-                onRefresh { viewModel?.sendListIntent(ListUIIntent.Refresh) }.refresh()
+                onRefresh { viewModel?.sendListIntent(ListUIIntent.Refresh) }
             }
 
             // 加载更多
@@ -89,7 +94,7 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
 
             ListUIState.ShowEmpty -> binding?.page?.showEmpty()
 
-            else -> {}
+            else -> { /* 空实现 */ }
         }
     }
 

@@ -2,7 +2,6 @@ package com.itoys.android.core.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.itoys.android.core.mvi.AbsViewModel
 import com.itoys.android.core.mvi.IUIIntent
@@ -14,7 +13,6 @@ import com.itoys.android.uikit.components.snack.TopSnackBar
 import com.itoys.android.uikit.components.snack.makeSnack
 import com.itoys.android.uikit.components.toast.toast
 import com.itoys.android.utils.expansion.collect
-import kotlinx.coroutines.launch
 
 /**
  * @Author Gu Fanfan
@@ -62,7 +60,7 @@ abstract class AbsMviFragment<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
         when (loading) {
             is LoadingUIState.Loading -> showLoading(loading.showLoading)
 
-            else -> {}
+            else -> { /* 空实现 */ }
         }
     }
 
@@ -116,9 +114,7 @@ abstract class AbsMviFragment<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
                 )
             }
 
-            else -> {
-                /* 空实现 */
-            }
+            else -> { /* 空实现 */ }
         }
     }
 }

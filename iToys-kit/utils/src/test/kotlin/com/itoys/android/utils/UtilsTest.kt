@@ -90,7 +90,7 @@ class UtilsTest {
 
     @Test
     fun toCNY() {
-        val amount = "666"
+        val amount = "9999999990"
 
         println("$amount CNY is ${amount.toCNY()}")
     }

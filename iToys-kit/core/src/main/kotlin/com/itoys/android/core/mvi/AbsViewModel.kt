@@ -42,6 +42,10 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
     private val _toastState: Channel<ToastUIState> = Channel()
     val toastState: Flow<ToastUIState> = _toastState.receiveAsFlow()
 
+    /** failure state */
+    private val _failureState: Channel<FailureUIState> = Channel()
+    val failureState: Flow<FailureUIState> = _failureState.receiveAsFlow()
+
     init {
         launchOnUI {
             uiIntentFlow.collect { intent -> handlerIntent(intent) }
@@ -100,6 +104,13 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
      */
     protected open fun sendToast(toast: ToastUIState) {
         launchOnUI { _toastState.send(toast) }
+    }
+
+    /**
+     * 发送Failure
+     */
+    protected open fun sendFailure(failure: FailureUIState) {
+        launchOnUI { _failureState.send(failure) }
     }
 
     /**
@@ -172,6 +183,7 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
     open fun handleFailure(failure: ResultException) {
         val msg = failure.msg.invalid("请求出现异常")
         sendToast(ToastUIState.Toast(msg))
+        sendFailure(FailureUIState.Failure(failure))
     }
 
     override fun onCleared() {

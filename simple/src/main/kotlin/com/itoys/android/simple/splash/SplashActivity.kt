@@ -9,7 +9,7 @@ import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.hybrid.HybridRouter
 import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
-import com.itoys.android.simple.indicator.SimpleIndicatorActivity
+import com.itoys.android.simple.form.SimpleFormActivity
 import com.itoys.android.simple.list.SimpleListActivity
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
@@ -63,15 +63,11 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
             cornerType = RoundCornerType.DIAGONAL_FROM_TOP_RIGHT
         )
 
-        binding?.textareaForm?.setContent(getString(R.string.uikit_long_text))
-        binding?.emoji?.filters = arrayOf(EmojiFilter())
-        binding?.amount?.filters = arrayOf(DecimalDigitsInputFilter(2))
         binding?.radio?.setContent(listOf(
             RadioModel(1, 1, "男"),
             RadioModel(2, 2, "女"),
             RadioModel(3, 3, "其他"),
         ))
-        binding?.identityCard?.setOwner(this@SplashActivity)
     }
 
     override fun addClickListen() {
@@ -89,7 +85,7 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
             binding?.idCard?.setUploadEnable(uploadEnable)
         }
 
-        binding?.submit?.doOnClick {
+        binding?.noticeDialog?.doOnClick {
             IToysNoticeDialog.show {
                 fm = supportFragmentManager
                 title = "这是标题这是标题这是标题这是标题"
@@ -103,17 +99,13 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
             }
         }
 
+        binding?.form?.doOnClick { SimpleFormActivity::class.actOpen(this) }
+
         binding?.simpleImage?.doOnClick {
             viewImage(
                 "http://dayu-img.uc.cn/columbus/img/oc/1002/b36ded73f33bc25e0dc4ec36bf620b0e.jpg"
             )
         }
-
-        binding?.shippingCost?.setResultCallback(object : IFormResultCallback() {
-            override fun result(result: String) {
-                super.result(result)
-            }
-        })
 
         binding?.radioEnable?.doOnClick {
             radioEnable = !radioEnable

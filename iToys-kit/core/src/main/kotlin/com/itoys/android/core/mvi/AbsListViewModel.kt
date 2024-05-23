@@ -222,5 +222,6 @@ abstract class AbsListViewModel<I : IUIIntent, S : IUIState> : AbsViewModel<I, S
         parsePager(null, intent, isSuccessful = false)
         val msg = failure.msg.invalid("请求出现异常")
         sendToast(ToastUIState.Toast(msg))
+        sendFailure(FailureUIState.Failure(failure))
     }
 }

@@ -195,43 +195,42 @@ val numberDigitMap = mapOf(
 // 定义汉字数字和单位
 val numbersCN = arrayOf("零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖")
 // 单位映射
-val currencyUnits = listOf("元", "拾", "佰", "仟", "万", "亿")
+val currencyUnits = listOf("元", "拾", "佰", "仟", "万", "拾", "佰", "仟", "亿", "拾", "佰", "仟")
 
 fun String.toCNY(): String {
     val amount = BigDecimal(this)
 
     // 将金额拆解为整数和小数部分
-    val wholePart = amount.toInt()
-    var wholePartCopy = wholePart
+    val wholePart = amount.toLong()
     val decimalPart = amount.subtract(BigDecimal(wholePart)).setScale(2, RoundingMode.HALF_UP).multiply(BigDecimal("100")).toInt()
 
     val sb = StringBuilder()
 
-    if (wholePart == 0 && decimalPart == 0) {
-        sb.append(numbersCN[0]).append(currencyUnits[0])
+    if (wholePart == 0L && decimalPart == 0) {
+        sb.insert(0, "${numbersCN[0]}${currencyUnits[0]}")
+        return sb.toString()
     }
+
+    // 标记是否上一位数字为零
+    var lastNonZero = false
 
     // 处理整数部分
-    var index = 0
-    // 标记是否上一位数字为零
-    var nonZero = false
+    if (wholePart != 0L) {
+        val wholePartReversed = wholePart.string().reversed()
+        for (index in wholePartReversed.indices) {
+            val digit = wholePartReversed[index].toString().toInt()
+            val unitDigit = index % 12
 
-    while (wholePartCopy != 0) {
-        val digit = wholePartCopy % 10
+            insertChineseYuan(wholePart, sb, digit, unitDigit)
 
-        if (digit != 0) {
-            sb.insert(0, "${numbersCN[digit]}${currencyUnits[index]}")
+            if (digit == 0 && lastNonZero) {
+                sb.insert(0, numbersCN[digit])
+            }
+
+            lastNonZero  = digit != 0
         }
 
-        if (digit == 0 && nonZero) {
-            sb.insert(0, numbersCN[digit])
-        }
-        nonZero = digit != 0
-        wholePartCopy /= 10
-        index++
-    }
-
-    if (sb.isNotEmpty() && !sb.endsWith(currencyUnits[0])) {
+        // 添加元
         sb.append(currencyUnits[0])
     }
 
@@ -251,4 +250,23 @@ fun String.toCNY(): String {
     }
 
     return sb.toString()
+}
+
+/**
+ * 将数字转换为中文数字
+ */
+private fun insertChineseYuan(wholePart: Long, sb: StringBuilder, digit: Int, unitDigit: Int) {
+    when {
+        digit != 0 -> sb.insert(0, chineseYuan(digit, unitDigit))
+        unitDigit == 4 && wholePart < 100000000 -> sb.insert(0, chineseYuan(digit, unitDigit))
+        unitDigit == 8 -> sb.insert(0, chineseYuan(digit, unitDigit))
+    }
+}
+
+private fun chineseYuan(digit: Int, unitDigit: Int): String {
+    return when {
+        digit == 0 && unitDigit > 0 -> currencyUnits[unitDigit]
+        digit > 0 && unitDigit == 0 -> numbersCN[digit]
+        else -> "${numbersCN[digit]}${currencyUnits[unitDigit]}"
+    }
 }

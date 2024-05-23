@@ -3,6 +3,7 @@ package com.itoys.android.core.activity
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.itoys.android.core.mvi.AbsViewModel
+import com.itoys.android.core.mvi.FailureUIState
 import com.itoys.android.core.mvi.IUIIntent
 import com.itoys.android.core.mvi.IUIState
 import com.itoys.android.core.mvi.LoadingUIState
@@ -49,6 +50,7 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
         viewModel?.apply {
             collect(loadingState, ::loading)
             collect(toastState, ::toast)
+            collect(failureState, ::failure)
         }
     }
 
@@ -59,14 +61,14 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
         when (loading) {
             is LoadingUIState.Loading -> showLoading(loading.showLoading)
 
-            else -> {}
+            else -> { /* 空实现 */ }
         }
     }
 
     /**
      * loading
      */
-    open fun showLoading(show: Boolean) {
+    protected open fun showLoading(show: Boolean) {
         if (show) {
             if (loadingDialog == null) {
                 loadingDialog = LottieLoadingDialog.show {
@@ -113,9 +115,20 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
                 )
             }
 
-            else -> {
-                /* 空实现 */
-            }
+            else -> { /* 空实现 */ }
         }
+    }
+
+    /**
+     * failure
+     *
+     * 可用作所有错误回调
+     * 例如：请求接口前button isEnable = false
+     * 请求失败后button isEnable = true
+     *
+     * @param failure 失败状态
+     */
+    protected open fun failure(failure: FailureUIState?) {
+        /* 空实现 */
     }
 }

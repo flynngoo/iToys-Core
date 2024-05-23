@@ -5,13 +5,13 @@
 #./gradlew publish -PpublishLibraryName=logcat -PpublishLibraryVersion=0.0.3-SNAPSHOT
 
 # 打包UI库
-#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.0.75-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.0.82-SNAPSHOT
 
 # 打包工具类库
-#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.22-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.25-SNAPSHOT
 
 # 打包Core库
-#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.49-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.51-SNAPSHOT
 
 # hybrid
 #./gradlew publish -PpublishLibraryName=hybrid -PpublishLibraryVersion=0.0.1-SNAPSHOT

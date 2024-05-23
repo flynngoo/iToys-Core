@@ -28,6 +28,7 @@ glide-transformers = "1.0.6"
 hilt = "2.48.1"
 immersionbar = "3.2.2"
 imageviewer = "1.0.7"
+itoys-hybrid = "0.0.1-SNAPSHOT"
 itoys-image = "0.0.13-SNAPSHOT"
 itoys-logcat = "0.0.3-SNAPSHOT"
 itoys-scanning = "0.0.4-SNAPSHOT"
@@ -121,6 +122,7 @@ luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 imageviewer = { group = "com.itoys.android", name = "ImageViewPager", version.ref = "imageviewer" }
+itoys-hybrid = { group = "com.itoys.android", name = "hybrid", version.ref = "itoys-hybrid" }
 itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-image" }
 itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys-logcat" }
 itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys-logcat" }
