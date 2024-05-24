@@ -20,4 +20,9 @@ object CoreConfig {
      * 搜索倒计时时间毫秒
      */
     var searchCountdownTimerFuture = 1500L
+
+    /**
+     * 默认api接口错误消息
+     */
+    var defaultApiErrorMsg = "请求接口出现异常, 请稍后重试"
 }

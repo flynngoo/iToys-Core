@@ -11,7 +11,7 @@
 #./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.25-SNAPSHOT
 
 # 打包Core库
-#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.51-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.52-SNAPSHOT
 
 # hybrid
 #./gradlew publish -PpublishLibraryName=hybrid -PpublishLibraryVersion=0.0.1-SNAPSHOT

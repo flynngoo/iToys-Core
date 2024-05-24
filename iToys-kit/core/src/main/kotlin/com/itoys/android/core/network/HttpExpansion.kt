@@ -1,6 +1,7 @@
 package com.itoys.android.core.network
 
 import com.google.gson.JsonParseException
+import com.itoys.android.core.CoreConfig
 import com.itoys.android.utils.expansion.invalid
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -88,7 +89,7 @@ fun Throwable.handlerException(): ResultException {
                 }
 
                 ApiResultCode.SERVICE_UNAVAILABLE -> {
-                    ResultException(code(), "请求接口出现异常, 请稍后重试")
+                    ResultException(code(), CoreConfig.defaultApiErrorMsg)
                 }
 
                 ApiResultCode.RESULT_FAILED -> {
@@ -105,7 +106,7 @@ fun Throwable.handlerException(): ResultException {
                     )
                 }
 
-                else -> ResultException(code(), "请求接口出现异常, 请稍后重试")
+                else -> ResultException(code(), CoreConfig.defaultApiErrorMsg)
             }
         }
 

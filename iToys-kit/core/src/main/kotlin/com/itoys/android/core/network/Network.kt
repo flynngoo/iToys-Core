@@ -3,8 +3,11 @@ package com.itoys.android.core.network
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.itoys.android.core.CoreConfig
 import com.itoys.android.logcat.asLog
 import com.itoys.android.logcat.logcat
+import com.itoys.android.utils.expansion.isBlank
+import com.itoys.android.utils.expansion.size
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -72,7 +75,13 @@ fun <T> BaseEntity<T>?.result() : T? {
         return this?.data
     }
 
-    throw ResultException(this?.errorCode ?: 0, this?.msg ?: "请求接口出现异常, 请稍后重试")
+    val errorMsg = if (this?.msg.isBlank() || this?.msg.size() > 100) {
+        CoreConfig.defaultApiErrorMsg
+    } else {
+        this?.msg
+    }
+
+    throw ResultException(this?.errorCode ?: 0, errorMsg)
 }
 
 fun <T> BaseListEntity<T>?.result() : List<T>? {
@@ -80,7 +89,13 @@ fun <T> BaseListEntity<T>?.result() : List<T>? {
         return this?.data
     }
 
-    throw ResultException(this?.errorCode ?: 0, this?.msg ?: "请求接口出现异常, 请稍后重试")
+    val errorMsg = if (this?.msg.isBlank() || this?.msg.size() > 100) {
+        CoreConfig.defaultApiErrorMsg
+    } else {
+        this?.msg
+    }
+
+    throw ResultException(this?.errorCode ?: 0, errorMsg)
 }
 
 fun <T> BasePageEntity<T>?.result() : PageEntity<T>? {
@@ -88,7 +103,13 @@ fun <T> BasePageEntity<T>?.result() : PageEntity<T>? {
         return this?.data
     }
 
-    throw ResultException(this?.errorCode ?: 0, this?.msg ?: "请求接口出现异常, 请稍后重试")
+    val errorMsg = if (this?.msg.isBlank() || this?.msg.size() > 100) {
+        CoreConfig.defaultApiErrorMsg
+    } else {
+        this?.msg
+    }
+
+    throw ResultException(this?.errorCode ?: 0, errorMsg)
 }
 
 /**
