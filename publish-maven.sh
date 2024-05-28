@@ -8,7 +8,7 @@
 #./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.0.82-SNAPSHOT
 
 # 打包工具类库
-#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.25-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.26-SNAPSHOT
 
 # 打包Core库
 #./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.52-SNAPSHOT
