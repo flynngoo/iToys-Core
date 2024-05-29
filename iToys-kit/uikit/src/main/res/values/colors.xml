@@ -10,6 +10,7 @@
     <color name="uikit_colorful_white">#FFFFFFFF</color>
     <color name="uikit_colorful_percent60_white">#66FFFFFF</color>
     <color name="uikit_colorful_black">#FF000000</color>
+    <color name="uikit_colorful_percent8_black">#EB000000</color>
     <color name="uikit_colorful_percent15_black">#D9000000</color>
     <color name="uikit_colorful_percent30_black">#4D000000</color>
     <color name="uikit_colorful_percent40_black">#66000000</color>
@@ -19,6 +20,7 @@
     <color name="uikit_colorful_percent90_black">#E5000000</color>
 
     <color name="uikit_colorful_00B42A">#FF00B42A</color>
+    <color name="uikit_colorful_00FFFF">#0000FFFF</color>
     <color name="uikit_colorful_0AA5A8">#FF0AA5A8</color>
     <color name="uikit_colorful_0AAB41">#FF0AAB41</color>
 
@@ -55,6 +57,8 @@
     <color name="uikit_colorful_98CBF9">#FF98CBF9</color>
     <color name="uikit_colorful_999999">#FF999999</color>
     <color name="uikit_colorful_9A9A9A">#FF9A9A9A</color>
+
+    <color name="uikit_colorful_A6A6A6">#FFA6A6A6</color>
 
     <color name="uikit_colorful_B6BFCC">#FFB6BFCC</color>
     <color name="uikit_colorful_B8B7B7">#FFB8B7B7</color>

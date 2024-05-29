@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.itoys.android.image.DemoImageModel
 import com.itoys.android.image.R
 import com.itoys.android.image.databinding.ImageDialogChooseImageBinding
 import com.itoys.android.image.loadImage
@@ -51,24 +52,9 @@ class ChooseImageDialog : DialogFragment() {
         var fm: FragmentManager? = null
 
         /**
-         * 示例图片标题
-         */
-        var demoImageTitle = ""
-
-        /**
          * 示例图片
          */
-        var demoImageDrawable: Drawable? = null
-
-        /**
-         * 示例图片链接
-         */
-        var demoImageUrl = ""
-
-        /**
-         * 示例图片文字
-         */
-        var demoImageText = ""
+        var demoImage: DemoImageModel? = null
 
         /**
          * 回调
@@ -96,19 +82,21 @@ class ChooseImageDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = ImageDialogChooseImageBinding.bind(view)
 
-        binding?.demoImageTitle?.text = builder?.demoImageTitle.invalid()
         // 标题
-        if (builder?.demoImageTitle.isBlank()) binding?.demoImageTitle?.gone()
+        if (builder?.demoImage?.imageTitle.isBlank()) binding?.demoImageTitle?.gone()
+        binding?.demoImageTitle?.text = builder?.demoImage?.imageTitle.invalid()
+
         // 图片
-        if (builder?.demoImageDrawable == null) {
-            binding?.demoImage?.loadImage(builder?.demoImageUrl)
+        if (builder?.demoImage?.image == -1) {
+            binding?.demoImage?.loadImage(builder?.demoImage?.imageUrl)
         } else {
-            binding?.demoImage?.setImageDrawable(builder?.demoImageDrawable)
+            binding?.demoImage?.setImageResource(builder?.demoImage?.image ?: 0)
         }
-        if (builder?.demoImageUrl.isBlank() && builder?.demoImageDrawable == null) binding?.demoImage?.gone()
+        if (builder?.demoImage?.imageUrl.isBlank() && builder?.demoImage?.image == -1) binding?.demoImage?.gone()
+
         // 文字
-        binding?.demoImageText?.text = builder?.demoImageText.invalid()
-        if (builder?.demoImageText.isBlank()) binding?.demoImageText?.gone()
+        binding?.demoImageText?.text = builder?.demoImage?.imageText.invalid()
+        if (builder?.demoImage?.imageText.isBlank()) binding?.demoImageText?.gone()
 
         binding?.takePicture?.setOnClickListener {
             builder?.callback?.takePicture()
@@ -118,7 +106,8 @@ class ChooseImageDialog : DialogFragment() {
             builder?.callback?.selectFromAlbum()
             dismiss()
         }
-            binding?.cancel?.setOnClickListener { dismiss() }
+        binding?.cancel?.setOnClickListener { dismiss() }
+        binding?.imageGroup?.setOnClickListener { dismiss() }
     }
 
     /**
@@ -131,7 +120,7 @@ class ChooseImageDialog : DialogFragment() {
             decorView.setPadding(0, 0, 0, 0)
             val params = attributes
             params.width = WindowManager.LayoutParams.MATCH_PARENT
-            params.height = WindowManager.LayoutParams.WRAP_CONTENT
+            params.height = WindowManager.LayoutParams.MATCH_PARENT
             params.gravity = Gravity.BOTTOM
             attributes = params
             isCancelable = true

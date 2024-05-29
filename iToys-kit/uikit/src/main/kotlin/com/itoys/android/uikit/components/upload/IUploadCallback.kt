@@ -10,7 +10,7 @@ interface IUploadCallback {
     /**
      * 自定义图片选择
      */
-    fun customImageSelection() {}
+    fun customImageSelection(mark: String) {}
 
     /**
      * 删除

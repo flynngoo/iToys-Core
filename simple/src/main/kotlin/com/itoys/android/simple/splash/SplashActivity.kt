@@ -9,11 +9,13 @@ import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.hybrid.HybridRouter
 import com.itoys.android.image.RoundCornerType
 import com.itoys.android.image.loadRoundCornerImage
+import com.itoys.android.logcat.logcat
 import com.itoys.android.simple.form.SimpleFormActivity
 import com.itoys.android.simple.list.SimpleListActivity
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import com.itoys.android.uikit.components.form.IFormResultCallback
+import com.itoys.android.uikit.components.picker.DatePicker
 import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.uikit.model.RadioModel
 import com.itoys.android.uikit.viewImage
@@ -86,7 +88,7 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
         }
 
         binding?.noticeDialog?.doOnClick {
-            IToysNoticeDialog.show {
+            /* IToysNoticeDialog.show {
                 fm = supportFragmentManager
                 title = "这是标题这是标题这是标题这是标题"
                 content = "确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗?"
@@ -95,6 +97,19 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
                     override fun clickCenter() {
                         super.clickCenter()
                     }
+                }
+            } */
+
+            DatePicker.show {
+                fm = supportFragmentManager
+                title = "测试长期有效"
+                fromToday = false
+                toToday = false
+                showLongTermValidity = true
+                defaultYear = 1980
+
+                callback = DatePicker.IDateCallback { year, month, day ->
+                    logcat { "$year-$month-$day" }
                 }
             }
         }

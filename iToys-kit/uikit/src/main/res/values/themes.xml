@@ -225,4 +225,16 @@
         <item name="android:drawablePadding">8dp</item>
         <item name="android:paddingStart">8dp</item>
     </style>
+
+    <style name="IToysAndroid.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/uikit_switch_thumb_selector</item>
+        <item name="track">@drawable/uikit_switch_track</item>
+        <!-- <item name="trackTint">@drawable/uikit_switch_track_color_selector</item> -->
+        <item name="materialThemeOverlay">@style/IToysAndroid.Switch.ThemeOverlay</item>
+    </style>
+
+    <style name="IToysAndroid.Switch.ThemeOverlay">
+        <item name="colorOnSurface">@color/uikit_colorful_A6A6A6</item>
+        <item name="colorSecondary">?attr/appPrimaryColor</item>
+    </style>
 </resources>

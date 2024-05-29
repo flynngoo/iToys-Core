@@ -159,4 +159,9 @@ class DescriptionsView(
         this.content = content
         contentView?.text = this.content
     }
+
+    /**
+     * 获取content
+     */
+    fun content() = contentView?.text.toString()
 }

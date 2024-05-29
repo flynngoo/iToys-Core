@@ -12,6 +12,7 @@ import com.itoys.android.utils.expansion.color
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.then
+import com.itoys.android.utils.expansion.visible
 
 /**
  * @Author Gu Fanfan
@@ -60,6 +61,12 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
         /** 从今天开始 */
         var fromToday = true
 
+        /** 到今天结束：最大日期只能选到今天 */
+        var toToday = true
+
+        /** 显示长期有效，如果选择长期有效返回：9999-12-31 */
+        var showLongTermValidity = false
+
         /** 起始年份 */
         var startYear = 1900
 
@@ -81,12 +88,24 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
     /** 日 */
     private var selectDay = 0
 
+    /** 长期有效 */
+    private var longTermValidity = false
+
     override fun createViewBinding(inflater: LayoutInflater) = UikitLayoutPickerDateBinding.inflate(inflater)
 
     override fun initialize() {
         if (builder.title.isNotBlank()) {
             binding?.title?.text = builder.title
         }
+
+        if (builder.showLongTermValidity) {
+            binding?.longTermValidity?.visible()
+
+            binding?.longTermValidity?.setOnCheckedChangeListener { _, isChecked ->
+                longTermValidity = isChecked
+            }
+        }
+
         binding?.dateWheel?.apply {
             setDateMode(builder.dateMode)
             setDateLabel("年", "月", "日")
@@ -100,17 +119,21 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
             }
 
             val startingDate: DateEntity
-            val endingDate: DateEntity
+            var endingDate: DateEntity
 
             when {
                 builder.fromToday -> {
                     startingDate = DateEntity.today()
-                    endingDate = DateEntity.target(startingDate.year + 20, 12, 31)
+                    endingDate = DateEntity.target(startingDate.year + 100, 12, 31)
                 }
 
                 else -> {
                     startingDate = DateEntity.target(builder.startYear, 1, 1)
                     endingDate = DateEntity.today()
+
+                    if (!builder.toToday) {
+                        endingDate = DateEntity.target(endingDate.year + 100, 12, 31)
+                    }
                 }
             }
             setRange(startingDate, endingDate)
@@ -132,6 +155,13 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
         binding?.close?.doOnClick { dismiss() }
 
         binding?.confirm?.doOnClick {
+            if (longTermValidity) {
+                // 长期有效
+                selectYear = 9999
+                selectMonth = 12
+                selectDay = 31
+            }
+
             builder.callback?.onResult(selectYear, selectMonth, selectDay)
             dismiss()
         }

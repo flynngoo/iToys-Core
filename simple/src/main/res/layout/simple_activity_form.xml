@@ -54,4 +54,17 @@
         app:formRequiredMarkStartMargin="16dp"
         app:formSuffixText="@string/uikit_yuan"
         app:layout_constraintTop_toBottomOf="@id/cash_cost" />
+
+    <com.itoys.android.uikit.components.picker.IdentityCardPickerView
+        android:id="@+id/identity_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/gas_cost" />
+
+    <com.itoys.android.uikit.components.form.PicturesFormView
+        android:id="@+id/other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/identity_card"
+        app:pictureTitle="@string/uikit_other" />
 </androidx.constraintlayout.widget.ConstraintLayout>

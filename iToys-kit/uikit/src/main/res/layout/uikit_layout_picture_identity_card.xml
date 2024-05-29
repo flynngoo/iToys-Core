@@ -24,33 +24,35 @@
         app:layout_constraintTop_toBottomOf="@+id/title">
 
         <com.itoys.android.uikit.components.upload.UploadImageView
-            android:id="@+id/portrait"
+            android:id="@+id/front"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/national_emblem"
+            app:layout_constraintEnd_toStartOf="@+id/back"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:uploadImageHeight="101dp"
+            app:uploadImageMark="front"
             app:uploadImageRequiredMark="false"
             app:uploadImageRoundCorner="4dp"
             app:uploadImageShowText="true"
-            app:uploadImageText="@string/uikit_id_card_portrait" />
+            app:uploadImageText="@string/uikit_id_card_front" />
 
         <com.itoys.android.uikit.components.upload.UploadImageView
-            android:id="@+id/national_emblem"
+            android:id="@+id/back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/portrait"
+            app:layout_constraintStart_toEndOf="@+id/front"
             app:layout_constraintTop_toTopOf="parent"
             app:uploadImageHeight="101dp"
+            app:uploadImageMark="back"
             app:uploadImageRequiredMark="false"
             app:uploadImageRoundCorner="4dp"
             app:uploadImageShowText="true"
-            app:uploadImageText="@string/uikit_id_card_national_emblem" />
+            app:uploadImageText="@string/uikit_id_card_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

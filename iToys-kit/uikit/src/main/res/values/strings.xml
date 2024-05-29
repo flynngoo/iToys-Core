@@ -100,10 +100,10 @@
     <string name="uikit_save_to_album">保存到相册</string>
 
     <string name="uikit_id_card_photo">身份证照片</string>
-    <string name="uikit_id_card_portrait">人像面</string>
-    <string name="uikit_id_card_delete_portrait">确认删除人像面吗?</string>
-    <string name="uikit_id_card_national_emblem">国徽面</string>
-    <string name="uikit_id_card_delete_national_emblem">确认删除国徽面吗?</string>
+    <string name="uikit_id_card_front">人像面</string>
+    <string name="uikit_id_card_delete_front">确认删除人像面吗?</string>
+    <string name="uikit_id_card_back">国徽面</string>
+    <string name="uikit_id_card_delete_back">确认删除国徽面吗?</string>
 
     <string name="uikit_agreement_user">用户协议</string>
     <string name="uikit_agreement_privacy">隐私政策</string>
@@ -130,6 +130,7 @@
     <string name="uikit_identity">身份</string>
     <string name="uikit_id_card">身份证</string>
     <string name="uikit_id_card_colon">身份证:</string>
+    <string name="uikit_long_term_validity">长期有效</string>
     <string name="uikit_input_error_name">姓名不能为空</string>
     <string name="uikit_input_error_sex">性别不能为空</string>
     <string name="uikit_input_error_identity">身份不能为空</string>

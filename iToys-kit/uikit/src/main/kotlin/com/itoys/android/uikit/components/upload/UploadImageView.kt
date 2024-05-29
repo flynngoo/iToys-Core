@@ -245,7 +245,7 @@ class UploadImageView(
         root.uploadImage.doOnClick {
             if (imageUrl.isBlank() && uploadEnable) {
                 if (isCustomizable) {
-                    uploadImageCallback?.customImageSelection()
+                    uploadImageCallback?.customImageSelection(uploadMark)
                 } else {
                     ChooseImageDialog.show {
                         fm = fragmentManager()
@@ -276,13 +276,7 @@ class UploadImageView(
         )
 
         deleteImageView = root.deleteImage
-        root.deleteImage.doOnClick {
-            if (isCustomizable) {
-                uploadImageCallback?.delete(uploadMark)
-            } else {
-                showDeleteImageDialog()
-            }
-        }
+        root.deleteImage.doOnClick { showDeleteImageDialog() }
     }
 
     /**
@@ -370,7 +364,7 @@ class UploadImageView(
     private fun showDeleteImageDialog() {
         IToysNoticeDialog.show {
             fm = fragmentManager()
-            content = "确定删除${uploadTitle}吗?"
+            content = "确定删除${binding.uploadText.text.invalid().replace(uploadTextLabel, "")}吗?"
 
             callback = object : IDialogCallback() {
 

@@ -26,12 +26,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/long_term_validity"
+        style="@style/IToysAndroid.Switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:checked="false"
+        android:text="@string/uikit_long_term_validity"
+        android:textColor="@color/uikit_colorful_333333"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
     <com.github.gzuliyujiang.wheelpicker.widget.DateWheelLayout
         android:id="@+id/date_wheel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/long_term_validity" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/confirm"
