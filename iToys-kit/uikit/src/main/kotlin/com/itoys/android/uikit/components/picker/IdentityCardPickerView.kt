@@ -130,7 +130,7 @@ class IdentityCardPickerView(
     /**
      * 人像页图片
      */
-    fun frontPicture() = binding.front.image(required = true)
+    fun frontPicture(required: Boolean = true) = binding.front.image(required)
 
     /**
      * 设置国徽页图片
@@ -143,5 +143,5 @@ class IdentityCardPickerView(
     /**
      * 国徽页图片
      */
-    fun backPicture() = binding.back.image(required = true)
+    fun backPicture(required: Boolean = true) = binding.back.image(required)
 }

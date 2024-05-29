@@ -541,8 +541,10 @@ class IToysFormView(
     /**
      * 获取表单内容
      */
-    fun formContent(): String {
+    fun formContent(check: Boolean = true): String {
         logcat { "$labelText -> $formContent" }
+        if (!check) return formContent
+
         val errMsg = errorMessage.isNotBlank().then({ errorMessage }, { "${labelText}内容不合法" })
         // 校验： 开启校验 && 内容合法 || 禁用校验
         check((autoCheck && contentAccurate) || !autoCheck) { errMsg }

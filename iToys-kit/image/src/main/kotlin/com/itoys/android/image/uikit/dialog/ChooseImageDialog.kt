@@ -1,6 +1,5 @@
 package com.itoys.android.image.uikit.dialog
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import com.itoys.android.image.DemoImageModel
 import com.itoys.android.image.R
 import com.itoys.android.image.databinding.ImageDialogChooseImageBinding
 import com.itoys.android.image.loadImage
+import com.itoys.android.utils.compat.ScreenSizeCompat
 import com.itoys.android.utils.expansion.gone
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
@@ -120,7 +120,7 @@ class ChooseImageDialog : DialogFragment() {
             decorView.setPadding(0, 0, 0, 0)
             val params = attributes
             params.width = WindowManager.LayoutParams.MATCH_PARENT
-            params.height = WindowManager.LayoutParams.MATCH_PARENT
+            params.height = (ScreenSizeCompat.screenSize(requireContext()).height * 0.8).toInt()
             params.gravity = Gravity.BOTTOM
             attributes = params
             isCancelable = true

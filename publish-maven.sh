@@ -5,7 +5,7 @@
 #./gradlew publish -PpublishLibraryName=logcat -PpublishLibraryVersion=0.0.3-SNAPSHOT
 
 # uikit
-#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.0.87-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.0.89-SNAPSHOT
 
 # utils
 #./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.26-SNAPSHOT
@@ -17,4 +17,4 @@
 #./gradlew publish -PpublishLibraryName=hybrid -PpublishLibraryVersion=0.0.1-SNAPSHOT
 
 # image
-#./gradlew publish -PpublishLibraryName=image -PpublishLibraryVersion=0.0.14-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=image -PpublishLibraryVersion=0.0.15-SNAPSHOT
