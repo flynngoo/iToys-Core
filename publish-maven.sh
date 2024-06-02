@@ -5,13 +5,13 @@
 #./gradlew publish -PpublishLibraryName=logcat -PpublishLibraryVersion=0.0.3-SNAPSHOT
 
 # uikit
-#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.0.89-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.0.92-SNAPSHOT
 
 # utils
-#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.26-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.0.29-SNAPSHOT
 
 # core
-#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.52-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.0.53-SNAPSHOT
 
 # hybrid
 #./gradlew publish -PpublishLibraryName=hybrid -PpublishLibraryVersion=0.0.1-SNAPSHOT

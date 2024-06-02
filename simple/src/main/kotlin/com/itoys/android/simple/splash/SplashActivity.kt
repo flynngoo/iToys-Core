@@ -2,7 +2,6 @@ package com.itoys.android.simple.splash
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.itoys.android.R
 import com.itoys.android.core.activity.AbsMviActivity
 import com.itoys.android.core.crash.catchCrash
 import com.itoys.android.databinding.SplashActivityLayoutBinding
@@ -12,9 +11,6 @@ import com.itoys.android.image.loadRoundCornerImage
 import com.itoys.android.logcat.logcat
 import com.itoys.android.simple.form.SimpleFormActivity
 import com.itoys.android.simple.list.SimpleListActivity
-import com.itoys.android.uikit.components.dialog.IDialogCallback
-import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
-import com.itoys.android.uikit.components.form.IFormResultCallback
 import com.itoys.android.uikit.components.picker.DatePicker
 import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.uikit.model.RadioModel
@@ -23,8 +19,6 @@ import com.itoys.android.utils.expansion.actOpen
 import com.itoys.android.utils.expansion.collect
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.dp2px
-import com.itoys.android.utils.filter.DecimalDigitsInputFilter
-import com.itoys.android.utils.filter.EmojiFilter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -133,7 +127,6 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     }
 
     override fun addObserver() {
-        3
         super.addObserver()
         viewModel?.apply { collect(uiState, ::uiCollect) }
     }

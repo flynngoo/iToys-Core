@@ -3,11 +3,13 @@ package com.itoys.android.uikit.components.input
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import com.drake.softinput.hideSoftInput
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.databinding.UikitLayoutSearchBinding
+import com.itoys.android.utils.InputUtils.hideSoftInput
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.gone
 import com.itoys.android.utils.expansion.size
@@ -33,6 +35,11 @@ class SearchView(
      * 是否允许清除
      */
     private var allowClear = true
+
+    /**
+     * 搜索输入框
+     */
+    private var searchInput: AppCompatEditText? = null
 
     /**
      * 搜索回调
@@ -96,6 +103,7 @@ class SearchView(
 
         ta.recycle()
 
+        searchInput = binding.searchInput
         binding.searchInput.addTextChangedListener {
             searchCallback?.onChange(it ?: "")
 
@@ -129,6 +137,12 @@ class SearchView(
 
     fun setSearchCallback(searchCallback: ISearchCallback) {
         this.searchCallback = searchCallback
+    }
+
+    fun clear() {
+        searchInput?.setText("")
+        searchInput?.hideSoftInput()
+        searchInput?.clearFocus()
     }
 
     interface ISearchCallback {

@@ -40,7 +40,7 @@ object Const {
     /**
      * emoji 正则
      */
-    const val EMOJI = "[\\ud83c\\udc00-\\ud83c\\udfff]|[\\ud83d\\udc00-\\ud83d\\udfff]|[\\u2600-\\u27ff]"
+    const val EMOJI = EmojiConst.EMOJI_REGEX
 
     /**
      * 营业执照 正则

@@ -122,3 +122,13 @@ fun Number?.stripTrailingZeros(): String {
 }
 
 fun Number?.withYuan() = "${stripTrailingZeros()} 元"
+
+/**
+ * double plus double
+ *
+ * 避免精度丢失问题
+ */
+fun Double.plusDouble(other: Double): Double {
+    val result = toBigDecimal().plus(other.toBigDecimal())
+    return result.toDouble()
+}

@@ -55,11 +55,18 @@
         app:formSuffixText="@string/uikit_yuan"
         app:layout_constraintTop_toBottomOf="@id/cash_cost" />
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/emoji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="表情限制"
+        app:layout_constraintTop_toBottomOf="@id/gas_cost" />
+
     <com.itoys.android.uikit.components.picker.IdentityCardPickerView
         android:id="@+id/identity_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/gas_cost" />
+        app:layout_constraintTop_toBottomOf="@id/emoji" />
 
     <com.itoys.android.uikit.components.form.PicturesFormView
         android:id="@+id/other"

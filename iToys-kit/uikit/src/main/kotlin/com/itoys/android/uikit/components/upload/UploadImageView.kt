@@ -323,10 +323,12 @@ class UploadImageView(
             binding.uploadLogo.visibility = isShowUploadLogo.then(VISIBLE, GONE)
             binding.uploadText.visibility = isShowUploadText.then(VISIBLE, GONE)
             binding.requiredMark.visibility = isRequiredMark.then(VISIBLE, GONE)
+            binding.deleteImage.visibility = this.imageUrl.isNotBlank().then(VISIBLE, GONE)
         } else {
             binding.uploadLogo.gone()
             binding.uploadText.gone()
             binding.requiredMark.gone()
+            binding.deleteImage.gone()
         }
     }
 

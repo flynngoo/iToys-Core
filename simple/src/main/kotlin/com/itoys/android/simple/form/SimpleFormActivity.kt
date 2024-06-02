@@ -16,6 +16,7 @@ import com.itoys.android.uikit.components.picker.IdentityCardPickerView
 import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.utils.expansion.safeParseDouble
 import com.itoys.android.utils.expansion.stripTrailingZeros
+import com.itoys.android.utils.filter.EmojiFilter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -84,6 +85,7 @@ class SimpleFormActivity : AbsMviActivity<SimpleActivityFormBinding, SimpleFormV
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.identityCard?.setOwner(this)
         binding?.other?.setOwner(this)
+        binding?.emoji?.filters = arrayOf(EmojiFilter())
     }
 
     override fun addClickListen() {

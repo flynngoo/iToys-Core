@@ -179,7 +179,7 @@ fun CharSequence?.email() = this.isNotBlank() && EMAIL.toRegex().matches(this.in
 /**
  * 表情
  */
-fun CharSequence?.isEmoji() = Pattern.compile(EMOJI, Pattern.UNICODE_CASE or Pattern.CASE_INSENSITIVE).matcher(this.invalid()).find()
+fun CharSequence?.isEmoji() = Pattern.compile(EMOJI, Pattern.UNICODE_CASE or Pattern.CASE_INSENSITIVE).matcher(this ?: "").find()
 
 /**
  * 空字符串

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 data class DictModel(
     @JsonProperty("dictKey")
-    val dictKey: Int?,
+    val dictKey: Long?,
     @JsonProperty("dictValue")
     val dictValue: String?,
 ) {

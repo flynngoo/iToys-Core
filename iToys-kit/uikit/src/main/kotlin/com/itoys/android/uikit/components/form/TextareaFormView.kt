@@ -133,4 +133,11 @@ class TextareaFormView(
     fun setTextarea(text: String) {
         textareaEdit?.setText(text)
     }
+
+    /**
+     * 设置Textarea是禁用
+     */
+    fun setTextareaEnable(enable: Boolean) {
+        textareaEdit?.isEnabled = enable
+    }
 }

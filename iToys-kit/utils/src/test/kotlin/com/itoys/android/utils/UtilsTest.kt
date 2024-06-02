@@ -3,12 +3,16 @@ package com.itoys.android.utils
 import com.itoys.android.utils.expansion.email
 import com.itoys.android.utils.expansion.isEmoji
 import com.itoys.android.utils.expansion.landlinePhone
+import com.itoys.android.utils.expansion.plusDouble
 import com.itoys.android.utils.expansion.roundToNearestTen
 import com.itoys.android.utils.expansion.simpleMobile
 import com.itoys.android.utils.expansion.string
 import com.itoys.android.utils.expansion.stripTrailingZeros
 import com.itoys.android.utils.expansion.toCNY
+import com.itoys.android.utils.regex.Const
+import com.itoys.android.utils.regex.EmojiConst
 import org.junit.Test
+import java.util.regex.Pattern
 
 /**
  * @Author Gu Fanfan
@@ -66,11 +70,11 @@ class UtilsTest {
 
         println(sortedMap) */
 
-        //初始化
+        // 初始化
         val map = mapOf(2 to "a", 1 to "c", 3 to "d", 5 to "q", 4 to "1")
-        //转换的核心代码
+        // 转换的核心代码
         val toMap = map.toList().sortedBy { it.first }.toMap()
-        //输出代码
+        // 输出代码
         println(toMap)
     }
 
@@ -97,12 +101,12 @@ class UtilsTest {
 
     /**
      * emoji
+     * 🫀 ❤️ 🆕 6⃣️
+     * 🫀🥰🤦🤦🥰🤦🤦🤦🤦🤦🥸🥸🤓🤓🤓🥸🥸
      */
     @Test
     fun isEmoji() {
-        val emoji = "😀abs"
-
-        println(emoji.isEmoji())
+        println("️谷".isEmoji())
     }
 
     /**
@@ -123,5 +127,13 @@ class UtilsTest {
         val number = 0
 
         println("Result: " + number.stripTrailingZeros())
+    }
+
+    @Test
+    fun testPlusDouble() {
+        val numberA = 35.8
+        val numberB = 0.55
+
+        println("Result: " + numberA.plusDouble(numberB))
     }
 }
