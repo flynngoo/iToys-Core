@@ -140,4 +140,6 @@
     <string name="uikit_please_input_phone">请输入手机号</string>
     <string name="uikit_please_select_sex">请选择性别</string>
     <string name="uikit_long_text">这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本</string>
+    <string name="uikit_date_year_month">%d年%s月</string>
+    <string name="uikit_date_ymd">%d年%s月%s日</string>
 </resources>

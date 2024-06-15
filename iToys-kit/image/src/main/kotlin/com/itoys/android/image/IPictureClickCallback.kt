@@ -13,6 +13,11 @@ interface IPictureClickCallback {
     fun selectPicture()
 
     /**
+     * 查看图片
+     */
+    fun viewPicture(position: Int)
+
+    /**
      * 删除图片
      */
     fun delete(index: Int)

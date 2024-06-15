@@ -243,6 +243,7 @@ fun RecyclerView.pictureList(
                 clickCallback?.selectPicture()
             } else {
                 // 查看大图
+                clickCallback?.viewPicture(modelPosition)
             }
         }
 
@@ -265,13 +266,14 @@ fun RecyclerView.addPictures(
     pictures: List<String>,
 ) {
     val size = this.models?.size ?: 0
+    val addedSize = pictures.size + size
 
     when {
-        withPlus && size < maximum -> {
+        withPlus && addedSize < maximum -> {
             addModels(pictures, index = max((size - 1), 0))
         }
 
-        size == maximum -> {
+        addedSize >= maximum -> {
             models = pictures
         }
 

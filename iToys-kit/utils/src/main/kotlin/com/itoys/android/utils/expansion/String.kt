@@ -1,6 +1,8 @@
 package com.itoys.android.utils.expansion
 
 import com.itoys.android.utils.IdCardValidatorUtil
+import com.itoys.android.utils.regex.Const.ALPHANUMERIC
+import com.itoys.android.utils.regex.Const.ALPHANUMERIC_WITH_CHINESE
 import com.itoys.android.utils.regex.Const.EMAIL
 import com.itoys.android.utils.regex.Const.EMOJI
 import com.itoys.android.utils.regex.Const.EXACT_MOBILE
@@ -180,6 +182,16 @@ fun CharSequence?.email() = this.isNotBlank() && EMAIL.toRegex().matches(this.in
  * 表情
  */
 fun CharSequence?.isEmoji() = Pattern.compile(EMOJI, Pattern.UNICODE_CASE or Pattern.CASE_INSENSITIVE).matcher(this ?: "").find()
+
+/**
+ * 字母+数字
+ */
+fun CharSequence?.isAlphanumeric() = Pattern.compile(ALPHANUMERIC).matcher(invalid()).find()
+
+/**
+ * 字母+数字+中文
+ */
+fun CharSequence?.isAlphanumericWithChinese() = Pattern.compile(ALPHANUMERIC_WITH_CHINESE).matcher(invalid()).find()
 
 /**
  * 空字符串

@@ -11,6 +11,7 @@ import com.itoys.android.image.loadRoundCornerImage
 import com.itoys.android.logcat.logcat
 import com.itoys.android.simple.form.SimpleFormActivity
 import com.itoys.android.simple.list.SimpleListActivity
+import com.itoys.android.uikit.components.picker.CalendarPicker
 import com.itoys.android.uikit.components.picker.DatePicker
 import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.uikit.model.RadioModel
@@ -53,12 +54,6 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
             })
         }
 
-        binding?.simpleImage?.loadRoundCornerImage(
-            "http://dayu-img.uc.cn/columbus/img/oc/1002/b36ded73f33bc25e0dc4ec36bf620b0e.jpg",
-            radius = 6.dp2px(),
-            cornerType = RoundCornerType.DIAGONAL_FROM_TOP_RIGHT
-        )
-
         binding?.radio?.setContent(listOf(
             RadioModel(1, 1, "男"),
             RadioModel(2, 2, "女"),
@@ -94,26 +89,15 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
                 }
             } */
 
-            DatePicker.show {
+            CalendarPicker.show {
                 fm = supportFragmentManager
-                title = "测试长期有效"
-                fromToday = false
-                toToday = false
-                showLongTermValidity = true
-                defaultYear = 1980
-
-                callback = DatePicker.IDateCallback { year, month, day ->
-                    logcat { "$year-$month-$day" }
-                }
+                rangeMode = true
             }
         }
 
         binding?.form?.doOnClick { SimpleFormActivity::class.actOpen(this) }
 
         binding?.simpleImage?.doOnClick {
-            viewImage(
-                "http://dayu-img.uc.cn/columbus/img/oc/1002/b36ded73f33bc25e0dc4ec36bf620b0e.jpg"
-            )
         }
 
         binding?.radioEnable?.doOnClick {

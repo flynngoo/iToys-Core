@@ -26,8 +26,8 @@ fun String?.navigation() {
     }
 
     TheRouter.build(this).navigation(callback = object : NavigationCallback() {
-        override fun onLost(navigator: Navigator) {
-            super.onLost(navigator)
+        override fun onLost(navigator: Navigator, requestCode: Int) {
+            super.onLost(navigator, requestCode)
             logcat(Log.ERROR) { "Not found ${navigator.url} page, please check." }
             navPageNotFound(navigator.url.invalid())
         }

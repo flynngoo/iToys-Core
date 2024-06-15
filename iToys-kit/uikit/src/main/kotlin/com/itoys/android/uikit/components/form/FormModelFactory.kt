@@ -278,7 +278,7 @@ object FormModelFactory {
             editBinding.formEdit.inputType = InputType.TYPE_CLASS_PHONE
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
-            editBinding.formEdit.filters = arrayOf(LengthFilter(12))
+            editBinding.formEdit.filters = arrayOf(LengthFilter(13))
             return editBinding.root
         }
 
@@ -358,6 +358,26 @@ object FormModelFactory {
             else -> Gravity.START
         }
         return edit
+    }
+
+    /**
+     * 添加edit InputFilter
+     */
+    fun addEditFilter(
+        @FormModel formModel: Int,
+        contentView: View?,
+        filters: Array<InputFilter>
+    ) {
+        when (formModel) {
+            FormModel.TEXT,
+            FormModel.NUMBER,
+            FormModel.PHONE,
+            FormModel.ID_CARD,
+            FormModel.EMAIL -> {
+                val edit: AppCompatEditText? = contentView?.findViewById(R.id.form_edit)
+                edit?.filters = edit?.filters?.plus(filters)
+            }
+        }
     }
 
     /**

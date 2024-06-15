@@ -46,4 +46,14 @@ object Const {
      * 营业执照 正则
      */
     const val BUSINESS_LICENSE = "^([159Y]{1})([1239]{1})([0-9ABCDEFGHJKLMNPQRTUWXY]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{9})([0-90-9ABCDEFGHJKLMNPQRTUWXY])\$"
+
+    /**
+     * 字母+数字 正则
+     */
+    const val ALPHANUMERIC = "[a-zA-Z0-9]"
+
+    /**
+     * 字母+数字+中文 正则
+     */
+    const val ALPHANUMERIC_WITH_CHINESE = "[a-zA-Z0-9\\u4E00-\\u9FFF]"
 }

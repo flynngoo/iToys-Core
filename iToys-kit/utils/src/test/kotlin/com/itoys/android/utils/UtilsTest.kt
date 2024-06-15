@@ -106,7 +106,8 @@ class UtilsTest {
      */
     @Test
     fun isEmoji() {
-        println("️谷".isEmoji())
+        println("️，，，。。。。".isEmoji())
+        println("️我".isEmoji())
     }
 
     /**

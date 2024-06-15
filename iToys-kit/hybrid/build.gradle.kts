@@ -23,5 +23,7 @@ dependencies {
     implementation(libs.itoys.logcat)
     implementation(libs.itoys.utils)
 
-    implementation(libs.itoys.library.hybrid)
+    implementation(libs.itoys.library.hybrid) {
+        exclude(group = "io.github.jeremyliao", module = "live-event-bus-x")
+    }
 }

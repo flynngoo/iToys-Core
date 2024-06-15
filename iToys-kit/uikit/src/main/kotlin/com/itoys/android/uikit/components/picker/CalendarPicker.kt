@@ -3,8 +3,6 @@ package com.itoys.android.uikit.components.picker
 import android.view.Gravity
 import android.view.LayoutInflater
 import com.itoys.android.uikit.R
-import com.itoys.android.uikit.components.calendar.SimpleMonthView
-import com.itoys.android.uikit.components.calendar.SimpleRangeMonthView
 import com.itoys.android.uikit.components.dialog.AbsDialog
 import com.itoys.android.uikit.components.dialog.IToysDialog
 import com.itoys.android.uikit.databinding.UikitLayoutPickerCalendarBinding
@@ -61,20 +59,12 @@ class CalendarPicker : IToysDialog<UikitLayoutPickerCalendarBinding, CalendarPic
 
     override fun initialize() {
         binding?.title?.text = builder.title
-        if (builder.rangeMode) {
-            binding?.calendar?.setSelectRangeMode()
-            binding?.calendar?.setMonthView(SimpleRangeMonthView::class.java)
-        } else {
-            binding?.calendar?.setMonthView(SimpleMonthView::class.java)
-            binding?.calendar?.setSelectSingleMode()
-            binding?.calendar?.scrollToCurrent()
-        }
-
+        binding?.calendar?.setRangeMode(builder.rangeMode)
         binding?.close?.doOnClick { dismiss() }
 
         binding?.confirm?.doOnClick {
             if (builder.rangeMode) {
-                val dates = binding?.calendar?.selectCalendarRange
+                val dates = binding?.calendar?.rangeCalendar()
                 if (!dates.isNullOrEmpty()) {
                     val startDate = dates.first()?.toCalendar()
                     val endDate = dates.last()?.toCalendar()
@@ -86,7 +76,7 @@ class CalendarPicker : IToysDialog<UikitLayoutPickerCalendarBinding, CalendarPic
                     )
                 }
             } else {
-                val date = binding?.calendar?.selectedCalendar?.toCalendar()
+                val date = binding?.calendar?.calendarData()
                 builder.callback?.onResult(TimeUtils.calendar2String(date, builder.datePattern))
             }
 

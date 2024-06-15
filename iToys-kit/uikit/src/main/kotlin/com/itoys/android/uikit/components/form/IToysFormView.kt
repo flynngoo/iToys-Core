@@ -3,6 +3,7 @@ package com.itoys.android.uikit.components.form
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
+import android.text.InputFilter
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -536,6 +537,13 @@ class IToysFormView(
     fun setContentEnable(enable: Boolean) {
         formEnable = enable
         FormModelFactory.updateContentEnable(contentView, formEnable, formModel)
+    }
+
+    /**
+     * 添加edit InputFilter
+     */
+    fun addEditFilter(filters: Array<InputFilter>) {
+        FormModelFactory.addEditFilter(formModel, contentView, filters)
     }
 
     /**

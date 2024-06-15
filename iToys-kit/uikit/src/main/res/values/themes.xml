@@ -101,6 +101,7 @@
 
     <style name="IToysAndroid.Body1.Ark" parent="IToysAndroid.Body1">
         <item name="android:fontFamily">@font/ark_zh</item>
+        <item name="fontFamily">@font/ark_zh</item>
     </style>
 
     <!-- Body2 14sp -->
@@ -112,10 +113,12 @@
 
     <style name="IToysAndroid.Body2.Medium" parent="IToysAndroid.Body2">
         <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="IToysAndroid.Body2.Ark" parent="IToysAndroid.Body2">
         <item name="android:fontFamily">@font/ark_zh</item>
+        <item name="fontFamily">@font/ark_zh</item>
     </style>
 
     <!-- Caption -->

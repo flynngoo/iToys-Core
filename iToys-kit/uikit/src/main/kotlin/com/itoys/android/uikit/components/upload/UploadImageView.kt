@@ -418,6 +418,7 @@ class UploadImageView(
         // 图片地址是否有效
         val isValidUrl = imageUrl.isNotBlank() && imageUrl.startsWith("http")
         val checkUrl = required.then({ isValidUrl }, { imageUrl.isBlank() || isValidUrl })
+        val uploadTitle = binding.uploadText.text.invalid().replace(uploadTextLabel, "")
 
         check(checkUrl) {
             (imageUrl.isBlank()).then(

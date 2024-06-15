@@ -335,4 +335,8 @@
         <!-- 图片上传 enable -->
         <attr name="uploadImageEnable" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="IToysCalendar">
+        <attr name="iToysDatePattern" format="string" />
+    </declare-styleable>
 </resources>

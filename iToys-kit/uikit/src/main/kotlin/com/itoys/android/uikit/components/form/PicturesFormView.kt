@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.drake.brv.reflect.copyType
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.models
 import com.drake.brv.utils.mutable
@@ -27,6 +28,7 @@ import com.itoys.android.uikit.R
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import com.itoys.android.uikit.databinding.UikitLayoutFormPictureBinding
+import com.itoys.android.uikit.viewImage
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
@@ -80,24 +82,69 @@ class PicturesFormView(
     private var ownerFragment: Fragment? = null
 
     /** 选择图片 */
-    private val medias = arrayListOf<ImageMedia>()
+    private val medias = arrayListOf<String>()
 
     /** 图片选择回调 */
     private val mediaCallback by lazy {
         object : IMediaCallback() {
             override fun onResult(result: ImageMedia) {
-                super.onResult(result)
-
-                medias.add(result)
                 addPictures(result.mediaPath)
             }
 
             override fun onResult(result: List<ImageMedia>?) {
-                super.onResult(result)
-
                 if (!result.isNullOrEmpty()) {
-                    medias.addAll(result)
                     addPictures(result.toStringList())
+                }
+            }
+        }
+    }
+
+    /**
+     * 图片点击回调
+     */
+    private val pictureClickCallback by lazy {
+        object : IPictureClickCallback {
+            override fun selectPicture() {
+                ChooseImageDialog.show {
+                    fm = fragmentManager()
+
+                    callback = object : ChooseImageDialog.ISelectCallback {
+                        override fun selectFromAlbum() {
+                            val modelsSize = pictureListView?.models?.size ?: 0
+                            val maximum = ((maximum - modelsSize) < 9).then((maximum - modelsSize), 9)
+                            ownerActivity?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
+                            ownerFragment?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
+                        }
+
+                        override fun takePicture() {
+                            ownerActivity?.takePicture(callback = mediaCallback)
+                            ownerFragment?.takePicture(callback = mediaCallback)
+                        }
+                    }
+                }
+            }
+
+            override fun viewPicture(position: Int) {
+                context.viewImage(
+                    mediaList(),
+                    imagePosition = position,
+                    showDelete = showDelete,
+                    showDownload = !showDelete,
+                )
+            }
+
+            override fun delete(index: Int) {
+                IToysNoticeDialog.show {
+                    fm = fragmentManager()
+                    title = context.getString(R.string.image_delete_this_picture)
+
+                    callback = object : IDialogCallback() {
+
+                        override fun clickCenter() {
+                            super.clickCenter()
+                            deletePicture(index)
+                        }
+                    }
                 }
             }
         }
@@ -155,41 +202,7 @@ class PicturesFormView(
             withPlus = showPlus,
             withDelete = showDelete,
             pictures = showPlus.then(listOf(""), listOf()),
-            clickCallback = object : IPictureClickCallback {
-                override fun selectPicture() {
-                    ChooseImageDialog.show {
-                        fm = fragmentManager()
-
-                        callback = object : ChooseImageDialog.ISelectCallback {
-                            override fun selectFromAlbum() {
-                                val maximum = (maximum < 9).then(maximum, 9)
-                                ownerActivity?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
-                                ownerFragment?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
-                            }
-
-                            override fun takePicture() {
-                                ownerActivity?.takePicture(callback = mediaCallback)
-                                ownerFragment?.takePicture(callback = mediaCallback)
-                            }
-                        }
-                    }
-                }
-
-                override fun delete(index: Int) {
-                    IToysNoticeDialog.show {
-                        fm = fragmentManager()
-                        title = context.getString(R.string.image_delete_this_picture)
-
-                        callback = object : IDialogCallback() {
-
-                            override fun clickCenter() {
-                                super.clickCenter()
-                                deletePicture(index)
-                            }
-                        }
-                    }
-                }
-            }
+            clickCallback = pictureClickCallback
         )
     }
 
@@ -201,11 +214,32 @@ class PicturesFormView(
     }
 
     /**
+     * 设置图片
+     */
+    fun setPictures(pictures: List<String>?, showPlus: Boolean = false) {
+        this.medias.clear()
+        this.medias.addAll(pictures.isNullOrEmpty().then(
+            { showPlus.then({ listOf("") }, { emptyList() }) },
+            { pictures }
+        ) ?: emptyList())
+
+        this.showPlus = showPlus
+        pictureListView?.pictureList(
+            spanCount = 4,
+            withPlus = showPlus,
+            withDelete = showPlus,
+            pictures = medias.copyType(),
+            clickCallback = pictureClickCallback
+        )
+    }
+
+    /**
      * 添加单张图片
      */
     fun addPictures(picture: String) {
         if (picture.isBlank()) return
 
+        medias.add(picture)
         pictureListView?.addPictures(
             maximum = maximum,
             withPlus = showPlus,
@@ -219,23 +253,11 @@ class PicturesFormView(
     fun addPictures(pictures: List<String>?) {
         if (pictures.isNullOrEmpty()) return
 
+        medias.addAll(pictures)
         pictureListView?.addPictures(
             maximum = maximum,
             withPlus = showPlus,
             pictures = pictures,
-        )
-    }
-
-    /**
-     * 添加多张图片
-     */
-    fun addMediaResult(result: List<ImageMedia>?) {
-        if (result.isNullOrEmpty()) return
-
-        pictureListView?.addPictures(
-            maximum = maximum,
-            withPlus = showPlus,
-            pictures = result.toStringList(),
         )
     }
 
@@ -277,12 +299,7 @@ class PicturesFormView(
     }
 
     /**
-     * 获取图片list
-     */
-    fun mediaList() = medias
-
-    /**
      * 获取图片路径list
      */
-    fun mediaPathList() = medias.toStringList()
+    fun mediaList() = medias
 }

@@ -3,15 +3,16 @@ package com.itoys.android.utils.filter
 import android.text.InputFilter
 import android.text.Spanned
 import com.itoys.android.utils.expansion.invalid
+import com.itoys.android.utils.expansion.isAlphanumericWithChinese
 import com.itoys.android.utils.expansion.isBlank
-import com.itoys.android.utils.expansion.isEmoji
 
 /**
  * @Author Gu Fanfan
  * @Email fanfan.worker@gmail.com
  * @Date 2024/4/14
+ * @Description 字母+数字+中文过滤
  */
-class EmojiFilter : InputFilter {
+class AlphanumericWithChineseFilter : InputFilter {
     override fun filter(
         source: CharSequence?,
         start: Int,
@@ -22,10 +23,10 @@ class EmojiFilter : InputFilter {
     ): CharSequence {
         if (source.isBlank()) return ""
 
-        if (source.isEmoji()) {
-            return ""
+        if (source.isAlphanumericWithChinese()) {
+            return source.invalid()
         }
 
-        return source.invalid()
+        return ""
     }
 }

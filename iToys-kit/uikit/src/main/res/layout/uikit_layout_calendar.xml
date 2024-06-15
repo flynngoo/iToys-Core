@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/date"
+        style="@style/IToysAndroid.Body2.Medium"
+        android:layout_height="44dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2021年12月" />
+
+    <com.haibin.calendarview.CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:calendar_height="42dp"
+        app:current_day_text_color="?attr/appPrimaryColor"
+        app:current_month_text_color="?attr/appPrimaryTextColor"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:max_select_range="-1"
+        app:min_select_range="-1"
+        app:min_year="2000"
+        app:other_month_text_color="@color/uikit_colorful_999999"
+        app:selected_text_color="@color/uikit_colorful_white"
+        app:selected_theme_color="?attr/appPrimaryColor" />
+</androidx.constraintlayout.widget.ConstraintLayout>

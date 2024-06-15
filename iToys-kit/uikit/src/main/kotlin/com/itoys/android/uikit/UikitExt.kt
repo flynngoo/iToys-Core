@@ -65,7 +65,6 @@ fun Activity.initBar(
             .fitsSystemWindows(fitsSystemWindows)
             .keyboardEnable(enableKeyboard)
             .navigationBarColor(navigationBarColor)
-            .transparentNavigationBar()
             .init()
     } catch (e: Exception) {
         logcat(priority = Log.ERROR) { e.asLog() }
@@ -355,6 +354,7 @@ fun Context.viewImage(
 
 fun Context.viewImage(
     imageUrl: List<String>,
+    imagePosition: Int = 0,
     folder: String = UikitInitialization.requireImageFolder(),
     showDownload: Boolean = true,
     showDelete: Boolean = true,
@@ -362,6 +362,7 @@ fun Context.viewImage(
 ) {
     ImagePreview.instance.setContext(this)
         .setImageList(imageUrl.toMutableList())
+        .setIndex(imagePosition)
         .setLoadStrategy(ImagePreview.LoadStrategy.NetworkAuto)
         .setShowDownButton(showDownload)
         .setShowDeleteButton(showDelete)

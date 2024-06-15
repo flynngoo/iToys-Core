@@ -25,22 +25,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.haibin.calendarview.CalendarView
+    <com.itoys.android.uikit.components.calendar.IToysCalendar
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:calendar_height="42dp"
-        app:calendar_padding="10dp"
-        app:current_day_text_color="@color/uikit_colorful_42B2F9"
-        app:current_month_text_color="@color/uikit_colorful_1D2129"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:max_select_range="-1"
-        app:min_select_range="-1"
-        app:min_year="2000"
-        app:other_month_text_color="@color/uikit_colorful_999999"
-        app:selected_text_color="@color/uikit_colorful_white"
-        app:selected_theme_color="@color/uikit_colorful_42B2F9" />
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/confirm"

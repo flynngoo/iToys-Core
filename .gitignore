@@ -94,3 +94,5 @@ lint/tmp/
 
 # Macos
 *.DS_Store
+
+publish-maven.gradle.kts

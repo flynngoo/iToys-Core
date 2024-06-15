@@ -19,21 +19,22 @@ captcha-verification = "1.6"
 captcha-separated = "1.3.4"
 datastore = "1.1.0"
 espresso-core = "3.5.1"
-eventbus-live = "1.8.0"
+eventbus-live = "1.8.1"
 flexbox = "3.0.0"
 fragment-ktx = "1.6.2"
 gson = "2.10.1"
-glide = "4.15.1"
+glide = "4.16.0"
 glide-transformers = "1.0.6"
 hilt = "2.48.1"
 immersionbar = "3.2.2"
 imageviewer = "1.0.7"
+itoys = "0.1.0"
 itoys-hybrid = "0.0.1-SNAPSHOT"
-itoys-image = "0.0.15-SNAPSHOT"
+itoys-image = "0.0.17-SNAPSHOT"
 itoys-logcat = "0.0.3-SNAPSHOT"
 itoys-scanning = "0.0.4-SNAPSHOT"
-itoys-uikit = "0.0.89-SNAPSHOT"
-itoys-utils = "0.0.29-SNAPSHOT"
+itoys-uikit = "0.0.108-SNAPSHOT"
+itoys-utils = "0.0.35-SNAPSHOT"
 itoys-library-hybrid = "1.0.0"
 jackson = "2.13.5"
 junit = "4.13.2"
@@ -42,6 +43,7 @@ kotlin = "1.9.20"
 kotlinx-coroutines = "1.7.3"
 kotlinx-datetime = "0.4.1"
 kotlinx-serialization = "1.6.0"
+ksp = "1.9.20-1.0.14"
 lifecycle = "2.7.0"
 luban = "1.0.0"
 lottie = "6.1.0"
@@ -70,7 +72,7 @@ seekbar-range = "v3.0.0"
 secrets = "2.0.1"
 spin-kit = "1.4.0"
 swipe-menu = "V1.3.0"
-theroute = "1.2.0-rc1"
+theroute = "1.2.2"
 timber = "5.0.1"
 title-bar = "10.5"
 viewpager2 = "1.0.0"
@@ -96,12 +98,13 @@ captcha-separated = { group = "com.github.WGwangguan", name = "SeparatedEditText
 cryptography = { group = "dev.whyoleg.cryptography", name = "cryptography-core", version.ref = "cryptography" }
 cryptography-provider = { group = "dev.whyoleg.cryptography", name = "cryptography-provider-jdk", version.ref = "cryptography" }
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
-eventbus-live = { group = "io.github.jeremyliao", name = "live-event-bus-x", version.ref = "eventbus-live" }
+eventbus-live = { group = "com.github.neo-turak", name = "LiveEventBus", version.ref = "eventbus-live" }
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
 fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+glide-ksp = { group = "com.github.bumptech.glide", name = "ksp", version.ref = "glide" }
 glide-transformers = { group = "jp.wasabeef.transformers", name = "glide", version.ref = "glide-transformers" }
 glide-transformers-gpu = { group = "jp.wasabeef.transformers", name = "glide-gpu", version.ref = "glide-transformers" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
@@ -122,13 +125,13 @@ luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 imageviewer = { group = "com.itoys.android", name = "ImageViewPager", version.ref = "imageviewer" }
-itoys-hybrid = { group = "com.itoys.android", name = "hybrid", version.ref = "itoys-hybrid" }
-itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-image" }
-itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys-logcat" }
-itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys-logcat" }
-itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys-scanning" }
-itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-uikit" }
-itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-utils" }
+itoys-hybrid = { group = "com.itoys.android", name = "hybrid", version.ref = "itoys" }
+itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys" }
+itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys" }
+itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys" }
+itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys" }
+itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys" }
+itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys" }
 itoys-library-hybrid = { group = "com.itoys.library", name = "lib-hybrid", version.ref = "itoys-library-hybrid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 magic-indicator = { group = "com.github.hackware1993", name = "MagicIndicator", version.ref = "magic-indicator" }
@@ -179,10 +182,10 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
-
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
@@ -191,5 +194,6 @@ therouter = { id = "cn.therouter.agp8", version.ref = "theroute" }
 # Plugins defined by this project
 itoys-android-application = { id = "itoys.android.application", version = "unspecified" }
 itoys-android-library = { id = "itoys.android.library", version = "unspecified" }
+itoys-android-library-kapt = { id = "itoys.android.library.kapt", version.ref = "agp" }
 itoys-android-hilt = { id = "itoys.android.hilt", version = "unspecified" }
 itoys-android-therouter = { id = "itoys.android.therouter", version = "unspecified" }

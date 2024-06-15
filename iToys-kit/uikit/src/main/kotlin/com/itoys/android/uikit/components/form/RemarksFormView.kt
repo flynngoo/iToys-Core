@@ -19,6 +19,7 @@ import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.then
+import com.itoys.android.utils.filter.AlphanumericWithChineseFilter
 import com.itoys.android.utils.filter.EmojiFilter
 
 /**
