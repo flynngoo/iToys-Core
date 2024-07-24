@@ -27,7 +27,7 @@ class StepsDecoration(
 ) : RecyclerView.ItemDecoration() {
 
     /** icon size  */
-    private val stepsIconSize = 18.dp2px()
+    private val stepsIconSize = 22.dp2px()
 
     /** item margin top */
     private val marginTop = 25.dp2px()

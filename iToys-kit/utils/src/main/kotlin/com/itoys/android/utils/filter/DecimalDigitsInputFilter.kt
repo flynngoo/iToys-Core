@@ -4,6 +4,7 @@ import android.text.InputFilter
 import android.text.Spanned
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
+import java.util.Locale
 import java.util.regex.Pattern
 
 /**
@@ -16,7 +17,7 @@ class DecimalDigitsInputFilter(private val decimalDigits: Int) : InputFilter {
     private val pattern: Pattern
 
     init {
-        val regex = String.format("[0-9]*+(\\.[0-9]{0,%d})?", decimalDigits)
+        val regex = String.format(Locale.getDefault(), "^[+-]?[0-9]*+(\\.[0-9]{0,%d})?$", decimalDigits)
         pattern = Pattern.compile(regex)
     }
 

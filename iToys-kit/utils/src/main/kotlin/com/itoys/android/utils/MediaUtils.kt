@@ -9,8 +9,10 @@ import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 
 /**
  * @author Fanfan Gu <a href="mailto:stefan.gufan@gmail.com">Contact me.</a>
@@ -95,5 +97,37 @@ object MediaUtils {
         canvas.drawColor(Color.WHITE)
         view.draw(canvas)
         return bitmap
+    }
+
+    /**
+     * bitmap转byteArr
+     *
+     * @param bitmap bitmap对象
+     * @param format 格式
+     * @param maxSize 最大的大小, 单位byte
+     * @return 字节数组
+     */
+    @JvmStatic
+    fun bitmap2Bytes(
+        bitmap: Bitmap,
+        format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG,
+        maxSize: Int = 128 * 1024
+    ): ByteArray {
+        var quality = 100
+        val output = ByteArrayOutputStream()
+
+        do {
+            output.reset()
+            bitmap.compress(format, quality, output)
+            quality -= 5
+        } while (output.toByteArray().size > maxSize)
+
+        val result = output.toByteArray()
+        return try {
+            output.close()
+            result
+        } catch (e: IOException) {
+            result
+        }
     }
 }

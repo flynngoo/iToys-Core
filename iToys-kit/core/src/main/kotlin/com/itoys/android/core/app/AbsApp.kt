@@ -5,8 +5,6 @@ import android.content.Context
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import com.itoys.android.core.GlobalConfig
-import com.itoys.android.core.crash.CrashHandler
-import com.itoys.android.core.crash.ToastCrashListener
 import com.itoys.android.core.network.NetworkInitialization
 import com.itoys.android.logcat.LoggerInitialization
 import com.itoys.android.uikit.UikitInitialization
@@ -25,20 +23,22 @@ abstract class AbsApp : Application() {
     abstract val globalConfig: GlobalConfig
 
     override fun attachBaseContext(base: Context?) {
-        TheRouter.isDebug = globalConfig.debug
         super.attachBaseContext(base)
         // 如果项目方法数超过65536, 则需要使用MultiDex进行分包
         MultiDex.install(base)
+        TheRouter.isDebug = globalConfig.debug
+        if (SysUtils.isMainProcess(this)) {
+            // logger 初始化
+            LoggerInitialization.initialization(application = this@AbsApp, debug = globalConfig.debug)
+            // network 初始化
+            NetworkInitialization.initialization(application = this@AbsApp, globalConfig = globalConfig)
+        }
     }
 
     override fun onCreate() {
         super.onCreate()
 
         if (SysUtils.isMainProcess(this)) {
-            // network 初始化
-            NetworkInitialization.initialization(application = this@AbsApp, globalConfig = globalConfig)
-            // logger 初始化
-            LoggerInitialization.initialization(application = this@AbsApp, debug = globalConfig.debug)
             // uikit 初始化
             UikitInitialization.initialization(application = this@AbsApp, imageFolder = globalConfig.imageFolder)
             // utils 初始化

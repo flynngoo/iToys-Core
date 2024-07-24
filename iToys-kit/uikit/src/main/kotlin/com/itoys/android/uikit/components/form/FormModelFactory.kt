@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RadioGroup
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.widget.addTextChangedListener
@@ -19,14 +20,17 @@ import com.itoys.android.uikit.R
 import com.itoys.android.uikit.databinding.UikitLayoutFormEditBinding
 import com.itoys.android.uikit.databinding.UikitLayoutFormRadioBinding
 import com.itoys.android.uikit.databinding.UikitLayoutFormSelectBinding
+import com.itoys.android.uikit.databinding.UikitLayoutFormSwitchBinding
 import com.itoys.android.uikit.databinding.UikitLayoutItemRadioBinding
 import com.itoys.android.uikit.model.RadioModel
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.dp2px
 import com.itoys.android.utils.expansion.email
+import com.itoys.android.utils.expansion.gone
 import com.itoys.android.utils.expansion.idCard
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
+import com.itoys.android.utils.expansion.isNotNull
 import com.itoys.android.utils.expansion.landlinePhone
 import com.itoys.android.utils.expansion.simpleMobile
 import com.itoys.android.utils.expansion.layoutInflater
@@ -35,6 +39,7 @@ import com.itoys.android.utils.expansion.then
 import com.itoys.android.utils.filter.DecimalDigitsInputFilter
 import com.itoys.android.utils.filter.EmojiFilter
 import com.itoys.android.utils.filter.IdCardInputFilter
+import kotlin.math.max
 
 /**
  * @Author Gu Fanfan
@@ -58,9 +63,13 @@ object FormModelFactory {
             FormModel.PHONE -> generateMobileModel(context, config)
             FormModel.ID_CARD -> generateIdCardModel(context, config)
             FormModel.EMAIL -> generateEmailModel(context, config)
+
             FormModel.DATE,
             FormModel.SELECT -> generateSelectModel(context, config)
+
             FormModel.RADIO -> generateRadioModel(context, config)
+
+            FormModel.SWITCH -> generateSwitchModel(context, config)
             else -> null
         }
     }
@@ -80,13 +89,17 @@ object FormModelFactory {
             FormModel.NUMBER -> {
                 val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
 
-                edit.addTextChangedListener {
-                    val text = it.toString()
+                if (edit.isEnabled) {
+                    edit.addTextChangedListener {
+                        val text = it.toString()
 
-                    if (edit.isFocused) {
-                        callback?.result(text)
+                        if (edit.isFocused) {
+                            callback?.result(text)
+                        }
+                        callback?.isAccurate(text.size() > 0)
                     }
-                    callback?.isAccurate(text.size() > 0)
+                } else {
+                    contentView.doOnClick { callback?.click() }
                 }
             }
 
@@ -154,6 +167,13 @@ object FormModelFactory {
                 }
             }
 
+            FormModel.SWITCH -> {
+                val formSwitch: SwitchCompat = contentView.findViewById(R.id.form_switch)
+                formSwitch.setOnCheckedChangeListener { _, isChecked ->
+                    callback?.result(isChecked)
+                }
+            }
+
             else -> {
                 logcat { "自定义不需要" }
             }
@@ -195,6 +215,11 @@ object FormModelFactory {
                         config.contentColor
                     )
                 )
+            }
+
+            FormModel.SWITCH -> {
+                val formSwitch: SwitchCompat = contentView.findViewById(R.id.form_switch)
+                formSwitch.isChecked = content.equals("true", ignoreCase = true)
             }
 
             else -> {
@@ -278,7 +303,7 @@ object FormModelFactory {
             editBinding.formEdit.inputType = InputType.TYPE_CLASS_PHONE
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
-            editBinding.formEdit.filters = arrayOf(LengthFilter(13))
+            editBinding.formEdit.filters = arrayOf(LengthFilter(max(11, config.maxLength)))
             return editBinding.root
         }
 
@@ -429,6 +454,20 @@ object FormModelFactory {
     }
 
     /**
+     * 生成Switch Model 表单
+     */
+    private fun generateSwitchModel(context: Context, config: FormContentConfig): View? {
+        context.layoutInflater?.let { layoutInflater ->
+            val switchBinding = UikitLayoutFormSwitchBinding.inflate(layoutInflater)
+            switchBinding.formSwitch.isChecked = config.placeholder.isNotBlank()
+            switchBinding.formSwitch.isEnabled = config.isEnable
+            return switchBinding.root
+        }
+
+        return null
+    }
+
+    /**
      * 更新 Radio Model
      */
     fun updateRadioModel(
@@ -471,8 +510,10 @@ object FormModelFactory {
         val selectView: ConstraintLayout = contentView.findViewById(R.id.form_select)
         val selectBinding = UikitLayoutFormSelectBinding.bind(selectView)
 
-        if (suffixIcon != null) {
+        if (suffixIcon.isNotNull()) {
             selectBinding.suffixIcon.setImageDrawable(suffixIcon)
+        } else {
+            selectBinding.suffixIcon.gone()
         }
     }
 }

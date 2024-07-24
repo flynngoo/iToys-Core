@@ -11,6 +11,7 @@
         android:background="@color/uikit_colorful_white"
         app:formBottomSeparator="true"
         app:formContentAlign="end"
+        app:formContentEnableAmount="true"
         app:formContentEndMargin="38dp"
         app:formLabel="运费"
         app:formLabelStartMargin="2dp"
@@ -55,12 +56,30 @@
         app:formSuffixText="@string/uikit_yuan"
         app:layout_constraintTop_toBottomOf="@id/cash_cost" />
 
+    <com.itoys.android.uikit.components.form.IToysFormView
+        android:id="@+id/test_enable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/uikit_colorful_white"
+        app:formBottomSeparator="true"
+        app:formContentAlign="end"
+        app:formContentEndMargin="38dp"
+        app:formLabel="万金油运费"
+        app:formLabelStartMargin="2dp"
+        app:formModel="Text"
+        app:formEnable="false"
+        app:formPlaceholder="0"
+        app:formRequiredMark="true"
+        app:formRequiredMarkStartMargin="16dp"
+        app:formSuffixText="@string/uikit_yuan"
+        app:layout_constraintTop_toBottomOf="@id/gas_cost" />
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/emoji"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="表情限制"
-        app:layout_constraintTop_toBottomOf="@id/gas_cost" />
+        app:layout_constraintTop_toBottomOf="@id/test_enable" />
 
     <com.itoys.android.uikit.components.picker.IdentityCardPickerView
         android:id="@+id/identity_card"
@@ -72,6 +91,8 @@
         android:id="@+id/other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:pictureMaximum="3"
+        app:pictureSpanCount="3"
         app:layout_constraintTop_toBottomOf="@id/identity_card"
         app:pictureTitle="@string/uikit_other" />
 </androidx.constraintlayout.widget.ConstraintLayout>

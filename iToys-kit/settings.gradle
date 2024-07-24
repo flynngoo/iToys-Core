@@ -5,4 +5,5 @@ include ':core',
         ':logcat',
         ':scanning',
         ':uikit',
-        ':utils'
+        ':utils',
+        ':wechat'

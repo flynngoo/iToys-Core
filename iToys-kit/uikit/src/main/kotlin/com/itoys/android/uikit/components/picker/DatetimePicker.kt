@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import com.github.gzuliyujiang.wheelpicker.annotation.DateMode
 import com.github.gzuliyujiang.wheelpicker.annotation.TimeMode
 import com.github.gzuliyujiang.wheelpicker.entity.DateEntity
+import com.github.gzuliyujiang.wheelpicker.entity.TimeEntity
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.components.dialog.AbsDialog
 import com.itoys.android.uikit.components.dialog.IToysDialog
 import com.itoys.android.uikit.databinding.UikitLayoutPickerDatetimeBinding
+import com.itoys.android.utils.expansion.color
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.isNotBlank
+import com.itoys.android.utils.expansion.then
 
 /**
  * @Author Gu Fanfan
@@ -64,6 +67,18 @@ class DatetimePicker : IToysDialog<UikitLayoutPickerDatetimeBinding, DatetimePic
 
         var dateMode = YEAR_MONTH_DAY
 
+        /** 从今天开始 */
+        var fromToday = true
+
+        /** 到今天结束：最大日期只能选到今天 */
+        var toToday = true
+
+        /** 起始年份 */
+        var startYear = 1900
+
+        /** 默认年份 */
+        var defaultYear = 0
+
         var timeMode = HOUR_24_NO_SECOND
 
         /** 回调 */
@@ -104,17 +119,57 @@ class DatetimePicker : IToysDialog<UikitLayoutPickerDatetimeBinding, DatetimePic
                 selectMonth = month
                 selectDay = day
             }
-            setRange(DateEntity.target(2023, 1, 1), DateEntity.today())
+
+            val startingDate: DateEntity
+            var endingDate: DateEntity
+
+            val today = DateEntity.today()
+
+            when {
+                builder.fromToday -> {
+                    startingDate = today
+                    endingDate = DateEntity.target(startingDate.year + 100, 12, 31)
+                }
+
+                else -> {
+                    startingDate = DateEntity.target(builder.startYear, 1, 1)
+                    endingDate = today
+
+                    if (!builder.toToday) {
+                        endingDate = DateEntity.target(endingDate.year + 100, 12, 31)
+                    }
+                }
+            }
+            setRange(startingDate, endingDate)
+
+            setDefaultValue(
+                DateEntity.target(
+                    (builder.defaultYear > 0).then(
+                        { builder.defaultYear },
+                        { today.year }
+                    ), today.month, today.day
+                )
+            )
+
+            selectYear = selectedYear
+            selectMonth = selectedMonth
+            selectDay = selectedDay
         }
 
         binding?.timeWheel?.apply {
             setTimeMode(builder.timeMode)
+
+            setDefaultValue(TimeEntity.now())
 
             setOnTimeSelectedListener { hour, minute, second ->
                 selectHour = hour
                 selectMinute = minute
                 selectSeconds = second
             }
+
+            selectHour = selectedHour
+            selectMinute = selectedMinute
+            selectSeconds = selectedSecond
         }
 
         binding?.close?.doOnClick { dismiss() }

@@ -14,15 +14,18 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.addModels
+import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.models
+import com.drake.brv.utils.mutable
 import com.drake.brv.utils.setup
 import com.itoys.android.image.databinding.ImageLayoutItemImageBinding
 import com.itoys.android.image.engine.CompressImageEngine
 import com.itoys.android.image.glide.GlideImageEngine
 import com.itoys.android.image.glide.IToysGlide
 import com.itoys.android.utils.expansion.dp2px
+import com.itoys.android.utils.expansion.empty
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.then
@@ -216,7 +219,7 @@ fun RecyclerView.pictureList(
 ) {
     grid(spanCount = spanCount).divider {
         orientation = DividerOrientation.GRID
-        setDivider(8, true)
+        setDivider(6, true)
     }.setup {
         addType<String>(R.layout.image_layout_item_image)
         onBind {
@@ -265,19 +268,28 @@ fun RecyclerView.addPictures(
     withPlus: Boolean = true,
     pictures: List<String>,
 ) {
-    val size = this.models?.size ?: 0
-    val addedSize = pictures.size + size
+    var modelSize = this.models?.size ?: 0
+    if (modelSize > 0 && this.models?.last() == String.empty()) {
+        modelSize -= 1
+    }
+
+    val addedSize = pictures.size + modelSize
+
 
     when {
         withPlus && addedSize < maximum -> {
-            addModels(pictures, index = max((size - 1), 0))
+            addModels(pictures, index = max((modelSize - 1), 0))
         }
 
-        addedSize >= maximum -> {
-            models = pictures
-        }
+        else -> {
+            if (withPlus) {
+                // 如果需要添加按钮情况下删除最后item
+                mutable.removeAt(modelSize)
+                bindingAdapter.notifyItemRemoved(modelSize)
+            }
 
-        else -> addModels(pictures)
+            addModels(pictures)
+        }
     }
 
     // 刷新分割线

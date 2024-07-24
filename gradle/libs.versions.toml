@@ -27,14 +27,14 @@ glide = "4.16.0"
 glide-transformers = "1.0.6"
 hilt = "2.48.1"
 immersionbar = "3.2.2"
-imageviewer = "1.0.7"
+imageviewer = "1.0.0"
 itoys = "0.1.0"
 itoys-hybrid = "0.0.1-SNAPSHOT"
-itoys-image = "0.0.17-SNAPSHOT"
+itoys-image = "0.1.2-SNAPSHOT"
 itoys-logcat = "0.0.3-SNAPSHOT"
 itoys-scanning = "0.0.4-SNAPSHOT"
-itoys-uikit = "0.0.108-SNAPSHOT"
-itoys-utils = "0.0.35-SNAPSHOT"
+itoys-uikit = "0.1.21-SNAPSHOT"
+itoys-utils = "0.1.3-SNAPSHOT"
 itoys-library-hybrid = "1.0.0"
 jackson = "2.13.5"
 junit = "4.13.2"
@@ -54,11 +54,13 @@ mmkv = "1.2.15"
 multidex = "2.0.1"
 navigation = "2.7.7"
 okhttp = "4.12.0"
-okio = "3.6.0"
+okio = "3.9.0"
+okdownload = "1.0.7"
 paging = "3.2.1"
 permissions = "18.6"
 picker = "4.1.13"
 picture-selector = "v3.11.2"
+progressbar-bga = "1.0.1"
 protobuf = "3.24.4"
 protobuf-plugin = "0.9.4"
 popup = "3.2.1"
@@ -76,6 +78,8 @@ theroute = "1.2.2"
 timber = "5.0.1"
 title-bar = "10.5"
 viewpager2 = "1.0.0"
+wechat = "6.8.0"
+work= "2.9.0"
 zxing = "3.0.1"
 
 [libraries]
@@ -124,14 +128,14 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
-imageviewer = { group = "com.itoys.android", name = "ImageViewPager", version.ref = "imageviewer" }
+imageviewer = { group = "com.itoys.library", name = "ImageViewPager", version.ref = "imageviewer" }
 itoys-hybrid = { group = "com.itoys.android", name = "hybrid", version.ref = "itoys" }
-itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys" }
+itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-image" }
 itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys" }
 itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys" }
 itoys-scanning = { group = "com.itoys.android", name = "scanning", version.ref = "itoys" }
-itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys" }
-itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys" }
+itoys-uikit = { group = "com.itoys.android", name = "uikit", version.ref = "itoys-uikit" }
+itoys-utils = { group = "com.itoys.android", name = "utils", version.ref = "itoys-utils" }
 itoys-library-hybrid = { group = "com.itoys.library", name = "lib-hybrid", version.ref = "itoys-library-hybrid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 magic-indicator = { group = "com.github.hackware1993", name = "MagicIndicator", version.ref = "magic-indicator" }
@@ -143,12 +147,18 @@ navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fr
 navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-logger = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-okio = { group = "com.squareup.okio", name = "okio", version.ref = "okhttp" }
+okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+okdownload = { group = "com.liulishuo.okdownload", name = "okdownload", version.ref = "okdownload" }
+okdownload-filedownloader = { group = "com.liulishuo.okdownload", name = "filedownloader", version.ref = "okdownload" }
+okdownload-okhttp = { group = "com.liulishuo.okdownload", name = "okhttp", version.ref = "okdownload" }
+okdownload-sqlite = { group = "com.liulishuo.okdownload", name = "sqlite", version.ref = "okdownload" }
+okdownload-ktx = { group = "com.liulishuo.okdownload", name = "ktx", version.ref = "okdownload" }
 paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging" }
 permissions = { group = "com.github.getActivity", name = "XXPermissions", version.ref = "permissions" }
 picker-wheel = { group = "com.github.gzu-liyujiang.AndroidPicker", name = "WheelPicker", version.ref = "picker" }
 picture-selector = { group = "io.github.lucksiege", name = "pictureselector", version.ref = "picture-selector" }
 picture-compress = { group = "io.github.lucksiege", name = "compress", version.ref = "picture-selector" }
+progressbar-bga = { group = "com.itoys.android", name = "ProgressBar", version.ref = "progressbar-bga" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 protobuf-java-lite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
@@ -171,6 +181,8 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 title-bar = { group = "com.github.getActivity", name = "TitleBar", version.ref = "title-bar" }
 viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 wheel = { group = "com.github.gzu-liyujiang.AndroidPicker", name = "WheelView", version.ref = "picker" }
+work = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
+wechat = { group = "com.tencent.mm.opensdk", name = "wechat-sdk-android", version.ref = "wechat" }
 zxing = { group = "com.github.jenly1314", name = "zxing-lite", version.ref = "zxing" }
 
 # Dependencies of the test

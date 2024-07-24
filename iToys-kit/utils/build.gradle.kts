@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.cryptography)
     implementation(libs.lifecycle.common)
     implementation(libs.mmkv)
+    implementation(libs.okio)
 
     // Test
     testImplementation(libs.junit)

@@ -1,5 +1,8 @@
 package com.itoys.android.utils.expansion
 
+import okio.buffer
+import okio.sink
+import okio.source
 import java.io.File
 
 /**
@@ -9,3 +12,8 @@ import java.io.File
  */
 
 fun String.toFile() = File(this)
+
+/**
+ * 获取文件md5
+ */
+fun File.md5() = source().buffer().buffer.md5().hex()

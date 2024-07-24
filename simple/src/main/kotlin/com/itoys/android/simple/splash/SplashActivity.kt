@@ -6,20 +6,23 @@ import com.itoys.android.core.activity.AbsMviActivity
 import com.itoys.android.core.crash.catchCrash
 import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.hybrid.HybridRouter
-import com.itoys.android.image.RoundCornerType
-import com.itoys.android.image.loadRoundCornerImage
 import com.itoys.android.logcat.logcat
 import com.itoys.android.simple.form.SimpleFormActivity
 import com.itoys.android.simple.list.SimpleListActivity
-import com.itoys.android.uikit.components.picker.CalendarPicker
-import com.itoys.android.uikit.components.picker.DatePicker
+import com.itoys.android.uikit.components.picker.DatetimePicker
+import com.itoys.android.uikit.components.toast.toast
+import com.itoys.android.uikit.components.upgrade.UpgradeDialog
+import com.itoys.android.uikit.components.upgrade.UpgradeModel
+import com.itoys.android.uikit.components.upgrade.filename
 import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.uikit.model.RadioModel
-import com.itoys.android.uikit.viewImage
+import com.itoys.android.utils.PathUtils
 import com.itoys.android.utils.expansion.actOpen
 import com.itoys.android.utils.expansion.collect
 import com.itoys.android.utils.expansion.doOnClick
-import com.itoys.android.utils.expansion.dp2px
+import com.itoys.android.utils.expansion.md5
+import com.itoys.android.utils.expansion.padZeroes
+import com.itoys.android.utils.expansion.toFile
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -89,9 +92,25 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
                 }
             } */
 
-            CalendarPicker.show {
+            /* DatetimePicker.show {
                 fm = supportFragmentManager
-                rangeMode = true
+                fromToday = false
+
+                callback = DatetimePicker.IDatetimeCallback { year, month, day, hour, minute, second ->
+                    toast("$year-${month.padZeroes()}-${day.padZeroes()} ${hour.padZeroes()}:${minute.padZeroes()}:${second.padZeroes()}")
+                }
+            } */
+            UpgradeDialog.show {
+                fm = supportFragmentManager
+                upgradeData = UpgradeModel(
+                    isIgnorable = true,
+                    versionCode = 32017,
+                    versionName = "3.2.17",
+                    upgradeLog = "小车订单审核前允许修改车辆价值",
+                    apkUrl = "http://img.bjjjst.com/00000000app/site/v3.1.18/com.mykj.jingji.site-20240618205454-v3.1.18.apk",
+                    apkSize = "25",
+                    md5 = "d41d8cd98f00b204e9800998ecf8427e"
+                )
             }
         }
 

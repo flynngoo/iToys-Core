@@ -13,6 +13,7 @@ import com.itoys.android.image.takePicture
 import com.itoys.android.image.uikit.dialog.ChooseImageDialog
 import com.itoys.android.uikit.components.form.IFormResultCallback
 import com.itoys.android.uikit.components.picker.IdentityCardPickerView
+import com.itoys.android.uikit.components.toast.toast
 import com.itoys.android.uikit.components.upload.IUploadCallback
 import com.itoys.android.utils.expansion.safeParseDouble
 import com.itoys.android.utils.expansion.stripTrailingZeros
@@ -86,6 +87,8 @@ class SimpleFormActivity : AbsMviActivity<SimpleActivityFormBinding, SimpleFormV
         binding?.identityCard?.setOwner(this)
         binding?.other?.setOwner(this)
         binding?.emoji?.filters = arrayOf(EmojiFilter())
+
+        binding?.cost?.setContent("-365.44")
     }
 
     override fun addClickListen() {
@@ -113,6 +116,12 @@ class SimpleFormActivity : AbsMviActivity<SimpleActivityFormBinding, SimpleFormV
                 super.result(result)
                 gasCost = result.safeParseDouble()
                 calculateCashCost()
+            }
+        })
+
+        binding?.testEnable?.setResultCallback(object : IFormResultCallback() {
+            override fun click() {
+                toast("点击测试")
             }
         })
 

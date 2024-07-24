@@ -125,7 +125,7 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
      */
     @Deprecated("See UseCase")
     fun <T : Any> launchRequest(
-        showLoading: Boolean = false,
+        showLoading: Boolean = true,
         showToast: Boolean = true,
         requestTag: String = UUID.randomUUID().toString(),
         success: ((T?) -> Unit)? = null,

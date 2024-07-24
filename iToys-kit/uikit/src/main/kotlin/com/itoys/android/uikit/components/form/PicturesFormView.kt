@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.drake.brv.reflect.copyType
+import com.drake.brv.utils.addModels
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.models
 import com.drake.brv.utils.mutable
@@ -27,12 +27,15 @@ import com.itoys.android.image.uikit.dialog.ChooseImageDialog
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
+import com.itoys.android.uikit.components.image.IViewImageCallback
 import com.itoys.android.uikit.databinding.UikitLayoutFormPictureBinding
 import com.itoys.android.uikit.viewImage
+import com.itoys.android.utils.expansion.empty
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
 import com.itoys.android.utils.expansion.then
+import kotlin.math.min
 
 /**
  * @Author Gu Fanfan
@@ -67,7 +70,7 @@ class PicturesFormView(
     private var maximum = Int.MAX_VALUE
 
     /** 每行 count */
-    private var spanCount = 4
+    private var spanCount = 3
 
     /** 展示添加 item */
     private var showPlus = true
@@ -80,6 +83,15 @@ class PicturesFormView(
 
     /** owner */
     private var ownerFragment: Fragment? = null
+
+    /** fm */
+    private var fragmentManager: FragmentManager? = null
+
+    /** 图片选择回调 */
+    private var pictureCallback: ChooseImageDialog.ISelectCallback? = null
+
+    /** 删除回调 */
+    private var deleteCallback: IPictureDeleteCallback? = null
 
     /** 选择图片 */
     private val medias = arrayListOf<String>()
@@ -108,10 +120,9 @@ class PicturesFormView(
                 ChooseImageDialog.show {
                     fm = fragmentManager()
 
-                    callback = object : ChooseImageDialog.ISelectCallback {
+                    callback = pictureCallback ?: object : ChooseImageDialog.ISelectCallback {
                         override fun selectFromAlbum() {
-                            val modelsSize = pictureListView?.models?.size ?: 0
-                            val maximum = ((maximum - modelsSize) < 9).then((maximum - modelsSize), 9)
+                            val maximum = min((maximum - medias.size), 9)
                             ownerActivity?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
                             ownerFragment?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
                         }
@@ -130,6 +141,7 @@ class PicturesFormView(
                     imagePosition = position,
                     showDelete = showDelete,
                     showDownload = !showDelete,
+                    callback = viewImageCallback
                 )
             }
 
@@ -141,11 +153,19 @@ class PicturesFormView(
                     callback = object : IDialogCallback() {
 
                         override fun clickCenter() {
-                            super.clickCenter()
                             deletePicture(index)
                         }
                     }
                 }
+            }
+        }
+    }
+
+    /** 查看大图回调 */
+    private val viewImageCallback by lazy {
+        object : IViewImageCallback {
+            override fun onDelete(position: Int) {
+                deletePicture(position)
             }
         }
     }
@@ -217,20 +237,18 @@ class PicturesFormView(
      * 设置图片
      */
     fun setPictures(pictures: List<String>?, showPlus: Boolean = false) {
-        this.medias.clear()
-        this.medias.addAll(pictures.isNullOrEmpty().then(
-            { showPlus.then({ listOf("") }, { emptyList() }) },
-            { pictures }
-        ) ?: emptyList())
-
+        this.showDelete = showPlus
         this.showPlus = showPlus
+
         pictureListView?.pictureList(
-            spanCount = 4,
+            spanCount = spanCount,
             withPlus = showPlus,
-            withDelete = showPlus,
-            pictures = medias.copyType(),
+            withDelete = showDelete,
+            pictures = showPlus.then(listOf(""), listOf()),
             clickCallback = pictureClickCallback
         )
+
+        addPictures(pictures)
     }
 
     /**
@@ -244,6 +262,20 @@ class PicturesFormView(
             maximum = maximum,
             withPlus = showPlus,
             pictures = listOf(picture),
+        )
+    }
+
+    /**
+     * 添加多张图片
+     */
+    fun addMediaResult(result: List<ImageMedia>?) {
+        if (result.isNullOrEmpty()) return
+
+        medias.addAll(result.toStringList())
+        pictureListView?.addPictures(
+            maximum = maximum,
+            withPlus = showPlus,
+            pictures = result.toStringList(),
         )
     }
 
@@ -269,11 +301,20 @@ class PicturesFormView(
         pictureListView?.bindingAdapter?.notifyItemRemoved(index)
         // 删除照片
         medias.removeAt(index)
+        deleteCallback?.delete(index)
 
-        // 如果删除后没有图片 && 支持选择上传
-        // 兼容 maximum = 1 的情况
-        if (pictureListView?.models?.size == 0 && showPlus) {
-            pictureListView?.models = listOf("")
+        if (showPlus) {
+            val pictureModels = pictureListView?.models ?: emptyList()
+
+            when {
+                // 如果删除后没有图片 && 支持选择上传
+                pictureModels.isEmpty() -> pictureListView?.models = listOf(String.empty())
+
+                // picture size == maximum删除后last != 空字符串，添加空字符串
+                pictureModels.last() != String.empty() -> {
+                    pictureListView?.addModels(listOf(String.empty()))
+                }
+            }
         }
     }
 
@@ -292,14 +333,39 @@ class PicturesFormView(
     }
 
     /**
+     * 设置 fm
+     */
+    fun setFragmentManager(fm: FragmentManager) {
+        this.fragmentManager = fm
+    }
+
+    /**
      * 获取fragmentManager
      */
     private fun fragmentManager(): FragmentManager? {
-        return ownerFragment?.childFragmentManager ?: ownerActivity?.supportFragmentManager
+        return (ownerFragment?.childFragmentManager ?: ownerActivity?.supportFragmentManager) ?: fragmentManager
     }
 
     /**
      * 获取图片路径list
      */
     fun mediaList() = medias
+
+    /**
+     * 设置图片选择回调
+     */
+    fun setPictureCallback(callback: ChooseImageDialog.ISelectCallback) {
+        this.pictureCallback = callback
+    }
+
+    /**
+     * 设置图片选择回调
+     */
+    fun setDeleteCallback(callback: IPictureDeleteCallback) {
+        this.deleteCallback = callback
+    }
+
+    fun interface IPictureDeleteCallback {
+        fun delete(index: Int)
+    }
 }

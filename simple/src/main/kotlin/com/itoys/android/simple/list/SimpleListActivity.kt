@@ -9,8 +9,12 @@ import com.itoys.android.core.mvi.ListUIIntent
 import com.itoys.android.databinding.SimpleLayoutFotterButtonBinding
 import com.itoys.android.databinding.SimpleLayoutHeaderTotalCountBinding
 import com.itoys.android.databinding.SimpleLayoutSearchBinding
+import com.itoys.android.uikit.bindSteps
 import com.itoys.android.uikit.components.input.SearchView
 import com.itoys.android.uikit.magicIndicator
+import com.itoys.android.uikit.model.StepsModel
+import com.itoys.android.uikit.model.StepsStatus
+import com.itoys.android.utils.expansion.dp2px
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -36,6 +40,30 @@ class SimpleListActivity : AbsMviListActivity<SimpleListViewModel>() {
         )
 
         headerView.totalCount.text = "共100条"
+
+        val currentSteps = 0
+
+        val list = listOf(
+            StepsModel(title = "房源信息", subtitle = "填写房屋信息"),
+            StepsModel(title = "填写信息", subtitle = "填写联系人信息"),
+            StepsModel(title = "完成录入", subtitle = "创建完成"),
+        )
+
+        list.forEachIndexed { index, stepsModel ->
+            stepsModel.margin = 52.dp2px()
+
+            stepsModel.status = when {
+                index < currentSteps ->  StepsStatus.Completed
+                index == currentSteps ->  StepsStatus.Progress
+                else -> StepsStatus.NotStarted
+            }
+        }
+
+        headerView.steps.apply {
+            self?.let {
+                bindSteps(it, list)
+            }
+        }
 
         headerView.indicator.magicIndicator(listOf("TAB1", "TAB2", "TAB3"))
         return headerView.root

@@ -3,6 +3,7 @@ package com.itoys.android.uikit
 import android.app.Application
 import com.drake.statelayout.StateConfig
 import com.itoys.android.logcat.logcat
+import com.itoys.android.uikit.components.upgrade.ApkInstallReceiver
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -38,6 +39,9 @@ object UikitInitialization {
         // 全局刷新配置
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> ClassicsHeader(context) }
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ -> ClassicsFooter(context) }
+
+        // 注册install广播
+        ApkInstallReceiver.registerReceiver(application)
     }
 
     fun requireApp(): Application {

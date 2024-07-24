@@ -90,6 +90,7 @@
             <enum name="Datetime" value="7" />
             <enum name="Select" value="8" />
             <enum name="Radio" value="9" />
+            <enum name="Switch" value="10" />
         </attr>
         <!-- 表单是否可点击 -->
         <attr name="formEnable" format="boolean" />

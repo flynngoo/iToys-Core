@@ -33,6 +33,7 @@ dependencies {
     implementation(libs.title.bar)
     implementation(libs.mmkv)
     implementation(libs.retrofit)
+    implementation(libs.okio)
 
     implementation(projects.iToysKit.core)
     implementation(projects.iToysKit.hybrid)

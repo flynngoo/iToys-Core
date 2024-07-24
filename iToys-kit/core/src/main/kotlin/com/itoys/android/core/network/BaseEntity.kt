@@ -47,7 +47,7 @@ class PageEntity<T>(
     @JsonProperty("total")
     val total: Int,
     @JsonProperty("records")
-    @JsonAlias("list")
+    @JsonAlias("list", "values")
     val list: List<T>?,
 )
 

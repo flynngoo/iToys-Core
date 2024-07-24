@@ -132,3 +132,13 @@ fun Double.plusDouble(other: Double): Double {
     val result = toBigDecimal().plus(other.toBigDecimal())
     return result.toDouble()
 }
+
+/**
+ * double minus double
+ *
+ * 避免精度丢失问题
+ */
+fun Double.minusDouble(other: Double): Double {
+    val result = toBigDecimal().minus(other.toBigDecimal())
+    return result.toDouble()
+}

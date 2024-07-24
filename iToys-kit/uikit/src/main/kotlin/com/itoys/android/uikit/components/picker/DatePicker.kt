@@ -121,15 +121,17 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
             val startingDate: DateEntity
             var endingDate: DateEntity
 
+            val today = DateEntity.today()
+
             when {
                 builder.fromToday -> {
-                    startingDate = DateEntity.today()
+                    startingDate = today
                     endingDate = DateEntity.target(startingDate.year + 100, 12, 31)
                 }
 
                 else -> {
                     startingDate = DateEntity.target(builder.startYear, 1, 1)
-                    endingDate = DateEntity.today()
+                    endingDate = today
 
                     if (!builder.toToday) {
                         endingDate = DateEntity.target(endingDate.year + 100, 12, 31)
@@ -141,9 +143,9 @@ class DatePicker : IToysDialog<UikitLayoutPickerDateBinding, DatePicker.Builder>
             setDefaultValue(
                 DateEntity.target(
                     (builder.defaultYear > 0).then(
-                        builder.defaultYear,
-                        startingDate.year
-                    ), startingDate.month, startingDate.day
+                        { builder.defaultYear },
+                        { today.year }
+                    ), today.month, today.day
                 )
             )
 

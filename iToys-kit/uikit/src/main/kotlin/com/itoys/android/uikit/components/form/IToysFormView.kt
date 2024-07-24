@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.textview.MaterialTextView
 import com.itoys.android.logcat.logcat
@@ -21,9 +22,11 @@ import com.itoys.android.utils.expansion.color
 import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.dp2px
 import com.itoys.android.utils.expansion.drawable
+import com.itoys.android.utils.expansion.gone
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.isNotBlank
+import com.itoys.android.utils.expansion.isNull
 import com.itoys.android.utils.expansion.then
 import com.itoys.android.utils.expansion.visible
 
@@ -43,6 +46,9 @@ class IToysFormView(
 
     /** 最小高度 */
     private var minHeight = 0
+
+    /** 必填标识 */
+    private var requiredMarkView: AppCompatImageView? = null
 
     /** 必填标识 */
     private var requiredMark = false
@@ -253,23 +259,31 @@ class IToysFormView(
             R.styleable.IToysFormView_formRequiredMarkEndMargin, requiredMarkEndMargin
         )
 
-        root.requiredMark.visibility = this.requiredMark.then(VISIBLE, GONE)
-        if (this.requiredMark) {
-            root.requiredMark.setImageDrawable(
-                requiredIcon ?: context.drawable(R.drawable.uikit_ic_required_mark)
-            )
-            val requiredMarkLayoutParams = root.requiredMark.layoutParams as MarginLayoutParams
-            requiredMarkLayoutParams.setMargins(
-                requiredMarkStartMargin, 0, requiredMarkEndMargin, 0
-            )
-            if (requiredMarkIconWidth > 0) {
-                requiredMarkLayoutParams.width = requiredMarkIconWidth
-            }
+        requiredMarkView = root.requiredMark
+        root.requiredMark.setImageDrawable(
+            requiredIcon ?: context.drawable(R.drawable.uikit_ic_required_mark)
+        )
+        val requiredMarkLayoutParams = root.requiredMark.layoutParams as MarginLayoutParams
+        requiredMarkLayoutParams.setMargins(
+            requiredMarkStartMargin, 0, requiredMarkEndMargin, 0
+        )
+        if (requiredMarkIconWidth > 0) {
+            requiredMarkLayoutParams.width = requiredMarkIconWidth
+        }
 
-            if (requiredMarkIconHeight > 0) {
-                requiredMarkLayoutParams.height = requiredMarkIconHeight
-            }
-            root.requiredMark.layoutParams = requiredMarkLayoutParams
+        if (requiredMarkIconHeight > 0) {
+            requiredMarkLayoutParams.height = requiredMarkIconHeight
+        }
+        root.requiredMark.layoutParams = requiredMarkLayoutParams
+        root.requiredMark.visibility = this.requiredMark.then(VISIBLE, GONE)
+    }
+
+    /**
+     * 显示必填标识
+     */
+    fun showRequiredMark(isVisible: Boolean = true) {
+        requiredMarkView?.apply {
+            visibility = isVisible.then(VISIBLE, INVISIBLE)
         }
     }
 
@@ -432,12 +446,20 @@ class IToysFormView(
         suffixIcon: Drawable? = null
     ) {
         this.suffixIcon = suffixIcon
-
-        when (formModel) {
-            FormModel.SELECT -> {
-                FormModelFactory.changeSelectSuffix(contentView, suffixIcon)
+        if (this.suffixIcon.isNull()) {
+            when (formModel) {
+                FormModel.SELECT -> {
+                    FormModelFactory.changeSelectSuffix(contentView, suffixIcon)
+                }
+                else -> formBinding?.suffixIcon?.gone()
             }
-            else -> formBinding?.suffixIcon?.visible()
+        } else {
+            when (formModel) {
+                FormModel.SELECT -> {
+                    FormModelFactory.changeSelectSuffix(contentView, suffixIcon)
+                }
+                else -> formBinding?.suffixIcon?.visible()
+            }
         }
     }
 

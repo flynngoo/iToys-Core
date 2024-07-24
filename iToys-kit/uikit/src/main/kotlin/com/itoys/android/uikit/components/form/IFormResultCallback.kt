@@ -18,6 +18,11 @@ abstract class IFormResultCallback {
     open fun result(result: String) {}
 
     /**
+     * 内容结果
+     */
+    open fun result(result: Boolean) {}
+
+    /**
      * 内容id
      */
     open fun resultId(resultId: Int) {}

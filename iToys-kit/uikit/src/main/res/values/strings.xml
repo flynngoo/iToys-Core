@@ -142,4 +142,6 @@
     <string name="uikit_long_text">这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本这是长文本</string>
     <string name="uikit_date_year_month">%d年%s月</string>
     <string name="uikit_date_ymd">%d年%s月%s日</string>
+    <string name="uikit_upgrade_now">立即更新</string>
+    <string name="uikit_upgrade_apk_size">更新包大小: %sMB</string>
 </resources>

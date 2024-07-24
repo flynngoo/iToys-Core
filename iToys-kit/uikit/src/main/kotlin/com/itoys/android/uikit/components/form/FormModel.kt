@@ -18,6 +18,7 @@ import androidx.annotation.IntDef
     FormModel.DATETIME,
     FormModel.SELECT,
     FormModel.RADIO,
+    FormModel.SWITCH,
 )
 @Retention(AnnotationRetention.SOURCE)
 annotation class FormModel {
@@ -33,5 +34,6 @@ annotation class FormModel {
         const val DATETIME = 7
         const val SELECT = 8
         const val RADIO = 9
+        const val SWITCH = 10
     }
 }
