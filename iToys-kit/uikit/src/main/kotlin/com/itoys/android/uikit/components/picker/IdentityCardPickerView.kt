@@ -138,11 +138,14 @@ class IdentityCardPickerView(
     private fun initView(attrs: AttributeSet?) {
         val ta = context.obtainStyledAttributes(attrs, R.styleable.IdentityCardPickerView)
         val title = ta.getString(R.styleable.IdentityCardPickerView_identityCardTitle).invalid()
+        val enable = ta.getBoolean(R.styleable.IdentityCardPickerView_identityCardEnable, true)
         ta.recycle()
 
         if (title.isNotBlank()) binding.title.text = title
+        binding.front.setUploadEnable(enable)
         binding.front.customImageSelection(true)
         binding.front.setUploadImageCallback(imageUploadCallback)
+        binding.back.setUploadEnable(enable)
         binding.back.customImageSelection(true)
         binding.back.setUploadImageCallback(imageUploadCallback)
     }
@@ -184,22 +187,28 @@ class IdentityCardPickerView(
      */
     fun addPictures(imageMark: String, picture: String) {
         when (imageMark) {
-            binding.front.imageMark() -> {
-                // 人像面
-                binding.front.setImage(picture)
-            }
+            // 人像面
+            binding.front.imageMark() -> binding.front.setImage(picture)
 
-            binding.back.imageMark() -> {
-                // 国徽面
-                binding.back.setImage(picture)
-            }
+            // 国徽面
+            binding.back.imageMark() -> binding.back.setImage(picture)
         }
     }
 
     /**
      * 设置图片
      */
-    fun setPictures(imageMark: String, picture: String) {
+    fun setPictures(frontPicture: String, backPicture: String) {
+        // 人像面
+        binding.front.setImage(frontPicture)
+        // 国徽面
+        binding.back.setImage(backPicture)
+    }
+
+    /**
+     * 设置图片
+     */
+    fun setPicture(imageMark: String, picture: String) {
         when (imageMark) {
             binding.front.imageMark() -> setFrontPicture(picture)
 

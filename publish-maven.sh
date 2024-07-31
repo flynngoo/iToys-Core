@@ -5,7 +5,7 @@
 #./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.1.14-SNAPSHOT
 
 # uikit
-#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.1.22-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.1.23-SNAPSHOT
 
 # hybrid
 #./gradlew publish -PpublishLibraryName=hybrid -PpublishLibraryVersion=0.1.0

@@ -237,6 +237,7 @@
 
     <declare-styleable name="IdentityCardPickerView">
         <attr name="identityCardTitle" format="string" />
+        <attr name="identityCardEnable" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="DescriptionsView">
