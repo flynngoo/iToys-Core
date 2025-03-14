@@ -20,11 +20,9 @@ class AlphanumericFilter : InputFilter {
         dest: Spanned?,
         dstart: Int,
         dend: Int
-    ): CharSequence {
-        if (source.isBlank()) return ""
-
+    ): CharSequence? {
         if (source.isAlphanumeric()) {
-            return source.invalid()
+            return source
         }
 
         return ""

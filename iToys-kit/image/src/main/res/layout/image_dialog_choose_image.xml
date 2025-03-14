@@ -40,7 +40,7 @@
             android:layout_marginTop="30dp"
             android:background="#FFF4F4F4"
             android:gravity="center"
-            android:paddingHorizontal="57dp"
+            android:paddingHorizontal="27dp"
             android:paddingVertical="16dp"
             android:textColor="#FF666666"
             android:textSize="14sp"

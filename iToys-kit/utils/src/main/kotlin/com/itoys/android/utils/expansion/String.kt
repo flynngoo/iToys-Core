@@ -9,6 +9,7 @@ import com.itoys.android.utils.regex.Const.EXACT_MOBILE
 import com.itoys.android.utils.regex.Const.HIDE_PHONE
 import com.itoys.android.utils.regex.Const.ID_CARD_CHAR
 import com.itoys.android.utils.regex.Const.LANDLINE_PHONE
+import com.itoys.android.utils.regex.Const.SIMPLE_LANDLINE_PHONE
 import com.itoys.android.utils.regex.Const.SIMPLE_MOBILE
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -55,7 +56,7 @@ fun CharSequence?.invalid(invalid: String = ""): String {
  * 字符串去掉空格, 如果字符串为空返回长度为0的字符串
  */
 fun String?.trimString(): String {
-    return this?.trim() ?: ""
+    return this?.replace("\\s".toRegex(), "") ?: ""
 }
 
 /**
@@ -150,7 +151,8 @@ fun CharSequence?.exactMobile() = this.isNotBlank() && EXACT_MOBILE.toRegex().ma
 /**
  * 座机-校验
  */
-fun CharSequence?.landlinePhone() = this.isNotBlank() && LANDLINE_PHONE.toRegex().matches(this.invalid())
+fun CharSequence?.landlinePhone() = this.isNotBlank() && (SIMPLE_LANDLINE_PHONE.toRegex()
+    .matches(this.invalid()) || LANDLINE_PHONE.toRegex().matches(this.invalid()))
 
 /**
  * 隐藏手机号中间4位

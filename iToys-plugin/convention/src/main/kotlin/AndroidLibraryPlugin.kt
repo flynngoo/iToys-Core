@@ -24,6 +24,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
                 configureKotlinAndroid(commonExtension = this)
 
                 defaultConfig.targetSdk = AppConfig.targetSdkVersion.apiLevel
+                defaultConfig.consumerProguardFiles("consumer-rules.pro")
 
                 viewBinding { enable = true }
             }

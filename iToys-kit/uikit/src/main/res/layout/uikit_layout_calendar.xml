@@ -5,15 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/last_month"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/uikit_ic_back_black"
+        app:layout_constraintBottom_toBottomOf="@id/date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/date"
+        app:tint="?attr/appPrimaryColor" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/date"
         style="@style/IToysAndroid.Body2.Medium"
         android:layout_height="44dp"
         android:paddingHorizontal="16dp"
         android:paddingTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="2021年12月" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/next_month"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/uikit_ic_right_back_black"
+        app:layout_constraintBottom_toBottomOf="@id/date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/date"
+        app:tint="?attr/appPrimaryColor" />
 
     <com.haibin.calendarview.CalendarView
         android:id="@+id/calendar"

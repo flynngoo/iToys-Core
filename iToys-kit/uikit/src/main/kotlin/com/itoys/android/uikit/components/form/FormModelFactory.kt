@@ -5,16 +5,20 @@ import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
+import android.text.style.UnderlineSpan
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.RadioGroup
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.text.getSpans
 import androidx.core.view.children
 import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import com.itoys.android.logcat.logcat
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.databinding.UikitLayoutFormEditBinding
@@ -60,7 +64,8 @@ object FormModelFactory {
             FormModel.TEXT -> generateTextModel(context, config)
             FormModel.NUMBER -> generateTextModel(context, config, inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
 
-            FormModel.PHONE -> generateMobileModel(context, config)
+            FormModel.PHONE -> generatePhoneModel(context, config)
+            FormModel.MOBILE -> generateMobileModel(context, config)
             FormModel.ID_CARD -> generateIdCardModel(context, config)
             FormModel.EMAIL -> generateEmailModel(context, config)
 
@@ -107,12 +112,25 @@ object FormModelFactory {
                 val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
 
                 edit.addTextChangedListener {
+                    val phone = it.toString()
+
+                    if (edit.isFocused) {
+                        callback?.result(phone)
+                    }
+                    callback?.isAccurate(phone.simpleMobile() || phone.landlinePhone())
+                }
+            }
+
+            FormModel.MOBILE -> {
+                val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
+
+                edit.addTextChangedListener {
                     val mobile = it.toString()
 
                     if (edit.isFocused) {
                         callback?.result(mobile)
                     }
-                    callback?.isAccurate(mobile.simpleMobile() || mobile.landlinePhone())
+                    callback?.isAccurate(mobile.simpleMobile())
                 }
             }
 
@@ -195,6 +213,7 @@ object FormModelFactory {
             FormModel.TEXT,
             FormModel.NUMBER,
             FormModel.PHONE,
+            FormModel.MOBILE,
             FormModel.ID_CARD,
             FormModel.EMAIL -> {
                 val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
@@ -242,6 +261,7 @@ object FormModelFactory {
             FormModel.TEXT,
             FormModel.NUMBER,
             FormModel.PHONE,
+            FormModel.MOBILE,
             FormModel.ID_CARD,
             FormModel.EMAIL -> {
                 val edit: AppCompatEditText = contentView.findViewById(R.id.form_edit)
@@ -292,6 +312,25 @@ object FormModelFactory {
     }
 
     /**
+     * 生成Phone Model 表单
+     */
+    private fun generatePhoneModel(
+        context: Context,
+        config: FormContentConfig
+    ): View? {
+        context.layoutInflater?.let { layoutInflater ->
+            val editBinding = UikitLayoutFormEditBinding.inflate(layoutInflater)
+            editBinding.formEdit.inputType = InputType.TYPE_CLASS_PHONE
+            editBinding.formEdit.isEnabled = config.isEnable
+            setEditStyle(editBinding.formEdit, config)
+            editBinding.formEdit.filters = arrayOf(LengthFilter(max(11, config.maxLength)))
+            return editBinding.root
+        }
+
+        return null
+    }
+
+    /**
      * 生成Mobile Model 表单
      */
     private fun generateMobileModel(
@@ -303,7 +342,7 @@ object FormModelFactory {
             editBinding.formEdit.inputType = InputType.TYPE_CLASS_PHONE
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
-            editBinding.formEdit.filters = arrayOf(LengthFilter(max(11, config.maxLength)))
+            editBinding.formEdit.filters = arrayOf(LengthFilter(11))
             return editBinding.root
         }
 

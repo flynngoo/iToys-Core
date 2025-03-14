@@ -161,6 +161,13 @@ class DescriptionsView(
     }
 
     /**
+     * 设置content color
+     */
+    fun setContentColor(color: Int) {
+        contentView?.setTextColor(color)
+    }
+
+    /**
      * 获取content
      */
     fun content() = contentView?.text.toString()

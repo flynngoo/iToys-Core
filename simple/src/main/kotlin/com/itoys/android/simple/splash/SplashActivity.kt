@@ -103,7 +103,7 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
             UpgradeDialog.show {
                 fm = supportFragmentManager
                 upgradeData = UpgradeModel(
-                    isIgnorable = true,
+                    isIgnorable = false,
                     versionCode = 32017,
                     versionName = "3.2.17",
                     upgradeLog = "小车订单审核前允许修改车辆价值",

@@ -19,13 +19,11 @@ class EmojiFilter : InputFilter {
         dest: Spanned?,
         dstart: Int,
         dend: Int
-    ): CharSequence {
-        if (source.isBlank()) return ""
-
+    ): CharSequence? {
         if (source.isEmoji()) {
             return ""
         }
 
-        return source.invalid()
+        return source
     }
 }

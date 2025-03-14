@@ -11,6 +11,7 @@ import com.itoys.android.uikit.R
 import com.itoys.android.uikit.databinding.UikitLayoutSearchBinding
 import com.itoys.android.utils.InputUtils.hideSoftInput
 import com.itoys.android.utils.expansion.doOnClick
+import com.itoys.android.utils.expansion.empty
 import com.itoys.android.utils.expansion.gone
 import com.itoys.android.utils.expansion.size
 import com.itoys.android.utils.expansion.then
@@ -105,7 +106,7 @@ class SearchView(
 
         searchInput = binding.searchInput
         binding.searchInput.addTextChangedListener {
-            searchCallback?.onChange(it ?: "")
+            searchCallback?.onChange(it ?: String.empty())
 
             // 输入内容长度大于0 && 允许清除, 显示清除按钮
             (it.size() > 0 && allowClear).then(
@@ -128,7 +129,7 @@ class SearchView(
 
         binding.suffix.doOnClick {
             if (allowClear) {
-                binding.searchInput.setText("")
+                binding.searchInput.setText(String.empty())
             }
 
             searchCallback?.onSuffixClick(allowClear)
@@ -140,7 +141,7 @@ class SearchView(
     }
 
     fun clear() {
-        searchInput?.setText("")
+        searchInput?.setText(String.empty())
         searchInput?.hideSoftInput()
         searchInput?.clearFocus()
     }

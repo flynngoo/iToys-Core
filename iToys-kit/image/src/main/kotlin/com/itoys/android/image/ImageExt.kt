@@ -275,10 +275,9 @@ fun RecyclerView.addPictures(
 
     val addedSize = pictures.size + modelSize
 
-
     when {
         withPlus && addedSize < maximum -> {
-            addModels(pictures, index = max((modelSize - 1), 0))
+            addModels(pictures, index = max(modelSize, 0))
         }
 
         else -> {

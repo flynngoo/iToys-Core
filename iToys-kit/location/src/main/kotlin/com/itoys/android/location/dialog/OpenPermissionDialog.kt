@@ -88,6 +88,8 @@ class OpenPermissionDialog : DialogFragment() {
      */
     private fun initialize() {
         binding?.btnOpenSettings?.setOnClickListener {
+            dismiss()
+
             when (builder.contentRes) {
                 R.string.location_permission_denied -> {
                     XXPermissions.startPermissionActivity(requireContext())
@@ -97,8 +99,6 @@ class OpenPermissionDialog : DialogFragment() {
                     LocationUtils.openLocationService(requireContext())
                 }
             }
-
-            dismiss()
         }
 
         binding?.btnCancel?.setOnClickListener { dismiss() }

@@ -69,6 +69,9 @@ class PicturesFormView(
     /** 最大长度 */
     private var maximum = Int.MAX_VALUE
 
+    /** 选择最大长度, 默认 9 */
+    private var selectMaximum = 9
+
     /** 每行 count */
     private var spanCount = 3
 
@@ -92,6 +95,9 @@ class PicturesFormView(
 
     /** 删除回调 */
     private var deleteCallback: IPictureDeleteCallback? = null
+
+    /** 添加选择图片回调 */
+    private var addMediasCallback: ((List<String>) -> Unit)? = null
 
     /** 选择图片 */
     private val medias = arrayListOf<String>()
@@ -122,7 +128,7 @@ class PicturesFormView(
 
                     callback = pictureCallback ?: object : ChooseImageDialog.ISelectCallback {
                         override fun selectFromAlbum() {
-                            val maximum = min((maximum - medias.size), 9)
+                            val maximum = min((maximum - medias.size), selectMaximum)
                             ownerActivity?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
                             ownerFragment?.selectFromAlbum(callback = mediaCallback, maxSize = maximum)
                         }
@@ -188,6 +194,7 @@ class PicturesFormView(
         titleTypeface = ta.getString(R.styleable.PicturesFormView_pictureTitleTypeface).invalid()
         titleBackground = ta.getColor(R.styleable.PicturesFormView_pictureTitleBackground, titleBackground)
         maximum = ta.getInt(R.styleable.PicturesFormView_pictureMaximum, maximum)
+        selectMaximum = ta.getInt(R.styleable.PicturesFormView_pictureSelectMaximum, selectMaximum)
         spanCount = ta.getInt(R.styleable.PicturesFormView_pictureSpanCount, spanCount)
         showPlus = ta.getBoolean(R.styleable.PicturesFormView_picturePlus, showPlus)
         showDelete = ta.getBoolean(R.styleable.PicturesFormView_picturePlus, showDelete)
@@ -263,6 +270,8 @@ class PicturesFormView(
             withPlus = showPlus,
             pictures = listOf(picture),
         )
+
+        addMediasCallback?.invoke(listOf(picture))
     }
 
     /**
@@ -291,6 +300,8 @@ class PicturesFormView(
             withPlus = showPlus,
             pictures = pictures,
         )
+
+        addMediasCallback?.invoke(pictures)
     }
 
     /**
@@ -356,6 +367,13 @@ class PicturesFormView(
      */
     fun setPictureCallback(callback: ChooseImageDialog.ISelectCallback) {
         this.pictureCallback = callback
+    }
+
+    /**
+     * 设置图片选择回调
+     */
+    fun setAddMediasCallback(callback: (List<String>) -> Unit) {
+        this.addMediasCallback = callback
     }
 
     /**

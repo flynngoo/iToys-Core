@@ -1,5 +1,6 @@
 package com.itoys.android.utils
 
+import android.text.TextUtils.replace
 import com.itoys.android.utils.expansion.email
 import com.itoys.android.utils.expansion.isEmoji
 import com.itoys.android.utils.expansion.landlinePhone
@@ -9,8 +10,10 @@ import com.itoys.android.utils.expansion.simpleMobile
 import com.itoys.android.utils.expansion.string
 import com.itoys.android.utils.expansion.stripTrailingZeros
 import com.itoys.android.utils.expansion.toCNY
+import com.itoys.android.utils.expansion.trimString
 import com.itoys.android.utils.regex.Const
 import com.itoys.android.utils.regex.EmojiConst
+import com.itoys.android.utils.regex.RegexUtils
 import org.junit.Test
 import java.util.regex.Pattern
 
@@ -34,7 +37,7 @@ class UtilsTest {
      */
     @Test
     fun runPhoneRegex() {
-        val phone = "1213232781"
+        val phone = "185113335311"
 
         assert(phone.simpleMobile() || phone.landlinePhone())
     }
@@ -56,6 +59,14 @@ class UtilsTest {
     fun stringSplit() {
         val ids = "1, 2, 3, 4"
         println(ids.split(", ")[0])
+    }
+    /**
+     * string split.
+     */
+    @Test
+    fun stringTrim() {
+        val str = "91110400 MA02 1BB 55M"
+        println(str.trimString())
     }
 
     /**
@@ -136,5 +147,11 @@ class UtilsTest {
         val numberB = 0.55
 
         println("Result: " + numberA.plusDouble(numberB))
+    }
+
+    @Test
+    fun testBusinessLicenseLength18() {
+        val businessLicense = "31210000747853909E"
+        println("营业执照校验: " + RegexUtils.isBusinessLicenseLength18(businessLicense))
     }
 }

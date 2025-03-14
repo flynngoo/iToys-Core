@@ -46,6 +46,9 @@ abstract class AbsViewModel<I : IUIIntent, S : IUIState> : ViewModel(), DefaultL
     private val _failureState: Channel<FailureUIState> = Channel()
     val failureState: Flow<FailureUIState> = _failureState.receiveAsFlow()
 
+    /** Page id */
+    open val pageId by lazy { UUID.randomUUID().toString() }
+
     init {
         launchOnUI {
             uiIntentFlow.collect { intent -> handlerIntent(intent) }

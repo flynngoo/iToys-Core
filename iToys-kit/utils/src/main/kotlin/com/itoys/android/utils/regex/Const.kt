@@ -23,6 +23,11 @@ object Const {
     const val SIMPLE_MOBILE = "^1[3-9]\\d{9}\$"
 
     /**
+     * 座机(简单) 正则
+     */
+    const val SIMPLE_LANDLINE_PHONE = "^(0\\d{2,3})?\\d{7,8}\$"
+
+    /**
      * 座机 正则
      */
     const val LANDLINE_PHONE = "^(0\\d{2,3}-)?\\d{7,8}\$"
@@ -45,7 +50,7 @@ object Const {
     /**
      * 营业执照 正则
      */
-    const val BUSINESS_LICENSE = "^([159Y]{1})([1239]{1})([0-9ABCDEFGHJKLMNPQRTUWXY]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{9})([0-90-9ABCDEFGHJKLMNPQRTUWXY])\$"
+    const val BUSINESS_LICENSE = "^([1-9]\\d{5})?([A-Z0-9]{9})([0-9A-Z]{3})\$"
 
     /**
      * 字母+数字 正则

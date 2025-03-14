@@ -28,20 +28,32 @@
         app:layout_constraintTop_toBottomOf="@id/upgrade_logo">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/upgrade_version"
+            style="@style/IToysAndroid.Title1"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/uikit_colorful_7C45FD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/uikit_upgrade_version" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/upgrade_content"
             style="@style/IToysAndroid.Body2"
             android:layout_width="0dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upgrade_version"
             tools:text="@string/uikit_long_text" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/upgrade_apk_size"
             style="@style/IToysAndroid.Body2"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upgrade_content"
             tools:text="@string/uikit_upgrade_apk_size" />

@@ -91,6 +91,7 @@
             <enum name="Select" value="8" />
             <enum name="Radio" value="9" />
             <enum name="Switch" value="10" />
+            <enum name="Mobile" value="11" />
         </attr>
         <!-- 表单是否可点击 -->
         <attr name="formEnable" format="boolean" />
@@ -164,6 +165,8 @@
         <attr name="pictureDelete" format="boolean" />
         <!-- 最大值 -->
         <attr name="pictureMaximum" format="integer" />
+        <!-- 选择最大值 -->
+        <attr name="pictureSelectMaximum" format="integer" />
         <!-- 每行 count -->
         <attr name="pictureSpanCount" format="integer" />
     </declare-styleable>

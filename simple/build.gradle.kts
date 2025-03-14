@@ -35,11 +35,12 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.okio)
 
-    implementation(projects.iToysKit.core)
-    implementation(projects.iToysKit.hybrid)
-    implementation(projects.iToysKit.logcat)
-    implementation(projects.iToysKit.image)
-    implementation(projects.iToysKit.scanning)
+    implementation(libs.itoys.core)
+    implementation(libs.itoys.hybrid)
+    implementation(libs.itoys.logcat)
+    implementation(libs.itoys.image)
+    implementation(libs.itoys.scanning)
+    // implementation(libs.itoys.uikit)
     implementation(projects.iToysKit.uikit)
-    implementation(projects.iToysKit.utils)
+    implementation(libs.itoys.utils)
 }

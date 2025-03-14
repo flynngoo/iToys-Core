@@ -24,15 +24,17 @@ abstract class AbsApp : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
+        if (SysUtils.isMainProcess(this)) {
+            // network 初始化
+            NetworkInitialization.initialization(application = this@AbsApp, globalConfig = globalConfig)
+
+            // logger 初始化
+            LoggerInitialization.initialization(application = this@AbsApp, debug = globalConfig.debug)
+        }
+
         // 如果项目方法数超过65536, 则需要使用MultiDex进行分包
         MultiDex.install(base)
         TheRouter.isDebug = globalConfig.debug
-        if (SysUtils.isMainProcess(this)) {
-            // logger 初始化
-            LoggerInitialization.initialization(application = this@AbsApp, debug = globalConfig.debug)
-            // network 初始化
-            NetworkInitialization.initialization(application = this@AbsApp, globalConfig = globalConfig)
-        }
     }
 
     override fun onCreate() {

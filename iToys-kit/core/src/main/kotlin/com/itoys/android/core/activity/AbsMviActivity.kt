@@ -78,7 +78,7 @@ abstract class AbsMviActivity<VB : ViewBinding, VM : AbsViewModel<out IUIIntent,
 
             loadingDialog?.showDialog()
         } else {
-            loadingDialog?.dismiss()
+            loadingDialog?.dismissAllowingStateLoss()
         }
     }
 

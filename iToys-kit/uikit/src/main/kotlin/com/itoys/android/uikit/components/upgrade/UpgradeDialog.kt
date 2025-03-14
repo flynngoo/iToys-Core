@@ -72,12 +72,14 @@ class UpgradeDialog : IToysDialog<UikitDialogUpgradeBinding, UpgradeDialog.Build
     override fun initialize() {
         binding?.apply {
             // check 是否强制更新
-            isCancelable = builder.upgradeData?.isIgnorable == true
+            isCancelable = builder.upgradeData?.isIgnorable == false
             (isCancelable).then(
                 { cancelUpgrade.visible() },
                 { cancelUpgrade.gone() }
             )
 
+            // 升级版本
+            upgradeVersion.text = getString(R.string.uikit_upgrade_version, builder.upgradeData?.versionName.invalid())
             // 升级内容
             upgradeContent.text = builder.upgradeData?.upgradeLog.invalid()
             // 升级包大小
@@ -161,11 +163,12 @@ class UpgradeDialog : IToysDialog<UikitDialogUpgradeBinding, UpgradeDialog.Build
                 // md5 一致 发送安装广播
                 // 关闭弹窗
                 binding?.root?.post {
+                    dismiss()
+
                     ApkInstallReceiver.sendBroadcast(
                         context = requireContext().applicationContext,
                         apk.absolutePath
                     )
-                    dismiss()
                 }
             } else {
                 // md5 不一致 通知用户重新下载

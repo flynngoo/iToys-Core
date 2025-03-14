@@ -9,6 +9,7 @@ import com.haibin.calendarview.CalendarView
 import com.itoys.android.uikit.R
 import com.itoys.android.uikit.databinding.UikitLayoutCalendarBinding
 import com.itoys.android.utils.TimeUtils
+import com.itoys.android.utils.expansion.doOnClick
 import com.itoys.android.utils.expansion.invalid
 import com.itoys.android.utils.expansion.padZeroes
 import com.itoys.android.utils.expansion.then
@@ -51,9 +52,13 @@ class IToysCalendar(
         datePattern = ta.getString(R.styleable.IToysCalendar_iToysDatePattern).invalid("yyyy/MM/dd")
         ta.recycle()
 
+        binding.lastMonth.doOnClick { binding.calendar.scrollToPre(true) }
+
         binding.date.text = context.getString(
             R.string.uikit_date_year_month, binding.calendar.curYear, binding.calendar.curMonth.padZeroes()
         )
+
+        binding.nextMonth.doOnClick { binding.calendar.scrollToNext(true) }
 
         binding.calendar.setOnMonthChangeListener { year, month ->
             binding.date.text = context.getString(

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.databind.node.JsonNodeType
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.module.kotlin.jsonMapper
 import com.fasterxml.jackson.module.kotlin.kotlinModule
@@ -107,7 +108,22 @@ object JsonMapper {
 
         while (fields.hasNext()) {
             val field = fields.next()
-            map[field.key] = field.value.asText()
+            val value = field.value
+
+            when (value.nodeType) {
+                JsonNodeType.ARRAY -> {
+                    val subValues = arrayListOf<String>()
+                    for (subField in value) {
+                        subValues.add(subField.asText())
+                    }
+
+                    map[field.key] = subValues
+                }
+                JsonNodeType.STRING -> map[field.key] = value.textValue()
+                JsonNodeType.BOOLEAN -> map[field.key] = value.booleanValue()
+                JsonNodeType.NUMBER -> map[field.key] = value.numberValue()
+                else -> map[field.key] = value.textValue()
+            }
         }
 
         return map

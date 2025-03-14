@@ -6,12 +6,14 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.itoys.android.image.DemoImageModel
 import com.itoys.android.image.IMediaCallback
 import com.itoys.android.image.ImageMedia
 import com.itoys.android.image.RoundCornerType
@@ -23,6 +25,8 @@ import com.itoys.android.uikit.R
 import com.itoys.android.uikit.components.dialog.IDialogCallback
 import com.itoys.android.uikit.components.dialog.IToysNoticeDialog
 import com.itoys.android.uikit.components.image.IViewImageCallback
+import com.itoys.android.uikit.components.upload.exception.EmptyImageException
+import com.itoys.android.uikit.components.upload.exception.UploadFailedException
 import com.itoys.android.uikit.databinding.UikitLayoutUploadImageBinding
 import com.itoys.android.uikit.viewImage
 import com.itoys.android.utils.expansion.doOnClick
@@ -94,6 +98,12 @@ class UploadImageView(
     /** 上传回调 */
     private var uploadImageCallback: IUploadCallback? = null
 
+    /** 上传图片demo image */
+    var uploadDemoImage: DemoImageModel? = null
+
+    /** 本地图片地址 */
+    private var localImageUrl = ""
+
     /** 图片地址 */
     private var imageUrl = ""
 
@@ -106,6 +116,7 @@ class UploadImageView(
             override fun onResult(result: ImageMedia) {
                 super.onResult(result)
                 setImage(result.mediaPath)
+                localImageUrl = result.mediaPath
 
                 uploadImageCallback?.upload(uploadMark, result.mediaPath)
             }
@@ -249,6 +260,7 @@ class UploadImageView(
                 } else {
                     ChooseImageDialog.show {
                         fm = fragmentManager()
+                        demoImage = uploadDemoImage
 
                         callback = object : ChooseImageDialog.ISelectCallback {
                             override fun selectFromAlbum() {
@@ -387,9 +399,10 @@ class UploadImageView(
             ownerFragment != null -> ownerFragment?.requireActivity()
             else -> null
         }
+        val image = localImageUrl.invalid(imageUrl)
 
         context?.viewImage(
-            imageUrl,
+            image,
             showDownload = !(showDelete && uploadEnable),
             showDelete = showDelete && uploadEnable,
             callback = viewImageCallback
@@ -414,6 +427,11 @@ class UploadImageView(
     /**
      * 获取图片地址
      */
+    @Deprecated(
+        message = "该方法存在异常处理不明确的问题，建议使用新的imageUrl()方法，它能更好地处理图片未选择和上传失败的情况",
+        replaceWith = ReplaceWith("imageUrlV2()"),
+        level = DeprecationLevel.WARNING
+    )
     fun imageUrl(required: Boolean = false): String {
         // 图片地址是否有效
         val isValidUrl = imageUrl.isNotBlank() && imageUrl.startsWith("http")
@@ -429,7 +447,38 @@ class UploadImageView(
     }
 
     /**
+     * 本地图片地址
+     */
+    fun localImageUrl() = localImageUrl.invalid()
+
+    /**
+     * 获取图片地址
+     * @throws EmptyImageException 当未选择图片时抛出
+     * @throws UploadFailedException 当图片上传失败时抛出
+     */
+    fun imageUrlV2(): String {
+        val uploadTitle = binding.uploadText.text.invalid().replace(uploadTextLabel, "")
+
+        if (imageUrl.isBlank()) {
+            throw EmptyImageException("请选择上传「${uploadTitle}」")
+        }
+
+        // 图片地址是否有效
+        val isValidUrl = imageUrl.startsWith("http")
+        if (!isValidUrl) {
+            throw UploadFailedException("「${uploadTitle}」上传失败, 请重新选择")
+        }
+
+        return imageUrl
+    }
+
+    /**
      * 图片
      */
+    @Deprecated(
+        message = "该方法存在异常处理不明确的问题，建议使用新的imageUrl()方法，它能更好地处理图片未选择和上传失败的情况",
+        replaceWith = ReplaceWith("imageUrlV2()"),
+        level = DeprecationLevel.WARNING
+    )
     fun image(required: Boolean = false) = imageMark() to imageUrl(required)
 }

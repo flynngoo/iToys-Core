@@ -30,16 +30,17 @@ immersionbar = "3.2.2"
 imageviewer = "1.0.0"
 itoys = "0.1.0"
 itoys-hybrid = "0.0.1-SNAPSHOT"
-itoys-image = "0.1.2-SNAPSHOT"
+itoys-image = "0.1.7-SNAPSHOT"
+itoys-core = "0.1.25-SNAPSHOT"
 itoys-logcat = "0.0.3-SNAPSHOT"
 itoys-scanning = "0.0.4-SNAPSHOT"
-itoys-uikit = "0.1.21-SNAPSHOT"
-itoys-utils = "0.1.3-SNAPSHOT"
+itoys-uikit = "0.1.39-SNAPSHOT"
+itoys-utils = "0.1.12-SNAPSHOT"
 itoys-library-hybrid = "1.0.0"
 jackson = "2.13.5"
 junit = "4.13.2"
 keyboard-event = "1.0.9"
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 kotlinx-coroutines = "1.7.3"
 kotlinx-datetime = "0.4.1"
 kotlinx-serialization = "1.6.0"
@@ -129,7 +130,9 @@ luban = { group = "top.zibin", name = "Luban-turbo", version.ref = "luban" }
 location-amap = { group = "com.amap.api", name = "location", version.ref = "location-amap" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 imageviewer = { group = "com.itoys.library", name = "ImageViewPager", version.ref = "imageviewer" }
+
 itoys-hybrid = { group = "com.itoys.android", name = "hybrid", version.ref = "itoys" }
+itoys-core = { group = "com.itoys.android", name = "core", version.ref = "itoys-core" }
 itoys-image = { group = "com.itoys.android", name = "image", version.ref = "itoys-image" }
 itoys-location = { group = "com.itoys.android", name = "location", version.ref = "itoys" }
 itoys-logcat = { group = "com.itoys.android", name = "logcat", version.ref = "itoys" }

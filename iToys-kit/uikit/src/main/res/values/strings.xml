@@ -143,5 +143,6 @@
     <string name="uikit_date_year_month">%d年%s月</string>
     <string name="uikit_date_ymd">%d年%s月%s日</string>
     <string name="uikit_upgrade_now">立即更新</string>
+    <string name="uikit_upgrade_version">%s版本全新上线</string>
     <string name="uikit_upgrade_apk_size">更新包大小: %sMB</string>
 </resources>
