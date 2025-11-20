@@ -38,7 +38,7 @@ abstract class AbsMviListFragment<VM : AbsListViewModel<out IUIIntent, out IUISt
 
     override fun initialize(savedInstanceState: Bundle?) {
         binding?.titleBar?.setTitle(listTitle())
-        binding?.titleBar?.visibility = withTileBar.then(View.VISIBLE, View.GONE)
+        binding?.clTitleBar?.visibility = withTileBar.then(View.VISIBLE, View.GONE)
 
         // 显示加载中
         binding?.page?.showLoading(refresh = false)

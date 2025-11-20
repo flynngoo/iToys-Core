@@ -42,5 +42,6 @@ dependencies {
     implementation(libs.itoys.scanning)
     // implementation(libs.itoys.uikit)
     implementation(projects.iToysKit.uikit)
-    implementation(libs.itoys.utils)
+    implementation(projects.iToysKit.utils)
+    // implementation(libs.itoys.utils)
 }

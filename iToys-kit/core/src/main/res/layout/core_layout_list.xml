@@ -4,18 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hjq.bar.TitleBar
-        android:id="@id/title_bar"
-        style="@style/IToysAndroid.TitleBar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.hjq.bar.TitleBar
+            android:id="@id/title_bar"
+            style="@style/IToysAndroid.TitleBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_title_bar" />
 
     <com.drake.brv.PageRefreshLayout
         android:id="@+id/page"

@@ -301,7 +301,7 @@ class UploadImageView(
         root.uploadLogo.visibility = isShowUploadLogo.then(VISIBLE, GONE)
 
         root.uploadLogo.setImageDrawable(
-            logo ?: context.drawable(R.drawable.uikit_ic_upload_image)
+            logo ?: context.drawable(R.drawable.uikit_icon_upload_image)
         )
         val logoParams = root.uploadLogo.layoutParams as LayoutParams
         logoParams.width = logoSize

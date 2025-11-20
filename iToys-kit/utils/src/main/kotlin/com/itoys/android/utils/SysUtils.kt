@@ -257,4 +257,39 @@ object SysUtils {
         val clipData = ClipData.newPlainText(label, text)
         context.clipboardManager?.setPrimaryClip(clipData)
     }
+
+    /**
+     * 打开系统浏览器
+     */
+    @JvmStatic
+    fun openSysBrowser(context: Context, url: String) {
+        if (url.isBlank()) return   // 空地址直接忽略或可选择 Toast
+
+        val uri = try {
+            Uri.parse(url)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return
+        }
+
+        // 检查是否 http / https
+        val scheme = uri.scheme?.lowercase()
+        if (scheme != "http" && scheme != "https") {
+            return
+        }
+
+        val intent = Intent(Intent.ACTION_VIEW, uri).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // 防止 context 不是 Activity 时崩溃
+        }
+
+        // 检查是否有应用能处理该 Intent
+        val pm = context.packageManager
+        intent.resolveActivity(pm) ?: return
+
+        try {
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

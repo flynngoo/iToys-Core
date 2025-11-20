@@ -94,8 +94,6 @@ class IToysCalendar(
                 )
             }
         })
-
-        binding.calendar
     }
 
     /**
@@ -112,6 +110,16 @@ class IToysCalendar(
             binding.calendar.setSelectSingleMode()
             binding.calendar.scrollToCurrent()
         }
+    }
+
+    /**
+     * 设置选择日期范围
+     *
+     * @param startCalendar startCalendar
+     * @param endCalendar   endCalendar
+     */
+    fun setSelectCalendarRange(startCalendar: Calendar, endCalendar: Calendar) {
+        binding.calendar.setSelectCalendarRange(startCalendar, endCalendar)
     }
 
     /**

@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import com.itoys.android.logcat.asLog
 import com.itoys.android.logcat.logcat
 import com.itoys.android.uikit.R
+import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.tagName
 import com.itoys.android.utils.expansion.then
 
@@ -20,6 +21,11 @@ import com.itoys.android.utils.expansion.then
  * @Date 2023/12/2
  */
 abstract class AbsDialog<out B : AbsDialog.Builder> : DialogFragment() {
+
+    /**
+     * 倒计时
+     */
+    private var countDownTimer: CountDownTimer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +90,29 @@ abstract class AbsDialog<out B : AbsDialog.Builder> : DialogFragment() {
         }
     }
 
+    /**
+     * 启动新的搜索倒计时
+     */
+    open fun startSearchCountDownTimer(keywords: String) {
+        countDownTimer?.cancel()
+        countDownTimer = null
+        if (keywords.isBlank()) return
+
+        countDownTimer = CountDownTimer(
+            dialog = this@AbsDialog,
+            searchKeywords = keywords,
+            builder().timerInterval,
+        )
+        countDownTimer?.start()
+    }
+
+    /**
+     * 倒计时结束
+     */
+    open fun countdownEnded(keywords: String) {
+        logcat { "倒计时结束 -> $keywords" }
+    }
+
     abstract class Builder {
 
         /**
@@ -135,5 +164,11 @@ abstract class AbsDialog<out B : AbsDialog.Builder> : DialogFragment() {
          * 多按钮排列方式。可选项：horizontal/vertical, 默认：horizontal
          */
         open var buttonLayout = LinearLayout.HORIZONTAL
+
+        /**
+         * 倒计间隔
+         * 单位：ms
+         */
+        open var timerInterval = 500L
     }
 }

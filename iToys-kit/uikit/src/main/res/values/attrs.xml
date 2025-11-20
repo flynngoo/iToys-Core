@@ -92,6 +92,7 @@
             <enum name="Radio" value="9" />
             <enum name="Switch" value="10" />
             <enum name="Mobile" value="11" />
+            <enum name="Click" value="12" />
         </attr>
         <!-- 表单是否可点击 -->
         <attr name="formEnable" format="boolean" />

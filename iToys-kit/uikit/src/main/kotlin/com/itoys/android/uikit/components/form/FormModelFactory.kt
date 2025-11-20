@@ -75,6 +75,8 @@ object FormModelFactory {
             FormModel.RADIO -> generateRadioModel(context, config)
 
             FormModel.SWITCH -> generateSwitchModel(context, config)
+
+            FormModel.CLICK -> generateClickModel(context, config)
             else -> null
         }
     }
@@ -170,7 +172,8 @@ object FormModelFactory {
 
             FormModel.ADDRESS,
             FormModel.DATETIME,
-            FormModel.SELECT -> {
+            FormModel.SELECT,
+            FormModel.CLICK -> {
                 val selectView: ConstraintLayout = contentView.findViewById(R.id.form_select)
                 val selectBinding = UikitLayoutFormSelectBinding.bind(selectView)
                 selectBinding.formSelect.doOnClick { callback?.click() }
@@ -223,7 +226,8 @@ object FormModelFactory {
             FormModel.ADDRESS,
             FormModel.DATE,
             FormModel.DATETIME,
-            FormModel.SELECT -> {
+            FormModel.SELECT,
+            FormModel.CLICK -> {
                 val selectView: ConstraintLayout = contentView.findViewById(R.id.form_select)
                 val selectBinding = UikitLayoutFormSelectBinding.bind(selectView)
                 selectBinding.content.text = (content.isNotBlank()).then(content, config.placeholder)
@@ -271,7 +275,8 @@ object FormModelFactory {
             FormModel.ADDRESS,
             FormModel.DATE,
             FormModel.DATETIME,
-            FormModel.SELECT -> {
+            FormModel.SELECT,
+            FormModel.CLICK -> {
                 val selectView: ConstraintLayout = contentView.findViewById(R.id.form_select)
                 selectView.isEnabled = contentEnable
             }
@@ -305,6 +310,11 @@ object FormModelFactory {
             if (!config.enableEmoji) filters = filters.plus(EmojiFilter())
             if (config.enableAmount) filters = filters.plus(DecimalDigitsInputFilter(2))
             editBinding.formEdit.filters = filters
+            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                }
+            }
             return editBinding.root
         }
 
@@ -324,6 +334,11 @@ object FormModelFactory {
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
             editBinding.formEdit.filters = arrayOf(LengthFilter(max(11, config.maxLength)))
+            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                }
+            }
             return editBinding.root
         }
 
@@ -343,6 +358,11 @@ object FormModelFactory {
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
             editBinding.formEdit.filters = arrayOf(LengthFilter(11))
+            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                }
+            }
             return editBinding.root
         }
 
@@ -364,6 +384,11 @@ object FormModelFactory {
             var filters = arrayOf<InputFilter>(IdCardInputFilter())
             if (config.maxLength > 0) filters = filters.plus(LengthFilter(config.maxLength))
             editBinding.formEdit.filters = filters
+            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                }
+            }
             return editBinding.root
         }
 
@@ -386,6 +411,11 @@ object FormModelFactory {
             if (config.maxLength > 0) filters = filters.plus(LengthFilter(config.maxLength))
             if (!config.enableEmoji) filters = filters.plus(EmojiFilter())
             editBinding.formEdit.filters = filters
+            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                }
+            }
             return editBinding.root
         }
 
@@ -453,6 +483,38 @@ object FormModelFactory {
     ): View? {
         context.layoutInflater?.let { layoutInflater ->
             val selectBinding = UikitLayoutFormSelectBinding.inflate(layoutInflater)
+            selectBinding.formSelect.isEnabled = config.isEnable
+            if (config.contentSize > 0) {
+                selectBinding.content.setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    config.contentSize.toFloat()
+                )
+            }
+            selectBinding.content.text = config.placeholder
+            if (config.placeholderColor != 0) {
+                selectBinding.content.setTextColor(config.placeholderColor)
+            }
+            selectBinding.content.gravity = when (config.contentAlign) {
+                FormTextAlign.START -> Gravity.START or Gravity.CENTER_VERTICAL
+                FormTextAlign.END -> Gravity.END or Gravity.CENTER_VERTICAL
+                else -> Gravity.START
+            }
+            return selectBinding.root
+        }
+
+        return null
+    }
+
+    /**
+     * 生成Click Model 表单
+     */
+    private fun generateClickModel(
+        context: Context,
+        config: FormContentConfig,
+    ): View? {
+        context.layoutInflater?.let { layoutInflater ->
+            val selectBinding = UikitLayoutFormSelectBinding.inflate(layoutInflater)
+            selectBinding.suffixIcon.gone()
             selectBinding.formSelect.isEnabled = config.isEnable
             if (config.contentSize > 0) {
                 selectBinding.content.setTextSize(
