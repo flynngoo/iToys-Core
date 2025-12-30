@@ -2,19 +2,29 @@ package com.itoys.android.simple.splash
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.RecyclerView.LayoutManager.chooseSize
 import com.itoys.android.core.activity.AbsMviActivity
 import com.itoys.android.core.crash.catchCrash
 import com.itoys.android.databinding.SplashActivityLayoutBinding
 import com.itoys.android.hybrid.HybridRouter
+import com.itoys.android.image.IMediaCallback
+import com.itoys.android.image.ImageMedia
+import com.itoys.android.image.selectFromAlbum
+import com.itoys.android.image.takePicture
+import com.itoys.android.image.toStringList
+import com.itoys.android.image.uikit.dialog.ChooseImageDialog
 import com.itoys.android.logcat.logcat
 import com.itoys.android.simple.form.SimpleFormActivity
 import com.itoys.android.simple.list.SimpleListActivity
+import com.itoys.android.simple.upload.UploadActivity
 import com.itoys.android.uikit.components.picker.DatetimePicker
 import com.itoys.android.uikit.components.toast.toast
 import com.itoys.android.uikit.components.upgrade.UpgradeDialog
 import com.itoys.android.uikit.components.upgrade.UpgradeModel
 import com.itoys.android.uikit.components.upgrade.filename
 import com.itoys.android.uikit.components.upload.IUploadCallback
+import com.itoys.android.uikit.components.upload.toImageItem
+import com.itoys.android.uikit.components.upload.toImageItemList
 import com.itoys.android.uikit.model.RadioModel
 import com.itoys.android.utils.PathUtils
 import com.itoys.android.utils.expansion.actOpen
@@ -36,6 +46,20 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
     override val viewModel: SplashViewModel? by viewModels()
 
     override fun createViewBinding() = SplashActivityLayoutBinding.inflate(layoutInflater)
+
+    /** 图片选择回调 */
+    private val mediaCallback by lazy {
+        object : IMediaCallback() {
+            override fun onResult(result: ImageMedia) {
+                super.onResult(result)
+
+            }
+
+            override fun onResult(result: List<ImageMedia>?) {
+                super.onResult(result)
+            }
+        }
+    }
 
     /**
      * 上传图片
@@ -80,37 +104,18 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
         }
 
         binding?.noticeDialog?.doOnClick {
-            /* IToysNoticeDialog.show {
+            ChooseImageDialog.show {
                 fm = supportFragmentManager
-                title = "这是标题这是标题这是标题这是标题"
-                content = "确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗确认删除测试图片吗?"
 
-                callback = object : IDialogCallback() {
-                    override fun clickCenter() {
-                        super.clickCenter()
+                callback = object : ChooseImageDialog.ISelectCallback {
+                    override fun selectFromAlbum() {
+                        selectFromAlbum(callback = mediaCallback)
+                    }
+
+                    override fun takePicture() {
+                        takePicture(callback = mediaCallback)
                     }
                 }
-            } */
-
-            /* DatetimePicker.show {
-                fm = supportFragmentManager
-                fromToday = false
-
-                callback = DatetimePicker.IDatetimeCallback { year, month, day, hour, minute, second ->
-                    toast("$year-${month.padZeroes()}-${day.padZeroes()} ${hour.padZeroes()}:${minute.padZeroes()}:${second.padZeroes()}")
-                }
-            } */
-            UpgradeDialog.show {
-                fm = supportFragmentManager
-                upgradeData = UpgradeModel(
-                    isIgnorable = false,
-                    versionCode = 32017,
-                    versionName = "3.2.17",
-                    upgradeLog = "小车订单审核前允许修改车辆价值",
-                    apkUrl = "http://img.bjjjst.com/00000000app/site/v3.1.18/com.mykj.jingji.site-20240618205454-v3.1.18.apk",
-                    apkSize = "25",
-                    md5 = "d41d8cd98f00b204e9800998ecf8427e"
-                )
             }
         }
 
@@ -127,6 +132,8 @@ class SplashActivity : AbsMviActivity<SplashActivityLayoutBinding, SplashViewMod
         binding?.phoneSubmit?.doOnClick {
             catchCrash { binding?.phone?.formContent() }
         }
+
+        binding?.upload?.doOnClick { UploadActivity::class.actOpen(this) }
     }
 
     override fun addObserver() {

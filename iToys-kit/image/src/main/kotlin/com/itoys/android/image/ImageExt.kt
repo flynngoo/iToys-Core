@@ -1,5 +1,6 @@
 package com.itoys.android.image
 
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -307,6 +308,8 @@ fun AppCompatActivity.takePicture(
         .setCompressEngine(CompressImageEngine.create())
         .forResult(object : OnResultCallbackListener<LocalMedia> {
             override fun onResult(result: ArrayList<LocalMedia>?) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
                 if (result.isNullOrEmpty()) {
                     callback?.onResult(null)
                     return
@@ -339,6 +342,8 @@ fun Fragment.takePicture(
         .setCompressEngine(CompressImageEngine.create())
         .forResult(object : OnResultCallbackListener<LocalMedia> {
             override fun onResult(result: ArrayList<LocalMedia>?) {
+                activity?.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
                 if (result.isNullOrEmpty()) {
                     callback?.onResult(null)
                     return
@@ -365,6 +370,7 @@ fun AppCompatActivity.selectFromAlbum(
 ) {
     PictureSelector.create(this)
         .openGallery(SelectMimeType.ofImage())
+        .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         .isDisplayCamera(false)
         .setMaxSelectNum(maxSize)
         .setMinSelectNum(1)
@@ -398,6 +404,7 @@ fun Fragment.selectFromAlbum(
 ) {
     PictureSelector.create(this)
         .openGallery(SelectMimeType.ofImage())
+        .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         .isDisplayCamera(false)
         .setMaxSelectNum(maxSize)
         .setMinSelectNum(1)

@@ -36,5 +36,11 @@
         <activity
             android:name=".simple.form.SimpleFormActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".simple.upload.UploadActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
     </application>
 </manifest>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="2dp">
+
+    <!-- 必填按钮 -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/required_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uikit_ic_required_mark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        style="@style/IToysAndroid.Body2"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/uikit_colorful_333333"
+        app:layout_constraintStart_toEndOf="@id/required_mark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginStart="0dp"
+        tools:text="@string/uikit_module_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/optional_title"
+        style="@style/IToysAndroid.Body2"
+        android:textColor="@color/uikit_colorful_999999"
+        app:layout_constraintStart_toEndOf="@id/title"
+        app:layout_constraintTop_toTopOf="@id/title"
+        tools:text="@string/uikit_module_name" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        style="@style/IToysAndroid.Body2"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/uikit_colorful_666666"
+        android:textSize="10dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="@string/uikit_module_name" />
+
+    <com.itoys.android.uikit.components.upload.UploadItemView
+        android:id="@+id/upload_item_left"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        app:itemMark="upload_left"
+        app:layout_constraintEnd_toStartOf="@id/upload_item_right"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitle" />
+
+    <com.itoys.android.uikit.components.upload.UploadItemView
+        android:id="@+id/upload_item_right"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:itemMark="upload_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/upload_item_left"
+        app:layout_constraintTop_toTopOf="@id/upload_item_left" />
+</androidx.constraintlayout.widget.ConstraintLayout>

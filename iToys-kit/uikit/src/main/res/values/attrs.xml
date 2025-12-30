@@ -114,6 +114,8 @@
         <attr name="formContentEnableEmoji" format="boolean" />
         <!-- 表单-内容 金额 -->
         <attr name="formContentEnableAmount" format="boolean" />
+        <!-- 表单-内容 金额 -->
+        <attr name="formContentFocusSelection" format="boolean" />
 
         <!-- 表单-后缀 icon -->
         <attr name="formSuffixIcon" format="reference" />
@@ -340,6 +342,69 @@
         <attr name="uploadImageMark" format="string" />
         <!-- 图片上传 enable -->
         <attr name="uploadImageEnable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="UploadWithHeaderView">
+        <!-- 图片上传-必填 默认false -->
+        <attr name="uploadRequiredMark" format="boolean" />
+        <!-- 图片上传-必填icon -->
+        <attr name="uploadRequiredMarkIcon" format="reference" />
+        <!-- 图片上传-必填icon宽 -->
+        <attr name="uploadRequiredMarkIconSize" format="dimension" />
+        <!-- 图片上传-必填start margin -->
+        <attr name="uploadRequiredMarkMargin" format="dimension" />
+
+        <!-- 标题 -->
+        <attr name="uploadTitle" format="string" />
+        <!-- 标题颜色 -->
+        <attr name="uploadTitleColor" format="string" />
+        <!-- 标题大小 -->
+        <attr name="uploadTitleSize" format="string" />
+        <!-- 图片上传-必填end margin -->
+        <attr name="uploadTitleMargin" format="dimension" />
+        <!-- 图片上传-标题和图片之间间距 -->
+        <attr name="uploadHeaderSpacing" format="dimension" />
+
+        <!-- 图片上传 tag -->
+        <attr name="uploadMark" format="string" />
+
+        <!-- 图片上传 tag -->
+        <attr name="uploadItemWidth" format="dimension" />
+        <attr name="uploadItemHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="UploadItemView">
+        <!-- 上传 tag -->
+        <attr name="itemMark" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="UploadListView">
+        <!-- 上传 tag -->
+        <attr name="uploadListTitle" format="string" />
+
+        <attr name="uploadListMark" format="string" />
+        <attr name="uploadListMaximum" format="integer" />
+        <attr name="uploadSelectMaximum" format="integer" />
+        <attr name="uploadListRequired" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="UploadGroupView">
+        <!-- 图片上传-必填 默认false -->
+        <attr name="uploadGroupRequiredMark" format="boolean" />
+        <!-- title -->
+        <attr name="uploadGroupTitle" format="string" />
+        <!-- subtitle -->
+        <attr name="uploadGroupSubtitle" format="string" />
+        <!-- Optional title -->
+        <attr name="uploadGroupOptionalTitle" format="string" />
+        <!-- 上传 mark -->
+        <attr name="uploadGroupMark" format="string" />
+
+        <!-- left -->
+        <attr name="uploadGroupLeftLabel" format="string" />
+
+        <!-- right -->
+        <attr name="uploadGroupRightLabel" format="string" />
     </declare-styleable>
 
     <declare-styleable name="IToysCalendar">

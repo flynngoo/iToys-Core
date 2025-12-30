@@ -145,4 +145,8 @@
     <string name="uikit_upgrade_now">立即更新</string>
     <string name="uikit_upgrade_version">%s版本全新上线</string>
     <string name="uikit_upgrade_apk_size">更新包大小: %sMB</string>
+    <string name="uikit_file_upload_failed">更新包大小: %sMB</string>
+    <string name="uikit_click_upload">点击上传</string>
+    <string name="uikit_click_upload_image">点击上传图片</string>
+    <string name="uikit_click_upload_file">点击上传文件</string>
 </resources>

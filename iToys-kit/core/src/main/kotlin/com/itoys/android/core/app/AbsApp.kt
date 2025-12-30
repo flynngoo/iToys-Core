@@ -18,7 +18,7 @@ import com.therouter.TheRouter
  * @Email fanfan.work@outlook.com
  * @Date 2023/10/21
  */
-abstract class AbsApp : Application() {
+abstract class AbsApp : Application(), IAppStatusChangedCallback {
 
     abstract val globalConfig: GlobalConfig
 
@@ -47,6 +47,7 @@ abstract class AbsApp : Application() {
             UtilsInitialization.initialization(application = this@AbsApp)
             // 注册activity 生命周期回调
             ActivityLifecycleImpl.install(application = this@AbsApp)
+            AppBridge.addAppStatusChangeCallback(this@AbsApp)
 
             syncInit(application = this@AbsApp)
 
@@ -86,4 +87,8 @@ abstract class AbsApp : Application() {
      * 收集用户信息需要放到用户同意隐私政策之后
      */
     abstract fun initCompliance(application: Application)
+
+    override fun onForeground() {}
+
+    override fun onBackground() {}
 }

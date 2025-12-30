@@ -14,10 +14,13 @@ import android.os.Process
 import androidx.core.content.FileProvider
 import com.itoys.android.utils.expansion.clipboardManager
 import com.itoys.android.utils.expansion.invalid
+import com.itoys.android.utils.expansion.isBlank
 import com.itoys.android.utils.expansion.locationManager
 import com.itoys.android.utils.expansion.textServicesManager
 import com.itoys.android.utils.expansion.then
 import java.io.File
+import java.net.MalformedURLException
+import java.net.URL
 
 /**
  * @Author Gu Fanfan
@@ -290,6 +293,23 @@ object SysUtils {
             context.startActivity(intent)
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    /**
+     * 判断字符串是否为 http(s) URL
+     */
+    @JvmStatic
+    fun isHttpUrl(raw: String): Boolean {
+        val s = raw.trim()
+        if (s.isBlank()) return false
+
+        return try {
+            val u = URL(s)
+            val proto = u.protocol?.lowercase()
+            proto == "http" || proto == "https"
+        } catch (e: MalformedURLException) {
+            false
         }
     }
 }

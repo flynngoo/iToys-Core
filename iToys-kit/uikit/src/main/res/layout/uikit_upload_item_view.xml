@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    android:background="@drawable/uikit_bg_upload_item">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/label_container"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/uikit_bg_upload_label"
+        app:layout_constraintBottom_toTopOf="@id/label_text"
+        app:layout_constraintEnd_toEndOf="@id/upload_preview"
+        app:layout_constraintStart_toStartOf="@id/upload_preview"
+        app:layout_constraintTop_toTopOf="@id/upload_preview"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/label_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/uikit_icon_upload_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_text"
+        style="@style/IToysAndroid.Body2"
+        android:layout_marginTop="4dp"
+        android:maxLength="12"
+        android:text="@string/uikit_click_upload"
+        android:textColor="@color/uikit_colorful_777777"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/upload_preview"
+        app:layout_constraintEnd_toEndOf="@id/upload_preview"
+        app:layout_constraintStart_toStartOf="@id/upload_preview"
+        app:layout_constraintTop_toBottomOf="@id/label_container"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_goneMarginTop="0dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/upload_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 文件容器 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/file_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/uikit_rectangle_stroke_primary_radius_8"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:src="@drawable/uikit_icon_file"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 状态容器 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/status_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/uikit_bg_upload_status"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <cn.bingoogolapple.progressbar.BGAProgressBar
+            android:id="@+id/upload_progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            app:bga_pb_isCapRounded="false"
+            app:bga_pb_mode="circle"
+            app:bga_pb_reachedColor="@color/uikit_colorful_white"
+            app:bga_pb_reachedHeight="3dp"
+            app:bga_pb_textColor="@color/uikit_colorful_white"
+            app:bga_pb_textMargin="8dp"
+            app:bga_pb_textSize="12sp"
+            app:bga_pb_unReachedColor="@color/uikit_colorful_percent40_white"
+            app:bga_pb_unReachedHeight="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/retry_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/uikit_icon_upload_retry_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/retry_text"
+                style="@style/IToysAndroid.Body2"
+                android:layout_marginTop="4dp"
+                android:text="@string/uikit_retry"
+                android:textColor="@color/uikit_colorful_white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@id/upload_preview"
+                app:layout_constraintEnd_toEndOf="@id/upload_preview"
+                app:layout_constraintStart_toStartOf="@id/upload_preview"
+                app:layout_constraintTop_toBottomOf="@id/label_container"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_goneMarginTop="0dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/image_ic_delete"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

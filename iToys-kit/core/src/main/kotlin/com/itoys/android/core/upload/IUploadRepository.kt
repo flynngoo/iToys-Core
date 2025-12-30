@@ -33,6 +33,7 @@ interface IUploadRepository {
         category: String,
         tokenType: TokenType,
         folder: String,
+        progress: ((Int) -> Unit)?,
         success: ((String) -> Unit)?,
         handleEx: ((ResultException) -> Unit)?
     )
@@ -45,6 +46,7 @@ interface IUploadRepository {
         category: String,
         tokenType: TokenType,
         folder: String,
+        progress: ((Int) -> Unit)?,
         success: ((String) -> Unit)?,
         handleEx: ((ResultException) -> Unit)?
     )

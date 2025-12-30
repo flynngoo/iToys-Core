@@ -310,11 +310,15 @@ object FormModelFactory {
             if (!config.enableEmoji) filters = filters.plus(EmojiFilter())
             if (config.enableAmount) filters = filters.plus(DecimalDigitsInputFilter(2))
             editBinding.formEdit.filters = filters
-            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) {
-                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+
+            if (config.focusSelection) {
+                editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                    }
                 }
             }
+
             return editBinding.root
         }
 
@@ -334,9 +338,11 @@ object FormModelFactory {
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
             editBinding.formEdit.filters = arrayOf(LengthFilter(max(11, config.maxLength)))
-            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) {
-                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+            if (config.focusSelection) {
+                editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                    }
                 }
             }
             return editBinding.root
@@ -358,9 +364,11 @@ object FormModelFactory {
             editBinding.formEdit.isEnabled = config.isEnable
             setEditStyle(editBinding.formEdit, config)
             editBinding.formEdit.filters = arrayOf(LengthFilter(11))
-            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) {
-                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+            if (config.focusSelection) {
+                editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                    }
                 }
             }
             return editBinding.root
@@ -384,9 +392,11 @@ object FormModelFactory {
             var filters = arrayOf<InputFilter>(IdCardInputFilter())
             if (config.maxLength > 0) filters = filters.plus(LengthFilter(config.maxLength))
             editBinding.formEdit.filters = filters
-            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) {
-                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+            if (config.focusSelection) {
+                editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                    }
                 }
             }
             return editBinding.root
@@ -411,9 +421,11 @@ object FormModelFactory {
             if (config.maxLength > 0) filters = filters.plus(LengthFilter(config.maxLength))
             if (!config.enableEmoji) filters = filters.plus(EmojiFilter())
             editBinding.formEdit.filters = filters
-            editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) {
-                    editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+            if (config.focusSelection) {
+                editBinding.formEdit.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus) {
+                        editBinding.formEdit.post { editBinding.formEdit.setSelection(editBinding.formEdit.text?.length ?: 0) }
+                    }
                 }
             }
             return editBinding.root

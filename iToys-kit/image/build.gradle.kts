@@ -21,8 +21,10 @@ dependencies {
     implementation(libs.glide.transformers)
     implementation(libs.glide.transformers.gpu)
     implementation(libs.imageviewer)
-    implementation(libs.picture.compress)
-    implementation(libs.picture.selector)
+    implementation(libs.itoys.library.compress)
+    implementation(libs.picture.selector) {
+        exclude("io.github.lucksiege", "compress")
+    }
     implementation(libs.okhttp)
 
     implementation(libs.itoys.utils)

@@ -14,7 +14,7 @@ class DevEnv : IEnv() {
     }
 
     /** 内网 */
-    override fun apiUrl() = stringValue(value = "http://192.168.1.200:8100/")
+    override fun apiUrl() = stringValue(value = "http://192.168.1.200:8807/")
 
     /** 外网 */
     // override fun apiUrl() = stringValue(value = "http://panda.tianhuo.vip:8100/")

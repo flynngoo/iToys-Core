@@ -134,6 +134,9 @@ class IToysFormView(
     /** 内容-金额 */
     private var enableAmount = false
 
+    /** 内容-光标 */
+    private var focusSelection = false
+
     /** 内容-suffix icon */
     private var suffixIcon: Drawable? = null
 
@@ -356,6 +359,7 @@ class IToysFormView(
         formEnable = ta.getBoolean(R.styleable.IToysFormView_formEnable, formEnable)
         enableEmoji = ta.getBoolean(R.styleable.IToysFormView_formContentEnableEmoji, enableEmoji)
         enableAmount = ta.getBoolean(R.styleable.IToysFormView_formContentEnableAmount, enableAmount)
+        focusSelection = ta.getBoolean(R.styleable.IToysFormView_formContentFocusSelection, focusSelection)
         contentView = root.content
 
         val config = FormContentConfig(
@@ -368,6 +372,7 @@ class IToysFormView(
             formEnable,
             enableEmoji,
             enableAmount,
+            focusSelection,
         )
 
         val contentLayoutParams = root.content.layoutParams as MarginLayoutParams
@@ -532,6 +537,7 @@ class IToysFormView(
             formEnable,
             enableEmoji,
             enableAmount,
+            focusSelection,
         )
 
         FormModelFactory.updateContent(contentView, content, formModel, config)

@@ -15,4 +15,5 @@ data class FormContentConfig(
     val isEnable: Boolean,
     val enableEmoji: Boolean,
     val enableAmount: Boolean,
+    val focusSelection: Boolean,
 )

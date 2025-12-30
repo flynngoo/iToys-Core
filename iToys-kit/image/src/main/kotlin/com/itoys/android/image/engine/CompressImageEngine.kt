@@ -29,7 +29,6 @@ class CompressImageEngine : CompressFileEngine {
     ) {
         Luban.with(context)
             .load(source)
-            .ignoreBy(100)
             .setCompressListener(object : OnNewCompressListener {
                 override fun onStart() {
                 }

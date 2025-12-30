@@ -2,19 +2,19 @@
 ./gradlew publish
 
 # core
-#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.1.28-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=core -PpublishLibraryVersion=0.1.30-SNAPSHOT
 
 # uikit
-#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.1.56-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=uikit -PpublishLibraryVersion=0.1.85-SNAPSHOT
 
 # hybrid
 #./gradlew publish -PpublishLibraryName=hybrid -PpublishLibraryVersion=0.1.0
 
 # image
-#./gradlew publish -PpublishLibraryName=image -PpublishLibraryVersion=0.1.14-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=image -PpublishLibraryVersion=0.1.19-SNAPSHOT
 
 # utils
-#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.1.16-SNAPSHOT
+#./gradlew publish -PpublishLibraryName=utils -PpublishLibraryVersion=0.1.18-SNAPSHOT
 
 # upgrade
 #./gradlew publish -PpublishLibraryName=upgrade -PpublishLibraryVersion=0.1.0
